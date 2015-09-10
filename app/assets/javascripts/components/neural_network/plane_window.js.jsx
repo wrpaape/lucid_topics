@@ -70,7 +70,6 @@ var PlaneWindow = React.createClass({
     var plane = planes[indexSelected];
 
     var options = planes.map(function(plane, i) {
-
       return <option key={ i } value={ i } >{ window.classifier.classify(plane.color) }</option>;
     });
 
