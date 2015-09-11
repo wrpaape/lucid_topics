@@ -1,8 +1,9 @@
 'use strict';
 
 var Neuron = function(numInputs) {
-  var rateCrossOver = 0.7;
-  var rateMutation = 0.1;
+  // var rateCrossOver = 0.7;
+  // var rateMutation = 0.1;
+  var c = 0.001;
   this.getInitalWeights = function() {
     this.bias = 1;
     this.weights = [];
@@ -31,7 +32,7 @@ var Neuron = function(numInputs) {
 };
 
 var NeuralNetwork = function(numInputs, dimInput) {
-  this.layers = [
+  var layers = [
     {
       type: 'input',
       numNeurons: numInputs,
@@ -39,7 +40,7 @@ var NeuralNetwork = function(numInputs, dimInput) {
     },
     {
       type: 'hidden',
-      numNeurons: 6,
+      numNeurons: 3,
       neurons: []
     },
     {
@@ -48,28 +49,37 @@ var NeuralNetwork = function(numInputs, dimInput) {
       neurons: []
     }
   ];
-  var weights = [];
-  this.layers.forEach(function(layer, j) {
+  // var weights = [];
+  layers.forEach(function(layer, j) {
     var numNeurons = layer.numNeurons;
     for (var i = 0; i < numNeurons; i++) {
       var neuron = new Neuron(dimInput);
       layer.neurons.push(neuron);
-      if (j) {
-        weights.push.apply(weights, neuron.weights);
-      }
+      // if (j) {
+      //   weights.push.apply(weights, neuron.weights);
+      // }
     }
     dimInput = numNeurons;
   });
-  this.weights = weights;
+  this.layers = layers;
+  // this.weights = weights;
   this.processLayer = function(layer) {
     layer.outputs = layer.neurons.map(function(neuron, i) {
       neuron.processInputs(layer.inputs[i]);
       return neuron.output;
     });
   };
+  this.updateWeights = function() {
+    var i = layers.length;
+    var outputsDesired = this.inputs[i - 1];
+    while (i-- > 1) {
+      layers[i].neurons.forEach(function(neuron) {
+
+      });
+    }
+  };
   this.processInputs = function(inputs) {
     this.inputs = inputs;
-    var layers = this.layers;
     var inputLayer = layers[0];
     inputLayer.inputs = inputs;
     this.processLayer(inputLayer);
@@ -82,11 +92,12 @@ var NeuralNetwork = function(numInputs, dimInput) {
       this.processLayer(layer);
     }
     this.outputs = layers[layers.length - 1].outputs;
+    this.updateWeights();
   };
 
-  this.encodeGenome = function() {
-    this.layers.forEach(function(layer) {
+  // this.encodeGenome = function() {
+  //   this.layers.forEach(function(layer) {
 
-    });
-  };
+  //   });
+  // };
 };

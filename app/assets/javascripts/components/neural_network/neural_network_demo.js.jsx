@@ -37,10 +37,12 @@ var NeuralNetworkDemo = React.createClass({
         y: sRand('y', pad)
       };
       this.v = {
+        mag: vMag,
         x: vMag * Math.cos(alpha),
         y: vMag * Math.sin(alpha)
       };
       this.a = {
+        mag: 0,
         x: 0,
         y: 0
       };
@@ -66,24 +68,46 @@ var NeuralNetworkDemo = React.createClass({
       var a = this.a;
       var alpha = this.alpha;
       var pad = this.pad;
+
       s.x += v.x;
       s.y += v.y;
       v.x += a.x;
       v.y += a.y;
-
       if (s.x + v.x > width - pad || s.x + v.x < pad) {
         v.x = 0;
       }
-
       if (s.y + v.y > height - pad || s.y + v.y < pad) {
         v.y = 0;
       }
+      v.mag = getMagnitude(v.x, v.y);
     };
 
     this.replaceState(
       {
         indexSelected: 0,
+        mode: mode,
         Plane: function() {
+          switch (mode) {
+            case 'perceptron steering':
+              var brain = new NeuralNetwork(2, 2);
+              this.brain = brain;
+              this.processError = function() {
+                // var inputs = [[this.v.mag, this.alpha], [this.rho, this.theta]];
+                // brain.processInputs(inputs);
+                // var aMag = brain.output[0];
+                // var phi = brain.output[1];
+                // this.a.x = aMag * Math.cos(phi);
+                // this.a.y = aMag * Math.sin(phi);
+                this.a.x = (this.deltaS.x + this.deltaV.x) / 1000;
+                this.a.y = (this.deltaS.y + this.deltaV.y) / 1000;
+              };
+              break;
+            case 'genetic algorithm':
+              this.processError = function() {
+                this.a.x = Math.cos(this.theta) / 5;
+                this.a.y = Math.sin(this.theta) / 5;
+              };
+          }
           var ar = 1 / 3;
           var c = pad;
           var b = ar * c;
@@ -130,41 +154,36 @@ var NeuralNetworkDemo = React.createClass({
               y: sTarget.y - s.y
             };
           };
+          this.updateDeltaV = function() {
+            var v = this.v;
+            var vTarget = this.target.v;
+            this.deltaV = {
+              x: vTarget.x - v.x,
+              y: vTarget.y - v.y
+            };
+          };
           this.updateRho = function() {
             var deltaS = this.deltaS;
             this.rho = getMagnitude(deltaS.x, deltaS.y);
           };
           this.updateError = function() {
             this.updateDeltaS();
+            this.updateDeltaV();
             this.updateRho();
             this.updateAngle('deltaS', 'theta');
           };
-          switch (mode) {
-            case 'perceptron steering':
-              this.processError = function() {
-                this.a.x = Math.cos(this.theta) / 5;
-                this.a.y = Math.sin(this.theta) / 5;
-              };
-              break;
-            case 'genetic algorithm':
-            console.log('hi');
-              this.processError = function() {
-                // this.a.x = 0;
-                // this.a.y = 0;
-              };
-          }
           this.c = c;
           this.ar = ar;
           this.pad = c;
           this.vMagMin = 0;
-          this.vMagMax = 20;
+          this.vMagMax = 0;
           this.color = '#' + Math.floor(Math.random() * 16777215).toString(16);
           this.initializeVectors();
           this.updateAngle('v', 'alpha');
           this.targetsCollected = 0;
         },
         Dot: function(allPlanes) {
-          var radius = pad * 3 / 20 + Math.random() * pad / 10;
+          var radius = randRange(pad * 3 / 10, pad / 2);
           this.initializeVectors = initializeVectors;
           this.updateVectors = updateDotVectors;
           this.updateRhos = function() {
@@ -291,7 +310,7 @@ var NeuralNetworkDemo = React.createClass({
         x: 100,
         y: 100
       },
-      vMag: this.getMagnitude(plane.v.x, plane.v.y) * 60,
+      vMag: plane.v.mag * 60,
       alpha: plane.alpha,
       rho: plane.rho,
       theta: plane.theta,
