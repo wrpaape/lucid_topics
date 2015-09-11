@@ -9,31 +9,37 @@ var zeros = function(length) {
 };
 
 var Neuron = function(numInputs, layer) {
-  this.getInitalWeights = function() {
-    this.bias = 1;
-    this.weights = [];
-    for (var i = 0; i < numInputs; i++) {
-      this.weights.push(layer ? 2 * Math.random() - 1 : 1);
-    }
-  };
-  this.updateActivation = function() {
-    var a = 0;
-    for (var i = 0; i < numInputs; i++) {
-      a += this.inputs[i] * this.weights[i];
-    }
-    this.activation = a - this.bias;
-  };
-  this.updateOutput = function() {
-    var p = 1;
-    this.output = Math.pow(1 + Math.pow(Math.E, -this.activation / p), -1);
-  };
-  this.processInputs = function(inputs) {
-    this.inputs = inputs;
-    this.updateActivation();
-    this.updateOutput();
-  };
-
-  this.getInitalWeights();
+  if (layer) {
+    this.getInitalWeights = function() {
+      this.bias = 1;
+      this.weights = [];
+      for (var i = 0; i < numInputs; i++) {
+        this.weights.push(2 * Math.random() - 1);
+      }
+    };
+    this.updateActivation = function() {
+      var a = 0;
+      for (var i = 0; i < numInputs; i++) {
+        a += this.inputs[i] * this.weights[i];
+      }
+      this.activation = a - this.bias;
+    };
+    this.updateOutput = function() {
+      var p = 1;
+      this.output = Math.pow(1 + Math.pow(Math.E, -this.activation / p), -1);
+    };
+    this.processInputs = function(inputs) {
+      this.inputs = inputs;
+      this.updateActivation();
+      this.updateOutput();
+    };
+    this.getInitalWeights();
+  } else {
+    this.processInputs = function(inputs) {
+      this.inputs = inputs;
+      this.output = inputs;
+    };
+  }
 };
 
 var NeuralNetwork = function(numInputs, numOutputs) {

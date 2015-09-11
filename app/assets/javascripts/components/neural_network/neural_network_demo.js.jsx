@@ -112,14 +112,17 @@ var NeuralNetworkDemo = React.createClass({
                 brain.processInputs(inputs);
                 var aMag = brain.outputs[0];
                 var phi = brain.outputs[1];
-                a.actual = {
-                  mag: aMag,
-                  angle: phi,
-                  x: aMag * Math.cos(phi),
-                  y: aMag * Math.sin(phi)
-                };
+                // a.actual = {
+                //   mag: aMag,
+                //   angle: phi,
+                //   x: aMag * Math.cos(phi),
+                //   y: aMag * Math.sin(phi)
+                // };
+                a.actual = a.desired;
                 var diffs = [a.desired.mag - a.actual.mag, a.desired.angle - a.actual.angle];
                 brain.processDiffs(diffs);
+                // console.log(brain.outputs);
+                // throw new Error();
               };
               break;
             case 'genetic algorithm':
@@ -190,8 +193,8 @@ var NeuralNetworkDemo = React.createClass({
           this.c = c;
           this.ar = ar;
           this.pad = c;
-          this.vMagMin = 0;
-          this.vMagMax = 0;
+          this.vMagMin = 0.1;
+          this.vMagMax = 0.1;
           this.color = '#' + Math.floor(Math.random() * 16777215).toString(16);
           this.initializeVectors();
           this.updateMagAngle(this.v);
