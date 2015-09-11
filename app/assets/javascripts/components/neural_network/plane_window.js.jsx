@@ -17,10 +17,12 @@ var PlaneWindow = React.createClass({
     var drawDottedLine = this.props.drawDottedLine;
     var drawArrow = this.props.drawArrow;
     var plane = planes[this.state.indexSelected];
-    var vMag = plane.vMag;
-    var alpha = plane.alpha;
-    var rho = plane.rho;
-    var theta = plane.theta;
+    var v = plane.v;
+    var dS = plane.dS;
+    var vMag = v.mag;
+    var alpha = v.angle;
+    var rho = dS.mag;
+    var theta = dS.angle;
     var color = plane.color;
     var targetsCollected = plane.targetsCollected;
     var canvas = document.getElementById('plane-window');
@@ -29,10 +31,10 @@ var PlaneWindow = React.createClass({
     var height = canvas.height;
     var xo1 = height / 10;
     var yo = height / 4;
-    var deltaX = (width - 3 * xo1) / 2;
+    var dX = (width - 3 * xo1) / 2;
     var phi = Math.PI / 12;
-    var r = deltaX / Math.cos(phi);
-    var xo2 = width - deltaX - xo1;
+    var r = dX / Math.cos(phi);
+    var xo2 = width - dX - xo1;
     var heightText = 3 * xo1 / 2;
     var formatScalar = function(scalar, v) {
       return Math.round(scalar) + (v ? ' m/s' : ' m');
@@ -44,14 +46,14 @@ var PlaneWindow = React.createClass({
 
     var draw = function() {
       ctx.clearRect(0, 0, width, height);
-      drawDottedLine(ctx, xo1, yo, xo1 + deltaX, yo);
+      drawDottedLine(ctx, xo1, yo, xo1 + dX, yo);
       drawArrow(ctx, xo1, yo, r, phi, color, 2 * r / 5);
       ctx.font = '25px serif';
       ctx.fillStyle = color;
       ctx.fillText('plane', xo1, heightText);
       ctx.fillText('v: ' + formatScalar(vMag, true), xo1, height - 2 * heightText - 4);
       ctx.fillText('α: ' + formatPhi(alpha), xo1, height - heightText);
-      drawDottedLine(ctx, xo2, yo, xo2 + deltaX, yo);
+      drawDottedLine(ctx, xo2, yo, xo2 + dX, yo);
       drawArrow(ctx, xo2, yo, r, phi, 'blue', 2 * r / 5);
       ctx.fillStyle = 'blue';
       ctx.fillText('target', xo2, heightText);

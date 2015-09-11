@@ -38,11 +38,13 @@ var NeuralNetworkDemo = React.createClass({
       };
       this.v = {
         mag: vMag,
+        angle: alpha,
         x: vMag * Math.cos(alpha),
         y: vMag * Math.sin(alpha)
       };
       this.a = {
         mag: 0,
+        angle: NaN,
         x: 0,
         y: 0
       };
@@ -66,7 +68,7 @@ var NeuralNetworkDemo = React.createClass({
       var s = this.s;
       var v = this.v;
       var a = this.a;
-      var alpha = this.alpha;
+      var alpha = this.v.angle;
       var pad = this.pad;
 
       s.x += v.x;
@@ -79,7 +81,6 @@ var NeuralNetworkDemo = React.createClass({
       if (s.y + v.y > height - pad || s.y + v.y < pad) {
         v.y = 0;
       }
-      v.mag = getMagnitude(v.x, v.y);
     };
 
     this.replaceState(
@@ -92,20 +93,24 @@ var NeuralNetworkDemo = React.createClass({
               var brain = new NeuralNetwork(2, 2);
               this.brain = brain;
               this.processError = function() {
-                // var inputs = [[this.v.mag, this.alpha], [this.rho, this.theta]];
+                // var inputs = [[this.v.mag, this.v.angle], [this.rho, this.a.angle]];
                 // brain.processInputs(inputs);
                 // var aMag = brain.output[0];
                 // var phi = brain.output[1];
                 // this.a.x = aMag * Math.cos(phi);
                 // this.a.y = aMag * Math.sin(phi);
-                this.a.x = (this.deltaS.x + this.deltaV.x) / 1000;
-                this.a.y = (this.deltaS.y + this.deltaV.y) / 1000;
+                var a = this.a;
+                var dS = this.dS;
+                var dV = this.dV;
+                a.x = (dS.x + dV.x) / 1000;
+                a.y = (dS.y + dV.y) / 1000;
+                this.updateMagAngle(a);
               };
               break;
             case 'genetic algorithm':
               this.processError = function() {
-                this.a.x = Math.cos(this.theta) / 5;
-                this.a.y = Math.sin(this.theta) / 5;
+                this.a.x = Math.cos(this.a.angle) / 5;
+                this.a.y = Math.sin(this.a.angle) / 5;
               };
           }
           var ar = 1 / 3;
@@ -113,16 +118,16 @@ var NeuralNetworkDemo = React.createClass({
           var b = ar * c;
           var le = getMagnitude(b / 2, c);
           var lambda = Math.atan(b / 2 / c);
-          this.updateAngle = function(vec, phi) {
-            vec = this[vec];
-            this[phi] = Math.atan(vec.y / vec.x);
+          this.updateMagAngle = function(vec) {
+            vec.mag = getMagnitude(vec.x, vec.y);
+            vec.angle = Math.atan(vec.y / vec.x);
             if (vec.x < 0 && vec.y >= 0) {
-              this[phi] -= Math.PI;
+              vec.angle -= Math.PI;
             } else if (vec.x < 0 && vec.y < 0) {
-              this[phi] += Math.PI;
+              vec.angle += Math.PI;
             }
-            if (this[phi] < 0) {
-              this[phi] += 2 * Math.PI;
+            if (vec.angle < 0) {
+              vec.angle += 2 * Math.PI;
             }
           };
           this.initializeVectors = initializeVectors;
@@ -130,7 +135,7 @@ var NeuralNetworkDemo = React.createClass({
           this.draw = function(childCtx) {
             var context = childCtx || ctx;
             var s = this.s;
-            var alpha = this.alpha;
+            var alpha = this.v.angle;
             context.beginPath();
             context.moveTo(s.x, s.y);
             for(var i = -1; i <= 1; i+= 2) {
@@ -144,12 +149,12 @@ var NeuralNetworkDemo = React.createClass({
           };
           this.update = function() {
             this.updateVectors();
-            this.updateAngle('v', 'alpha');
+            this.updateMagAngle(this.v);
           };
           this.updateDeltaS = function() {
             var s = this.s;
             var sTarget = this.target.s;
-            this.deltaS = {
+            this.dS = {
               x: sTarget.x - s.x,
               y: sTarget.y - s.y
             };
@@ -157,20 +162,15 @@ var NeuralNetworkDemo = React.createClass({
           this.updateDeltaV = function() {
             var v = this.v;
             var vTarget = this.target.v;
-            this.deltaV = {
+            this.dV = {
               x: vTarget.x - v.x,
               y: vTarget.y - v.y
             };
           };
-          this.updateRho = function() {
-            var deltaS = this.deltaS;
-            this.rho = getMagnitude(deltaS.x, deltaS.y);
-          };
           this.updateError = function() {
             this.updateDeltaS();
             this.updateDeltaV();
-            this.updateRho();
-            this.updateAngle('deltaS', 'theta');
+            this.updateMagAngle(this.dS);
           };
           this.c = c;
           this.ar = ar;
@@ -179,7 +179,7 @@ var NeuralNetworkDemo = React.createClass({
           this.vMagMax = 0;
           this.color = '#' + Math.floor(Math.random() * 16777215).toString(16);
           this.initializeVectors();
-          this.updateAngle('v', 'alpha');
+          this.updateMagAngle(this.v);
           this.targetsCollected = 0;
         },
         Dot: function(allPlanes) {
@@ -310,10 +310,18 @@ var NeuralNetworkDemo = React.createClass({
         x: 100,
         y: 100
       },
-      vMag: plane.v.mag * 60,
-      alpha: plane.alpha,
-      rho: plane.rho,
-      theta: plane.theta,
+      a: {
+        mag: plane.a.mag * 3600,
+        angle: plane.a.angle
+      },
+      v: {
+        mag: plane.v.mag * 60,
+        angle: plane.v.angle
+      },
+      dS: {
+        mag: plane.dS.mag,
+        angle: plane.dS.angle
+      },
       targetsCollected: plane.targetsCollected,
       color: plane.color,
       draw: plane.draw

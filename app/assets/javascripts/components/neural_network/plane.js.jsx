@@ -5,8 +5,8 @@ var Plane = React.createClass({
   componentDidUpdate: function() {
     var planes = this.props.planes;
     var plane = planes[this.props.indexSelected];
-    var alpha = plane.alpha;
-    var theta = plane.theta;
+    var alpha = plane.v.angle;
+    var theta = plane.dS.angle;
     var color = plane.color;
     var canvas = document.getElementById('plane');
     var ctx = canvas.getContext('2d');
