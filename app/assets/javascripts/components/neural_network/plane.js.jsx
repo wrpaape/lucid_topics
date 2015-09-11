@@ -3,31 +3,45 @@
 
 var Plane = React.createClass({
   componentDidUpdate: function() {
-    var planes = this.props.planes;
-    var plane = planes[this.props.indexSelected];
-    var alpha = plane.v.angle;
+    var plane = this.props.planes[this.props.indexSelected];
     var theta = plane.dS.angle;
-    var color = plane.color;
-    var canvas = document.getElementById('plane');
-    var ctx = canvas.getContext('2d');
-    var width = canvas.width;
-    var height = canvas.height;
+    var alpha = plane.v.angle;
+    var phiActual = plane.a.actual.angle;
+    var phiDesired = plane.a.desired.angle;
+    var canvasInput = document.getElementById('plane-input');
+    var canvasOutput = document.getElementById('plane-output');
+    var ctxInput = canvasInput.getContext('2d');
+    var ctxOutput = canvasOutput.getContext('2d');
+    var width = canvasInput.width;
+    var height = canvasInput.height;
     var xo = width / 2;
     var yo = height / 2;
-    var rBall = width / 25;
+    var rBall = canvasInput.width / 25;
     var rArrow = xo - 4 * rBall;
     var xBall = xo + (rArrow + 2 * rBall) * Math.cos(theta);
     var yBall = yo + (rArrow + 2 * rBall) * Math.sin(theta);
     var drawDottedLine = this.drawDottedLine;
     var drawArrow = this.drawArrow;
     var drawBall = this.drawBall;
+    var drawInput = function() {
+      ctxInput.clearRect(0, 0, width, height);
+      plane.draw(ctxInput);
+      drawDottedLine(ctxInput, xo, yo, 2 * xo, yo);
+      drawArrow(ctxInput, xo, yo, rArrow, rArrow / 6, alpha, plane.color);
+      drawArrow(ctxInput, xo, yo, rArrow, rArrow / 3, theta, 'blue');
+      drawBall(ctxInput, xBall, yBall, rBall);
+    };
+    var drawOutput = function() {
+      ctxOutput.clearRect(0, 0, width, height);
+      plane.draw(ctxOutput);
+      drawDottedLine(ctxOutput, xo, yo, 2 * xo, yo);
+      drawArrow(ctxOutput, xo, yo, rArrow, rArrow / 6, phiActual, 'red');
+      drawArrow(ctxOutput, xo, yo, rArrow, rArrow / 3, phiDesired, 'green');
+      drawBall(ctxOutput, xBall, yBall, rBall);
+    };
     var draw = function() {
-      ctx.clearRect(0, 0, width, height);
-      plane.draw(ctx);
-      drawDottedLine(ctx, xo, yo, 2 * xo, yo);
-      drawArrow(ctx, xo, yo, rArrow, alpha, color, rArrow / 6);
-      drawArrow(ctx, xo, yo, rArrow, theta, 'blue', rArrow / 3);
-      drawBall(ctx, xBall, yBall, rBall);
+      drawInput();
+      drawOutput();
     };
 
     window.requestAnimationFrame(draw);
@@ -43,7 +57,7 @@ var Plane = React.createClass({
     ctx.stroke();
     ctx.restore();
   },
-  drawArrow: function(ctx, xo, yo, r, phi, color, rArc) {
+  drawArrow: function(ctx, xo, yo, r, rArc, phi, color) {
     var le = r / 10;
     var lambda = Math.PI / 6;
     var rx = r * Math.cos(phi) + xo;
@@ -83,7 +97,8 @@ var Plane = React.createClass({
   render: function() {
     return(
       <div>
-        <canvas id='plane' width='200' height='200' />
+        <canvas id='plane-input' width='200' height='200' />
+        <canvas id='plane-output' width='200' height='200' />
         <PlaneWindow planes={ this.props.planes } indexSelected={ this.props.indexSelected } updateIndex={ this.props.updateIndex } drawDottedLine={ this.drawDottedLine } drawArrow={ this.drawArrow } />
       </div>
     );

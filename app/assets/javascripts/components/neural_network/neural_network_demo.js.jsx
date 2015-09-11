@@ -108,21 +108,32 @@ var NeuralNetworkDemo = React.createClass({
                 a.desired.x = (dS.x + dV.x) / 1000;
                 a.desired.y = (dS.y + dV.y) / 1000;
                 this.updateMagAngle(a.desired);
-                var inputs = [[v.mag], [v.angle], [dS.mag], [dS.angle]];
-                brain.processInputs(inputs);
-                var aMag = brain.outputs[0];
-                var phi = brain.outputs[1];
+                a.actual = a.desired;
+                // var inputs = [[v.mag], [v.angle], [dS.mag], [dS.angle]];
+                // brain.processInputs(inputs);
+                // var aMag = brain.outputs[0];
+                // var phi = brain.outputs[1];
                 // a.actual = {
                 //   mag: aMag,
                 //   angle: phi,
                 //   x: aMag * Math.cos(phi),
                 //   y: aMag * Math.sin(phi)
                 // };
-                a.actual = a.desired;
-                var diffs = [a.desired.mag - a.actual.mag, a.desired.angle - a.actual.angle];
-                brain.processDiffs(diffs);
+                // var diffs = [a.desired.mag - a.actual.mag, a.desired.angle - a.actual.angle];
+                // brain.processDiffs(diffs);
                 // console.log(brain.outputs);
-                // throw new Error();
+                // console.log(getMagnitude(diffs[0], diffs[1]));
+                // console.log(brain.layers[2].neurons[1].error);
+                // if (isNaN(brain.layers[1].neurons[0].weights[0])) {
+                //   console.log('weight is NaN');
+                //   throw new Error();
+                // } else if (isNaN(a.actual.mag)) {
+                //   console.log('a is NaN');
+                //   throw new Error();
+                // } else if(!v.mag) {
+                //   console.log('v is 0');
+                //   throw new Error();
+                // }
               };
               break;
             case 'genetic algorithm':
@@ -252,7 +263,7 @@ var NeuralNetworkDemo = React.createClass({
           ctx.clearRect(0, 0, width, height);
         }
       },
-      this.setPlanes.bind(this, 2)
+      this.setPlanes.bind(this, 3)
     );
   },
   setPlanes: function(numPlanes) {

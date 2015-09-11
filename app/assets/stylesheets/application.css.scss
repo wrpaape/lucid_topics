@@ -5,16 +5,13 @@ html, body {
   height: 100%;
   display: block;
   text-align: center;
-  overflow: hidden;
   background-color: black;
   canvas {
-    margin-top: 10px;
+    margin: 10px 5px 0;
     border: 3px solid white;
+    width: 24.5%;
     &#neural-network {
       width: 50%;
-    }
-    &#plane, &#plane-window {
-      width: 20%;
     }
   }
 }

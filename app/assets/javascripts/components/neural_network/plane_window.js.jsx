@@ -20,46 +20,70 @@ var PlaneWindow = React.createClass({
     var v = plane.v;
     var dS = plane.dS;
     var vMag = v.mag;
-    var alpha = v.angle;
+    var aMagActual = plane.a.actual.mag;
+    var aMagDesired = plane.a.desired.mag;
     var rho = dS.mag;
+    var alpha = v.angle;
     var theta = dS.angle;
-    var color = plane.color;
+    var phiActual = plane.a.actual.angle;
+    var phiDesired = plane.a.desired.angle;
     var targetsCollected = plane.targetsCollected;
-    var canvas = document.getElementById('plane-window');
-    var ctx = canvas.getContext('2d');
-    var width = canvas.width;
-    var height = canvas.height;
+    var color = plane.color;
+    var canvasInput = document.getElementById('plane-window-input');
+    var canvasOutput = document.getElementById('plane-window-output');
+    var ctxInput = canvasInput.getContext('2d');
+    var ctxOutput = canvasOutput.getContext('2d');
+    var width = canvasInput.width;
+    var height = canvasInput.height;
     var xo1 = height / 10;
     var yo = height / 4;
     var dX = (width - 3 * xo1) / 2;
-    var phi = Math.PI / 12;
-    var r = dX / Math.cos(phi);
+    var angle = Math.PI / 12;
+    var r = dX / Math.cos(angle);
     var xo2 = width - dX - xo1;
     var heightText = 3 * xo1 / 2;
-    var formatScalar = function(scalar, v) {
-      return Math.round(scalar) + (v ? ' m/s' : ' m');
+    var formatScalar = function(scalar, units) {
+      return Math.round(scalar) + ' ' + units;
     };
-    var formatPhi = function(phi) {
-      return Math.round(phi * 180 / Math.PI) + ' °';
+    var formatAngle = function(angle) {
+      return Math.round(angle * 180 / Math.PI) + ' °';
     };
-
-
+    var drawInput = function() {
+      ctxInput.clearRect(0, 0, width, height);
+      drawDottedLine(ctxInput, xo1, yo, xo1 + dX, yo);
+      drawArrow(ctxInput, xo1, yo, r, 2 * r / 5, angle, color);
+      ctxInput.font = '25px serif';
+      ctxInput.fillStyle = color;
+      ctxInput.fillText('plane', xo1, heightText);
+      ctxInput.fillText('v: ' + formatScalar(vMag, 'm/s'), xo1, height - 2 * heightText - 4);
+      ctxInput.fillText('α: ' + formatAngle(alpha), xo1, height - heightText);
+      drawDottedLine(ctxInput, xo2, yo, xo2 + dX, yo);
+      drawArrow(ctxInput, xo2, yo, r, 2 * r / 5, angle, 'blue');
+      ctxInput.fillStyle = 'blue';
+      ctxInput.fillText('target', xo2, heightText);
+      ctxInput.fillText('ρ: ' + formatScalar(rho, 'm'), xo2, height - 2 * heightText - 4);
+      ctxInput.fillText('θ: ' + formatAngle(theta), xo2, height - heightText);
+    };
+    var drawOutput = function() {
+      ctxOutput.clearRect(0, 0, width, height);
+      drawDottedLine(ctxOutput, xo1, yo, xo1 + dX, yo);
+      drawArrow(ctxOutput, xo1, yo, r, 2 * r / 5, angle, 'red');
+      ctxOutput.font = '25px serif';
+      ctxOutput.fillStyle = 'red';
+      ctxOutput.fillText('actual', xo1, heightText);
+      ctxOutput.fillText('a: ' + formatScalar(aMagActual, 'm/s²'), xo1, height - 2 * heightText - 4);
+      ctxOutput.fillText('ϕ: ' + formatAngle(phiActual), xo1, height - heightText);
+      drawDottedLine(ctxOutput, xo2, yo, xo2 + dX, yo);
+      drawArrow(ctxOutput, xo2, yo, r, 2 * r / 5, angle, 'green');
+      ctxOutput.fillStyle = 'green';
+      ctxOutput.fillText('desired', xo2, heightText);
+      ctxOutput.fillText('a: ' + formatScalar(aMagDesired, 'm/s²'), xo2, height - 2 * heightText - 4);
+      ctxOutput.fillText('ϕ: ' + formatAngle(phiDesired), xo2, height - heightText);
+    };
     var draw = function() {
-      ctx.clearRect(0, 0, width, height);
-      drawDottedLine(ctx, xo1, yo, xo1 + dX, yo);
-      drawArrow(ctx, xo1, yo, r, phi, color, 2 * r / 5);
-      ctx.font = '25px serif';
-      ctx.fillStyle = color;
-      ctx.fillText('plane', xo1, heightText);
-      ctx.fillText('v: ' + formatScalar(vMag, true), xo1, height - 2 * heightText - 4);
-      ctx.fillText('α: ' + formatPhi(alpha), xo1, height - heightText);
-      drawDottedLine(ctx, xo2, yo, xo2 + dX, yo);
-      drawArrow(ctx, xo2, yo, r, phi, 'blue', 2 * r / 5);
-      ctx.fillStyle = 'blue';
-      ctx.fillText('target', xo2, heightText);
-      ctx.fillText('ρ: ' + formatScalar(rho), xo2, height - 2 * heightText - 4);
-      ctx.fillText('θ: ' + formatPhi(theta), xo2, height - heightText);
-    }.bind(this);
+      drawInput();
+      drawOutput();
+    };
 
     window.requestAnimationFrame(draw);
   },
@@ -81,10 +105,11 @@ var PlaneWindow = React.createClass({
           { options }
         </select>
         <span>
-          { plane.targetsCollected }
+          { '   targets collected: ' + plane.targetsCollected }
         </span>
         <div>
-          <canvas id='plane-window' width='300' height='150' />
+          <canvas id='plane-window-input' width='300' height='150' />
+          <canvas id='plane-window-output' width='300' height='150' />
         </div>
       </div>
     );

@@ -96,11 +96,12 @@ var NeuralNetwork = function(numInputs, numOutputs) {
   this.processDiffs = function(diffs) {
     this.diffs = diffs;
     var i = layers.length;
+    var neuron, neurons, output;
     while (i-- > 1) {
-      var neurons = layers[i].neurons;
+      neurons = layers[i].neurons;
       for (var j = 0; j < neurons.length; j++) {
-        var neuron = neurons[j];
-        var output = neuron.output;
+        neuron = neurons[j];
+        output = neuron.output;
         neuron.error = output * (1 - output) * diffs[j];
         for (var k = 0; k < neuron.inputs.length; k++) {
           neuron.weights[k] += eta * neuron.error * neuron.inputs[k];
@@ -108,7 +109,7 @@ var NeuralNetwork = function(numInputs, numOutputs) {
       }
       diffs = zeros(neurons[0].weights.length);
       for (var m = 0; m < neurons.length; m++) {
-        var neuron = neurons[m];
+        neuron = neurons[m];
         for (var n = 0; n < neuron.weights.length; n++) {
           diffs[n] += neuron.error * neuron.weights[n];
         }
