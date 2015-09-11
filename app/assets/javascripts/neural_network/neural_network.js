@@ -1,14 +1,19 @@
 'use strict';
 
-var Neuron = function(numInputs) {
-  // var rateCrossOver = 0.7;
-  // var rateMutation = 0.1;
-  var c = 0.001;
+var zeros = function(length) {
+ var zeros = [], i = length;
+  while (i--) {
+    zeros[i] = 0;
+  }
+  return zeros;
+};
+
+var Neuron = function(numInputs, layer) {
   this.getInitalWeights = function() {
     this.bias = 1;
     this.weights = [];
     for (var i = 0; i < numInputs; i++) {
-      this.weights.push(2 * Math.random() - 1);
+      this.weights.push(layer ? 2 * Math.random() - 1 : 1);
     }
   };
   this.updateActivation = function() {
@@ -19,7 +24,7 @@ var Neuron = function(numInputs) {
     this.activation = a - this.bias;
   };
   this.updateOutput = function() {
-    var p = 1.0;
+    var p = 1;
     this.output = Math.pow(1 + Math.pow(Math.E, -this.activation / p), -1);
   };
   this.processInputs = function(inputs) {
@@ -31,7 +36,8 @@ var Neuron = function(numInputs) {
   this.getInitalWeights();
 };
 
-var NeuralNetwork = function(numInputs, dimInput) {
+var NeuralNetwork = function(numInputs, numOutputs) {
+  var eta = 1;
   var layers = [
     {
       type: 'input',
@@ -40,43 +46,31 @@ var NeuralNetwork = function(numInputs, dimInput) {
     },
     {
       type: 'hidden',
-      numNeurons: 3,
+      numNeurons: numInputs + numOutputs,
       neurons: []
     },
     {
       type: 'output',
-      numNeurons: dimInput,
+      numNeurons: numOutputs,
       neurons: []
     }
   ];
-  // var weights = [];
+  var numInputsForLayer = 1;
   layers.forEach(function(layer, j) {
     var numNeurons = layer.numNeurons;
     for (var i = 0; i < numNeurons; i++) {
-      var neuron = new Neuron(dimInput);
+      var neuron = new Neuron(numInputsForLayer, j);
       layer.neurons.push(neuron);
-      // if (j) {
-      //   weights.push.apply(weights, neuron.weights);
-      // }
     }
-    dimInput = numNeurons;
+    numInputsForLayer = numNeurons;
   });
   this.layers = layers;
-  // this.weights = weights;
+  this.eta = eta;
   this.processLayer = function(layer) {
     layer.outputs = layer.neurons.map(function(neuron, i) {
       neuron.processInputs(layer.inputs[i]);
       return neuron.output;
     });
-  };
-  this.updateWeights = function() {
-    var i = layers.length;
-    var outputsDesired = this.inputs[i - 1];
-    while (i-- > 1) {
-      layers[i].neurons.forEach(function(neuron) {
-
-      });
-    }
   };
   this.processInputs = function(inputs) {
     this.inputs = inputs;
@@ -92,12 +86,27 @@ var NeuralNetwork = function(numInputs, dimInput) {
       this.processLayer(layer);
     }
     this.outputs = layers[layers.length - 1].outputs;
-    this.updateWeights();
   };
-
-  // this.encodeGenome = function() {
-  //   this.layers.forEach(function(layer) {
-
-  //   });
-  // };
+  this.processDiffs = function(diffs) {
+    this.diffs = diffs;
+    var i = layers.length;
+    while (i-- > 1) {
+      var neurons = layers[i].neurons;
+      for (var j = 0; j < neurons.length; j++) {
+        var neuron = neurons[j];
+        var output = neuron.output;
+        neuron.error = output * (1 - output) * diffs[j];
+        for (var k = 0; k < neuron.inputs.length; k++) {
+          neuron.weights[k] += eta * neuron.error * neuron.inputs[k];
+        }
+      }
+      diffs = zeros(neurons[0].weights.length);
+      for (var m = 0; m < neurons.length; m++) {
+        var neuron = neurons[m];
+        for (var n = 0; n < neuron.weights.length; n++) {
+          diffs[n] += neuron.error * neuron.weights[n];
+        }
+      }
+    }
+  };
 };

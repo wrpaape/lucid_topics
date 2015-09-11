@@ -43,10 +43,18 @@ var NeuralNetworkDemo = React.createClass({
         y: vMag * Math.sin(alpha)
       };
       this.a = {
-        mag: 0,
-        angle: NaN,
-        x: 0,
-        y: 0
+        actual: {
+          mag: 0,
+          angle: NaN,
+          x: 0,
+          y: 0
+        },
+        desired: {
+          mag: 0,
+          angle: NaN,
+          x: 0,
+          y: 0
+        },
       };
     };
     var updateDotVectors = function() {
@@ -73,8 +81,8 @@ var NeuralNetworkDemo = React.createClass({
 
       s.x += v.x;
       s.y += v.y;
-      v.x += a.x;
-      v.y += a.y;
+      v.x += a.actual.x;
+      v.y += a.actual.y;
       if (s.x + v.x > width - pad || s.x + v.x < pad) {
         v.x = 0;
       }
@@ -93,18 +101,25 @@ var NeuralNetworkDemo = React.createClass({
               var brain = new NeuralNetwork(2, 2);
               this.brain = brain;
               this.processError = function() {
-                // var inputs = [[this.v.mag, this.v.angle], [this.rho, this.a.angle]];
-                // brain.processInputs(inputs);
-                // var aMag = brain.output[0];
-                // var phi = brain.output[1];
-                // this.a.x = aMag * Math.cos(phi);
-                // this.a.y = aMag * Math.sin(phi);
+                var v = this.v;
                 var a = this.a;
                 var dS = this.dS;
                 var dV = this.dV;
-                a.x = (dS.x + dV.x) / 1000;
-                a.y = (dS.y + dV.y) / 1000;
-                this.updateMagAngle(a);
+                a.desired.x = (dS.x + dV.x) / 1000;
+                a.desired.y = (dS.y + dV.y) / 1000;
+                this.updateMagAngle(a.desired);
+                var inputs = [[v.mag], [v.angle], [dS.mag], [dS.angle]];
+                brain.processInputs(inputs);
+                var aMag = brain.outputs[0];
+                var phi = brain.outputs[1];
+                a.actual = {
+                  mag: aMag,
+                  angle: phi,
+                  x: aMag * Math.cos(phi),
+                  y: aMag * Math.sin(phi)
+                };
+                var diffs = [a.desired.mag - a.actual.mag, a.desired.angle - a.actual.angle];
+                brain.processDiffs(diffs);
               };
               break;
             case 'genetic algorithm':
@@ -151,7 +166,7 @@ var NeuralNetworkDemo = React.createClass({
             this.updateVectors();
             this.updateMagAngle(this.v);
           };
-          this.updateDeltaS = function() {
+          this.updateDS = function() {
             var s = this.s;
             var sTarget = this.target.s;
             this.dS = {
@@ -159,7 +174,7 @@ var NeuralNetworkDemo = React.createClass({
               y: sTarget.y - s.y
             };
           };
-          this.updateDeltaV = function() {
+          this.updateDV = function() {
             var v = this.v;
             var vTarget = this.target.v;
             this.dV = {
@@ -168,8 +183,8 @@ var NeuralNetworkDemo = React.createClass({
             };
           };
           this.updateError = function() {
-            this.updateDeltaS();
-            this.updateDeltaV();
+            this.updateDS();
+            this.updateDV();
             this.updateMagAngle(this.dS);
           };
           this.c = c;
@@ -311,8 +326,14 @@ var NeuralNetworkDemo = React.createClass({
         y: 100
       },
       a: {
-        mag: plane.a.mag * 3600,
-        angle: plane.a.angle
+        actual: {
+          mag: plane.a.actual.mag * 3600,
+          angle: plane.a.actual.angle
+        },
+        desired: {
+          mag: plane.a.desired.mag * 3600,
+          angle: plane.a.desired.angle
+        }
       },
       v: {
         mag: plane.v.mag * 60,
