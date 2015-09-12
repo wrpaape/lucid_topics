@@ -8,8 +8,10 @@ var zeros = function(length) {
   return zeros;
 };
 
-var Neuron = function(numInputs, layer) {
+var Neuron = function(numInputs, layer, index) {
+  var neuronColors = [['#FFBE44', '#FD7780'], 'aqua', 'fuchsia'];
   if (layer) {
+    this.color = neuronColors[layer];
     this.getInitalWeights = function() {
       this.bias = 1;
       this.weights = [];
@@ -35,6 +37,7 @@ var Neuron = function(numInputs, layer) {
     };
     this.getInitalWeights();
   } else {
+    this.color = neuronColors[0][Math.floor(index / 2)];
     this.processInputs = function(inputs) {
       this.inputs = inputs;
       this.output = inputs;
@@ -61,14 +64,27 @@ var NeuralNetwork = function(numInputs, numOutputs) {
       neurons: []
     }
   ];
+  var width = 2000;
+  var height = 1000;
+  var dXLayer = width / (layers.length + 1);
+  var rNeuron = dXLayer / 12;
+  var xNeuron = 3 * dXLayer / 4;
+  var yNeuron, dYNeuron;
   var numInputsForLayer = 1;
   layers.forEach(function(layer, j) {
     var numNeurons = layer.numNeurons;
+    dYNeuron = height / numNeurons;
+    yNeuron = dYNeuron / 2;
     for (var i = 0; i < numNeurons; i++) {
-      var neuron = new Neuron(numInputsForLayer, j);
+      var neuron = new Neuron(numInputsForLayer, j, i);
+      neuron.x = xNeuron;
+      neuron.y = yNeuron;
+      neuron.r = rNeuron;
       layer.neurons.push(neuron);
+      yNeuron += dYNeuron;
     }
     numInputsForLayer = numNeurons;
+     xNeuron += dXLayer;
   });
   this.layers = layers;
   this.eta = eta;

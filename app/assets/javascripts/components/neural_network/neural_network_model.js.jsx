@@ -4,79 +4,98 @@
 var NeuralNetworkModel = React.createClass({
   componentDidUpdate: function() {
     var brain = this.props.brain;
+    var layers = brain.layers;
     var planeColor = this.props.planeColor;
-    var coords = this.props.neuronCoords;
     var drawBall = this.props.drawBall;
     var canvas = document.getElementById('neural-network-model');
     var ctx = canvas.getContext('2d');
-    var dXLayer = coords[1][0][0] - coords[0][0][0];
+    var dXLayer = layers[1].neurons[0].x - layers[0].neurons[0].x;
     var rNeuron = dXLayer / 12;
-    var neuronColors = [[planeColor, 'blue'], 'aqua', 'fuchsia'];
-    var xy1, xy2, neuronColor;
-    for (var i = 0; i < coords.length; i++) {
-      for (var j = 0; j < coords[i].length; j++) {
-        xy1 = coords[i][j];
-        if (coords[i + 1]) {
-          for (var k = 0; k < coords[i + 1].length; k++) {
-            xy2 = coords[i + 1][k];
-            this.drawLine(ctx, xy1, xy2, 'white', 1);
+    var drawSynapse = this.drawSynapse;
+    var drawArrow = this.drawArrow;
+    var drawSymbolTag = this.drawSymbolTag;
+    var neurons, neuron, x1, y1, x2, y2, weight;
+    var draw = function() {
+      for (var i = 0; i < layers.length; i++) {
+        var neurons = layers[i].neurons;
+        for (var j = 0; j < neurons.length; j++) {
+          neuron = neurons[j];
+          x1 = neuron.x;
+          y1 = neuron.y;
+          if (layers[i + 1]) {
+            var nextNeurons = layers[i + 1].neurons;
+            for (var k = 0; k < nextNeurons.length; k++) {
+              x2 = nextNeurons[k].x;
+              y2 = nextNeurons[k].y;
+              weight = nextNeurons[k].weights[j];
+              drawSynapse(ctx, x1, y1, x2, y2, weight);
+            }
           }
+          drawBall(ctx, x1, y1, neuron.r, neuron.color);
         }
-        neuronColor =  i > 0 ? neuronColors[i] : neuronColors[0][Math.floor(j / 2)];
-        drawBall(ctx, xy1[0], xy1[1], rNeuron, neuronColor);
       }
-    }
-    var inputSymbols = ['v', '⍺', 'ρ', 'θ'];
-    var inputColors = neuronColors[0];
-    var inputLayer = coords[0];
-    for (var m = 0; m < inputLayer.length; m++) {
-      xy2 = [inputLayer[m][0] - rNeuron, inputLayer[m][1]];
-      xy1 = [xy2[0] - dXLayer / 3, xy2[1]];
-      this.drawArrow(ctx, xy1, xy2, inputColors[Math.floor(m / 2)]);
-      this.drawSymbolTag(ctx, xy1[0], xy1[1], inputSymbols[m], inputColors[Math.floor(m / 2)], true);
-    }
-    var outputSymbols = ['aₓ', 'φₓ'];
-    var outputColor = neuronColors[neuronColors.length - 1];
-    var outputLayer = coords[coords.length - 1];
-    for (var n = 0; n < outputLayer.length; n++) {
-      xy1 = [outputLayer[n][0] + rNeuron, outputLayer[n][1]];
-      xy2 = [xy1[0] + dXLayer / 3, xy1[1]];
-      this.drawArrow(ctx, xy1, xy2, outputColor);
-      this.drawSymbolTag(ctx, xy2[0], xy2[1], outputSymbols[n], outputColor);
-    }
-    var xBall = xy1[0] + 3 * dXLayer / 4;
-    var yBall = canvas.height / 2;
-    var rBall = 3 * rNeuron / 2;
-    drawBall(ctx, xBall, yBall, rBall, 'lime');
-    this.drawSymbolTag(ctx, xy2[0], yBall - rBall, 'aₒ', 'lime');
-    this.drawSymbolTag(ctx, xy2[0], yBall + rBall, 'φₒ', 'lime');
+      var inputSymbols = ['v', '⍺', 'ρ', 'θ'];
+      var inputNeurons = layers[0].neurons;
+      for (var m = 0; m < inputNeurons.length; m++) {
+        var neuron = inputNeurons[m];
+        x2 = neuron.x - neuron.r;
+        y2 = neuron.y;
+        x1 = x2 - dXLayer / 3
+        y1 = y2;
+        drawArrow(ctx, x1, y1, x2, y2, neuron.color);
+        drawSymbolTag(ctx, x1, y1, inputSymbols[m], neuron.color, true);
+      }
+      var outputSymbols = ['Tₓ', 'φₓ'];
+      var outputNeurons = layers[layers.length - 1].neurons;
+      for (var n = 0; n < outputNeurons.length; n++) {
+        var neuron = outputNeurons[n];
+        x1 = neuron.x;
+        y1 = neuron.y;
+        x2 = x1 + dXLayer / 3;
+        y2 = y1;
+        drawArrow(ctx, x1, y1, x2, y2, neuron.color);
+        drawSymbolTag(ctx, x2, y2, outputSymbols[n], neuron.color);
+      }
+      var xBall = x1 + 3 * dXLayer / 4;
+      var yBall = canvas.height / 2;
+      var rBall = 3 * rNeuron / 2;
+      drawBall(ctx, xBall, yBall, rBall, 'lime');
+      drawSymbolTag(ctx, x2, yBall - rBall, 'Tₒ', 'lime');
+      drawSymbolTag(ctx, x2, yBall + rBall, 'φₒ', 'lime');
+    };
+
+    window.requestAnimationFrame(draw);
+    // this.props.pause();
+    // window.setTimeout(this.props.resume, 100);
   },
-  drawLine: function(ctx, xy1, xy2, color, lineWidth) {
+  drawSynapse: function(ctx, x1, y1, x2, y2, weight) {
+    var color = weight > 0 ? 'green' : 'red';
+    var lineWidth = Math.abs(weight) * 10;
     ctx.save();
     ctx.strokeStyle = color;
     ctx.lineWidth = lineWidth;
     ctx.beginPath();
-    ctx.moveTo(xy1[0], xy1[1]);
-    ctx.lineTo(xy2[0], xy2[1]);
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
     ctx.stroke();
     ctx.restore();
   },
-  drawArrow: function(ctx, xy1, xy2, color) {
-    var le = (xy2[0] - xy1[0]) / 10;
+  drawArrow: function(ctx, x1, y1, x2, y2, color) {
+    var le = (x2 - x1) / 10;
     var delta = Math.PI / 6;
-    var lex = xy2[0] - le * Math.cos(delta);
-    var ley1 = xy2[1] + le * Math.sin(delta);
-    var ley2 = xy2[1] - le * Math.sin(delta);
+    var lex = x2 - le * Math.cos(delta);
+    var ley1 = y2 + le * Math.sin(delta);
+    var ley2 = y2 - le * Math.sin(delta);
     ctx.save();
     ctx.strokeStyle = color;
     ctx.lineWidth = 4;
     ctx.beginPath();
-    ctx.moveTo(xy1[0], xy1[1]);
-    ctx.lineTo(xy2[0], xy2[1]);
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
     ctx.stroke();
     ctx.lineTo(lex, ley1);
     ctx.stroke();
-    ctx.moveTo(xy2[0], xy2[1]);
+    ctx.moveTo(x2, y2);
     ctx.lineTo(lex, ley2);
     ctx.stroke();
     ctx.restore();

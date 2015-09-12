@@ -5,7 +5,7 @@ var NeuralNetworkDemo = React.createClass({
   getInitialState: function() {
     return({
       indexSelected: 0,
-      planeComp: <div/>
+      planeVectors: <div/>
     });
   },
   componentDidMount: function() {
@@ -114,9 +114,9 @@ var NeuralNetworkDemo = React.createClass({
             // };
             // var diffs = [a.desired.mag - a.actual.mag, a.desired.angle - a.actual.angle];
             // brain.processDiffs(diffs);
-            // console.log(brain.outputs);
-            // console.log(getMagnitude(diffs[0], diffs[1]));
-            // console.log(brain.layers[2].neurons[1].error);
+            // // console.log(brain.outputs);
+            // // console.log(getMagnitude(diffs[0], diffs[1]));
+            // // console.log(brain.layers[2].neurons[1].error);
             // if (isNaN(brain.layers[1].neurons[0].weights[0])) {
             //   console.log('weight is NaN');
             //   throw new Error();
@@ -186,6 +186,7 @@ var NeuralNetworkDemo = React.createClass({
             this.updateDS();
             this.updateDV();
             this.updateMagAngle(this.dS);
+            this.updateMagAngle(this.dV);
           };
           this.c = c;
           this.ar = ar;
@@ -239,8 +240,8 @@ var NeuralNetworkDemo = React.createClass({
 
           this.radius = radius;
           this.pad = radius + pad;
-          this.vMagMin = 0.1;
-          this.vMagMax = 1;
+          this.vMagMin = 1;
+          this.vMagMax = 3;
           this.colors = ['blue'];
           this.initializeVectors();
           this.updateRhos();
@@ -316,7 +317,7 @@ var NeuralNetworkDemo = React.createClass({
     planes.DrawAndUpdate();
     this.state.dots.DrawAndUpdate(planes.all[indexSelected].color);
     this.setState({
-        planeComp: <PlaneVectors planes={ planes.all.map(this.extendPlane) } indexSelected={ indexSelected } updateIndex={ this.updateIndex } />,
+        planeVectors: <PlaneVectors planes={ planes.all.map(this.extendPlane) } indexSelected={ indexSelected } updateIndex={ this.updateIndex } pause={ this.pause } resume={ this.resume } />,
         requestId: window.requestAnimationFrame(this.draw)
       });
   },
@@ -340,6 +341,10 @@ var NeuralNetworkDemo = React.createClass({
         mag: plane.v.mag * 60,
         angle: plane.v.angle
       },
+      dV: {
+        mag: plane.dV.mag * 60,
+        angle: plane.dV.angle
+      },
       dS: {
         mag: plane.dS.mag,
         angle: plane.dS.angle
@@ -358,20 +363,29 @@ var NeuralNetworkDemo = React.createClass({
       indexSelected: newIndex
     });
   },
-  resetWeights: function() {
+  pause: function() {
     window.cancelAnimationFrame(this.state.requestId);
+  },
+  resume: function() {
+    window.requestAnimationFrame(this.draw);
+  },
+  setRefreshRate: function(event) {
+    this.setState({ refreshRate: event.target.value });
+  },
+   resetDemo: function() {
+    this.pause();
     this.replaceState(this.getInitialState(), this.componentDidMount);
   },
   render: function() {
 
     return(
       <div>
-        <span onClick={ this.resetWeights }>reset weights</span>
+        <span onClick={ this.resetDemo }>reset</span>
         <div>
           <canvas id='neural-network' width='1000' height='500' />
         </div>
         <div>
-          { this.state.planeComp }
+          { this.state.planeVectors }
         </div>
       </div>
     );

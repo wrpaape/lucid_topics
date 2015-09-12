@@ -5,7 +5,7 @@ var PlaneVectors = React.createClass({
   componentDidUpdate: function() {
     var plane = this.props.planes[this.props.indexSelected];
     var theta = plane.dS.angle;
-    var alpha = plane.v.angle;
+    var dAlpha = plane.dV.angle;
     var phiActual = plane.a.actual.angle;
     var phiDesired = plane.a.desired.angle;
     var canvasInput = document.getElementById('plane-vectors-input');
@@ -27,8 +27,8 @@ var PlaneVectors = React.createClass({
       ctxInput.clearRect(0, 0, width, height);
       plane.draw(ctxInput);
       drawDottedLine(ctxInput, xo, yo, 2 * xo, yo);
-      drawArrow(ctxInput, xo, yo, rArrow, rArrow / 6, alpha, plane.color);
-      drawArrow(ctxInput, xo, yo, rArrow, rArrow / 3, theta, 'blue');
+      drawArrow(ctxInput, xo, yo, rArrow, rArrow / 6, dAlpha, '#FFBE44');
+      drawArrow(ctxInput, xo, yo, rArrow, rArrow / 3, theta, '#FD7780');
       drawBall(ctxInput, xBall, yBall, rBall, 'blue');
     };
     var drawOutput = function() {
@@ -94,27 +94,6 @@ var PlaneVectors = React.createClass({
     ctx.fill();
     ctx.restore();
   },
-  getNeuronCoordinates: function() {
-    var layers = this.props.planes[this.props.indexSelected].brain.layers;
-    var width = 2000;
-    var height = 1000;
-    var dXLayer = width / (layers.length + 1);
-    var xNeuron = 3 * dXLayer / 4;
-    var yNeuron, dYNeuron, neurons;
-    var neuronCoords = new Array(layers.length);
-    for (var i = 0; i < layers.length; i++) {
-      neurons = layers[i].neurons;
-      dYNeuron = height / neurons.length;
-      yNeuron = dYNeuron / 2;
-      neuronCoords[i] = new Array(neurons.length);
-      for (var j = 0; j < neurons.length; j++) {
-        neuronCoords[i][j] = [xNeuron, yNeuron];
-        yNeuron += dYNeuron;
-      }
-      xNeuron += dXLayer;
-    }
-    return neuronCoords;
-  },
   render: function() {
     var planes = this.props.planes;
     var indexSelected = this.props.indexSelected;
@@ -124,7 +103,7 @@ var PlaneVectors = React.createClass({
         <canvas id='plane-vectors-input' width='200' height='200' />
         <canvas id='plane-vectors-output' width='200' height='200' />
         <PlaneValues planes={ planes } indexSelected={ indexSelected } updateIndex={ this.props.updateIndex } drawDottedLine={ this.drawDottedLine } drawArrow={ this.drawArrow } />
-        <NeuralNetworkModel brain={ planes[indexSelected].brain } planeColor={ planes[indexSelected].color } neuronCoords={ this.getNeuronCoordinates() } drawBall={ this.drawBall } />
+        <NeuralNetworkModel brain={ planes[indexSelected].brain } drawBall={ this.drawBall } pause={ this.props.pause } resume={ this.props.resume } />
       </div>
     );
   }
