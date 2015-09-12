@@ -46,17 +46,17 @@ var PlaneValues = React.createClass({
       return Math.round(scalar) + ' ' + units;
     };
     var formatAngle = function(angle) {
-      return Math.round(angle * 180 / Math.PI) + ' °';
+      return Math.round(angle * 180 / Math.PI) + '°';
     };
     var drawInput = function() {
       ctxInput.clearRect(0, 0, width, height);
       drawDottedLine(ctxInput, xo1, yo, xo1 + dX, yo);
       drawArrow(ctxInput, xo1, yo, r, 2 * r / 5, angle, color);
-      ctxInput.font = '24px serif';
+      ctxInput.font = '18px monaco, Consolas, "Lucida Console", monospace';
       ctxInput.fillStyle = color;
       ctxInput.fillText('plane', xo1, heightText);
       ctxInput.fillText('v: ' + formatScalar(vMag, 'm/s'), xo1, height - 2 * heightText - 4);
-      ctxInput.fillText('α: ' + formatAngle(alpha), xo1, height - heightText);
+      ctxInput.fillText('⍺: ' + formatAngle(alpha), xo1, height - heightText);
       drawDottedLine(ctxInput, xo2, yo, xo2 + dX, yo);
       drawArrow(ctxInput, xo2, yo, r, 2 * r / 5, angle, 'blue');
       ctxInput.fillStyle = 'blue';
@@ -67,18 +67,18 @@ var PlaneValues = React.createClass({
     var drawOutput = function() {
       ctxOutput.clearRect(0, 0, width, height);
       drawDottedLine(ctxOutput, xo1, yo, xo1 + dX, yo);
-      drawArrow(ctxOutput, xo1, yo, r, 2 * r / 5, angle, 'red');
-      ctxOutput.font = '24px serif';
-      ctxOutput.fillStyle = 'red';
+      drawArrow(ctxOutput, xo1, yo, r, 2 * r / 5, angle, 'fuchsia');
+      ctxOutput.font = '18px monaco, Consolas, "Lucida Console", monospace';
+      ctxOutput.fillStyle = 'fuchsia';
       ctxOutput.fillText('actual', xo1, heightText);
-      ctxOutput.fillText('a: ' + formatScalar(aMagActual, 'm/s²'), xo1, height - 2 * heightText - 4);
-      ctxOutput.fillText('ϕ: ' + formatAngle(phiActual), xo1, height - heightText);
+      ctxOutput.fillText('aₓ: ' + formatScalar(aMagActual, 'm/s²'), xo1, height - 2 * heightText - 4);
+      ctxOutput.fillText('φₓ: ' + formatAngle(phiActual), xo1, height - heightText);
       drawDottedLine(ctxOutput, xo2, yo, xo2 + dX, yo);
       drawArrow(ctxOutput, xo2, yo, r, 2 * r / 5, angle, 'green');
       ctxOutput.fillStyle = 'green';
       ctxOutput.fillText('desired', xo2, heightText);
-      ctxOutput.fillText('a: ' + formatScalar(aMagDesired, 'm/s²'), xo2, height - 2 * heightText - 4);
-      ctxOutput.fillText('ϕ: ' + formatAngle(phiDesired), xo2, height - heightText);
+      ctxOutput.fillText('aₒ: ' + formatScalar(aMagDesired, 'm/s²'), xo2, height - 2 * heightText - 4);
+      ctxOutput.fillText('φₒ: ' + formatAngle(phiDesired), xo2, height - heightText);
     };
     var draw = function() {
       drawInput();

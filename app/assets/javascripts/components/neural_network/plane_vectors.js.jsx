@@ -35,7 +35,7 @@ var PlaneVectors = React.createClass({
       ctxOutput.clearRect(0, 0, width, height);
       plane.draw(ctxOutput);
       drawDottedLine(ctxOutput, xo, yo, 2 * xo, yo);
-      drawArrow(ctxOutput, xo, yo, rArrow, rArrow / 6, phiActual, 'red');
+      drawArrow(ctxOutput, xo, yo, rArrow, rArrow / 6, phiActual, 'fuchsia');
       drawArrow(ctxOutput, xo, yo, rArrow, rArrow / 3, phiDesired, 'green');
       drawBall(ctxOutput, xBall, yBall, rBall, 'blue');
     };
@@ -99,7 +99,7 @@ var PlaneVectors = React.createClass({
     var width = 2000;
     var height = 1000;
     var dXLayer = width / (layers.length + 1);
-    var xNeuron = dXLayer;
+    var xNeuron = 3 * dXLayer / 4;
     var yNeuron, dYNeuron, neurons;
     var neuronCoords = new Array(layers.length);
     for (var i = 0; i < layers.length; i++) {
@@ -124,7 +124,7 @@ var PlaneVectors = React.createClass({
         <canvas id='plane-vectors-input' width='200' height='200' />
         <canvas id='plane-vectors-output' width='200' height='200' />
         <PlaneValues planes={ planes } indexSelected={ indexSelected } updateIndex={ this.props.updateIndex } drawDottedLine={ this.drawDottedLine } drawArrow={ this.drawArrow } />
-        <NeuralNetworkModel brain={ planes[indexSelected].brain } neuronCoords={ this.getNeuronCoordinates() } drawBall={ this.drawBall } />
+        <NeuralNetworkModel brain={ planes[indexSelected].brain } planeColor={ planes[indexSelected].color } neuronCoords={ this.getNeuronCoordinates() } drawBall={ this.drawBall } />
       </div>
     );
   }
