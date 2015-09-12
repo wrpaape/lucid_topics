@@ -4,14 +4,11 @@
 var NeuralNetworkDemo = React.createClass({
   getInitialState: function() {
     return({
-      mode: 'perceptron steering',
+      indexSelected: 0,
       planeComp: <div/>
     });
   },
   componentDidMount: function() {
-    this.setMode(this.state.mode);
-  },
-  setMode: function(mode) {
     var canvas = document.getElementById('neural-network');
     var ctx = canvas.getContext('2d');
     var width = canvas.width;
@@ -91,57 +88,46 @@ var NeuralNetworkDemo = React.createClass({
       }
     };
 
-    this.replaceState(
+    this.setState(
       {
-        indexSelected: 0,
-        mode: mode,
         Plane: function() {
-          switch (mode) {
-            case 'perceptron steering':
-              var brain = new NeuralNetwork(2, 2);
-              this.brain = brain;
-              this.processError = function() {
-                var v = this.v;
-                var a = this.a;
-                var dS = this.dS;
-                var dV = this.dV;
-                a.desired.x = (dS.x + dV.x) / 1000;
-                a.desired.y = (dS.y + dV.y) / 1000;
-                this.updateMagAngle(a.desired);
-                a.actual = a.desired;
-                // var inputs = [[v.mag], [v.angle], [dS.mag], [dS.angle]];
-                // brain.processInputs(inputs);
-                // var aMag = brain.outputs[0];
-                // var phi = brain.outputs[1];
-                // a.actual = {
-                //   mag: aMag,
-                //   angle: phi,
-                //   x: aMag * Math.cos(phi),
-                //   y: aMag * Math.sin(phi)
-                // };
-                // var diffs = [a.desired.mag - a.actual.mag, a.desired.angle - a.actual.angle];
-                // brain.processDiffs(diffs);
-                // console.log(brain.outputs);
-                // console.log(getMagnitude(diffs[0], diffs[1]));
-                // console.log(brain.layers[2].neurons[1].error);
-                // if (isNaN(brain.layers[1].neurons[0].weights[0])) {
-                //   console.log('weight is NaN');
-                //   throw new Error();
-                // } else if (isNaN(a.actual.mag)) {
-                //   console.log('a is NaN');
-                //   throw new Error();
-                // } else if(!v.mag) {
-                //   console.log('v is 0');
-                //   throw new Error();
-                // }
-              };
-              break;
-            case 'genetic algorithm':
-              this.processError = function() {
-                this.a.x = Math.cos(this.a.angle) / 5;
-                this.a.y = Math.sin(this.a.angle) / 5;
-              };
-          }
+          var brain = new NeuralNetwork(2, 2);
+          this.brain = brain;
+          this.processError = function() {
+            var v = this.v;
+            var a = this.a;
+            var dS = this.dS;
+            var dV = this.dV;
+            a.desired.x = (dS.x + dV.x) / 1000;
+            a.desired.y = (dS.y + dV.y) / 1000;
+            this.updateMagAngle(a.desired);
+            a.actual = a.desired;
+            // var inputs = [[v.mag], [v.angle], [dS.mag], [dS.angle]];
+            // brain.processInputs(inputs);
+            // var aMag = brain.outputs[0];
+            // var phi = brain.outputs[1];
+            // a.actual = {
+            //   mag: aMag,
+            //   angle: phi,
+            //   x: aMag * Math.cos(phi),
+            //   y: aMag * Math.sin(phi)
+            // };
+            // var diffs = [a.desired.mag - a.actual.mag, a.desired.angle - a.actual.angle];
+            // brain.processDiffs(diffs);
+            // console.log(brain.outputs);
+            // console.log(getMagnitude(diffs[0], diffs[1]));
+            // console.log(brain.layers[2].neurons[1].error);
+            // if (isNaN(brain.layers[1].neurons[0].weights[0])) {
+            //   console.log('weight is NaN');
+            //   throw new Error();
+            // } else if (isNaN(a.actual.mag)) {
+            //   console.log('a is NaN');
+            //   throw new Error();
+            // } else if(!v.mag) {
+            //   console.log('v is 0');
+            //   throw new Error();
+            // }
+          };
           var ar = 1 / 3;
           var c = pad;
           var b = ar * c;
@@ -329,9 +315,10 @@ var NeuralNetworkDemo = React.createClass({
     this.state.clear();
     planes.DrawAndUpdate();
     this.state.dots.DrawAndUpdate(planes.all[indexSelected].color);
-    this.setState({ planeComp: <Plane planes={ planes.all.map(this.extendPlane) } indexSelected={ indexSelected } updateIndex={ this.updateIndex } /> });
-
-    window.requestAnimationFrame(this.draw);
+    this.setState({
+        planeComp: <PlaneVectors planes={ planes.all.map(this.extendPlane) } indexSelected={ indexSelected } updateIndex={ this.updateIndex } />,
+        requestId: window.requestAnimationFrame(this.draw)
+      });
   },
   extendPlane: function(plane) {
     return({
@@ -365,24 +352,20 @@ var NeuralNetworkDemo = React.createClass({
   getMagnitude: function(x, y) {
     return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
   },
-  selectMode: function(event) {
-    this.setMode(event.target.value);
-  },
   updateIndex: function(newIndex) {
     this.setState({
       indexSelected: newIndex
     });
   },
+  resetWeights: function() {
+    window.cancelAnimationFrame(this.state.requestId);
+    this.replaceState(this.getInitialState(), this.componentDidMount);
+  },
   render: function() {
-    var options = ['perceptron steering', 'genetic algorithm'].map(function(mode) {
-      return <option key={ mode } value={ mode } >{ mode }</option>;
-    });
 
     return(
       <div>
-        <select value={ this.state.mode } onChange={ this.selectMode }>
-          { options }
-        </select>
+        <span onClick={ this.resetWeights }>reset weights</span>
         <div>
           <canvas id='neural-network' width='1000' height='500' />
         </div>

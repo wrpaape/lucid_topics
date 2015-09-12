@@ -6,11 +6,12 @@ html, body {
   display: block;
   text-align: center;
   background-color: black;
+  color: white;
   canvas {
     margin: 10px 5px 0;
     border: 3px solid white;
     width: 24.5%;
-    &#neural-network {
+    &#neural-network, &#neural-network-model {
       width: 50%;
     }
   }

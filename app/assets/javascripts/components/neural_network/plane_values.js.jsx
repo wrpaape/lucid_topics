@@ -1,7 +1,7 @@
 /* globals React */
 'use strict';
 
-var PlaneWindow = React.createClass({
+var PlaneValues = React.createClass({
   getInitialState: function() {
     return({
       indexSelected: this.props.indexSelected
@@ -29,8 +29,8 @@ var PlaneWindow = React.createClass({
     var phiDesired = plane.a.desired.angle;
     var targetsCollected = plane.targetsCollected;
     var color = plane.color;
-    var canvasInput = document.getElementById('plane-window-input');
-    var canvasOutput = document.getElementById('plane-window-output');
+    var canvasInput = document.getElementById('plane-values-input');
+    var canvasOutput = document.getElementById('plane-values-output');
     var ctxInput = canvasInput.getContext('2d');
     var ctxOutput = canvasOutput.getContext('2d');
     var width = canvasInput.width;
@@ -52,7 +52,7 @@ var PlaneWindow = React.createClass({
       ctxInput.clearRect(0, 0, width, height);
       drawDottedLine(ctxInput, xo1, yo, xo1 + dX, yo);
       drawArrow(ctxInput, xo1, yo, r, 2 * r / 5, angle, color);
-      ctxInput.font = '25px serif';
+      ctxInput.font = '24px serif';
       ctxInput.fillStyle = color;
       ctxInput.fillText('plane', xo1, heightText);
       ctxInput.fillText('v: ' + formatScalar(vMag, 'm/s'), xo1, height - 2 * heightText - 4);
@@ -68,7 +68,7 @@ var PlaneWindow = React.createClass({
       ctxOutput.clearRect(0, 0, width, height);
       drawDottedLine(ctxOutput, xo1, yo, xo1 + dX, yo);
       drawArrow(ctxOutput, xo1, yo, r, 2 * r / 5, angle, 'red');
-      ctxOutput.font = '25px serif';
+      ctxOutput.font = '24px serif';
       ctxOutput.fillStyle = 'red';
       ctxOutput.fillText('actual', xo1, heightText);
       ctxOutput.fillText('a: ' + formatScalar(aMagActual, 'm/s²'), xo1, height - 2 * heightText - 4);
@@ -108,8 +108,9 @@ var PlaneWindow = React.createClass({
           { '   targets collected: ' + plane.targetsCollected }
         </span>
         <div>
-          <canvas id='plane-window-input' width='300' height='150' />
-          <canvas id='plane-window-output' width='300' height='150' />
+          <canvas id='plane-values-input' width='300' height='150' />
+          <canvas id='plane-values-output' width='300' height='150' />
+          <NeuralNetworkModel />
         </div>
       </div>
     );

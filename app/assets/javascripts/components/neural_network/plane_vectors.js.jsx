@@ -1,15 +1,15 @@
 /* globals React */
 'use strict';
 
-var Plane = React.createClass({
+var PlaneVectors = React.createClass({
   componentDidUpdate: function() {
     var plane = this.props.planes[this.props.indexSelected];
     var theta = plane.dS.angle;
     var alpha = plane.v.angle;
     var phiActual = plane.a.actual.angle;
     var phiDesired = plane.a.desired.angle;
-    var canvasInput = document.getElementById('plane-input');
-    var canvasOutput = document.getElementById('plane-output');
+    var canvasInput = document.getElementById('plane-vectors-input');
+    var canvasOutput = document.getElementById('plane-vectors-output');
     var ctxInput = canvasInput.getContext('2d');
     var ctxOutput = canvasOutput.getContext('2d');
     var width = canvasInput.width;
@@ -97,9 +97,9 @@ var Plane = React.createClass({
   render: function() {
     return(
       <div>
-        <canvas id='plane-input' width='200' height='200' />
-        <canvas id='plane-output' width='200' height='200' />
-        <PlaneWindow planes={ this.props.planes } indexSelected={ this.props.indexSelected } updateIndex={ this.props.updateIndex } drawDottedLine={ this.drawDottedLine } drawArrow={ this.drawArrow } />
+        <canvas id='plane-vectors-input' width='200' height='200' />
+        <canvas id='plane-vectors-output' width='200' height='200' />
+        <PlaneValues planes={ this.props.planes } indexSelected={ this.props.indexSelected } updateIndex={ this.props.updateIndex } drawDottedLine={ this.drawDottedLine } drawArrow={ this.drawArrow } />
       </div>
     );
   }
