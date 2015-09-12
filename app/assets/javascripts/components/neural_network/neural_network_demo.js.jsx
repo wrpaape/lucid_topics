@@ -91,7 +91,7 @@ var NeuralNetworkDemo = React.createClass({
     this.setState(
       {
         Plane: function() {
-          var brain = new NeuralNetwork(2, 2);
+          var brain = new NeuralNetwork(4, 2);
           this.brain = brain;
           this.processError = function() {
             var v = this.v;
@@ -345,6 +345,7 @@ var NeuralNetworkDemo = React.createClass({
         angle: plane.dS.angle
       },
       targetsCollected: plane.targetsCollected,
+      brain: plane.brain,
       color: plane.color,
       draw: plane.draw
     });

@@ -110,7 +110,6 @@ var PlaneValues = React.createClass({
         <div>
           <canvas id='plane-values-input' width='300' height='150' />
           <canvas id='plane-values-output' width='300' height='150' />
-          <NeuralNetworkModel />
         </div>
       </div>
     );
