@@ -47,9 +47,9 @@ var NeuralNetworkModel = React.createClass({
     var xBall = xy1[0] + 3 * dXLayer / 4;
     var yBall = canvas.height / 2;
     var rBall = 3 * rNeuron / 2;
-    drawBall(ctx, xBall, yBall, rBall, 'green');
-    this.drawSymbolTag(ctx, xy2[0], yBall - rBall, 'aₒ', 'green');
-    this.drawSymbolTag(ctx, xy2[0], yBall + rBall, 'φₒ', 'green');
+    drawBall(ctx, xBall, yBall, rBall, 'lime');
+    this.drawSymbolTag(ctx, xy2[0], yBall - rBall, 'aₒ', 'lime');
+    this.drawSymbolTag(ctx, xy2[0], yBall + rBall, 'φₒ', 'lime');
   },
   drawLine: function(ctx, xy1, xy2, color, lineWidth) {
     ctx.save();

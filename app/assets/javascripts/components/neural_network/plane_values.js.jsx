@@ -74,8 +74,8 @@ var PlaneValues = React.createClass({
       ctxOutput.fillText('aₓ: ' + formatScalar(aMagActual, 'm/s²'), xo1, height - 2 * heightText - 4);
       ctxOutput.fillText('φₓ: ' + formatAngle(phiActual), xo1, height - heightText);
       drawDottedLine(ctxOutput, xo2, yo, xo2 + dX, yo);
-      drawArrow(ctxOutput, xo2, yo, r, 2 * r / 5, angle, 'green');
-      ctxOutput.fillStyle = 'green';
+      drawArrow(ctxOutput, xo2, yo, r, 2 * r / 5, angle, 'lime');
+      ctxOutput.fillStyle = 'lime';
       ctxOutput.fillText('desired', xo2, heightText);
       ctxOutput.fillText('aₒ: ' + formatScalar(aMagDesired, 'm/s²'), xo2, height - 2 * heightText - 4);
       ctxOutput.fillText('φₒ: ' + formatAngle(phiDesired), xo2, height - heightText);
