@@ -41,21 +41,15 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'pry'
+  gem 'bullet'
 end
 
-
-gem 'puma'
-gem 'figaro'
 group :production do
   gem 'rails_12factor'
 end
 
-group :development, :test do
-  gem 'pry'
-  gem 'faker'
-end
-
-gem 'bullet', group: :development
-gem 'bootstrap-sass'
+gem 'puma'
+gem 'figaro'
 gem 'react-rails'
 gem 'bcrypt'

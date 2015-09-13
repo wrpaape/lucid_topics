@@ -82,4 +82,4 @@ production:
   <<: *default
   database: lucid_topics_production
   username: lucid_topics
-  password: <%= ENV['DRAW_APP_DATABASE_PASSWORD'] %>
+  password: <%= ENV['LUCID_TOPICS_DATABASE_PASSWORD'] %>
