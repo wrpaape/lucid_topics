@@ -33,6 +33,7 @@ var Neuron = function(numInputs, indexLayer, indexNeuron) {
         this.weights[i] += eta * this.error * this.inputs[i];
       }
       this.bias = this.weights[this.weights.length - 1];
+      this.r = this.r0 + this.bias * 10;
     };
     this.getInitalWeights();
   } else {
@@ -45,6 +46,7 @@ var Neuron = function(numInputs, indexLayer, indexNeuron) {
 };
 
 var NeuralNetwork = function(numInputs, numOutputs) {
+  this.eta = 1;
   var layers = [
     {
       type: 'input',
@@ -77,15 +79,15 @@ var NeuralNetwork = function(numInputs, numOutputs) {
       var neuron = new Neuron(numInputsForLayer, i, j);
       neuron.x = xNeuron;
       neuron.y = yNeuron;
+      neuron.r0 = rNeuron;
       neuron.r = rNeuron;
       layer.neurons.push(neuron);
       yNeuron += dYNeuron;
     }
     numInputsForLayer = numNeurons;
      xNeuron += dXLayer;
-  });
+  }.bind(this));
   this.layers = layers;
-  this.eta = 1;
   this.processLayer = function(layer) {
     layer.outputs = layer.neurons.map(function(neuron, i) {
       neuron.processInputs(layer.inputs[i]);

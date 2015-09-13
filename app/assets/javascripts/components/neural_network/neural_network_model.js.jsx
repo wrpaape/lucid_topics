@@ -65,8 +65,6 @@ var NeuralNetworkModel = React.createClass({
     };
 
     window.requestAnimationFrame(draw);
-    this.props.pause();
-    window.setTimeout(this.props.resume, 0);
   },
   drawSynapse: function(ctx, x1, y1, x2, y2, weight) {
     var color = weight > 0 ? 'green' : 'red';

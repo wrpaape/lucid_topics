@@ -103,14 +103,14 @@ var NeuralNetworkDemo = React.createClass({
             var inputs = [[dV.mag], [dV.angle], [dS.mag], [dS.angle]];
             brain.processInputs(inputs);
             var aMag = brain.outputs[0];
-            var phi = brain.outputs[1] % (2 * Math.PI);
+            var phi = brain.outputs[1];
             a.actual = {
               mag: aMag,
               angle: phi,
               x: aMag * Math.cos(phi),
               y: aMag * Math.sin(phi)
             };
-            var diffs = [a.desired.mag - a.actual.mag, a.desired.angle - a.actual.angle];
+            var diffs = [a.desired.mag - a.actual.mag, (a.desired.angle - a.actual.angle)];
             brain.processDiffs(diffs);
             // a.actual = a.desired;
             // console.log(brain.outputs);
@@ -249,7 +249,7 @@ var NeuralNetworkDemo = React.createClass({
           ctx.clearRect(0, 0, width, height);
         }
       },
-      this.setPlanes.bind(this, 1)
+      this.setPlanes.bind(this, 2)
     );
   },
   setPlanes: function(numPlanes) {
@@ -268,7 +268,7 @@ var NeuralNetworkDemo = React.createClass({
       }
     };
 
-    this.setState({ planes: planes }, this.setDots.bind(this, 2));
+    this.setState({ planes: planes }, this.setDots.bind(this, 10));
   },
   setDots: function(numDots) {
     var allPlanes = this.state.planes.all;
@@ -358,9 +358,8 @@ var NeuralNetworkDemo = React.createClass({
     return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
   },
   updateIndex: function(newIndex) {
-    this.setState({
-      indexSelected: newIndex
-    });
+    this.pause();
+    this.setState({ indexSelected: newIndex }, this.resume());
   },
   pause: function() {
     window.cancelAnimationFrame(this.state.requestId);
