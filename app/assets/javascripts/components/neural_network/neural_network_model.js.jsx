@@ -37,10 +37,10 @@ var NeuralNetworkModel = React.createClass({
       var inputSymbols = ['v', '⍺', 'ρ', 'θ'];
       var inputNeurons = layers[0].neurons;
       for (var m = 0; m < inputNeurons.length; m++) {
-        var neuron = inputNeurons[m];
+        neuron = inputNeurons[m];
         x2 = neuron.x - neuron.r;
         y2 = neuron.y;
-        x1 = x2 - dXLayer / 3
+        x1 = x2 - dXLayer / 3;
         y1 = y2;
         drawArrow(ctx, x1, y1, x2, y2, neuron.color);
         drawSymbolTag(ctx, x1, y1, inputSymbols[m], neuron.color, true);
@@ -48,7 +48,7 @@ var NeuralNetworkModel = React.createClass({
       var outputSymbols = ['Tₓ', 'φₓ'];
       var outputNeurons = layers[layers.length - 1].neurons;
       for (var n = 0; n < outputNeurons.length; n++) {
-        var neuron = outputNeurons[n];
+        neuron = outputNeurons[n];
         x1 = neuron.x;
         y1 = neuron.y;
         x2 = x1 + dXLayer / 3;
@@ -65,8 +65,8 @@ var NeuralNetworkModel = React.createClass({
     };
 
     window.requestAnimationFrame(draw);
-    // this.props.pause();
-    // window.setTimeout(this.props.resume, 100);
+    this.props.pause();
+    window.setTimeout(this.props.resume, 0);
   },
   drawSynapse: function(ctx, x1, y1, x2, y2, weight) {
     var color = weight > 0 ? 'green' : 'red';

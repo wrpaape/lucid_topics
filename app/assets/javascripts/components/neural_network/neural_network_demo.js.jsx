@@ -94,36 +94,35 @@ var NeuralNetworkDemo = React.createClass({
           var brain = new NeuralNetwork(4, 2);
           this.brain = brain;
           this.processError = function() {
-            var v = this.v;
             var a = this.a;
             var dS = this.dS;
             var dV = this.dV;
             a.desired.x = (dS.x + dV.x) / 1000;
             a.desired.y = (dS.y + dV.y) / 1000;
             this.updateMagAngle(a.desired);
-            a.actual = a.desired;
-            // var inputs = [[v.mag], [v.angle], [dS.mag], [dS.angle]];
-            // brain.processInputs(inputs);
-            // var aMag = brain.outputs[0];
-            // var phi = brain.outputs[1];
-            // a.actual = {
-            //   mag: aMag,
-            //   angle: phi,
-            //   x: aMag * Math.cos(phi),
-            //   y: aMag * Math.sin(phi)
-            // };
-            // var diffs = [a.desired.mag - a.actual.mag, a.desired.angle - a.actual.angle];
-            // brain.processDiffs(diffs);
-            // // console.log(brain.outputs);
-            // // console.log(getMagnitude(diffs[0], diffs[1]));
-            // // console.log(brain.layers[2].neurons[1].error);
+            var inputs = [[dV.mag], [dV.angle], [dS.mag], [dS.angle]];
+            brain.processInputs(inputs);
+            var aMag = brain.outputs[0];
+            var phi = brain.outputs[1] % (2 * Math.PI);
+            a.actual = {
+              mag: aMag,
+              angle: phi,
+              x: aMag * Math.cos(phi),
+              y: aMag * Math.sin(phi)
+            };
+            var diffs = [a.desired.mag - a.actual.mag, a.desired.angle - a.actual.angle];
+            brain.processDiffs(diffs);
+            // a.actual = a.desired;
+            // console.log(brain.outputs);
+            // console.log(getMagnitude(diffs[0], diffs[1]));
+            // console.log(brain.layers[2].neurons[1].error);
             // if (isNaN(brain.layers[1].neurons[0].weights[0])) {
             //   console.log('weight is NaN');
             //   throw new Error();
             // } else if (isNaN(a.actual.mag)) {
             //   console.log('a is NaN');
             //   throw new Error();
-            // } else if(!v.mag) {
+            // } else if(!this.v.mag) {
             //   console.log('v is 0');
             //   throw new Error();
             // }
@@ -250,7 +249,7 @@ var NeuralNetworkDemo = React.createClass({
           ctx.clearRect(0, 0, width, height);
         }
       },
-      this.setPlanes.bind(this, 3)
+      this.setPlanes.bind(this, 1)
     );
   },
   setPlanes: function(numPlanes) {
@@ -269,7 +268,7 @@ var NeuralNetworkDemo = React.createClass({
       }
     };
 
-    this.setState({ planes: planes }, this.setDots.bind(this, 10));
+    this.setState({ planes: planes }, this.setDots.bind(this, 2));
   },
   setDots: function(numDots) {
     var allPlanes = this.state.planes.all;
