@@ -5,7 +5,7 @@ var NeuralNetworksDemo = React.createClass({
   getInitialState: function() {
     return({
       idSelected: 0,
-      planeVectors: <div/>
+      planeVectors: null
     });
   },
   componentDidMount: function() {
@@ -60,14 +60,14 @@ var NeuralNetworksDemo = React.createClass({
       var vMagMin = this.vMagMin;
       var vMagMax = this.vMagMax;
       var pad = this.pad;
-      s.x += v.x;
-      s.y += v.y;
       if (s.x + v.x > width - pad || s.x + v.x < pad) {
         v.x = vNegRand(v.x, vMagMin, vMagMax);
       }
       if (s.y + v.y > height - pad || s.y + v.y < pad) {
         v.y = vNegRand(v.y, vMagMin, vMagMax);
       }
+      s.x += v.x;
+      s.y += v.y;
     };
     var updatePlaneVectors = function() {
       var s = this.s;
@@ -76,16 +76,16 @@ var NeuralNetworksDemo = React.createClass({
       var alpha = this.v.angle;
       var pad = this.pad;
 
-      s.x += v.x;
-      s.y += v.y;
-      v.x += a.actual.x;
-      v.y += a.actual.y;
       if (s.x + v.x > width - pad || s.x + v.x < pad) {
         v.x = 0;
       }
       if (s.y + v.y > height - pad || s.y + v.y < pad) {
         v.y = 0;
       }
+      s.x += v.x;
+      s.y += v.y;
+      v.x += a.actual.x;
+      v.y += a.actual.y;
     };
 
     this.setState(

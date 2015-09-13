@@ -52,6 +52,9 @@ html, body {
   background-color: black;
   color: white;
   font-family: monaco, Consolas, 'Lucida Console', monospace;
+  form {
+    text-align: center;
+  }
   select {
     -webkit-appearance: menulist-button;
     color: white;
