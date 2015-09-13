@@ -1,13 +1,13 @@
 /* globals React */
 'use strict';
 
-var NeuralNetworkModel = React.createClass({
+var NeuralNetworksModel = React.createClass({
   componentDidUpdate: function() {
     var brain = this.props.brain;
     var layers = brain.layers;
     var planeColor = this.props.planeColor;
     var drawBall = this.props.drawBall;
-    var canvas = document.getElementById('neural-network-model');
+    var canvas = document.getElementById('neural-network-models');
     var ctx = canvas.getContext('2d');
     var dXLayer = layers[1].neurons[0].x - layers[0].neurons[0].x;
     var rNeuron = dXLayer / 12;
@@ -113,7 +113,7 @@ var NeuralNetworkModel = React.createClass({
   render: function() {
     return(
       <div>
-        <canvas id='neural-network-model' width='2000' height='1000' />
+        <canvas id='neural-network-models' width='2000' height='1000' />
       </div>
     );
   }

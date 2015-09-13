@@ -4,19 +4,19 @@
 var PlaneValues = React.createClass({
   getInitialState: function() {
     return({
-      indexSelected: this.props.indexSelected
+      idSelected: this.props.idSelected
     });
   },
   componentWillReceiveProps: function(nextProps) {
     this.setState({
-      indexSelected: nextProps.indexSelected
+      idSelected: nextProps.idSelected
     });
   },
   componentDidUpdate: function() {
     var planes = this.props.planes;
     var drawDottedLine = this.props.drawDottedLine;
     var drawArrow = this.props.drawArrow;
-    var plane = planes[this.state.indexSelected];
+    var plane = planes[this.state.idSelected];
     var dV = plane.dV;
     var dS = plane.dS;
     var dVMag = dV.mag;
@@ -91,8 +91,8 @@ var PlaneValues = React.createClass({
   },
   render: function() {
     var planes = this.props.planes;
-    var indexSelected = this.state.indexSelected;
-    var plane = planes[indexSelected];
+    var idSelected = this.state.idSelected;
+    var plane = planes[idSelected];
 
     var options = planes.map(function(plane, i) {
       return <option key={ i } value={ i } >{ window.classifier.classify(plane.color) }</option>;
@@ -100,7 +100,7 @@ var PlaneValues = React.createClass({
 
     return(
       <div>
-        <select value={ this.state.indexSelected } onChange={ this.selectPlane }>
+        <select value={ this.state.idSelected } onChange={ this.selectPlane }>
           { options }
         </select>
         <span>

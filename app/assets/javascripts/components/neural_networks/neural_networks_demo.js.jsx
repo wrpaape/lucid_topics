@@ -1,15 +1,15 @@
 /* globals React */
 'use strict';
 
-var NeuralNetworkDemo = React.createClass({
+var NeuralNetworksDemo = React.createClass({
   getInitialState: function() {
     return({
-      indexSelected: 0,
+      idSelected: 0,
       planeVectors: <div/>
     });
   },
   componentDidMount: function() {
-    var canvas = document.getElementById('neural-network');
+    var canvas = document.getElementById('neural-networks');
     var ctx = canvas.getContext('2d');
     var width = canvas.width;
     var height = canvas.height;
@@ -311,12 +311,13 @@ var NeuralNetworkDemo = React.createClass({
   },
   draw: function() {
     var planes = this.state.planes;
-    var indexSelected = this.state.indexSelected;
+    var idSelected = this.state.idSelected;
     this.state.clear();
     planes.DrawAndUpdate();
-    this.state.dots.DrawAndUpdate(planes.all[indexSelected].color);
+    this.state.dots.DrawAndUpdate(planes.all[idSelected].color);
+
     this.setState({
-        planeVectors: <PlaneVectors planes={ planes.all.map(this.extendPlane) } indexSelected={ indexSelected } updateIndex={ this.updateIndex } pause={ this.pause } resume={ this.resume } />,
+        planeVectors: <PlaneVectors planes={ planes.all.map(this.extendPlane) } idSelected={ idSelected } updateIndex={ this.updateIndex } pause={ this.pause } resume={ this.resume } />,
         requestId: window.requestAnimationFrame(this.draw)
       });
   },
@@ -359,7 +360,7 @@ var NeuralNetworkDemo = React.createClass({
   },
   updateIndex: function(newIndex) {
     this.pause();
-    this.setState({ indexSelected: newIndex }, this.resume());
+    this.setState({ idSelected: newIndex }, this.resume());
   },
   pause: function() {
     window.cancelAnimationFrame(this.state.requestId);
@@ -370,17 +371,16 @@ var NeuralNetworkDemo = React.createClass({
   setRefreshRate: function(event) {
     this.setState({ refreshRate: event.target.value });
   },
-   resetDemo: function() {
+  resetDemo: function() {
     this.pause();
     this.replaceState(this.getInitialState(), this.componentDidMount);
   },
   render: function() {
-
     return(
       <div>
         <span onClick={ this.resetDemo }>reset</span>
         <div>
-          <canvas id='neural-network' width='1000' height='500' />
+          <canvas id='neural-networks' width='1000' height='500' />
         </div>
         <div>
           { this.state.planeVectors }

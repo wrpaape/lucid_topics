@@ -3,7 +3,7 @@
 
 var PlaneVectors = React.createClass({
   componentDidUpdate: function() {
-    var plane = this.props.planes[this.props.indexSelected];
+    var plane = this.props.planes[this.props.idSelected];
     var theta = plane.dS.angle;
     var dAlpha = plane.dV.angle;
     var phiActual = plane.a.actual.angle;
@@ -96,14 +96,14 @@ var PlaneVectors = React.createClass({
   },
   render: function() {
     var planes = this.props.planes;
-    var indexSelected = this.props.indexSelected;
+    var idSelected = this.props.idSelected;
 
     return(
       <div>
         <canvas id='plane-vectors-input' width='200' height='200' />
         <canvas id='plane-vectors-output' width='200' height='200' />
-        <PlaneValues planes={ planes } indexSelected={ indexSelected } updateIndex={ this.props.updateIndex } drawDottedLine={ this.drawDottedLine } drawArrow={ this.drawArrow } />
-        <NeuralNetworkModel brain={ planes[indexSelected].brain } drawBall={ this.drawBall } pause={ this.props.pause } resume={ this.props.resume } />
+        <PlaneValues planes={ planes } idSelected={ idSelected } updateIndex={ this.props.updateIndex } drawDottedLine={ this.drawDottedLine } drawArrow={ this.drawArrow } />
+        <NeuralNetworksModel brain={ planes[idSelected].brain } drawBall={ this.drawBall } pause={ this.props.pause } resume={ this.props.resume } />
       </div>
     );
   }

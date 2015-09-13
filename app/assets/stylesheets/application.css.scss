@@ -1,3 +1,46 @@
+@keyframes fade-out {
+  to {
+    opacity: 0;
+    background-color: rgba(255, 255, 255, 0);
+  }
+}
+@keyframes hide {
+  to {
+    z-index: -1;
+  }
+}
+
+@mixin fade-out {
+  animation: fade-out 1s ease-in 1s forwards,
+    hide 4s forwards;
+}
+@mixin pop-up {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.false {
+  display: none;
+}
+.cursor-pointer {
+  cursor: pointer;
+  &:active {
+    color: grey;
+  }
+}
+.alert {
+  font-size: 24px;
+  padding: 24px;
+  background-color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  @include pop-up;
+  @include fade-out;
+}
+
 html, body {
   height: 100%;
   display: block;
@@ -5,10 +48,19 @@ html, body {
   background-color: black;
   color: white;
   font-family: monaco, Consolas, 'Lucida Console', monospace;
+  select {
+    -webkit-appearance: menulist-button;
+    color: white;
+    background-color: black;
+    border: 1px solid white;
+    font-family: monaco, Consolas, 'Lucida Console', monospace;
+    font-size: 1em;
+    margin-top: 5px;
+  }
   canvas {
     margin: 10px 5px 0;
     border: 3px solid white;
-    width: 24.5%;
+    width: 20%;
     &#neural-network, &#neural-network-model {
       width: 50%;
     }

@@ -2,28 +2,54 @@
 'use strict';
 
 var Index = React.createClass({
-
-  authenticateEmployee: function() {
-    $.ajax({
-      type: 'POST',
-      url: game.saveURL,
-      dataType: 'json',
-      headers: {
-        'X-HTTP-Method-Override': 'PUT'
-      },
-      data: {
-        id: game.id,
-        state: gameState
-      },
-      success: function(response) {
-        this.setAlert(game.title + response.message);
-      }.bind(this),
-      error: function(jqXHR, textStatus, errorThrown) {
-        this.setAlert(game.title + ' save failed!');
-      }.bind(this)
+  getInitialState: function() {
+    return({
+      idSelected: 0,
+      alert: <Alert key='true' message={ 'welcome' } />
     });
   },
   render: function() {
-    return <div />;
+    var topics = this.props.topics;
+    var idSelected = this.state.idSelected;
+    var alert = this.state.alert;
+    var id, topicProps, topicComponent
+    var index = topics.map(function(topic) {
+      id = topic.id;
+      console.log(id);
+      if (id === idSelected) {
+        topicProps = {
+          topic: topic,
+          setAlert: this.setAlert
+        }
+        topicComponent = React.createElement(window[topic.component], topicProps);
+      }
+
+      return(
+        <div key={ 'index-' + id }>
+          <div className={ !idSelected + ' cursor-pointer' } onClick={ this.selectTopic.bind(this, id) }>
+            { topic.title }
+          </div>
+          <div className={ id === idSelected }>
+            { topicComponent }
+          </div>
+        </div>
+      );
+    }.bind(this));
+
+    return(
+      <div>
+        { [alert].concat(index) }
+      </div>
+    );
+  },
+  selectTopic: function(id) {
+    this.setState({
+      idSelected: id
+    })
+  },
+  setAlert: function(message) {
+    this.setState({
+      alert: <Alert key={ !JSON.parse(this.state.alert.key) } message={ message } />
+    })
   }
 });
