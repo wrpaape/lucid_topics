@@ -190,8 +190,8 @@ var NeuralNetworkDemo = React.createClass({
           this.c = c;
           this.ar = ar;
           this.pad = c;
-          this.vMagMin = 0.1;
-          this.vMagMax = 0.1;
+          this.vMagMin = 0;
+          this.vMagMax = 0;
           this.color = '#' + Math.floor(Math.random() * 16777215).toString(16);
           this.initializeVectors();
           this.updateMagAngle(this.v);
@@ -239,8 +239,8 @@ var NeuralNetworkDemo = React.createClass({
 
           this.radius = radius;
           this.pad = radius + pad;
-          this.vMagMin = 1;
-          this.vMagMax = 3;
+          this.vMagMin = 0.1;
+          this.vMagMax = 1;
           this.colors = ['blue'];
           this.initializeVectors();
           this.updateRhos();
@@ -329,7 +329,7 @@ var NeuralNetworkDemo = React.createClass({
       a: {
         actual: {
           mag: plane.a.actual.mag * 3600,
-          angle: plane.a.actual.angle
+          angle: plane.a.actual.angle % (2 * Math.PI)
         },
         desired: {
           mag: plane.a.desired.mag * 3600,

@@ -55,7 +55,7 @@ var NeuralNetwork = function(numInputs, numOutputs) {
     },
     {
       type: 'hidden',
-      numNeurons: numInputs + numOutputs,
+      numNeurons: numInputs + numOutputs - 0,
       neurons: []
     },
     {

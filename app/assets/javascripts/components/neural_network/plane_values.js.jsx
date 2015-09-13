@@ -53,13 +53,13 @@ var PlaneValues = React.createClass({
       drawArrow(ctxInput, xo1, yo, r, 2 * r / 5, angle, '#1DFD84');
       ctxInput.font = '18px monaco, Consolas, "Lucida Console", monospace';
       ctxInput.fillStyle = '#1DFD84';
-      ctxInput.fillText('velocity', xo1, heightText);
+      ctxInput.fillText('rel velocity', xo1, heightText);
       ctxInput.fillText('v: ' + formatScalar(dVMag, 'm/s'), xo1, height - 2 * heightText - 4);
       ctxInput.fillText('⍺: ' + formatAngle(dAlpha), xo1, height - heightText);
       drawDottedLine(ctxInput, xo2, yo, xo2 + dX, yo);
       drawArrow(ctxInput, xo2, yo, r, 2 * r / 5, angle, '#C1FA1C');
       ctxInput.fillStyle = '#C1FA1C';
-      ctxInput.fillText('position', xo2, heightText);
+      ctxInput.fillText('rel position', xo2, heightText);
       ctxInput.fillText('ρ: ' + formatScalar(rho, 'm'), xo2, height - 2 * heightText - 4);
       ctxInput.fillText('θ: ' + formatAngle(theta), xo2, height - heightText);
     };

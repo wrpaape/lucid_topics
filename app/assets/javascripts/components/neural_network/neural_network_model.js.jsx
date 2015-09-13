@@ -16,6 +16,7 @@ var NeuralNetworkModel = React.createClass({
     var drawSymbolTag = this.drawSymbolTag;
     var neurons, neuron, x1, y1, x2, y2, weight;
     var draw = function() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (var i = 0; i < layers.length; i++) {
         var neurons = layers[i].neurons;
         for (var j = 0; j < neurons.length; j++) {
