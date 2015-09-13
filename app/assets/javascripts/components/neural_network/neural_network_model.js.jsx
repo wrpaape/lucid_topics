@@ -68,8 +68,8 @@ var NeuralNetworkModel = React.createClass({
     window.requestAnimationFrame(draw);
   },
   drawSynapse: function(ctx, x1, y1, x2, y2, weight) {
-    var color = weight > 0 ? 'green' : 'red';
-    var lineWidth = Math.abs(weight) * 10;
+    var color = weight.color;
+    var lineWidth = weight.width;
     ctx.save();
     ctx.strokeStyle = color;
     ctx.lineWidth = lineWidth;

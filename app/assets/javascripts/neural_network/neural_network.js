@@ -6,15 +6,25 @@ var Neuron = function(numInputs, indexLayer, indexNeuron) {
     this.color = neuronColors[indexLayer];
     this.getInitalWeights = function() {
       this.weights = [];
+      var weight, value;
       for (var i = 0; i < numInputs + 1; i++) {
-        this.weights.push(2 * Math.random() - 1);
+        weight = { value: 2 * Math.random() - 1 };
+        this.updateWeightColor(weight);
+        this.updateWeightWidth(weight);
+        this.weights.push(weight);
       }
-      this.bias = this.weights[numInputs];
+      this.bias = this.weights[numInputs].value;
+    };
+    this.updateWeightColor = function(weight) {
+      weight.color = weight.value < 0 ? 'red' : 'green';
+    };
+    this.updateWeightWidth = function(weight) {
+      weight.width = Math.abs(weight.value) * 10;
     };
     this.updateActivation = function() {
       this.activation = 0;
       for (var i = 0; i < numInputs + 1; i++) {
-        this.activation += this.inputs[i] * this.weights[i];
+        this.activation += this.inputs[i] * this.weights[i].value;
       }
     };
     this.updateOutput = function() {
@@ -29,10 +39,14 @@ var Neuron = function(numInputs, indexLayer, indexNeuron) {
       this.error = this.output * (1 - this.output) * diff;
     };
     this.updateWeights = function(eta) {
+      var weight;
       for (var i = 0; i < this.weights.length; i++) {
-        this.weights[i] += eta * this.error * this.inputs[i];
+        weight = this.weights[i];
+        weight.value += eta * this.error * this.inputs[i];
+        this.updateWeightColor(weight);
+        this.updateWeightWidth(weight);
       }
-      this.bias = this.weights[this.weights.length - 1];
+      this.bias = this.weights[this.weights.length - 1].value;
       this.r = this.r0 + this.bias * 10;
     };
     this.getInitalWeights();
@@ -129,7 +143,7 @@ var NeuralNetwork = function(numInputs, numOutputs) {
       diff = 0;
       for (var n = 0; n < outputLayer.neurons.length; n++) {
         neuron = outputLayer.neurons[n];
-        diff += neuron.error * neuron.weights[m];
+        diff += neuron.error * neuron.weights[m].value;
       }
       neuron = hiddenLayer.neurons[m];
       neuron.updateError(diff);
