@@ -22,29 +22,33 @@
   left: 0;
   z-index: 1;
 }
-
-.false {
-  display: none;
-}
-.cursor-pointer {
+@mixin cursor-pointer {
   cursor: pointer;
   &:active {
     color: grey;
   }
 }
+
+.false {
+  display: none;
+}
+.cursor-pointer {
+  @include cursor-pointer;
+}
 .alert {
   font-size: 24px;
   padding: 24px;
   background-color: rgba(255, 255, 255, 0.5);
+  color: black;
   text-align: center;
   @include pop-up;
   @include fade-out;
 }
+.demo {
+  text-align: center;
+}
 
 html, body {
-  height: 100%;
-  display: block;
-  text-align: center;
   background-color: black;
   color: white;
   font-family: monaco, Consolas, 'Lucida Console', monospace;
@@ -56,12 +60,13 @@ html, body {
     font-family: monaco, Consolas, 'Lucida Console', monospace;
     font-size: 1em;
     margin-top: 5px;
+    @include cursor-pointer;
   }
   canvas {
     margin: 10px 5px 0;
     border: 3px solid white;
     width: 20%;
-    &#neural-network, &#neural-network-model {
+    &#neural-networks, &#neural-network-model {
       width: 50%;
     }
   }

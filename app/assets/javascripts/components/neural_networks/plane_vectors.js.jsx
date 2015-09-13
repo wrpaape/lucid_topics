@@ -103,7 +103,7 @@ var PlaneVectors = React.createClass({
         <canvas id='plane-vectors-input' width='200' height='200' />
         <canvas id='plane-vectors-output' width='200' height='200' />
         <PlaneValues planes={ planes } idSelected={ idSelected } updateIndex={ this.props.updateIndex } drawDottedLine={ this.drawDottedLine } drawArrow={ this.drawArrow } />
-        <NeuralNetworksModel brain={ planes[idSelected].brain } drawBall={ this.drawBall } pause={ this.props.pause } resume={ this.props.resume } />
+        <NeuralNetworkModel brain={ planes[idSelected].brain } drawBall={ this.drawBall } pause={ this.props.pause } resume={ this.props.resume } />
       </div>
     );
   }

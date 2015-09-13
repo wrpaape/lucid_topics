@@ -8,6 +8,16 @@ var Index = React.createClass({
       alert: <Alert key='true' message={ 'welcome' } />
     });
   },
+  selectTopic: function(id) {
+    this.setState({
+      idSelected: id
+    });
+  },
+  setAlert: function(message) {
+    this.setState({
+      alert: <Alert key={ !JSON.parse(this.state.alert.key) } message={ message } />
+    });
+  },
   render: function() {
     var topics = this.props.topics;
     var idSelected = this.state.idSelected;
@@ -15,11 +25,11 @@ var Index = React.createClass({
     var id, topicProps, topicComponent
     var index = topics.map(function(topic) {
       id = topic.id;
-      console.log(id);
       if (id === idSelected) {
         topicProps = {
           topic: topic,
-          setAlert: this.setAlert
+          setAlert: this.setAlert,
+          goBack: this.selectTopic.bind(this, 0)
         }
         topicComponent = React.createElement(window[topic.component], topicProps);
       }
@@ -41,15 +51,5 @@ var Index = React.createClass({
         { [alert].concat(index) }
       </div>
     );
-  },
-  selectTopic: function(id) {
-    this.setState({
-      idSelected: id
-    })
-  },
-  setAlert: function(message) {
-    this.setState({
-      alert: <Alert key={ !JSON.parse(this.state.alert.key) } message={ message } />
-    })
   }
 });

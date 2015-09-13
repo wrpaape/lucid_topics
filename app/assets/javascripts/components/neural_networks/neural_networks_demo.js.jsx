@@ -112,20 +112,6 @@ var NeuralNetworksDemo = React.createClass({
             };
             var diffs = [a.desired.mag - a.actual.mag, (a.desired.angle - a.actual.angle)];
             brain.processDiffs(diffs);
-            // a.actual = a.desired;
-            // console.log(brain.outputs);
-            // console.log(getMagnitude(diffs[0], diffs[1]));
-            // console.log(brain.layers[2].neurons[1].error);
-            // if (isNaN(brain.layers[1].neurons[0].weights[0])) {
-            //   console.log('weight is NaN');
-            //   throw new Error();
-            // } else if (isNaN(a.actual.mag)) {
-            //   console.log('a is NaN');
-            //   throw new Error();
-            // } else if(!this.v.mag) {
-            //   console.log('v is 0');
-            //   throw new Error();
-            // }
           };
           var ar = 1 / 3;
           var c = pad;
@@ -317,9 +303,9 @@ var NeuralNetworksDemo = React.createClass({
     this.state.dots.DrawAndUpdate(planes.all[idSelected].color);
 
     this.setState({
-        planeVectors: <PlaneVectors planes={ planes.all.map(this.extendPlane) } idSelected={ idSelected } updateIndex={ this.updateIndex } pause={ this.pause } resume={ this.resume } />,
-        requestId: window.requestAnimationFrame(this.draw)
-      });
+      planeVectors: <PlaneVectors planes={ planes.all.map(this.extendPlane) } idSelected={ idSelected } updateIndex={ this.updateIndex } pause={ this.pause } resume={ this.resume } />,
+      requestId: window.requestAnimationFrame(this.draw)
+    });
   },
   extendPlane: function(plane) {
     return({
@@ -371,19 +357,33 @@ var NeuralNetworksDemo = React.createClass({
   setRefreshRate: function(event) {
     this.setState({ refreshRate: event.target.value });
   },
-  resetDemo: function() {
+  setDemo: function(callback) {
     this.pause();
-    this.replaceState(this.getInitialState(), this.componentDidMount);
+    this.replaceState(this.getInitialState(), callback);
   },
   render: function() {
     return(
       <div>
-        <span onClick={ this.resetDemo }>reset</span>
         <div>
-          <canvas id='neural-networks' width='1000' height='500' />
+          <span className='cursor-pointer' onClick={ this.setDemo.bind(this, this.props.goBack) }>
+            back
+          </span>
         </div>
         <div>
-          { this.state.planeVectors }
+          <span className='cursor-pointer' onClick={ this.setDemo.bind(this, this.props.goHome) }>
+            home
+          </span>
+        </div>
+        <div className='demo'>
+          <span className='cursor-pointer' onClick={ this.setDemo.bind(this, this.componentDidMount) }>
+            reset
+          </span>
+          <div>
+            <canvas id='neural-networks' width='1000' height='500' />
+          </div>
+          <div>
+            { this.state.planeVectors }
+          </div>
         </div>
       </div>
     );

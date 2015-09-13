@@ -19,7 +19,7 @@ var Neuron = function(numInputs, indexLayer, indexNeuron) {
       weight.color = weight.value < 0 ? 'red' : 'green';
     };
     this.updateWeightWidth = function(weight) {
-      weight.width = Math.abs(weight.value) * 10;
+      weight.width = Math.ceil(Math.abs(weight.value) * 10);
     };
     this.updateActivation = function() {
       this.activation = 0;
@@ -47,7 +47,8 @@ var Neuron = function(numInputs, indexLayer, indexNeuron) {
         this.updateWeightWidth(weight);
       }
       this.bias = this.weights[this.weights.length - 1].value;
-      this.r = this.r0 + this.bias * 10;
+      var newR = this.r0 + this.bias * 10;
+      this.r = newR < 0 ? 1 : newR;
     };
     this.getInitalWeights();
   } else {
