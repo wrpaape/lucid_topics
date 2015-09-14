@@ -70,7 +70,7 @@ var Lisp = React.createClass({
             What is LISP?
           </p>
           <p>
-            LISP is weafwefawefawe.
+            (Homoiconic code)
           </p>
         </section>
         <section>
@@ -90,12 +90,15 @@ var Lisp = React.createClass({
             </li>
             <li>
               <p>
-                the function
+                the first-class function
               </p>
               <p>
-                Of course, other languages have functions, but Lisp is rare
-                in allowing the creation of new functions <strong>while a
-                program is running</strong>
+                Functions in LISP can not only be "called," or applied to arguments,
+                they can also be manipulated just like any other kind of object.
+                LISP was the first to implement this programming pattern of passing
+                and returning of functions (called <strong>lambda expressions</strong>)
+                within a program. This allows for the manipulation of and creation of
+                new functions <strong>while a program is running</strong>.
               </p>
             </li>
           </ul>
@@ -107,10 +110,10 @@ var Lisp = React.createClass({
           <ul>
             <li>
               <p>
-                popularity
+                legacy
               </p>
               <p>
-                First, Lisp is the most popular language
+                First, LISP is the most popular language
                 for AI programming, particularly in the United States.
                 If you're going to learn a language, it might as well be
                 one with a growing literature, rather than a dead tongue.
@@ -121,20 +124,20 @@ var Lisp = React.createClass({
                 flexibility
               </p>
               <p>
-                In particular, Lisp makes it easy to
+                In particular, LISP makes it easy to
                 define new languages especially targeted to the problem
                 at hand. This is especially handy in AI applications, which
                 often manipulate complex information that is most easily
-                represented in some novel form. Lisp is one of the few
+                represented in some novel form. LISP is one of the few
                 languages that allows full flexibility in defining and
                 manipulating programs as well as data.
               </p>
               <p>
-                Lisp has a powerful macro facility, which
+                LISP has a powerful macro facility, which
                 can be used to extend the basic language. When new styles of
-                programming were invented, other languages died out; Lisp
+                programming were invented, other languages died out; LISP
                 simply incorporated the new styles by defining some new macros.
-                The macro facility is possible because Lisp programs are composed
+                The macro facility is possible because LISP programs are composed
                 of a simple data structure: the list.
               </p>
               <p>
@@ -149,7 +152,7 @@ var Lisp = React.createClass({
               </div>
               <p>
                 In other languages you fit your problem <strong>to</strong> the language;
-                with Lisp you <strong>extend</strong> the language to fit your problem
+                with LISP you <strong>extend</strong> the language to fit your problem
               </p>
             </li>
             <li>
@@ -157,14 +160,14 @@ var Lisp = React.createClass({
                 prototypability
               </p>
               <p>
-                Lisp makes it very easy to develop a working program fast.
-                Lisp programs are concise and are uncluttered by low-level
-                detail. Common Lisp offers an unusually large number of
+                LISP makes it very easy to develop a working program fast.
+                LISP programs are concise and are uncluttered by low-level
+                detail. Common LISP offers an unusually large number of
                 useful predefined objects, including over 700 functions.
                 The programming environment (such as debugging tools,
                 incremental compilers, integrated editors, and interfaces
-                to window systems) that surround Lisp systems are usually
-                very good. And the dynamic, interactive nature of Lisp
+                to window systems) that surround LISP systems are usually
+                very good. And the dynamic, interactive nature of LISP
                 makes it easy to experiment and change a program while it
                 is being developed.
               </p>
@@ -175,9 +178,9 @@ var Lisp = React.createClass({
               </p>
               <p>
                 It must be mentioned that in Europe and Japan,
-                Prolog has been as popular as Lisp for AI work. Prolog shares most
-                of Lisp's advantages in terms of flexibility and conciseness.
-                Recently, Lisp has gained popularity worldwide, and Prolog
+                Prolog has been as popular as LISP for AI work. Prolog shares most
+                of LISP's advantages in terms of flexibility and conciseness.
+                Recently, LISP has gained popularity worldwide, and Prolog
                 is becoming more well known in the United States. As a result,
                 the average AI worker today is likely to be bilingual.
               </p>
