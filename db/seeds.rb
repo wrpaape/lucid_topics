@@ -1,18 +1,22 @@
 Topic.create([
   {
     title: "LISP",
-    component: "Lisp"
+    component: "Lisp",
+    filename: "lisp"
   },
   {
     title: "Neural Networks",
-    component: "NeuralNetworks"
+    component: "NeuralNetworks",
+    filename: "neural_networks"
   },
   {
     title: "Triplestore (RDF store) Database",
-    component: "Triplestore"
+    component: "Triplestore",
+    filename: "triplestore"
   },
   {
     title: "Machine Learning",
-    component: "MachineLearning"
+    component: "MachineLearning",
+    filename: "machine_learning"
   }
 ])

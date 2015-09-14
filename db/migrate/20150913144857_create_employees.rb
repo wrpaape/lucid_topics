@@ -1,4 +1,4 @@
-class Employee < ActiveRecord::Migration
+class CreateEmployees < ActiveRecord::Migration
   def change
     create_table :employees do |t|
       t.string :password_digest

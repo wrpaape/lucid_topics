@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   def create
     if Employee.first.authenticate(params[:password])
       session[:logged_in] = true
-      redirect_to topics_path
+      redirect_to topics_url
     else
       render :new
     end

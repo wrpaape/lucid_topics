@@ -30,15 +30,15 @@ var Index = React.createClass({
           topic: topic,
           setAlert: this.setAlert,
           goBack: this.selectTopic.bind(this, 0)
-        }
+        };
         topicComponent = React.createElement(window[topic.component], topicProps);
       }
 
       return(
         <div key={ 'index-' + id }>
-          <div className={ !idSelected + ' cursor-pointer' } onClick={ this.selectTopic.bind(this, id) }>
+          <span className={ !idSelected + ' cursor-pointer' } onClick={ this.selectTopic.bind(this, id) }>
             { topic.title }
-          </div>
+          </span>
           <div className={ id === idSelected }>
             { topicComponent }
           </div>

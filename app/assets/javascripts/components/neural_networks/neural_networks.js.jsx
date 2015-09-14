@@ -7,7 +7,7 @@ var NeuralNetworks = React.createClass({
       demo: null
     });
   },
-  selectDemo: function() {
+  seeDemo: function() {
     this.setState({
       demo: <NeuralNetworksDemo goBack={ this.quitDemo } goHome={ this.goBack } />
     });
@@ -30,9 +30,17 @@ var NeuralNetworks = React.createClass({
             </span>
           </div>
           <div>
-            <span className='cursor-pointer' onClick={ this.selectDemo }>
+            <a className='cursor-pointer' href={ this.props.topic.urls.pdf }>
+              download pdf
+            </a>
+          </div>
+          <div>
+            <span className='cursor-pointer' onClick={ this.seeDemo }>
               see demo
             </span>
+          </div>
+          <div>
+            lorem
           </div>
         </div>
         { demo }
