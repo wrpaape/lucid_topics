@@ -14,6 +14,9 @@
   animation: fade-out 1s ease-in 1s forwards,
     hide 4s forwards;
 }
+@mixin consolas {
+  font-family: monaco, Consolas, 'Lucida Console', monospace;
+}
 @mixin pop-up {
   position: absolute;
   top: 0;
@@ -44,14 +47,22 @@
   @include pop-up;
   @include fade-out;
 }
-.demo {
+.paragraph {
+  padding: 0 100px 0;
+}
+.editors-wrap, .demo {
   text-align: center;
+  .editor {
+    position: relative;
+    display: inline-block;
+    padding: 5px;
+  }
 }
 
 html, body {
   background-color: black;
   color: white;
-  font-family: monaco, Consolas, 'Lucida Console', monospace;
+  @include consolas;
   form {
     text-align: center;
   }
@@ -60,12 +71,36 @@ html, body {
     text-decoration: none;
   }
   p {
-    &:first-of-type {
+    font-size: 1.2em;
+    &.header {
       text-align: center;
       font-size: 2em;
     }
-    &:nth-of-type(2) {
-      padding: 0 100px 0;
+  }
+  pre {
+    width: 400px;
+    height: 150px;
+    text-align: left;
+    border: 1px solid white;
+    ::-webkit-scrollbar {
+        width: 14px;
+    }
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+    ::-webkit-scrollbar-thumb {
+        background: rgba(100, 100, 100, 0.8);
+    }
+    ::-webkit-scrollbar-corner,
+    ::-webkit-scrollbar-thumb:window-inactive {
+        background: rgba(100, 100, 100, 0.4);
+    }
+    .ace_gutter-layer {
+      @include consolas;
+      background-color: black;
+    }
+    .ace_selection {
+      background-color: lighten(black, 30%);
     }
   }
   select {
@@ -73,9 +108,9 @@ html, body {
     color: white;
     background-color: black;
     border: 1px solid white;
-    font-family: monaco, Consolas, 'Lucida Console', monospace;
     font-size: 1em;
     margin-top: 5px;
+    @include consolas;
     @include cursor-pointer;
   }
   canvas {

@@ -1,4 +1,9 @@
-/* globals */
+/* globals ColorClassifier */
+//= require ace-builds/src-min-noconflict/ace
+//= require ace-builds/src-min-noconflict/theme-terminal
+//= require ace-builds/src-min-noconflict/ext-language_tools
+//= require ace-builds/src-min-noconflict/mode-lisp
+//= require ace-builds/src-min-noconflict/mode-c_cpp
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
