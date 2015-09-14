@@ -17,6 +17,9 @@
 @mixin consolas {
   font-family: monaco, Consolas, 'Lucida Console', monospace;
 }
+@mixin lucida {
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif;
+}
 @mixin pop-up {
   position: absolute;
   top: 0;
@@ -73,9 +76,13 @@ html, body {
     }
     li {
       & > p {
-        font-size: 0.8em;
-        &:first-child {
-          font-size: 1em;
+        font-size: 1em;
+        &:not(:first-child) {
+          @include lucida;
+          font-size: 0.8em;
+          strong {
+            color: red;
+          }
         }
       }
       & > div {

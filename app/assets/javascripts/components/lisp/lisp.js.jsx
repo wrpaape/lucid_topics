@@ -84,8 +84,10 @@ var Lisp = React.createClass({
               </p>
               <p>
                 LISP programs are composed of a simple data structure:
-                the list (hence LIS(t) Processing). A 'list' is a nonatomic combination of objects
-                enclosed by a set of parentheses (hence Lots of Irritating Stupid Parentheses).
+                the list (hence <strong>LIS</strong>t <strong>P</strong>rocessing).
+                A 'list' is a nonatomic combination of objects enclosed by a set of
+                parentheses (hence <strong>L</strong>ots of <strong>I</strong>rritating <strong>
+                S</strong>tupid <strong>P</strong>arentheses).
               </p>
             </li>
             <li>
@@ -97,8 +99,10 @@ var Lisp = React.createClass({
                 they can also be manipulated just like any other kind of object.
                 LISP was the first to implement this programming pattern of passing
                 and returning of functions (called <strong>lambda expressions</strong>)
-                within a program. This allows for the manipulation of and creation of
-                new functions <strong>while a program is running</strong>.
+                within a program. Lambda expressions allow for the manipulation of and
+                creation of new functions <strong>at run time</strong>. This powerful
+                technique or <strong>closure</strong> is not possible in most
+                programming languages.
               </p>
             </li>
           </ul>
@@ -152,7 +156,7 @@ var Lisp = React.createClass({
               </div>
               <p>
                 In other languages you fit your problem <strong>to</strong> the language;
-                with LISP you <strong>extend</strong> the language to fit your problem
+                with LISP you <strong>extend</strong> the language to fit your problem.
               </p>
             </li>
             <li>
@@ -180,8 +184,8 @@ var Lisp = React.createClass({
                 It must be mentioned that in Europe and Japan,
                 Prolog has been as popular as LISP for AI work. Prolog shares most
                 of LISP's advantages in terms of flexibility and conciseness.
-                Recently, LISP has gained popularity worldwide, and Prolog
-                is becoming more well known in the United States. As a result,
+                More recently LISP has gained popularity worldwide, and Prolog
+                has become more well known in the United States. As a result,
                 the average AI worker today is likely to be bilingual.
               </p>
             </li>
