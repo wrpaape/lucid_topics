@@ -59,6 +59,15 @@ html, body {
     color: white;
     text-decoration: none;
   }
+  p {
+    &:first-of-type {
+      text-align: center;
+      font-size: 2em;
+    }
+    &:nth-of-type(2) {
+      padding: 0 100px 0;
+    }
+  }
   select {
     -webkit-appearance: menulist-button;
     color: white;
