@@ -8,11 +8,11 @@ var Lisp = React.createClass({
         'C': {
           mode: 'c_cpp',
           keys: [-1, -1, -1],
-          value: '1 + 2 + 3  + 4'
+          value: '/* 1 + 2 + 3 + 4 */'
         },
         'LISP': {
           mode: 'lisp',
-          value: '(+ 1 2 3 4)',
+          value: ';; (+ 1 2 3 4)',
           keys: [-1, -1, -1]
         }
       }
@@ -46,11 +46,11 @@ var Lisp = React.createClass({
     var contents = this.state.contents;
     var editors = Object.keys(contents).map(function(lang) {
       return(
-        <div className='editor'>
+        <div key={ 'editor-' + lang }>
           <div>
             { lang }
           </div>
-          <pre key={ 'editor-' + lang } id={ 'editor-' + lang } onKeyDown={ this.submitCode.bind(this, contents, lang) }>
+          <pre id={ 'editor-' + lang } onKeyDown={ this.submitCode.bind(this, contents, lang) }>
             { contents[lang].value }
           </pre>
         </div>
@@ -65,34 +65,125 @@ var Lisp = React.createClass({
           </span>
         </div>
           { [this.props.downloadPdf].concat(this.props.title) }
-        <div className='paragraph'>
+        <section>
           <p>
             What is LISP?
           </p>
-          <div className='editors-wrap'>
-            { editors }
-          </div>
-          <span>
-            &nbsp;&nbsp;&nbsp;LISP is weafwefawefawe.
-          </span>
-        </div>
-        <div className='paragraph'>
           <p>
-            Features of LISP
+            LISP is weafwefawefawe.
+          </p>
+        </section>
+        <section>
+          <p>
+            Powerful Features of LISP
           </p>
           <ul>
             <li>
               <p>
                 the list
               </p>
-              <span>
-                &nbsp;&nbsp;&nbsp;LISP programs are composed of a simple data structure:
+              <p>
+                LISP programs are composed of a simple data structure:
                 the list (hence LIS(t) Processing). A 'list' is a nonatomic combination of objects
                 enclosed by a set of parentheses (hence Lots of Irritating Stupid Parentheses).
-              </span>
+              </p>
+            </li>
+            <li>
+              <p>
+                the function
+              </p>
+              <p>
+                Of course, other languages have functions, but Lisp is rare
+                in allowing the creation of new functions <strong>while a
+                program is running</strong>
+              </p>
             </li>
           </ul>
-        </div>
+        </section>
+        <section>
+          <p>
+            Why is LISP used for solving AI problems?
+          </p>
+          <ul>
+            <li>
+              <p>
+                popularity
+              </p>
+              <p>
+                First, Lisp is the most popular language
+                for AI programming, particularly in the United States.
+                If you're going to learn a language, it might as well be
+                one with a growing literature, rather than a dead tongue.
+              </p>
+            </li>
+            <li>
+              <p>
+                flexibility
+              </p>
+              <p>
+                In particular, Lisp makes it easy to
+                define new languages especially targeted to the problem
+                at hand. This is especially handy in AI applications, which
+                often manipulate complex information that is most easily
+                represented in some novel form. Lisp is one of the few
+                languages that allows full flexibility in defining and
+                manipulating programs as well as data.
+              </p>
+              <p>
+                Lisp has a powerful macro facility, which
+                can be used to extend the basic language. When new styles of
+                programming were invented, other languages died out; Lisp
+                simply incorporated the new styles by defining some new macros.
+                The macro facility is possible because Lisp programs are composed
+                of a simple data structure: the list.
+              </p>
+              <p>
+                All programming languages, by definition,
+                provide a means of defining programs, but many other
+                languages limit the ways in which a program can be used, or
+                limit the range of programs that can be defined, or require
+                the programmer to explicitly state irrelevant details.
+              </p>
+              <div>
+                { editors }
+              </div>
+              <p>
+                In other languages you fit your problem <strong>to</strong> the language;
+                with Lisp you <strong>extend</strong> the language to fit your problem
+              </p>
+            </li>
+            <li>
+              <p>
+                prototypability
+              </p>
+              <p>
+                Lisp makes it very easy to develop a working program fast.
+                Lisp programs are concise and are uncluttered by low-level
+                detail. Common Lisp offers an unusually large number of
+                useful predefined objects, including over 700 functions.
+                The programming environment (such as debugging tools,
+                incremental compilers, integrated editors, and interfaces
+                to window systems) that surround Lisp systems are usually
+                very good. And the dynamic, interactive nature of Lisp
+                makes it easy to experiment and change a program while it
+                is being developed.
+              </p>
+            </li>
+            <li>
+              <p>
+                Prolog
+              </p>
+              <p>
+                It must be mentioned that in Europe and Japan,
+                Prolog has been as popular as Lisp for AI work. Prolog shares most
+                of Lisp's advantages in terms of flexibility and conciseness.
+                Recently, Lisp has gained popularity worldwide, and Prolog
+                is becoming more well known in the United States. As a result,
+                the average AI worker today is likely to be bilingual.
+              </p>
+            </li>
+          </ul>
+        </section>
       </div>
     );
   }
