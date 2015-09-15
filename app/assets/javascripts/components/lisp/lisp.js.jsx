@@ -141,8 +141,8 @@ var Lisp = React.createClass({
             Legacy
           </h4>
           <p>
-            First, LISP is the most popular language
-            for AI programming, particularly in the United States.
+            First, LISP is the <strong>most popular language
+            for AI programming</strong>, particularly in the United States.
             If you're going to learn a language, it might as well be
             one with a growing literature, rather than a dead tongue.
           </p>
@@ -151,8 +151,8 @@ var Lisp = React.createClass({
           </h4>
           <p>
             In particular, LISP makes it easy to
-            define new languages especially targeted to the problem
-            at hand. This is especially handy in AI applications, which
+            define new languages especially <strong>targeted to the problem
+            at hand</strong>. This is especially handy in AI applications, which
             often manipulate complex information that is most easily
             represented in some novel form. LISP is one of the few
             languages that allows full flexibility in defining and
@@ -184,9 +184,9 @@ var Lisp = React.createClass({
             LISP has a powerful macro facility, which
             can be used to extend the basic language. When new styles of
             programming were invented, other languages died out; LISP
-            simply incorporated the new styles by defining some new macros.
-            The macro facility is possible because LISP programs are composed
-            of a simple data structure: the list.
+            <strong>simply incorporated the new styles</strong> by defining
+            some new macros. The macro facility is possible because LISP
+            programs are composed of a simple data structure: the list.
           </p>
           <h4>
             Prototypability
