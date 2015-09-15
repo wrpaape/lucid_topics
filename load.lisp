@@ -12,7 +12,7 @@
 
 (load "~/repos/wuwei/wuwei.asd")  ;Use local copy of wuwei;
 
-(load (make-pathname :directory *build-dir* :defaults "heroku-setup.lisp"))
+;;; (load (make-pathname :directory *build-dir* :defaults "heroku-setup.lisp"))
 
 (load (make-pathname :directory *build-dir* :defaults "local.lisp"))
 
