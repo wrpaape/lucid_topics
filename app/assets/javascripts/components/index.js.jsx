@@ -31,16 +31,16 @@ var Index = React.createClass({
           setAlert: this.setAlert,
           goBack: this.selectTopic.bind(this, 0),
           downloadPdf: <div key={ topic.title + '-download-pdf' }><a className='cursor-pointer' href={ topic.urls.pdf }>download pdf</a></div>,
-          title: <p key={ topic.title + '-title' } className='header'>{ topic.title }</p>
+          title: <h1 key={ topic.title + '-title' }>{ topic.title }</h1>
         };
         topicComponent = React.createElement(window[topic.component], topicProps);
       }
 
       return(
         <div key={ 'index-' + id }>
-          <span className={ !idSelected + ' cursor-pointer' } onClick={ this.selectTopic.bind(this, id) }>
+          <h2 className={ !idSelected + ' cursor-pointer' } onClick={ this.selectTopic.bind(this, id) }>
             { topic.title }
-          </span>
+          </h2>
           <div className={ id === idSelected }>
             { topicComponent }
           </div>
