@@ -183,10 +183,10 @@ var Lisp = React.createClass({
           <p>
             LISP has a powerful macro facility, which
             can be used to extend the basic language. When new styles of
-            programming were invented, other languages died out; LISP
-            <strong>simply incorporated the new styles</strong> by defining
-            some new macros. The macro facility is possible because LISP
-            programs are composed of a simple data structure: the list.
+            programming were invented, other languages died out;
+            LISP simply <strong>incorporated the new styles</strong> by
+            defining some new macros. The macro facility is possible because
+            LISP programs are composed of a simple data structure: the list.
           </p>
           <h4>
             Prototypability
