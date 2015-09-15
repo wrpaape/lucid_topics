@@ -5,7 +5,7 @@ var Index = React.createClass({
   getInitialState: function() {
     return({
       idSelected: 0,
-      alert: <Alert key='true' message={ <Img src='lucid_logo.png' /> } />
+      alert: <Alert key='true' message={ <img src={ this.props.paths.img + 'lucid_logo.png' } /> } />
     });
   },
   selectTopic: function(id) {
@@ -32,7 +32,8 @@ var Index = React.createClass({
           goBack: this.selectTopic.bind(this, 0),
           downloadPdf: <div key={ topic.title + '-download-pdf' }><a className='cursor-pointer' href={ topic.urls.download.pdf }>download pdf</a></div>,
           title: <h1 key={ topic.title + '-title' }>{ topic.title }</h1>,
-          urls: topic.urls
+          urls: topic.urls,
+          paths: topic.paths
         };
         topicComponent = React.createElement(window[topic.component], topicProps);
       }

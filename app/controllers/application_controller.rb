@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :require_login, :set_urls
+  before_action :require_login, :set_urls, :set_paths
 
   private
 
@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_urls
-    Topic.all_urls = {
+    all_urls = {
       login: login_url,
       download_file: download_file_url,
       evaluate: {
@@ -19,5 +19,18 @@ class ApplicationController < ActionController::Base
         pascal: pascal_url
       }
     }
+
+    Topic.all_urls = all_urls
+    TopicsController.all_urls = all_urls
+  end
+
+  def set_paths
+    all_paths = {
+      # img: ""
+      img: "/assets/"
+    }
+
+    Topic.all_paths = all_paths
+    TopicsController.all_paths = all_paths
   end
 end
