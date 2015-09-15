@@ -4,7 +4,36 @@
     background-color: rgba(255, 255, 255, 0);
   }
 }
+@-webkit-keyframes fade-out {
+  0% {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  100% {
+    opacity: 0;
+    background-color: rgba(255, 255, 255, 0);
+  }
+}
+@-moz-keyframes fade-out {
+  to {
+    opacity: 0;
+    background-color: rgba(255, 255, 255, 0);
+  }
+}
 @keyframes hide {
+  to {
+    z-index: -1;
+  }
+}
+@-webkit-keyframes hide {
+  0% {
+    z-index: 0;
+  }
+  100% {
+    z-index: -1;
+  }
+}
+@-moz-keyframes hide {
   to {
     z-index: -1;
   }
@@ -12,6 +41,10 @@
 
 @mixin fade-out {
   animation: fade-out 1s ease-in 1s forwards,
+    hide 4s forwards;
+  -webkit-animation: fade-out 1s ease-in 1s forwards,
+    hide 0s 2s forwards;
+  -moz-animation: fade-out 1s ease-in 1s forwards,
     hide 4s forwards;
 }
 @mixin consolas {
