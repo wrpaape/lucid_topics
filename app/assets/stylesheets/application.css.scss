@@ -2,7 +2,7 @@
 @-webkit-keyframes fade-out {
   0% {
     opacity: 1;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 1);
   }
   100% {
     opacity: 0;
@@ -79,7 +79,7 @@
 .alert {
   font-size: 24px;
   padding: 24px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 1);
   color: black;
   text-align: center;
   @include pop-up;
@@ -112,6 +112,7 @@ html, body {
     strong {
       color: red;
     }
+
     & > div {
       text-align: center;
       & > div {
@@ -121,6 +122,10 @@ html, body {
         pre {
           width: 400px;
           height: 150px;
+          &#editor-homoiconic {
+            width: 550px;
+            height: 300px;
+          }
           text-align: left;
           border: 1px solid white;
           ::-webkit-scrollbar {
