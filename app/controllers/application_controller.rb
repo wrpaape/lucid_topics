@@ -13,7 +13,11 @@ class ApplicationController < ActionController::Base
   def set_urls
     Topic.all_urls = {
       login: login_url,
-      download_file: download_file_url
+      download_file: download_file_url,
+      evaluate: {
+        lisp: lisp_url,
+        pascal: pascal_url
+      }
     }
   end
 end

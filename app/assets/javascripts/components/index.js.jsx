@@ -30,8 +30,9 @@ var Index = React.createClass({
           topic: topic,
           setAlert: this.setAlert,
           goBack: this.selectTopic.bind(this, 0),
-          downloadPdf: <div key={ topic.title + '-download-pdf' }><a className='cursor-pointer' href={ topic.urls.pdf }>download pdf</a></div>,
-          title: <h1 key={ topic.title + '-title' }>{ topic.title }</h1>
+          downloadPdf: <div key={ topic.title + '-download-pdf' }><a className='cursor-pointer' href={ topic.urls.download.pdf }>download pdf</a></div>,
+          title: <h1 key={ topic.title + '-title' }>{ topic.title }</h1>,
+          urls: topic.urls
         };
         topicComponent = React.createElement(window[topic.component], topicProps);
       }

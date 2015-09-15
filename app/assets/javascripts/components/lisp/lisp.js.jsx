@@ -9,6 +9,7 @@ var Lisp = React.createClass({
           title: 'Pascal',
           mode: 'pascal',
           keys: [-1, -1, -1],
+          output: '',
           value: '(* Pascal *)' +
           '\nvar temp, result: matrix;' +
           '\nadd(b.c, temp);' +
@@ -19,6 +20,7 @@ var Lisp = React.createClass({
           title: 'LISP',
           mode: 'lisp',
           keys: [-1, -1, -1],
+          output: '',
           value: ';;; LISP' +
           '\n(mult a (add b c))'
         },
@@ -26,6 +28,7 @@ var Lisp = React.createClass({
           title: 'A Homoiconic Language',
           mode: 'lisp',
           keys: [-1, -1, -1],
+          output: '',
           value: ';;;  first we can define a function, foo, that' +
           '\n;;;  1) receives a an argument, x,' +
           '\n;;;  1) adds the value 1 to that argument,' +
@@ -69,11 +72,11 @@ var Lisp = React.createClass({
   },
   componentDidMount: function () {
     var contents = this.state.contents;
-    Object.keys(contents).forEach(function(lang) {
-      var editor = ace.edit('editor-' + lang);
+    Object.keys(contents).forEach(function(thisEditor) {
+      var editor = ace.edit('editor-' + thisEditor);
       editor.$blockScrolling = Infinity;
       editor.setTheme('ace/theme/terminal');
-      editor.getSession().setMode('ace/mode/' + contents[lang].mode);
+      editor.getSession().setMode('ace/mode/' + contents[thisEditor].mode);
       editor.getSession().setTabSize(2);
       editor.setOptions({
         enableBasicAutocompletion: true,
@@ -81,32 +84,53 @@ var Lisp = React.createClass({
       });
     });
   },
-  submitCode: function (contents, lang, key) {
-    var shift = 13;
+  submitCode: function (contents, thisEditor, key) {
+    var sft = 13;
     var rtn = 16;
     var cmdL = 91;
     var cmdR = 93;
     var ctr = 17;
-    var keyCode = key.keyCode;
-    var oldKeys = contents[lang].keys;
-    contents[lang].keys = oldKeys.slice(-2).concat(keyCode);
-    // console.log(contents[lang].keys);
-    // contents[lang].value = ace.edit('editor-' + lang).getValue();
-    this.setState({
-      contents: contents
+    contents[thisEditor].keys = contents[thisEditor].keys.slice(-2).concat(key.keyCode);
+    var last3 = contents[thisEditor].keys;
+    var submitted = [cmdL, cmdR, ctr].map(function(key) {
+      return [key, sft, rtn];
+    }).some(function(keys) {
+      return !(!~last3.indexOf(keys[0]) || !~last3.indexOf(keys[1]) || !~last3.indexOf(keys[2]));
     });
+    if (submitted) {
+      var evalUrl = this.props.urls.evaluate[contents[thisEditor].mode];
+      ajax.get(
+        evalUrl,
+        { input: ace.edit('editor-' + thisEditor).getValue() },
+        function(output) {
+          contents[thisEditor].output = output;
+          contents[thisEditor].keys = [-1, -1, -1];
+          this.setState({
+            contents: contents
+          });
+        }.bind(this),
+        true
+      );
+    } else {
+      this.setState({
+        contents: contents
+      });
+    }
   },
   render: function() {
     var contents = this.state.contents;
-    var editors = Object.keys(contents).map(function(lang) {
+    var editors = Object.keys(contents).map(function(thisEditor) {
       return(
-        <div key={ 'editor-' + lang }>
+        <div key={ 'editor-' + thisEditor }>
           <h3>
-            { contents[lang].title }
+            { contents[thisEditor].title }
           </h3>
-          <pre id={ 'editor-' + lang } onKeyDown={ this.submitCode.bind(this, contents, lang) }>
-            { contents[lang].value }
+          <pre id={ 'editor-' + thisEditor } onKeyDown={ this.submitCode.bind(this, contents, thisEditor) }>
+            { contents[thisEditor].value }
           </pre>
+          <div>
+            <code>{ 'output: ' + contents[thisEditor].output }</code>
+          </div>
         </div>
       );
     }.bind(this));

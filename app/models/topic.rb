@@ -10,7 +10,10 @@ class Topic < ActiveRecord::Base
     pdf.query = URI.encode_www_form( path: "pdfs/#{filename}.pdf", filename: "#{filename}.pdf", type: "application/pdf")
 
     {
-      pdf: pdf.to_s
+      download: {
+        pdf: pdf.to_s
+      },
+      evaluate: all_urls[:evaluate]
     }
   end
 end

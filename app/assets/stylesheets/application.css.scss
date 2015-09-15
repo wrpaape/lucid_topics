@@ -119,6 +119,9 @@ html, body {
         position: relative;
         display: inline-block;
         padding: 5px;
+        & >div {
+          text-align: left;
+        }
         pre {
           width: 400px;
           height: 150px;

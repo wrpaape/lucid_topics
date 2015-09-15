@@ -6,7 +6,7 @@ var Neuron = function(numInputs, indexLayer, indexNeuron) {
     this.color = neuronColors[indexLayer];
     this.getInitalWeights = function() {
       this.weights = [];
-      var weight, value;
+      var weight;
       for (var i = 0; i < numInputs + 1; i++) {
         weight = { value: 2 * Math.random() - 1 };
         this.updateWeightColor(weight);

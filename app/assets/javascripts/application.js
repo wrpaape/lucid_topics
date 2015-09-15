@@ -11,6 +11,7 @@
 //= require ace-builds/src-min-noconflict/ext-language_tools
 //= require ace-builds/src-min-noconflict/mode-lisp
 //= require ace-builds/src-min-noconflict/mode-pascal
+//= require ajax
 //= require_tree .
 
 'use strict';
