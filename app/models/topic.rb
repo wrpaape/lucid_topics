@@ -19,8 +19,8 @@ class Topic < ActiveRecord::Base
   end
 
   def paths
-    topic_paths = {}
-    all_paths.each { |type, path| topic_paths[type] = "#{path}#{filename}/" }
-    topic_paths
+    {
+      img: "/#{filename}/"
+    }
   end
 end

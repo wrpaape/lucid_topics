@@ -1,10 +1,6 @@
 class TopicsController < ApplicationController
-  mattr_accessor :all_urls, :all_paths
-
   def index
     @topics = Topic.all_as_json
-    @urls = all_urls
-    @paths = all_paths
   end
 
   def download_file
@@ -14,6 +10,6 @@ class TopicsController < ApplicationController
   private
 
   def path
-    "#{Rails.root}/public/#{params[:path]}"
+    Rails.root.join("public", params[:path])
   end
 end

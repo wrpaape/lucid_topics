@@ -4,6 +4,7 @@
 //= require turbolinks
 //= require react
 //= require react_ujs
+//= require react_rails_img
 //= require components
 //= require ace-builds/src-min-noconflict/ace
 //= require ace-builds/src-min-noconflict/theme-terminal

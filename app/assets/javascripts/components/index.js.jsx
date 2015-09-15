@@ -5,7 +5,7 @@ var Index = React.createClass({
   getInitialState: function() {
     return({
       idSelected: 0,
-      alert: <Alert key='true' message={ <img src={ this.props.paths.img + 'lucid_logo.png' } /> } />
+      alert: <Alert key='true' message={ <Img src='lucid_logo.png' /> } />
     });
   },
   selectTopic: function(id) {

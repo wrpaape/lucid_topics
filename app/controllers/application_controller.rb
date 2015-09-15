@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :require_login, :set_urls, :set_paths
+  before_action :require_login, :set_urls
 
   private
 
@@ -21,16 +21,5 @@ class ApplicationController < ActionController::Base
     }
 
     Topic.all_urls = all_urls
-    TopicsController.all_urls = all_urls
-  end
-
-  def set_paths
-    all_paths = {
-      # img: ""
-      img: "public/assets/"
-    }
-
-    Topic.all_paths = all_paths
-    TopicsController.all_paths = all_paths
   end
 end

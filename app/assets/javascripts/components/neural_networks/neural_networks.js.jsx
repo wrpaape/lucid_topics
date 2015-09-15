@@ -41,9 +41,9 @@ var NeuralNetworks = React.createClass({
             approximate functions that can depend on a large number of inputs and
             are generally unknown.
           </p>
-            <img src={ imgPath + 'neuron.png' } />
-            <img src={ imgPath + 'artificial_neuron.jpg' } />
-            <img src={ imgPath + 'basic_diagram.png' } />
+            <Img src={ imgPath + 'neuron.png' } />
+            <Img src={ imgPath + 'artificial_neuron.jpg' } />
+            <Img src={ imgPath + 'basic_diagram.png' } />
           <p>
             artificial neural networks are generally presented
             as systems of interconnected "neurons" which exchange messages between each
