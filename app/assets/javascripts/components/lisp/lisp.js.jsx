@@ -83,12 +83,21 @@ var Lisp = React.createClass({
             Powerful Features of LISP
           </h3>
           <h4>
+            Uniform Syntax
+          </h4>
+          <p>
+            The syntax of Lisp programs is simple. This makes the language easy to learn,
+            and very little time is wasted correcting typos. In addition, it is easy to
+            write programs that <strong>manipulate other programs</strong> or <strong>
+            define whole new languages</strong>.
+          </p>
+          <h4>
             The List
           </h4>
           <p>
             LISP programs are composed of a simple data structure:
             the list (hence <strong>LIS</strong>t <strong>P</strong>rocessing).
-            A 'list' is a nonatomic combination of objects enclosed by a set of
+            A list is a nonatomic combination of objects enclosed by a set of
             parentheses (hence <strong>L</strong>ots of <strong>I</strong>rritating <strong>
             S</strong>tupid <strong>P</strong>arentheses).
           </p>
@@ -98,7 +107,7 @@ var Lisp = React.createClass({
             constantly changing size, making fixed-length data structures like vectors harder to use.
           </p>
           <h4>
-            the first-class function
+            The First-Class Function
           </h4>
           <p>
             Functions in LISP can not only be "called," or applied to arguments,
@@ -108,7 +117,20 @@ var Lisp = React.createClass({
             within a program. Lambda expressions allow for the manipulation of and
             creation of new functions <strong>at run time</strong>. This powerful
             technique or <strong>closure</strong> is not possible in most
-            programming languages.
+            traditional programming languages.
+          </p>
+          <h4>
+            Interactive Environment
+          </h4>
+          <p>
+            Traditionally, a programmer would write a complete program, compile it,
+            correct any errors detected by the compiler, and then run and debug it.
+            For long programs, waiting for the compiler occupied a large portion of
+            the debugging time. In Lisp one normally writes a few small functions at
+            a time, getting feedback from the Lisp system after evaluating each one.
+            Accordingly, LISP has an <strong>interactive environment</strong> rather
+            than a batch mode of interaction common among traditional languages
+            and is condusive to prototyping and agile development.
           </p>
         </section>
         <section>
@@ -137,19 +159,16 @@ var Lisp = React.createClass({
             manipulating programs as well as data.
           </p>
           <p>
-            LISP has a powerful macro facility, which
-            can be used to extend the basic language. When new styles of
-            programming were invented, other languages died out; LISP
-            simply incorporated the new styles by defining some new macros.
-            The macro facility is possible because LISP programs are composed
-            of a simple data structure: the list.
-          </p>
-          <p>
             All programming languages, by definition,
             provide a means of defining programs, but many other
             languages limit the ways in which a program can be used, or
             limit the range of programs that can be defined, or require
-            the programmer to explicitly state irrelevant details.
+            the programmer to explicitly state irrelevant details. Time
+            spent providing type declarations and allocating storage adds
+            up in longer programs, and these minutiae are <strong>avoided entirely</strong> in
+            LISP. Compare below how the trivial problem of computing <code>a x (b + c)
+            </code> when <code>a</code>, <code>b</code>, and <code>c</code> are
+            matices is addressed in Pascal, a more traditional language, versus LISP.
           </p>
           <div>
             { editors }
@@ -157,6 +176,17 @@ var Lisp = React.createClass({
           <p>
             In other languages you fit your problem <strong>to</strong> the language;
             with LISP you <strong>extend</strong> the language to fit your problem.
+          </p>
+          <h4>
+            Extensibility
+          </h4>
+          <p>
+            LISP has a powerful macro facility, which
+            can be used to extend the basic language. When new styles of
+            programming were invented, other languages died out; LISP
+            simply incorporated the new styles by defining some new macros.
+            The macro facility is possible because LISP programs are composed
+            of a simple data structure: the list.
           </p>
           <h4>
             Prototypability
