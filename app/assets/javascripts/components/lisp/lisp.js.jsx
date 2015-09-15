@@ -55,8 +55,10 @@ var Lisp = React.createClass({
           '\n' +
           '\n;;;  now we can define a new function, bar, that instead' +
           '\n;;;  adds 2 to x:' +
-          '\n(defun bar (x) (+ x 2))' +
-          '\n;;;  returns => BAR' +
+          '\n  (defun bar (x) (+ x 2))' +
+          '\n  ;;  returns => BAR' +
+          '\n  (bar 3)' +
+          '\n  ;;  returns => 5' +
           '\n(setf (symbol-function \'foo) #\'bar)' +
           '\n;;;  returns => #<FUNCTION BAR (X) (DECLARE (SYSTEM::IN-DEFUN BAR)) (BLOCK BAR (+ X 2))>' +
           '\n(foo 3)' +

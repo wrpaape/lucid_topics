@@ -1,5 +1,8 @@
 class TopicsController < ApplicationController
+  include Lisp
+
   def index
+    # 100.times { puts Lisp.evaluate(%q((* 1 2 3))) }
     @topics = Topic.all_as_json
   end
 
