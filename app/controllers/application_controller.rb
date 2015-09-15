@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   def set_paths
     all_paths = {
       # img: ""
-      img: "/assets/"
+      img: "public/assets/"
     }
 
     Topic.all_paths = all_paths
