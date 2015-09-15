@@ -83,7 +83,7 @@ var Lisp = React.createClass({
             Powerful Features of LISP
           </h3>
           <h4>
-            the list
+            The List
           </h4>
           <p>
             LISP programs are composed of a simple data structure:
@@ -116,7 +116,7 @@ var Lisp = React.createClass({
             Why is LISP used for solving AI problems?
           </h3>
           <h4>
-            legacy
+            Legacy
           </h4>
           <p>
             First, LISP is the most popular language
@@ -125,7 +125,7 @@ var Lisp = React.createClass({
             one with a growing literature, rather than a dead tongue.
           </p>
           <h4>
-            flexibility
+            Flexibility
           </h4>
           <p>
             In particular, LISP makes it easy to
@@ -159,7 +159,7 @@ var Lisp = React.createClass({
             with LISP you <strong>extend</strong> the language to fit your problem.
           </p>
           <h4>
-            prototypability
+            Prototypability
           </h4>
           <p>
             LISP makes it very easy to develop a working program fast.
