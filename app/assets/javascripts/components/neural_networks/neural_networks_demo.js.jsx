@@ -5,6 +5,8 @@ var NeuralNetworksDemo = React.createClass({
   getInitialState: function() {
     return({
       idSelected: 0,
+      showHud: true,
+      walkthrough: null,
       planeVectors: null
     });
   },
@@ -231,7 +233,7 @@ var NeuralNetworksDemo = React.createClass({
           this.initializeVectors();
           this.updateRhos();
         },
-        clear: function() {
+        clearCanvas: function() {
           ctx.clearRect(0, 0, width, height);
         }
       },
@@ -298,12 +300,30 @@ var NeuralNetworksDemo = React.createClass({
   draw: function() {
     var planes = this.state.planes;
     var idSelected = this.state.idSelected;
-    this.state.clear();
+
+    this.state.clearCanvas();
     planes.DrawAndUpdate();
     this.state.dots.DrawAndUpdate(planes.all[idSelected].color);
 
+    var walkthroughProps = {
+      plane: new this.state.Plane(),
+      pause: this.pause,
+      resume: this.resume
+    };
+    var planeVectorsProps = {
+      planes: planes.all.map(this.extendPlane),
+      idSelected: idSelected,
+      updateIndex: this.updateIndex,
+      drawDottedLine: this.drawDottedLine,
+      drawArrow: this.drawArrow,
+      drawBall: this.drawBall,
+      pause: this.pause,
+      resume: this.resume
+    };
+
     this.setState({
-      planeVectors: <PlaneVectors planes={ planes.all.map(this.extendPlane) } idSelected={ idSelected } updateIndex={ this.updateIndex } pause={ this.pause } resume={ this.resume } />,
+      walkthrough: React.createElement(window.Walkthrough, walkthroughProps),
+      planeVectors: React.createElement(window.PlaneVectors, planeVectorsProps),
       requestId: window.requestAnimationFrame(this.draw)
     });
   },
@@ -361,28 +381,85 @@ var NeuralNetworksDemo = React.createClass({
     this.pause();
     this.replaceState(this.getInitialState(), callback);
   },
+  toggleHud: function() {
+    this.setState({ showHud: !this.state.showHud });
+  },
+  drawDottedLine: function(ctx, x1, y1, x2, y2) {
+    ctx.save();
+    ctx.strokeStyle = 'white';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([10]);
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+    ctx.restore();
+  },
+  drawArrow: function(ctx, xo, yo, r, rArc, phi, color) {
+    var le = r / 10;
+    var lambda = Math.PI / 6;
+    var rx = r * Math.cos(phi) + xo;
+    var ry = r * Math.sin(phi) + yo;
+    var delta1 = phi - lambda;
+    var delta2 = Math.PI / 2 - phi - lambda;
+    var lex1 = rx - le * Math.cos(delta1);
+    var ley1 = ry - le * Math.sin(delta1);
+    var lex2 = rx - le * Math.sin(delta2);
+    var ley2 = ry - le * Math.cos(delta2);
+    ctx.save();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(xo, yo);
+    ctx.lineTo(rx, ry);
+    ctx.stroke();
+    ctx.lineTo(lex1, ley1);
+    ctx.stroke();
+    ctx.moveTo(rx, ry);
+    ctx.lineTo(lex2, ley2);
+    ctx.stroke();
+    ctx.moveTo(xo + rArc, yo);
+    ctx.arc(xo, yo, rArc, 0, phi, false);
+    ctx.stroke();
+    ctx.restore();
+  },
+  drawBall: function(ctx, x, y, r, color) {
+    ctx.save();
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, 2 * Math.PI);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  },
   render: function() {
+    var showHud = this.state.showHud;
+    var setDemo = this.setDemo;
+
     return(
       <div>
         <div>
-          <span className='cursor-pointer' onClick={ this.setDemo.bind(this, this.props.goBack) }>
+          <span className='cursor-pointer' onClick={ setDemo.bind(this, this.props.goBack) }>
             back
           </span>
         </div>
         <div>
-          <span className='cursor-pointer' onClick={ this.setDemo.bind(this, this.props.goHome) }>
+          <span className='cursor-pointer' onClick={ setDemo.bind(this, this.props.goHome) }>
             home
           </span>
         </div>
         <div className='demo'>
-          <span className='cursor-pointer' onClick={ this.setDemo.bind(this, this.componentDidMount) }>
+          <span className='cursor-pointer' onClick={ setDemo.bind(this, this.componentDidMount) }>
             reset
           </span>
           <div>
             <canvas id='neural-networks' width='1000' height='500' />
           </div>
+          <span className='cursor-pointer' onClick={ this.toggleHud }>
+            { showHud ? 'show walkthrough' : 'show HUD' }
+          </span>
           <div>
-            { this.state.planeVectors }
+            { showHud ? this.state.planeVectors : this.state.walkthrough }
           </div>
         </div>
       </div>

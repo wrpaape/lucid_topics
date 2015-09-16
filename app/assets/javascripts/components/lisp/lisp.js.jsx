@@ -264,7 +264,7 @@ var Lisp = React.createClass({
             up in longer programs, and these minutiae are <strong>avoided entirely</strong> in
             LISP. For instance, take the trivial problem of computing <code>a x (b + c)
             </code> when <code>a</code>, <code>b</code>, and <code>c</code> are
-            matices. Compare below how this is addressed in Pascal, a more
+            matrices. Compare below how this is addressed in Pascal, a more
             traditional language, versus LISP.
           </p>
           <div>
