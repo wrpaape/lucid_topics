@@ -66,8 +66,8 @@ var NeuralNetworks = React.createClass({
             new synapse to one or more downstream neurons.
           </p>
           <p>
-            What makes a neuron smarter than a simple switch, or rather, what makes a
-            <strong>network</strong> of billions of neurons firing in parallel smarter
+            What makes a neuron smarter than a simple switch, or rather, what makes
+            a <strong>network</strong> of billions of neurons firing in parallel smarter
             is that the individual neuron's threshold value is tuned according to the
             feedback it receives after every synapse. This individual feedback can be
             viewed as an adjustment to error and depends on the <strong>combined</strong> effect
