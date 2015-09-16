@@ -9,7 +9,8 @@ var Walkthrough = React.createClass({
     return(
       <div>
         <canvas id='walkthrough-a' width='500' height='200' />
-        <canvas id='walkthrough-b' width='200' height='200' />
+        <canvas id='walkthrough-b' width='500' height='200' />
+        <canvas id='walkthrough-b' width='500' height='200' />
       </div>
     );
   }

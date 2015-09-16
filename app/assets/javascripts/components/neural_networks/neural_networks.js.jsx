@@ -93,7 +93,7 @@ var NeuralNetworks = React.createClass({
           </section>
           <section>
             <h3>
-              The FeedForward-Backpropogation Model
+              The Feedforward-Backpropogation Network
             </h3>
             <p>
               It turns out neural networks of the animal kingdom come in all shapes, sizes,
@@ -103,14 +103,24 @@ var NeuralNetworks = React.createClass({
               assume (typically) a much more specialized role than a living nervous system.
               Accordingly, hundreds of models were born from Math World possessing a particular
               scope of problem-solving capabilities, with some better suited than others at
-              solving a particular problem.
+              solving any particular problem. We will be venturing just deep enough into Math
+              World to cover the very basics of "the quintessential" neural network model:
+              Feedforward-Backpropogation.
+            </p>
+              <Img src={ imgPath + 'f_b_network.jpg' } />
+            <p>
+              Feedforward-Backpropogation is not specific to the layered configuration
+              of this neural network, but rather "feedforward" describes the method
+              of collective processing while "backpropogation" refers to its training
+              or learning algorithm.
             </p>
             <p>
               Let's focus on a single neuron in one of our cavemen's neural network.
               Let's say this neuron is hooked up so that it receives input synapses
               from two upstream neurons and fires off its output synapse to a single neuron
-              downstream. This neuron
+              downstream. Biological details aside, our neuron should look something like this.
             </p>
+              <Img src={ imgPath + 'perceptron.png' } />
           </section>
           <span className='cursor-pointer' onClick={ this.seeDemo }>
             see demo
