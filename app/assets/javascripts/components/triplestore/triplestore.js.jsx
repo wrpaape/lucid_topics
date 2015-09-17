@@ -24,12 +24,12 @@ var Triplestore = React.createClass({
             big messy flowchart. The universal symbol for database, the cylinder, has roots in
             technology that predates the database concept:
           </p>
-          <Img src={ imgPath + 'drum.png' } />
+          <Img src={ imgPath + 'drum.jpg' } />
           <p>
             Invented in the early 30's, drum memory was widely used as computer storage around
             the time early database models were being hashed out on the drawing board. You'd be
             blind not see the resemblance, however, a database as a system serves a
-            purpose <strong>beyond a simple means of storage</strong>.
+            purpose <strong>more complete a simple means of storage</strong>.
           </p>
           <p>
             The general definition of a database is "a collection of information organized to provide
@@ -38,8 +38,6 @@ var Triplestore = React.createClass({
             <strong>DBMS</strong>. A DBMS is the interactive software layer through which programmers,
             their programs, and, indirectly, consumers find, change, and otherwise make use of the data
             stored in the actual database.
-
-
           </p>
         </section>
         <section>

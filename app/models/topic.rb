@@ -20,7 +20,7 @@ class Topic < ActiveRecord::Base
 
   def paths
     {
-      img: "/#{filename}/"
+      img: "#{filename}/"
     }
   end
 end
