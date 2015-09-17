@@ -142,7 +142,7 @@ var Lisp = React.createClass({
             back
           </span>
         </div>
-          { [this.props.downloadPdf].concat(this.props.title) }
+        { [this.props.downloadPdf].concat(this.props.title) }
         <section>
           <h3>
             What is LISP? (Homoiconic code)
