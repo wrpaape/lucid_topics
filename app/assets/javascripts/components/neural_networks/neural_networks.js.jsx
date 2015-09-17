@@ -87,7 +87,8 @@ var NeuralNetworks = React.createClass({
               So how did the cavemen finally learn to keep their hands out of the fire?
               At the risk of offending the biologists and mathematicians still
               hard at work mapping the magic behind the nervous system, the functionality
-              of a neural network, at least as an abstract concept, is simpler than it appears.
+              of a neural network, at least as an abstract concept, is simpler than it
+              may appear.
             </p>
           </section>
           <section>
@@ -165,6 +166,7 @@ var NeuralNetworks = React.createClass({
               weighted sum. But where does that last element in the series come from? If you recall from earlier
               that each neuron has some "intrinsic threshold value" to compare to, this is it. One way of
               viewing how our neuron uses this value (called bias) to judge its weighted input is through the equation:
+            </p>
             <p>
               x1w1 + x2w2 + x3w3... + xnwn >= t
             </p>
