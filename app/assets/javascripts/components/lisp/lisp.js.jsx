@@ -274,7 +274,7 @@ var Lisp = React.createClass({
             In other languages you fit your problem <strong>to</strong> the language;
             with LISP you <strong>extend</strong> the language to fit your problem.
           </p>
-           <h4>
+          <h4>
             Homoiconicity
           </h4>
           <p>

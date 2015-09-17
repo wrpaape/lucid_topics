@@ -111,9 +111,35 @@ html, body {
     strong {
       color: red;
     }
-
     & > div {
+      display: table;
+      padding: 0 100px;
       text-align: center;
+      & > div {
+        padding: 10px;
+        font-size: 1.2em;
+      }
+      & > table {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+        tbody, thead {
+          border: 2px solid;
+          th {
+            padding: 10px;
+            overflow-wrap: break-word;
+            &:nth-child(3) {
+              width: 25%;
+            }
+          }
+          td {
+            padding: 10px;
+            text-align: left;
+            font-size: 0.8em;
+            word-wrap: break-word;
+          }
+        }
+      }
       & > div {
         position: relative;
         display: inline-block;
