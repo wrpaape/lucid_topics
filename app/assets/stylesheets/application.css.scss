@@ -113,6 +113,7 @@ html, body {
     }
     & > div {
       display: table;
+      width: 100%;
       text-align: center;
       font-size: 0.5em;
       & > div {
@@ -192,11 +193,26 @@ html, body {
         }
       }
       & > div {
-        position: relative;
         display: inline-block;
+        width: 100%;
         padding: 5px;
-        & >div {
-          text-align: left;
+        text-align: left;
+        &.post {
+          vertical-align: top;
+          width: 45%;
+          margin: 15px;
+          border: 2px solid;
+          background-color: lighten(black, 10%);
+          div {
+            padding: 10px;
+            margin: 10px;
+          }
+          & > div, & > div > div > div {
+            background-color: black;
+          }
+          & > div > div, & > div > div > div > div {
+            background-color: lighten(black, 10%);
+          }
         }
         pre {
           width: 400px;

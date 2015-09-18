@@ -98,9 +98,9 @@ var Triplestore = React.createClass({
             attributes are set according to the values listed in each column or field.
           </p>
           <div>
-            <div>
+            <h3>
               users
-            </div>
+            </h3>
             <table className='users-general'>
               <thead>
                 <tr>
@@ -166,13 +166,63 @@ var Triplestore = React.createClass({
           </h3>
           <p>
             The grandaddy of DBMS's, the relational DBMS originated in the 70's and has thrived
-            to this day as one of the most common and powerful database implementations. Let's see
-            how an RDBMS would handle the posts and comments of this forum's userbase:
+            to this day as one of the most common and powerful database implementations. Returning
+            to our example, let's populate this forum with some commonplace forum dialogue:
           </p>
           <div>
-            <div>
-              users
+            <div className='post'>
+              <h3>
+                I am never not right.
+              </h3>
+              <div>
+                jimchrist:&nbsp;&nbsp;Prove me wrong, peasants.
+                <br />
+                <br />
+                EDIT: You're all getting bans once our db schema can handle them.
+                <div>
+                  IHeartATX:&nbsp;&nbsp;first
+                </div>
+                <div>
+                  implosions:&nbsp;&nbsp;ur mum's always right
+                  <div>
+                    jimchrist:&nbsp;&nbsp;That she is. After all, she did grace the world with yours truly.
+                    <div>
+                      PackersFan96:&nbsp;&nbsp;he meant that in a sexual way sperglord
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  jimchrist:&nbsp;&nbsp;Let's stay on topic people. Am I ever wrong?
+                  <div>
+                    PackersFan96:&nbsp;&nbsp;not as wrong as your mother LMAO
+                  </div>
+                </div>
+                <div>
+                  IHeartATX:&nbsp;&nbsp;pls stop fighting ;_;
+                </div>
+              </div>
             </div>
+            <div className='post'>
+              <h3>
+                jimchrist's mom general
+              </h3>
+              <div>
+                implosions:&nbsp;&nbsp;any pics yet?
+                <div>
+                  PackersFan96:&nbsp;&nbsp;working on it
+                </div>
+              </div>
+            </div>
+          </div>
+          <p>
+            Let's see
+            how an RDBMS would handle the posts and comments of this forum's userbase as they appear
+            above:
+          </p>
+          <div>
+            <h3>
+              users
+            </h3>
             <table className='users-relational'>
               <thead>
                 <tr>
@@ -226,9 +276,9 @@ var Triplestore = React.createClass({
             </table>
           </div>
           <div>
-            <div>
+            <h3>
               posts
-            </div>
+            </h3>
             <table className='posts-relational'>
               <thead>
                 <tr>
@@ -247,23 +297,23 @@ var Triplestore = React.createClass({
                   <td>"Prove me wrong, peasants.\n\nEDIT: You're all getting bans once our db schema can handle them."</td>
                   <td>1</td>
                   <td>"2015-09-17 09:33:53"</td>
-                  <td>"2015-09-17 09:55:21"</td>
+                  <td>"2015-09-17 09:51:21"</td>
                 </tr>
                 <tr>
                   <td>2</td>
-                  <td>"jimchrist's mom general."</td>
+                  <td>"jimchrist's mom general"</td>
                   <td>"any pics yet?"</td>
                   <td>4</td>
-                  <td>"2015-12-14 01:11:10"</td>
-                  <td>"2015-09-14 00:55:47"</td>
+                  <td>"2015-09-17 09:51:50"</td>
+                  <td>"2015-09-17 09:51:50"</td>
                 </tr>
               </tbody>
             </table>
           </div>
           <div>
-            <div>
+            <h3>
               comments
-            </div>
+            </h3>
             <table className='comments-relational'>
               <thead>
                 <tr>
@@ -283,8 +333,8 @@ var Triplestore = React.createClass({
                   <td>3</td>
                   <td>1</td>
                   <td>"Post"</td>
-                  <td>created_at</td>
-                  <td>updated_at</td>
+                  <td>"2015-09-17 09:34:20"</td>
+                  <td>"2015-09-17 09:34:20"</td>
                 </tr>
                 <tr>
                   <td>2</td>
@@ -292,17 +342,17 @@ var Triplestore = React.createClass({
                   <td>4</td>
                   <td>1</td>
                   <td>"Post"</td>
-                  <td>created_at</td>
-                  <td>updated_at</td>
+                  <td>"2015-09-17 09:39:09"</td>
+                  <td>"2015-09-17 09:39:09"</td>
                 </tr>
                 <tr>
                   <td>3</td>
-                  <td>"That she is. After all, she did raise yours truly."</td>
+                  <td>"That she is. After all, she did grace the world with yours truly."</td>
                   <td>1</td>
                   <td>2</td>
                   <td>"Comment"</td>
-                  <td>created_at</td>
-                  <td>updated_at</td>
+                  <td>"2015-09-17 09:40:10"</td>
+                  <td>"2015-09-17 09:40:10"</td>
                 </tr>
                 <tr>
                   <td>4</td>
@@ -310,8 +360,8 @@ var Triplestore = React.createClass({
                   <td>2</td>
                   <td>3</td>
                   <td>"Comment"</td>
-                  <td>created_at</td>
-                  <td>updated_at</td>
+                  <td>"2015-09-17 09:44:41"</td>
+                  <td>"2015-09-17 09:44:41"</td>
                 </tr>
                 <tr>
                   <td>5</td>
@@ -319,8 +369,8 @@ var Triplestore = React.createClass({
                   <td>1</td>
                   <td>1</td>
                   <td>"Post"</td>
-                  <td>created_at</td>
-                  <td>updated_at</td>
+                  <td>"2015-09-17 09:46:12"</td>
+                  <td>"2015-09-17 09:46:12"</td>
                 </tr>
                 <tr>
                   <td>6</td>
@@ -328,8 +378,8 @@ var Triplestore = React.createClass({
                   <td>2</td>
                   <td>5</td>
                   <td>"Comment"</td>
-                  <td>created_at</td>
-                  <td>updated_at</td>
+                  <td>"2015-09-17 09:49:34"</td>
+                  <td>"2015-09-17 09:49:34"</td>
                 </tr>
                 <tr>
                   <td>7</td>
@@ -337,8 +387,8 @@ var Triplestore = React.createClass({
                   <td>2</td>
                   <td>2</td>
                   <td>"Post"</td>
-                  <td>created_at</td>
-                  <td>updated_at</td>
+                  <td>"2015-09-17 09:52:42"</td>
+                  <td>"2015-09-17 09:52:42"</td>
                 </tr>
                 <tr>
                   <td>8</td>
@@ -346,8 +396,8 @@ var Triplestore = React.createClass({
                   <td>3</td>
                   <td>1</td>
                   <td>"Post"</td>
-                  <td>created_at</td>
-                  <td>updated_at</td>
+                  <td>"2015-09-17 09:53:12"</td>
+                  <td>"2015-09-17 09:53:12"</td>
                 </tr>
               </tbody>
             </table>
