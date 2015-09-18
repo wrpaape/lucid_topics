@@ -101,13 +101,13 @@ var Triplestore = React.createClass({
             <h3>
               users
             </h3>
-            <table className='users-general'>
+            <table>
               <thead>
                 <tr>
                   <th>username</th>
                   <th>email</th>
-                  <th>password_digest</th>
-                  <th>admin</th>
+                  <th className='width-25'>password_digest</th>
+                  <th className='width-10'>admin</th>
                   <th>created_at</th>
                   <th>updated_at</th>
                 </tr>
@@ -215,22 +215,20 @@ var Triplestore = React.createClass({
             </div>
           </div>
           <p>
-            Let's see
-            how an RDBMS would handle the posts and comments of this forum's userbase as they appear
-            above:
+            Let's see how an RDBMS would handle this forum's posts and comments:
           </p>
           <div>
             <h3>
               users
             </h3>
-            <table className='users-relational'>
+            <table>
               <thead>
                 <tr>
-                  <th>id</th>
+                  <th className='width-5'>id</th>
                   <th>username</th>
                   <th>email</th>
-                  <th>password_digest</th>
-                  <th>admin</th>
+                  <th className='width-25'>password_digest</th>
+                  <th className='width-10'>admin</th>
                   <th>created_at</th>
                   <th>updated_at</th>
                 </tr>
@@ -279,13 +277,13 @@ var Triplestore = React.createClass({
             <h3>
               posts
             </h3>
-            <table className='posts-relational'>
+            <table>
               <thead>
                 <tr>
-                  <th>id</th>
+                  <th className='width-5'>id</th>
                   <th>title</th>
-                  <th>body</th>
-                  <th>user_id</th>
+                  <th className='width-25'>body</th>
+                  <th className='width-10'>user_id</th>
                   <th>created_at</th>
                   <th>updated_at</th>
                 </tr>
@@ -314,14 +312,14 @@ var Triplestore = React.createClass({
             <h3>
               comments
             </h3>
-            <table className='comments-relational'>
+            <table>
               <thead>
                 <tr>
-                  <th>id</th>
-                  <th>body</th>
-                  <th>user_id</th>
-                  <th>commentable_id</th>
-                  <th>commentable_type</th>
+                  <th className='width-5'>id</th>
+                  <th className='width-25'>body</th>
+                  <th className='width-10'>user_id</th>
+                  <th className='width-10'>commentable_id</th>
+                  <th className='width-15'>commentable_type</th>
                   <th>created_at</th>
                   <th>updated_at</th>
                 </tr>
@@ -402,6 +400,37 @@ var Triplestore = React.createClass({
               </tbody>
             </table>
           </div>
+          <p>
+            Note the fields having "id" or "type" in them.  These are called <strong>keys</strong> and
+            make possible the robust efficiency and raw speed with which RDBMSs handle structured data.
+            A key in most cases is unique and immutable and can be classified as either "primary" or "foreign."
+            The convention is that field or column names indicating the primary key are labeled "id"
+            and that foreign keys occupy the column (or columns in the case of polymorphic associations)
+            labeled with the singular of the parent entry's table name followed by "id" and sometimes
+            "type." Using this simple system of recording parent-child <strong>associations</strong> by
+            inserting the parent entry's primary key into its child(ren) entry(ies) as a foreign key, a
+            sophisticated network of otherwise independent tables of data can be established.
+          </p>
+          <p>
+            In the case of our forum, the "one-to-many" association between a user and their posts can
+            be handled without having to stuff the contents of every post belonging to each user in
+            its corresponding entry in the "users" table. Rather a separate "posts" table is created
+            where ownership of each post entry is expressed by the value of its foreign key "user_id."
+            The case is similar with the "comments" table, however, since our forum allows for users
+            to comment on posts AND other comments as well, ownership must be expressed through two
+            foreign keys: "commentable_id" and "commentable_type" where commentable_type indicates
+            which table (posts or comments) the RDBMS should look up for the parent having an id with
+            the value of its commentable_id. Accordingly the polymorphic (meaning that this table can
+            belong to two or more separate tables on a single association) association establishing one
+            post-to-many comments AND one comment-to-many comments can be handled with ease.
+          </p>
+          <p>
+            While our users-posts-comments database exhibits just two cases of the one-to-many association,
+            a vast library of all types of "one-to-one," "one-to-many," and "many-to-many" associations
+            are at your disposal with a standard RDBMS which can be tailored to your specific data-handling
+            needs. In fact, whole careers are devoted to determining the "best" selection of RDBMS
+            associations for configuring a client's database.
+          </p>
         </section>
         <section>
           <h3>

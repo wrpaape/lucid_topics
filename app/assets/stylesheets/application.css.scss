@@ -55,6 +55,9 @@
 @mixin lucida {
   font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif;
 }
+@mixin light-grey-bg {
+  background-color: lighten(black, 10%);
+}
 @mixin pop-up {
   position: absolute;
   top: 0;
@@ -115,74 +118,30 @@ html, body {
       display: table;
       width: 100%;
       text-align: center;
-      font-size: 0.5em;
-      & > div {
-        padding: 5px;
-        font-size: 1.2em;
-      }
+      font-size: 0.8em;
       & > table {
-        width: 40%;
+        width: 80%;
         table-layout: fixed;
         border-collapse: collapse;
         margin: auto;
-        &.users-general {
-          width: 60%;
-          th {
-            &:nth-child(3) {
-              width: 25%;
-            }
-            &:nth-child(4) {
-              width: 10%;
-            }
-          }
-        }
-        &.users-relational {
-          th {
-            &:first-child {
-              width: 5%;
-            }
-            &:nth-child(4) {
-              width: 25%;
-            }
-            &:nth-child(5) {
-              width: 10%;
-            }
-          }
-        }
-        &.posts-relational {
-          th {
-            &:first-child {
-              width: 5%;
-            }
-            &:nth-child(3) {
-              width: 25%;
-            }
-            &:nth-child(4) {
-              width: 10%;
-            }
-          }
-        }
-        &.comments-relational {
-          th {
-            &:first-child {
-              width: 5%;
-            }
-            &:nth-child(2) {
-              width: 25%;
-            }
-            &:nth-child(3), &:nth-child(4) {
-              width: 10%
-            }
-            &:nth-child(5) {
-              width: 15%;
-            }
-          }
-        }
+        @include light-grey-bg;
         tbody, thead {
           border: 2px solid;
           th {
             padding: 3px;
             overflow-wrap: break-word;
+            &.width-5 {
+              width: 5%;
+            }
+            &.width-10 {
+              width: 10%;
+            }
+            &.width-15 {
+              width: 15%;
+            }
+            &.width-25 {
+              width: 25%;
+            }
           }
           td {
             padding: 3px;
@@ -197,12 +156,13 @@ html, body {
         width: 100%;
         padding: 5px;
         text-align: left;
+        font-size: 0.8em;
         &.post {
           vertical-align: top;
           width: 45%;
           margin: 15px;
           border: 2px solid;
-          background-color: lighten(black, 10%);
+          @include light-grey-bg;
           div {
             padding: 10px;
             margin: 10px;
@@ -211,7 +171,7 @@ html, body {
             background-color: black;
           }
           & > div > div, & > div > div > div > div {
-            background-color: lighten(black, 10%);
+            @include light-grey-bg;
           }
         }
         pre {
