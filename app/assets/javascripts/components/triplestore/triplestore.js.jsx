@@ -91,11 +91,17 @@ var Triplestore = React.createClass({
           <h3>
             How do they work?
           </h3>
+          <p>
+            Traditionally the means by which databases house their data can be modeled as <strong>a
+            network of tables</strong>. Each table is identified by a name and consists of a series
+            of rows and columns. Each row represents a single entry in the database, where an entry's
+            attributes are set according to the values listed in each column or field.
+          </p>
           <div>
             <div>
               users
             </div>
-            <table>
+            <table className='users-general'>
               <thead>
                 <tr>
                   <th>username</th>
@@ -134,7 +140,7 @@ var Triplestore = React.createClass({
                 <tr>
                   <td>"implosions"</td>
                   <td>"groundpound@example.com"</td>
-                  <td>"$2a$10$7qp0k2HOCVyQ4pyDhkyRXeBsV0o.KT8UCFCmpg8yNKcel5Vp2f/Ca" </td>
+                  <td>"$2a$10$7qp0k2HOCVyQ4pyDhkyRXeBsV0o.KT8UCFCmpg8yNKcel5Vp2f/Ca"</td>
                   <td>false</td>
                   <td>"2015-09-13 12:29:05"</td>
                   <td>"2015-09-14 07:00:59"</td>
@@ -143,10 +149,209 @@ var Triplestore = React.createClass({
             </table>
           </div>
           <p>
-            Traditionally the means by which databases house their data can be modeled as a network
-            of tables. Each table can usually be identified by name and consists of a series of rows
-            and columns
+            Take for example the archetypal "users" table above configured to keep track of
+            data concerning, for instance, the userbase of a particular forum. Each "user" entry
+            records the attributes listed in the table header:  our first user goes by the username
+            of "jimchrist," has admin privileges, etc... This table configuration, or <strong>
+            schema</strong>, so far looks like nothing your cookie-cutter spreadsheet software
+            couldn't handle. So what if the owner of this website wanted to allow their users
+            to make posts like a proper forum?  Not only that, but lets say they wanted to allow
+            users to comment on posts and other comments as well–AND keep track of this interaction
+            without having a nervous breakdown. This is where a proper DBMS excels over Excel.
           </p>
+        </section>
+        <section>
+          <h3>
+            The Relational Database Management System (RDBMS)
+          </h3>
+          <p>
+            The grandaddy of DBMS's, the relational DBMS originated in the 70's and has thrived
+            to this day as one of the most common and powerful database implementations. Let's see
+            how an RDBMS would handle the posts and comments of this forum's userbase:
+          </p>
+          <div>
+            <div>
+              users
+            </div>
+            <table className='users-relational'>
+              <thead>
+                <tr>
+                  <th>id</th>
+                  <th>username</th>
+                  <th>email</th>
+                  <th>password_digest</th>
+                  <th>admin</th>
+                  <th>created_at</th>
+                  <th>updated_at</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>"jimchrist"</td>
+                  <td>"literallyhitler@example.com"</td>
+                  <td>"$2a$10$YqUOsQSzmlKoILXwCrnVOOUOmp9SSEgR6aasAPGBfdgPjmfuLhC/O"</td>
+                  <td>true</td>
+                  <td>"2014-07-14 19:34:47"</td>
+                  <td>"2015-09-15 12:30:42"</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>"PackersFan96"</td>
+                  <td>"greenbay@example.com"</td>
+                  <td>"$2a$10$B3BC0qh7HyTZvsN6jEHOh.5ZhZ2rhQFiSGJfk4Q56n4hyaCiUkohO"</td>
+                  <td>false</td>
+                  <td>"2015-12-14 01:11:10"</td>
+                  <td>"2015-09-14 00:55:47"</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>"IHeartATX"</td>
+                  <td>"asdf@example.com"</td>
+                  <td>"$2a$10$5YwBHb2WzFJVD3SX8W4sauxHTDOtSYFDvQDvZpgHAFtb2a27lhWgS"</td>
+                  <td>false</td>
+                  <td>"2015-08-14 01:00:20"</td>
+                  <td>"2015-09-15 10:52:40"</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>"implosions"</td>
+                  <td>"groundpound@example.com"</td>
+                  <td>"$2a$10$7qp0k2HOCVyQ4pyDhkyRXeBsV0o.KT8UCFCmpg8yNKcel5Vp2f/Ca"</td>
+                  <td>false</td>
+                  <td>"2015-09-13 12:29:05"</td>
+                  <td>"2015-09-14 07:00:59"</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <div>
+              posts
+            </div>
+            <table className='posts-relational'>
+              <thead>
+                <tr>
+                  <th>id</th>
+                  <th>title</th>
+                  <th>body</th>
+                  <th>user_id</th>
+                  <th>created_at</th>
+                  <th>updated_at</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>"I am never not right."</td>
+                  <td>"Prove me wrong, peasants.\n\nEDIT: You're all getting bans once our db schema can handle them."</td>
+                  <td>1</td>
+                  <td>"2015-09-17 09:33:53"</td>
+                  <td>"2015-09-17 09:55:21"</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>"jimchrist's mom general."</td>
+                  <td>"any pics yet?"</td>
+                  <td>4</td>
+                  <td>"2015-12-14 01:11:10"</td>
+                  <td>"2015-09-14 00:55:47"</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <div>
+              comments
+            </div>
+            <table className='comments-relational'>
+              <thead>
+                <tr>
+                  <th>id</th>
+                  <th>body</th>
+                  <th>user_id</th>
+                  <th>commentable_id</th>
+                  <th>commentable_type</th>
+                  <th>created_at</th>
+                  <th>updated_at</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>"first"</td>
+                  <td>3</td>
+                  <td>1</td>
+                  <td>"Post"</td>
+                  <td>created_at</td>
+                  <td>updated_at</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>"ur mum's always right"</td>
+                  <td>4</td>
+                  <td>1</td>
+                  <td>"Post"</td>
+                  <td>created_at</td>
+                  <td>updated_at</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>"That she is. After all, she did raise yours truly."</td>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>"Comment"</td>
+                  <td>created_at</td>
+                  <td>updated_at</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>"he meant that in a sexual way sperglord"</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>"Comment"</td>
+                  <td>created_at</td>
+                  <td>updated_at</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>"Let's stay on topic people. Am I ever wrong?"</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>"Post"</td>
+                  <td>created_at</td>
+                  <td>updated_at</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>"not as wrong as your mother LMAO"</td>
+                  <td>2</td>
+                  <td>5</td>
+                  <td>"Comment"</td>
+                  <td>created_at</td>
+                  <td>updated_at</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>"working on it"</td>
+                  <td>2</td>
+                  <td>2</td>
+                  <td>"Post"</td>
+                  <td>created_at</td>
+                  <td>updated_at</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>"pls stop fighting ;_;"</td>
+                  <td>3</td>
+                  <td>1</td>
+                  <td>"Post"</td>
+                  <td>created_at</td>
+                  <td>updated_at</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </section>
         <section>
           <h3>

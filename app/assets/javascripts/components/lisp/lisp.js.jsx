@@ -145,7 +145,7 @@ var Lisp = React.createClass({
         { [this.props.downloadPdf].concat(this.props.title) }
         <section>
           <h3>
-            What is LISP? (Homoiconic code)
+            What is LISP?
           </h3>
           <p>
             LISP is the first programming language to arise from a family
