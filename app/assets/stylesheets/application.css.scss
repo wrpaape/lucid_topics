@@ -133,7 +133,7 @@ $s10: 24px;
 
 @mixin fade-out {
   -webkit-animation: fade-out 1s ease-in 1s forwards,
-    hide 0s 2s forwards;
+    hide 4s forwards;
   animation: fade-out 1s ease-in 1s forwards,
     hide 4s forwards;
   -moz-animation: fade-out 1s ease-in 1s forwards,
