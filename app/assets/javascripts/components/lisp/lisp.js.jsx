@@ -140,12 +140,13 @@ var Lisp = React.createClass({
 
     return(
       <div>
-        <h5>
+        <div className='nav header'>
           <span onClick={ this.props.goBack }>
             back
           </span>
-        </h5>
-        { [this.props.downloadPdf].concat(this.props.title) }
+          { this.props.downloadPdf }
+        </div>
+        { this.props.title }
         <section>
           <h3>
             What is LISP?

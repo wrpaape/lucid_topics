@@ -100,11 +100,13 @@ var PlaneValues = React.createClass({
 
     return(
       <div>
-        <div>
+        <div className='nav'>
           <select value={ this.state.idSelected } onChange={ this.selectPlane }>
             { options }
           </select>
-          { '   targets collected: ' + plane.targetsCollected }
+          <code>
+            { '   targets collected: ' + plane.targetsCollected }
+          </code>
         </div>
         <canvas id='plane-values-input' width='300' height='150' />
         <canvas id='plane-values-output' width='300' height='150' />

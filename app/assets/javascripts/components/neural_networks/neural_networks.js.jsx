@@ -25,12 +25,16 @@ var NeuralNetworks = React.createClass({
     return(
       <div>
         <div className={ !demo }>
-          <h5>
+          <div className='nav header'>
             <span onClick={ this.goBack }>
               back
             </span>
-          </h5>
-          { [this.props.downloadPdf].concat(this.props.title) }
+            { this.props.downloadPdf }
+            <span onClick={ this.seeDemo }>
+              demo
+            </span>
+          </div>
+          { this.props.title }
           <section>
             <h3>
               What is a Neural Network?
@@ -179,11 +183,6 @@ var NeuralNetworks = React.createClass({
             <p>
             </p>
           </section>
-          <h5>
-            <span onClick={ this.seeDemo }>
-              see demo
-            </span>
-          </h5>
         </div>
         { demo }
       </div>

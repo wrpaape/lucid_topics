@@ -438,27 +438,23 @@ var NeuralNetworksDemo = React.createClass({
 
     return(
       <div>
-        <h5>
+        <div className='nav header'>
           <span onClick={ setDemo.bind(this, this.props.goBack) }>
             back
           </span>
-        </h5>
-        <h5>
           <span onClick={ setDemo.bind(this, this.props.goHome) }>
             home
           </span>
-        </h5>
-        <h5>
           <span onClick={ setDemo.bind(this, this.componentDidMount) }>
             reset
           </span>
-        </h5>
+        </div>
         <canvas id='neural-networks' width='1000' height='500' />
-        <h6>
+        <div className='nav'>
           <span onClick={ this.toggleHud }>
             { showHud ? 'show walkthrough' : 'show HUD' }
           </span>
-        </h6>
+        </div>
         { showHud ? this.state.planeVectors : this.state.walkthrough }
       </div>
     );

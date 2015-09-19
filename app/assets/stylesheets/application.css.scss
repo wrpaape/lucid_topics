@@ -64,7 +64,7 @@ $s10: 24px;
 @mixin btn {
   cursor: pointer;
   &:active {
-    color: $c4;
+    color: $c5;
   }
 }
 @mixin set-ace {
@@ -153,6 +153,19 @@ $s10: 24px;
   @include pop-up;
   @include fade-out;
 }
+.nav {
+  padding: 0 $s4;
+  &.header {
+    position: fixed;
+    text-align: left;
+    span, a {
+      display: block;
+    }
+  }
+  span, a, select {
+    @include btn;
+  }
+}
 
 body {
   font-size: $s9;
@@ -164,18 +177,15 @@ body {
     max-width: 80%;
     max-height: 400px;
   }
-  h2, h4, h5, p, td {
+  h2, h4, p, td {
     text-align: left;
   }
-  h3, h6 {
+  h3, h5 {
     text-align: center;
   }
-  h5, h6 {
+  h5 {
     font-size: $s9;
     margin: $s1;
-  }
-  h2 > span, h5 > span, h6 > span, select, a {
-    @include btn;
   }
   p {
     font-size: $s8;
@@ -188,10 +198,6 @@ body {
   }
   strong {
     color: $ch1;
-  }
-  code {
-    font-size: $s8;
-    cursor: help;
   }
   samp {
     &:nth-of-type(3n + 1) {
@@ -279,11 +285,16 @@ body {
         pre {
           width: 400px;
           height: 150px;
+          margin: $s5;
           @include set-ace;
           &#editor-homoiconic {
             width: 550px;
             height: 300px;
           }
+        }
+        code {
+          font-size: $s8;
+          cursor: help;
         }
       }
     }
