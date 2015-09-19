@@ -5,11 +5,11 @@ var MachineLearning = React.createClass({
   render: function() {
     return(
       <div>
-        <div>
-          <span className='cursor-pointer' onClick={ this.props.goBack }>
+        <h5>
+          <span onClick={ this.props.goBack }>
             back
           </span>
-        </div>
+        </h5>
         { [this.props.downloadPdf].concat(this.props.title) }
         <section>
           <h3>

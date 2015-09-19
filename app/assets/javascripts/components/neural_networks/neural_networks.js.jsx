@@ -25,11 +25,11 @@ var NeuralNetworks = React.createClass({
     return(
       <div>
         <div className={ !demo }>
-          <div>
-            <span className='cursor-pointer' onClick={ this.goBack }>
+          <h5>
+            <span onClick={ this.goBack }>
               back
             </span>
-          </div>
+          </h5>
           { [this.props.downloadPdf].concat(this.props.title) }
           <section>
             <h3>
@@ -179,9 +179,11 @@ var NeuralNetworks = React.createClass({
             <p>
             </p>
           </section>
-          <span className='cursor-pointer' onClick={ this.seeDemo }>
-            see demo
-          </span>
+          <h5>
+            <span onClick={ this.seeDemo }>
+              see demo
+            </span>
+          </h5>
         </div>
         { demo }
       </div>

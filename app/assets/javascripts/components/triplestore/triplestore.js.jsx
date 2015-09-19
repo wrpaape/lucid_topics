@@ -7,11 +7,11 @@ var Triplestore = React.createClass({
 
     return(
       <div>
-        <div>
-          <span className='cursor-pointer' onClick={ this.props.goBack }>
+        <h5>
+          <span onClick={ this.props.goBack }>
             back
           </span>
-        </div>
+        </h5>
         { [this.props.downloadPdf].concat(this.props.title) }
          <section>
           <h3>
@@ -318,7 +318,7 @@ var Triplestore = React.createClass({
                   <th className='width-5'>id</th>
                   <th className='width-25'>body</th>
                   <th className='width-10'>user_id</th>
-                  <th className='width-10'>commentable_id</th>
+                  <th className='width-15'>commentable_id</th>
                   <th className='width-15'>commentable_type</th>
                   <th>created_at</th>
                   <th>updated_at</th>
@@ -429,7 +429,10 @@ var Triplestore = React.createClass({
             a vast library of all types of "one-to-one," "one-to-many," and "many-to-many" associations
             are at your disposal with a standard RDBMS which can be tailored to your specific data-handling
             needs. In fact, whole careers are devoted to determining the "best" selection of RDBMS
-            associations for configuring a client's database.
+            associations for configuring a client's database. That being said, a relational DBMS is
+            not always the best match for certain sets of data. Particularly the handling of <strong>
+            loosely structured</strong> or <strong>unstructured data</strong> is not their forte. For these
+            special cases, its best practice in database architecture to implement...
           </p>
         </section>
         <section>

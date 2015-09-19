@@ -30,7 +30,7 @@ var Index = React.createClass({
           topic: topic,
           setAlert: this.setAlert,
           goBack: this.selectTopic.bind(this, 0),
-          downloadPdf: <div key={ topic.title + '-download-pdf' }><a className='cursor-pointer' href={ topic.urls.download.pdf }>download pdf</a></div>,
+          downloadPdf: <h5 key={ topic.title + '-download-pdf' }><a href={ topic.urls.download.pdf }>download pdf</a></h5>,
           title: <h1 key={ topic.title + '-title' }>{ topic.title }</h1>,
           urls: topic.urls,
           paths: topic.paths
@@ -40,8 +40,10 @@ var Index = React.createClass({
 
       return(
         <div key={ 'index-' + id }>
-          <h2 className={ !idSelected + ' cursor-pointer' } onClick={ this.selectTopic.bind(this, id) }>
-            { topic.title }
+          <h2>
+            <span className={ !idSelected } onClick={ this.selectTopic.bind(this, id) }>
+              { topic.title }
+            </span>
           </h2>
           <div className={ id === idSelected }>
             { topicComponent }

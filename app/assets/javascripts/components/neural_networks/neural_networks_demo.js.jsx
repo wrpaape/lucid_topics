@@ -438,30 +438,28 @@ var NeuralNetworksDemo = React.createClass({
 
     return(
       <div>
-        <div>
-          <span className='cursor-pointer' onClick={ setDemo.bind(this, this.props.goBack) }>
+        <h5>
+          <span onClick={ setDemo.bind(this, this.props.goBack) }>
             back
           </span>
-        </div>
-        <div>
-          <span className='cursor-pointer' onClick={ setDemo.bind(this, this.props.goHome) }>
+        </h5>
+        <h5>
+          <span onClick={ setDemo.bind(this, this.props.goHome) }>
             home
           </span>
-        </div>
-        <div className='demo'>
-          <span className='cursor-pointer' onClick={ setDemo.bind(this, this.componentDidMount) }>
+        </h5>
+        <h5>
+          <span onClick={ setDemo.bind(this, this.componentDidMount) }>
             reset
           </span>
-          <div>
-            <canvas id='neural-networks' width='1000' height='500' />
-          </div>
-          <span className='cursor-pointer' onClick={ this.toggleHud }>
+        </h5>
+        <canvas id='neural-networks' width='1000' height='500' />
+        <h6>
+          <span onClick={ this.toggleHud }>
             { showHud ? 'show walkthrough' : 'show HUD' }
           </span>
-          <div>
-            { showHud ? this.state.planeVectors : this.state.walkthrough }
-          </div>
-        </div>
+        </h6>
+        { showHud ? this.state.planeVectors : this.state.walkthrough }
       </div>
     );
   }

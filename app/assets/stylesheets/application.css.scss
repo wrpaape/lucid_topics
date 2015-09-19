@@ -1,24 +1,97 @@
+$c1: black;
+$c2: white;
+$c3: lighten($c1, 10%);
+$ch: red;
+$s1: 1px;
+$s2: 2px;
+$s3: 3px;
+$s4: 5px;
+$s5: 10px;
+$s6: 12px;
+$s7: 14px;
+$s8: 16px;
+$s9: 18px;
+$s10: 24px;
+
+@mixin consolas {
+  font-family: monaco, Consolas, 'Lucida Console', monospace;
+}
+@mixin lucida {
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif;
+}
+@mixin unfaded {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 1);
+}
+@mixin faded {
+  opacity: 0;
+  background-color: rgba(255, 255, 255, 0);
+}
+@mixin bg1 {
+  background-color: $c1;
+}
+@mixin bg2 {
+  background-color: $c2;
+}
+@mixin bg3 {
+  background-color: $c3;
+}
+@mixin border1 {
+  border: $s1 solid $c2;
+}
+@mixin border2 {
+  border: $s2 solid $c2;
+}
+@mixin pop-up {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+@mixin cursor-pointer {
+  cursor: pointer;
+  &:active {
+    color: $c3;
+  }
+}
+@mixin set-ace {
+  .ace_gutter-layer {
+    color: $c2;
+    @include consolas;
+    @include bg1;
+  }
+  .ace_selection {
+    @include bg3;
+  }
+  ::-webkit-scrollbar {
+      width: $s7;
+  }
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 $s4 $c2;
+  }
+  ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-corner, ::-webkit-scrollbar-thumb:window-inactive {
+    @include bg2;
+  }
+}
 
 @-webkit-keyframes fade-out {
   0% {
-    opacity: 1;
-    background-color: rgba(255, 255, 255, 1);
+    @include unfaded;
   }
   100% {
-    opacity: 0;
-    background-color: rgba(255, 255, 255, 0);
+    @include faded;
   }
 }
 @keyframes fade-out {
   to {
-    opacity: 0;
-    background-color: rgba(255, 255, 255, 0);
+    @include faded;
   }
 }
 @-moz-keyframes fade-out {
   to {
-    opacity: 0;
-    background-color: rgba(255, 255, 255, 0);
+    @include faded;
   }
 }
 
@@ -49,183 +122,149 @@
   -moz-animation: fade-out 1s ease-in 1s forwards,
     hide 4s forwards;
 }
-@mixin consolas {
-  font-family: monaco, Consolas, 'Lucida Console', monospace;
-}
-@mixin lucida {
-  font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif;
-}
-@mixin light-grey-bg {
-  background-color: lighten(black, 10%);
-}
-@mixin pop-up {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1;
-}
-@mixin cursor-pointer {
-  cursor: pointer;
-  &:active {
-    color: grey;
-  }
-}
 
 .false {
   display: none;
 }
-.cursor-pointer {
-  @include cursor-pointer;
-}
 .alert {
-  font-size: 24px;
-  padding: 24px;
-  background-color: rgba(255, 255, 255, 1);
-  color: black;
-  text-align: center;
+  font-size: $s10;
+  padding: $s10;
+  color: $c1;
+  @include unfaded;
   @include pop-up;
   @include fade-out;
 }
-.demo {
-  text-align: center;
-}
 
-html, body {
-  background-color: black;
-  color: white;
+body {
+  font-size: $s9;
+  color: $c2;
+  text-align: center;
   @include consolas;
-  form {
+  @include bg1;
+  img {
+    max-width: 80%;
+    max-height: 400px;
+  }
+  h2, h4, h5, p, td {
+    text-align: left;
+  }
+  h3, h6 {
     text-align: center;
+  }
+  h5, h6 {
+    font-size: $s9;
+    margin: $s1;
+  }
+  h2 > span, h5 > span, h6 > span, select, a {
+    @include cursor-pointer;
+  }
+  p {
+    font-size: $s8;
+    line-height: $s10;
+    @include lucida;
   }
   a {
-    color: white;
+    color: $c2;
     text-decoration: none;
   }
-  h1, h3 {
-    text-align: center;
+  strong {
+    color: $ch;
+  }
+  code {
+    font-size: $s8;
+  }
+  .post, canvas, tbody, thead, pre {
+    @include border2;
   }
   section {
     padding: 0 100px 0;
-    p {
-      @include lucida;
-    }
-    strong {
-      color: red;
-    }
     & > div {
       display: table;
       width: 100%;
-      text-align: center;
-      font-size: 0.8em;
+      font-size: $s7;
       & > table {
         width: 80%;
         table-layout: fixed;
         border-collapse: collapse;
         margin: auto;
-        @include light-grey-bg;
-        tbody, thead {
-          border: 2px solid;
-          th {
-            padding: 3px;
-            overflow-wrap: break-word;
-            &.width-5 {
-              width: 5%;
-            }
-            &.width-10 {
-              width: 10%;
-            }
-            &.width-15 {
-              width: 15%;
-            }
-            &.width-25 {
-              width: 25%;
-            }
+        @include bg3;
+        th {
+          padding: $s3;
+          overflow-wrap: break-word;
+          &.width-5 {
+            width: 5%;
           }
-          td {
-            padding: 3px;
-            text-align: left;
-            font-size: 0.8em;
-            word-wrap: break-word;
+          &.width-10 {
+            width: 10%;
           }
+          &.width-15 {
+            width: 15%;
+          }
+          &.width-25 {
+            width: 25%;
+          }
+        }
+        td {
+          padding: $s3;
+          font-size: $s5;
+          word-wrap: break-word;
         }
       }
       & > div {
         display: inline-block;
-        width: 100%;
-        padding: 5px;
         text-align: left;
-        font-size: 0.8em;
         &.post {
           vertical-align: top;
-          width: 45%;
-          margin: 15px;
-          border: 2px solid;
-          @include light-grey-bg;
+          width: 48%;
+          @include bg3;
+          &:first-child {
+            margin: $s8 $s5 $s8 0;
+          }
+          &:nth-child(2) {
+            margin: $s8 0 $s8 $s5;
+          }
           div {
-            padding: 10px;
-            margin: 10px;
+            padding: $s5;
+            margin: $s5;
+            span {
+              font-size: $s7;
+              line-height: $s9;
+              @include lucida;
+            }
           }
           & > div, & > div > div > div {
-            background-color: black;
+            @include bg1;
           }
           & > div > div, & > div > div > div > div {
-            @include light-grey-bg;
+            @include bg3;
           }
         }
         pre {
           width: 400px;
           height: 150px;
+          @include set-ace;
           &#editor-homoiconic {
             width: 550px;
             height: 300px;
-          }
-          text-align: left;
-          border: 1px solid white;
-          ::-webkit-scrollbar {
-              width: 14px;
-          }
-          ::-webkit-scrollbar-track {
-              box-shadow: inset 0 0 6px white;
-          }
-          ::-webkit-scrollbar-thumb {
-              background: white;
-          }
-          ::-webkit-scrollbar-corner,
-          ::-webkit-scrollbar-thumb:window-inactive {
-              background: white;
-          }
-          .ace_gutter-layer {
-            @include consolas;
-            color: white;
-            background-color: black;
-          }
-          .ace_selection {
-            background-color: lighten(black, 30%);
           }
         }
       }
     }
   }
-
   select {
+    margin-top: $s4;
+    font-size: $s9;
     -webkit-appearance: menulist-button;
-    color: white;
-    background-color: black;
-    border: 1px solid white;
-    font-size: 1em;
-    margin-top: 5px;
+    color: $c2;
+    @include border1;
+    @include bg1;
     @include consolas;
-    @include cursor-pointer;
   }
   canvas {
-    margin: 10px 5px 0;
-    border: 3px solid white;
     width: 20%;
+    margin: $s5 $s8 0;
     &#neural-networks, &#neural-network-model {
       width: 50%;
-      margin-bottom: 5px;
     }
   }
 }

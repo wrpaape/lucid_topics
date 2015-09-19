@@ -128,20 +128,18 @@ var Lisp = React.createClass({
           <pre id={ 'editor-' + thisEditor } onKeyDown={ this.submitCode.bind(this, contents, thisEditor) }>
             { contents[thisEditor].value }
           </pre>
-          <div>
-            <code>{ 'output: ' + contents[thisEditor].output }</code>
-          </div>
+          <code>{ 'output: ' + contents[thisEditor].output }</code>
         </div>
       );
     }.bind(this));
 
     return(
       <div>
-        <div>
-          <span className='cursor-pointer' onClick={ this.props.goBack }>
+        <h5>
+          <span onClick={ this.props.goBack }>
             back
           </span>
-        </div>
+        </h5>
         { [this.props.downloadPdf].concat(this.props.title) }
         <section>
           <h3>

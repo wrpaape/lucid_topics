@@ -111,10 +111,6 @@ var NeuralNetworkModel = React.createClass({
     ctx.restore();
   },
   render: function() {
-    return(
-      <div>
-        <canvas id='neural-network-model' width='2000' height='1000' />
-      </div>
-    );
+    return <canvas id='neural-network-model' width='2000' height='1000' />;
   }
 });
