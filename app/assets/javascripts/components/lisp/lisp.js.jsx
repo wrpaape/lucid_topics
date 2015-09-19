@@ -128,7 +128,12 @@ var Lisp = React.createClass({
           <pre id={ 'editor-' + thisEditor } onKeyDown={ this.submitCode.bind(this, contents, thisEditor) }>
             { contents[thisEditor].value }
           </pre>
-          <code>{ 'output: ' + contents[thisEditor].output }</code>
+          <code>
+            <abbr title='hold (cmd or ctr) + shift + return to evaluate'>
+              output:&nbsp;&nbsp;
+            </abbr>
+            { contents[thisEditor].output }
+          </code>
         </div>
       );
     }.bind(this));
@@ -260,9 +265,9 @@ var Lisp = React.createClass({
             the programmer to explicitly state irrelevant details. Time
             spent providing type declarations and allocating storage adds
             up in longer programs, and these minutiae are <strong>avoided entirely</strong> in
-            LISP. For instance, take the trivial problem of computing <code>a x (b + c)
-            </code> when <code>a</code>, <code>b</code>, and <code>c</code> are
-            matrices. Compare below how this is addressed in Pascal, a more
+            LISP. For instance, take the trivial problem of computing <var>a</var> × ( <var>
+            b</var> + <var>c</var> ) when <var>a</var>, <var>b</var>, and <var>
+            c</var> are matrices. Compare below how this is addressed in Pascal, a more
             traditional language, versus LISP.
           </p>
           <div>

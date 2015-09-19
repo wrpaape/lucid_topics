@@ -1,7 +1,12 @@
 $c1: black;
 $c2: white;
-$c3: lighten($c1, 10%);
-$ch: red;
+$c3: lighten($c1, 5%);
+$c4: lighten($c1, 10%);
+$c5: lighten($c1, 25%);
+$ch1: aqua;
+$ch2: red;
+$ch3: yellow;
+$ch4: green;
 $s1: 1px;
 $s2: 2px;
 $s3: 3px;
@@ -36,6 +41,12 @@ $s10: 24px;
 @mixin bg3 {
   background-color: $c3;
 }
+@mixin bg4 {
+  background-color: $c4;
+}
+@mixin bg5 {
+  background-color: $c5;
+}
 @mixin border1 {
   border: $s1 solid $c2;
 }
@@ -50,29 +61,37 @@ $s10: 24px;
   left: 0;
   z-index: 1;
 }
-@mixin cursor-pointer {
+@mixin btn {
   cursor: pointer;
   &:active {
-    color: $c3;
+    color: $c4;
   }
 }
 @mixin set-ace {
-  .ace_gutter-layer {
+  &.ace-terminal-theme {
     color: $c2;
-    @include consolas;
-    @include bg1;
-  }
-  .ace_selection {
-    @include bg3;
-  }
-  ::-webkit-scrollbar {
-      width: $s7;
-  }
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 $s4 $c2;
-  }
-  ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-corner, ::-webkit-scrollbar-thumb:window-inactive {
-    @include bg2;
+    .ace_marker-layer {
+      .ace_active-line {
+        @include bg4;
+      }
+      .ace_selection {
+        @include bg5;
+      }
+    }
+    .ace_gutter-layer {
+      color: $c2;
+      @include consolas;
+      @include bg3;
+    }
+    ::-webkit-scrollbar {
+        width: $s7;
+    }
+    ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 $s4 $c2;
+    }
+    ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-corner, ::-webkit-scrollbar-thumb:window-inactive {
+      @include bg2;
+    }
   }
 }
 
@@ -156,7 +175,7 @@ body {
     margin: $s1;
   }
   h2 > span, h5 > span, h6 > span, select, a {
-    @include cursor-pointer;
+    @include btn;
   }
   p {
     font-size: $s8;
@@ -168,10 +187,22 @@ body {
     text-decoration: none;
   }
   strong {
-    color: $ch;
+    color: $ch1;
   }
   code {
     font-size: $s8;
+    cursor: help;
+  }
+  samp {
+    &:nth-of-type(3n + 1) {
+      color: $ch2;
+    }
+    &:nth-of-type(3n + 2) {
+      color: $ch3;
+    }
+    &:nth-of-type(3n + 3) {
+      color: $ch4;
+    }
   }
   .post, canvas, tbody, thead, pre {
     @include border2;
@@ -187,9 +218,16 @@ body {
         table-layout: fixed;
         border-collapse: collapse;
         margin: auto;
-        @include bg3;
+        @include bg4;
+        th, td {
+          padding: $s4;
+          vertical-align: top;
+          @include bg3;
+          &:nth-child(odd) {
+            @include bg4;
+          }
+        }
         th {
-          padding: $s3;
           overflow-wrap: break-word;
           &.width-5 {
             width: 5%;
@@ -205,7 +243,6 @@ body {
           }
         }
         td {
-          padding: $s3;
           font-size: $s5;
           word-wrap: break-word;
         }
@@ -216,7 +253,7 @@ body {
         &.post {
           vertical-align: top;
           width: 48%;
-          @include bg3;
+          @include bg4;
           &:first-child {
             margin: $s8 $s5 $s8 0;
           }
@@ -233,10 +270,10 @@ body {
             }
           }
           & > div, & > div > div > div {
-            @include bg1;
+            @include bg3;
           }
           & > div > div, & > div > div > div > div {
-            @include bg3;
+            @include bg4;
           }
         }
         pre {

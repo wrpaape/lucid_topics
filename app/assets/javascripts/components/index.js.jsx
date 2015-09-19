@@ -39,7 +39,7 @@ var Index = React.createClass({
       }
 
       return(
-        <div key={ 'index-' + id }>
+        <article key={ 'index-' + id }>
           <h2>
             <span className={ !idSelected } onClick={ this.selectTopic.bind(this, id) }>
               { topic.title }
@@ -48,7 +48,7 @@ var Index = React.createClass({
           <div className={ id === idSelected }>
             { topicComponent }
           </div>
-        </div>
+        </article>
       );
     }.bind(this));
 

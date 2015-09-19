@@ -437,7 +437,7 @@ var Triplestore = React.createClass({
         </section>
         <section>
           <h3>
-            The RDF Data Model (Triplestore)
+            The RDF Data Model
           </h3>
           <p>
             RDF or Resource Description Framework is a simple language for expressing data models,
@@ -448,25 +448,44 @@ var Triplestore = React.createClass({
             resources and values.  A value, however, is either a resource or a primitive data type.
             The basic unit to represent information in RDF is the statement.
           </p>
-        </section>
-        <section>
+          <h4>
+            Triplestore
+          </h4>
+          <p>
+            The triplestore database, an RDF database that has become very popular across a wide range
+            of applications as of late, has the ability to ingest diverse data, allowing flexibility to
+            schema changes as data does not have to be reloaded. Triplestores combine full text search
+            with graph analytics and logical reasoning to produce deep, rich results.
+            **metadata, content enrichment,***
+          </p>
           <h3>
-            The Statement
+            <strong>Triplestores are the "smart brain" on top of legacy systems leveraging knowledge,
+            rules and inferences to bring meaning to all of your data.</strong>
           </h3>
+          <h4>
+            The Statement (Triple)
+          </h4>
           <p>
             A statement is a 'triple' of the type:
           </p>
           <p>
-            subject - predicate - object.
+            <samp>subject</samp> - <samp>predicate</samp> - <samp>object</samp>
           </p>
           <p>
-            Where "subject" is a resource, "predicate" is a property, and "object" is a value.
+            where <samp>subject</samp> is a resource, <samp>predicate</samp> is a property, and <samp>object</samp> is a value. All data
+            is represented in triples in a triplestore database, which form the glue bringing structure
+            and order in the form of <strong>graphs</strong> to all but the most capricious globs of raw
+            data (much like the RDBMS's method of keys and tables). Take for example the triple:
           </p>
-        </section>
-        <section>
-          <h3>
-            AI Applications of RDF
-          </h3>
+          <p>
+            <samp>subject</samp> - <samp>predicate</samp> - <samp>object</samp>
+            <samp>subject</samp> - <samp>predicate</samp> - <samp>object</samp>
+            <samp>subject</samp> - <samp>predicate</samp> - <samp>object</samp>
+            <samp>subject</samp> - <samp>predicate</samp> - <samp>object</samp>
+          </p>
+          <h4>
+            AI Applications
+          </h4>
           <p>
             RDF or Resource Description Framework is a simple language for expressing data models,
             which refer to objects ("resources") and their relationships. RDF Schema is a vocabulary
@@ -476,11 +495,9 @@ var Triplestore = React.createClass({
             resources and values.  A value, however, is either a resource or a primitive data type.
             The basic unit to represent information in RDF is the statement.
           </p>
-        </section>
-        <section>
-          <h3>
+          <h4>
             Watson's Triplestore
-          </h3>
+          </h4>
           <p>
             RDF or Resource Description Framework is a simple language for expressing data models,
             which refer to objects ("resources") and their relationships. RDF Schema is a vocabulary
@@ -490,11 +507,9 @@ var Triplestore = React.createClass({
             resources and values.  A value, however, is either a resource or a primitive data type.
             The basic unit to represent information in RDF is the statement.
           </p>
-        </section>
-        <section>
-          <h3>
+          <h4>
             Quadstore or Named Graph
-          </h3>
+          </h4>
           <p>
             RDF or Resource Description Framework is a simple language for expressing data models,
             which refer to objects ("resources") and their relationships. RDF Schema is a vocabulary
