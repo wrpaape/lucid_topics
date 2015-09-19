@@ -32,6 +32,22 @@ $s10: 24px;
   opacity: 0;
   background-color: rgba(255, 255, 255, 0);
 }
+@mixin fade-out-keys {
+  0% {
+    @include unfaded;
+  }
+  100% {
+    @include faded;
+  }
+}
+@mixin hide-keys {
+  0% {
+    z-index: 0;
+  }
+  100% {
+    z-index: -1;
+  }
+}
 @mixin bg1 {
   background-color: $c1;
 }
@@ -96,41 +112,23 @@ $s10: 24px;
 }
 
 @-webkit-keyframes fade-out {
-  0% {
-    @include unfaded;
-  }
-  100% {
-    @include faded;
-  }
+  @include fade-out-keys;
 }
 @keyframes fade-out {
-  to {
-    @include faded;
-  }
+  @include fade-out-keys;
 }
 @-moz-keyframes fade-out {
-  to {
-    @include faded;
-  }
+  @include fade-out-keys;
 }
 
 @-webkit-keyframes hide {
-  0% {
-    z-index: 0;
-  }
-  100% {
-    z-index: -1;
-  }
+  @include hide-keys;
 }
 @keyframes hide {
-  to {
-    z-index: -1;
-  }
+  @include hide-keys;
 }
 @-moz-keyframes hide {
-  to {
-    z-index: -1;
-  }
+  @include hide-keys;
 }
 
 @mixin fade-out {
@@ -180,12 +178,8 @@ body {
   h2, h4, p, td {
     text-align: left;
   }
-  h3, h5 {
+  h3{
     text-align: center;
-  }
-  h5 {
-    font-size: $s9;
-    margin: $s1;
   }
   p {
     font-size: $s8;
@@ -293,6 +287,7 @@ body {
           }
         }
         code {
+          margin-left: $s5;
           font-size: $s8;
           cursor: help;
         }
