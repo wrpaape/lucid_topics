@@ -4,7 +4,7 @@ class Hash
     query = { title: delete(:topics) } if has_key?(:topics)
     buzzword = Buzzword.create(self)
     buzzword.topics << Topic.where(query)
-    -> { buzzword.related << Buzzword.where(word: related) }
+    -> { catch(:dupe) { buzzword.relateds << Buzzword.where(word: related) } }
   end
 end
 

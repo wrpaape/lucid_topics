@@ -20,20 +20,33 @@ var Index = React.createClass({
   },
   render: function() {
     var topics = this.props.topics;
+    var buzzwords = this.props.buzzwords;
     var idSelected = this.state.idSelected;
     var alert = this.state.alert;
-    var id, topicProps, topicComponent
+    var id, buzzwordList, buzzwordProps, topicProps, topicComponent
     var index = topics.map(function(topic) {
       id = topic.id;
       if (id === idSelected) {
+        buzzwordList = topic.buzzwords.map(function(buzzword) {
+          buzzwordProps = {
+            key: topic.title + '-' + buzzword.word,
+            note: buzzword.note,
+            word: buzzword.word,
+            related: buzzword.related,
+            buzzwords: buzzwords
+          };
+          return React.createElement(window.Buzzword, buzzwordProps);
+        });
+
         topicProps = {
           topic: topic,
-          setAlert: this.setAlert,
-          goBack: this.selectTopic.bind(this, 0),
           downloadPdf: <a href={ topic.urls.download.pdf }>pdf⇩</a>,
           title: <h1>{ topic.title }</h1>,
+          buzzwordBank: <section><h3>Buzzword Bank</h3><ul>{ buzzwordList }</ul></section>,
           urls: topic.urls,
-          paths: topic.paths
+          paths: topic.paths,
+          setAlert: this.setAlert,
+          goBack: this.selectTopic.bind(this, 0),
         };
         topicComponent = React.createElement(window[topic.component], topicProps);
       }

@@ -1,6 +1,7 @@
 class TopicsController < ApplicationController
   def index
     @topics = Topic.all_as_json
+    @buzzwords = Buzzword.all_as_json
   end
 
   def download_file

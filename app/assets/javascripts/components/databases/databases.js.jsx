@@ -521,67 +521,7 @@ var Databases = React.createClass({
             The basic unit to represent information in RDF is the statement.
           </p>
         </section>
-        <section>
-          <h3>
-            Buzzword Bank
-          </h3>
-          <ul>
-            <li>
-              Association/Relationship
-            </li>
-            <li>
-              Attribute/Property
-            </li>
-            <li>
-              Class
-            </li>
-            <li>
-              Data(set)
-            </li>
-            <li>
-              Framework
-            </li>
-            <li>
-              (Generalized-)Hierarchy
-            </li>
-            <li>
-              Graph
-            </li>
-            <li>
-              Model
-            </li>
-            <li>
-              Object
-            </li>
-            <li>
-              Network
-            </li>
-            <li>
-              Parent-Child Relationship
-            </li>
-            <li>
-              Primitive Data Type
-            </li>
-            <li>
-              Property
-            </li>
-            <li>
-              Raw/Curated Data
-            </li>
-            <li>
-              Resource
-            </li>
-            <li>
-              Schema
-            </li>
-            <li>
-              Semantics
-            </li>
-            <li>
-              Structured/Unstructured Data
-            </li>
-          </ul>
-        </section>
+        { this.props.buzzwordBank }
       </div>
     );
   }

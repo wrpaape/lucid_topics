@@ -96,52 +96,7 @@ var MachineLearning = React.createClass({
           <p>
           </p>
         </section>
-        <section>
-          <h3>
-            Buzzword Bank
-          </h3>
-          <ul>
-            <li>
-              Algorithm/Methodology
-            </li>
-            <li>
-              Data(set)
-            </li>
-            <li>
-              Explicitly Programmed
-            </li>
-            <li>
-              Feature
-            </li>
-            <li>
-              Learning
-            </li>
-            <li>
-              (Mapping) Function
-            </li>
-            <li>
-              Model
-            </li>
-            <li>
-              (Non)linear
-            </li>
-            <li>
-              Program/Task
-            </li>
-            <li>
-              (Programming) Pattern
-            </li>
-            <li>
-              Signal/Feedback
-            </li>
-            <li>
-              (Tunable) Parameters
-            </li>
-            <li>
-              (Un)labeled
-            </li>
-          </ul>
-        </section>
+        { this.props.buzzwordBank }
       </div>
     );
   }

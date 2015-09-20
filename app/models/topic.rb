@@ -3,13 +3,26 @@ class Topic < ActiveRecord::Base
   has_and_belongs_to_many :buzzwords, -> { order(:word) }
 
   def self.all_as_json
-    all.as_json(except: :filename, methods: [:urls, :paths])
+    all.as_json(except: :filename,
+      methods: [
+        :urls,
+        :paths
+      ],
+      include: {
+        buzzwords: {
+          only: [
+            :word,
+            :note
+          ],
+          methods: :related
+        }
+      }
+    )
   end
-
 
   def urls
     pdf = URI.parse(all_urls[:download_file])
-    pdf.query = URI.encode_www_form( path: "pdfs/#{filename}.pdf", filename: "#{filename}.pdf", type: "application/pdf")
+    pdf.query = URI.encode_www_form(path: "pdfs/#{filename}.pdf", filename: "#{filename}.pdf", type: "application/pdf")
 
     {
       download: {
