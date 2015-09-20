@@ -285,7 +285,7 @@ var Lisp = React.createClass({
             Homoiconicity is a fancy computer science term where a program is
             homoiconic if its internal representation can be inferred by reading
             the text's layout. In other words, the primary representation of the
-            program is also a datastructure in a primitive type of the language
+            program is also a data structure in a primitive type of the language
             itself. LISP was the first language to incorporate this trait,
             as LISP programs and all objects and data within are represented
             as embedded lists:
@@ -342,6 +342,58 @@ var Lisp = React.createClass({
             has become more well known in the United States. As a result,
             the average AI worker today is likely to be bilingual.
           </p>
+        </section>
+        <section>
+          <h3>
+            Buzzword Bank
+          </h3>
+          <ul>
+            <li>
+              Array/List/Vector
+            </li>
+            <li>
+              Atom
+            </li>
+            <li>
+              Compile
+            </li>
+            <li>
+              (Fixed-Length/nonatomic) Data Structure
+            </li>
+            <li>
+              Debug
+            </li>
+            <li>
+              Function
+            </li>
+            <li>
+              High/Low-Level
+            </li>
+            <li>
+              (Machine-Independent) Programming Language
+            </li>
+            <li>
+              Macro
+            </li>
+            <li>
+              Primitive (Data) Type
+            </li>
+            <li>
+              Program
+            </li>
+            <li>
+              Object
+            </li>
+            <li>
+              (Programming) Pattern
+            </li>
+            <li>
+              Semantics
+            </li>
+            <li>
+              Syntax
+            </li>
+          </ul>
         </section>
       </div>
     );

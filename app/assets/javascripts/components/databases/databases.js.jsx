@@ -216,7 +216,7 @@ var Databases = React.createClass({
             </div>
           </div>
           <p>
-            Let's see how an RDBMS would handle this forum's posts and comments:
+            Let's see how an RDBMS would handle this dataset:
           </p>
           <div>
             <h3>
@@ -408,8 +408,8 @@ var Databases = React.createClass({
             The convention is that field or column names indicating the primary key are labeled "id"
             and that foreign keys occupy the column (or columns in the case of polymorphic associations)
             labeled with the singular of the parent entry's table name followed by "id" and sometimes
-            "type." Using this simple system of recording parent-child <strong>associations</strong> by
-            inserting the parent entry's primary key into its child(ren) entry(ies) as a foreign key, a
+            "type." Using this simple system of recording <strong>associations</strong> by <strong>
+            inserting the parent entry's primary key into its child(ren) entry(ies) as a foreign key</strong>, a
             sophisticated network of otherwise independent tables of data can be established.
           </p>
           <p>
@@ -442,9 +442,9 @@ var Databases = React.createClass({
           </h3>
           <p>
             RDF or Resource Description Framework is a simple language for expressing data models,
-            which refer to objects ("resources") and their relationships. RDF Schema is a vocabulary
-            for describing properties and classes of RDF-based resources, with semantics for
-            generalized-hierarchies of such properies and classes. The RDF data model consists of
+            which refer to objects ("resources") and their associations or relationships. RDF Schema
+            is a vocabulary for describing properties and classes of RDF-based resources, with semantics
+            for generalized-hierarchies of such properies and classes. The RDF data model consists of
             resources, properties and values. Properties are the relationships that bind together
             resources and values.  A value, however, is either a resource or a primitive data type.
             The basic unit to represent information in RDF is the statement.
@@ -520,6 +520,67 @@ var Databases = React.createClass({
             resources and values.  A value, however, is either a resource or a primitive data type.
             The basic unit to represent information in RDF is the statement.
           </p>
+        </section>
+        <section>
+          <h3>
+            Buzzword Bank
+          </h3>
+          <ul>
+            <li>
+              Association/Relationship
+            </li>
+            <li>
+              Attribute/Property
+            </li>
+            <li>
+              Class
+            </li>
+            <li>
+              Data(set)
+            </li>
+            <li>
+              Framework
+            </li>
+            <li>
+              (Generalized-)Hierarchy
+            </li>
+            <li>
+              Graph
+            </li>
+            <li>
+              Model
+            </li>
+            <li>
+              Object
+            </li>
+            <li>
+              Network
+            </li>
+            <li>
+              Parent-Child Relationship
+            </li>
+            <li>
+              Primitive Data Type
+            </li>
+            <li>
+              Property
+            </li>
+            <li>
+              Raw/Curated Data
+            </li>
+            <li>
+              Resource
+            </li>
+            <li>
+              Schema
+            </li>
+            <li>
+              Semantics
+            </li>
+            <li>
+              Structured/Unstructured Data
+            </li>
+          </ul>
         </section>
       </div>
     );

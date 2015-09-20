@@ -41,17 +41,17 @@ var NeuralNetworks = React.createClass({
             </h3>
             <p>
               (Artificial) Neural Networks are a family of statistical learning models
-              inspired by the central nervouse system and are used to estimate or
+              inspired by the central nervous system and are used to estimate or
               approximate functions that can depend on a large number of inputs and
               are generally unknown.
             </p>
             <Img src={ imgPath + 'neuron.png' } />
             <Img src={ imgPath + 'basic_diagram.png' } />
             <p>
-              artificial neural networks are generally presented
+              Artificial neural networks are generally presented
               as systems of interconnected "neurons" which exchange messages between each
               other. The connections have numeric weights that can be tuned based on
-              experience, making neural nets <strong>adaptive to inputs
+              experience, making neural networks <strong>adaptive to inputs
               </strong> and thus <strong>capable of learning</strong>.
             </p>
           </section>
@@ -101,7 +101,7 @@ var NeuralNetworks = React.createClass({
             </h3>
             <p>
               It turns out neural networks of the animal kingdom come in all shapes, sizes,
-              and configurations according to the ecological niche occupied by their host.
+              and configurations tailored to the ecological niche occupied by their host.
               Our friends the mathematicians have taken the models that mimick these natural
               systems and stripped them down to their lean and mean components in order to
               assume (typically) a much more specialized role than a living nervous system.
@@ -129,7 +129,7 @@ var NeuralNetworks = React.createClass({
             <p>
               It turns out the properties of each synapse of this simple neuron can be
               modeled by the assignment of a simple decimal number. This number is referred
-              to as a weight in Math World, and its function is not unlike the weight that
+              to as a <strong>weight</strong> in Math World, and its function is not unlike the weight that
               teachers implement when grading their assignments: a failed test is usually
               more costly to a student's overall GPA than a forgotten homework worksheet.
               But while a heavier weight implies greater importance to a graded assignment,
@@ -150,7 +150,7 @@ var NeuralNetworks = React.createClass({
               be broken down into the ebbing and flowing of decimal point numbers.
             </p>
             <p>
-              Back to our simple neuron, or perceptron as its called in the math community. As the
+              Let's study our simple neuron, or perceptron as its called in the math community. As the
               fundamental unit of the neural network, its sole function is to read in numbers,
               do some calculations, and spit out a new set of numbers as output. We'll get to
               how their combined effort results in the magic phenomenon we call learning soon enough,
@@ -183,6 +183,52 @@ var NeuralNetworks = React.createClass({
             <p>
             </p>
           </section>
+          <section>
+          <h3>
+            Buzzword Bank
+          </h3>
+          <ul>
+            <li>
+              Amplification/Gain
+            </li>
+            <li>
+              Input/Output
+            </li>
+            <li>
+              Feedback
+            </li>
+            <li>
+              Function
+            </li>
+            <li>
+              (Machine) Learning
+            </li>
+            <li>
+              Model
+            </li>
+            <li>
+              (Non)linear
+            </li>
+            <li>
+              Parallel/Collective Processing
+            </li>
+            <li>
+              Response Characteristics
+            </li>
+            <li>
+              Sigmoid/Squashing Function
+            </li>
+            <li>
+              Switch
+            </li>
+            <li>
+              Threshold
+            </li>
+            <li>
+              Weight(ed Sum)
+            </li>
+          </ul>
+        </section>
         </div>
         { demo }
       </div>

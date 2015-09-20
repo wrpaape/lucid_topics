@@ -1,5 +1,6 @@
 class Topic < ActiveRecord::Base
   mattr_accessor :all_urls, :all_paths
+  has_and_belongs_to_many :buzzwords, -> { order(:word) }
 
   def self.all_as_json
     all.as_json(except: :filename, methods: [:urls, :paths])
