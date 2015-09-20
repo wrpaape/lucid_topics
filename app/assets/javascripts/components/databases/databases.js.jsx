@@ -1,7 +1,7 @@
 /* globals React */
 'use strict';
 
-var Triplestore = React.createClass({
+var Databases = React.createClass({
   render: function() {
     var imgPath = this.props.paths.img;
 

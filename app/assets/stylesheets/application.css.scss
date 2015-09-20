@@ -175,16 +175,19 @@ body {
     max-width: 80%;
     max-height: 400px;
   }
-  h2, h4, p, td {
+  h2, h4, p, td, li {
     text-align: left;
   }
   h3{
     text-align: center;
   }
-  p {
+  p, li {
     font-size: $s8;
     line-height: $s10;
     @include lucida;
+  }
+  ul > li {
+    margin-bottom: $s5;
   }
   a {
     color: $c2;
@@ -222,13 +225,13 @@ body {
         th, td {
           padding: $s4;
           vertical-align: top;
+          word-wrap: break-word;
           @include bg3;
           &:nth-child(odd) {
             @include bg4;
           }
         }
         th {
-          overflow-wrap: break-word;
           &.width-5 {
             width: 5%;
           }
@@ -244,7 +247,7 @@ body {
         }
         td {
           font-size: $s5;
-          word-wrap: break-word;
+
         }
       }
       & > div {

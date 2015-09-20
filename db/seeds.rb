@@ -10,9 +10,9 @@ Topic.create([
     filename: "neural_networks"
   },
   {
-    title: "Triplestore (RDF store) Database",
-    component: "Triplestore",
-    filename: "triplestore"
+    title: "Databases",
+    component: "Databases",
+    filename: "databases"
   },
   {
     title: "Machine Learning",
