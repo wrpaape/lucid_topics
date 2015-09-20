@@ -183,52 +183,7 @@ var NeuralNetworks = React.createClass({
             <p>
             </p>
           </section>
-          <section>
-          <h3>
-            Buzzword Bank
-          </h3>
-          <ul>
-            <li>
-              Amplification/Gain
-            </li>
-            <li>
-              Input/Output
-            </li>
-            <li>
-              Feedback
-            </li>
-            <li>
-              Function
-            </li>
-            <li>
-              (Machine) Learning
-            </li>
-            <li>
-              Model
-            </li>
-            <li>
-              (Non)linear
-            </li>
-            <li>
-              Parallel/Collective Processing
-            </li>
-            <li>
-              Response Characteristics
-            </li>
-            <li>
-              Sigmoid/Squashing Function
-            </li>
-            <li>
-              Switch
-            </li>
-            <li>
-              Threshold
-            </li>
-            <li>
-              Weight(ed Sum)
-            </li>
-          </ul>
-        </section>
+        { this.props.buzzwordBank }
         </div>
         { demo }
       </div>

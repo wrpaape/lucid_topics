@@ -343,58 +343,7 @@ var Lisp = React.createClass({
             the average AI worker today is likely to be bilingual.
           </p>
         </section>
-        <section>
-          <h3>
-            Buzzword Bank
-          </h3>
-          <ul>
-            <li>
-              Array/List/Vector
-            </li>
-            <li>
-              Atom
-            </li>
-            <li>
-              Compile
-            </li>
-            <li>
-              (Fixed-Length/nonatomic) Data Structure
-            </li>
-            <li>
-              Debug
-            </li>
-            <li>
-              Function
-            </li>
-            <li>
-              High/Low-Level
-            </li>
-            <li>
-              (Machine-Independent) Programming Language
-            </li>
-            <li>
-              Macro
-            </li>
-            <li>
-              Primitive (Data) Type
-            </li>
-            <li>
-              Program
-            </li>
-            <li>
-              Object
-            </li>
-            <li>
-              (Programming) Pattern
-            </li>
-            <li>
-              Semantics
-            </li>
-            <li>
-              Syntax
-            </li>
-          </ul>
-        </section>
+        { this.props.buzzwordBank }
       </div>
     );
   }
