@@ -20,21 +20,23 @@ var Buzzword = React.createClass({
       related: newBuzzword.related
     });
   },
-  render: function() {
+  formatRelated: function() {
     var related = this.state.related.map(function(word, i) {
       return <i key={ this.state.word + '-' + word } onClick={ this.selectBuzzword.bind(this, word) }>{ word }</i>;
     }.bind(this));
 
+    return related[0] ? <p>related:<span className='nav'>{ related }</span></p> : null;
+  },
+  render: function() {
     return(
       <li onMouseLeave={ this.resetBuzzword }>
-        <i>{ this.state.word }</i>
         <p>
-          { this.state.note }
+          <i>{ this.state.word }</i>
         </p>
-        <div>
-          related:
-          <span className='nav'>{ related }</span>
-        </div>
+         { this.formatRelated() }
+        <p>
+          { marked(this.state.note) }
+        </p>
       </li>
     );
   }

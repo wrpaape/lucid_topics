@@ -12,6 +12,7 @@
 //= require ace-builds/src-min-noconflict/mode-lisp
 //= require ace-builds/src-min-noconflict/mode-pascal
 //= require ajax
+//= require marked
 //= require_tree .
 
 'use strict';

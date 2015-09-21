@@ -33,20 +33,60 @@ Topic.create([
 
 buzzwords = [
   {
-    word: "Array",
-    note: "hello",
+    word: "array",
+    note:
+"""
+An array is data structure consisting of a collection of elements or atoms with each
+atom identified by a unique index or key. The simplest type of data structure is the linear or
+one-dimensional array, which can be modeled as a continuous container housing its atoms in
+a series of numbered boxes:
+
+  atoms:    [ \"I'm first\" , 42 , x , ... , \"I'm last\" ]
+  indices:  [      0        ,  1 , 2 , ... ,      n       ]
+
+pros:  
+cons:  
+""",
     topics: ["LISP"],
-    related: ["List", "Vector"]
+    related: ["List", "Vector", "Nonatomic Data Structure"]
   },
   {
     word: "List",
-    note: "hello",
+    note:
+"""
+A list is an abstract data type that represents an ordered sequence of not necessarily unique values.
+Lists are most commonly implemented as \"linked lists\", consisting of a cluster of
+separated container nodes chained together by references.
+
+```
+  atoms:    [ \"I'm first\" , 42 , x , ... , \"I'm last\" ]
+  indices:  [      0        ,  1 , 2 , ... ,      n       ]
+```
+
+*safe*
+pros:
+- can insert/delete an element or splice at anywhere in the list with constant speed regardless of its size
+cons:
+- not good for random access (can't \"look up\" an element but rather must traverse the list one by one)
+*safe*
+""",
     topics: ["LISP"],
     related: ["Vector"]
   },
   {
     word: "Vector",
-    note: "hello",
+    note:
+"""
+A list is an abstract data type that represents an ordered sequence of not necessarily unique values.
+Lists are most commonly implemented as \"linked lists\", datastructures consisting of a cluster of
+separated container nodes chained together by references.
+
+  atoms:    [ \"I'm first\" , 42 , x , ... , \"I'm last\" ]
+  indices:  [      0        ,  1 , 2 , ... ,      n       ]
+
+pros: can increase/decrease in size at run-time
+cons:
+"""[1..-2],
     topics: ["LISP"]
   },
   {
@@ -77,7 +117,7 @@ buzzwords = [
     word: "Debug",
     note: "hello",
     topics: ["LISP"],
-    related: [""]
+    related: ["Compile"]
   },
   {
     word: "Function",
@@ -89,25 +129,25 @@ buzzwords = [
     word: "High-Level",
     note: "hello",
     topics: ["LISP"],
-    related: [""]
+    related: ["Low-Level"]
   },
   {
     word: "Low-Level",
     note: "hello",
     topics: ["LISP"],
-    related: [""]
+    related: ["High-Level"]
   },
   {
     word: "Machine-Independent Programming Language",
     note: "hello",
     topics: ["LISP"],
-    related: [""]
+    related: []
   },
   {
     word: "Macro",
     note: "hello",
     topics: ["LISP"],
-    related: [""]
+    related: ["Program", "Task"]
   },
   {
     word: "Primitive Data Type",
@@ -119,211 +159,229 @@ buzzwords = [
     word: "Program",
     note: "hello",
     topics: ["LISP"],
-    related: [""]
+    related: ["Macro"]
   },
   {
     word: "Object",
     note: "hello",
     topics: ["LISP"],
-    related: [""]
+    related: ["Nonatomic Data Structure"]
   },
   {
-    word: "(Programming) Pattern",
+    word: "Programming Pattern/Paradigm",
     note: "hello",
-    topics: ["LISP"],
-    related: [""]
+    topics: ["LISP", "Machine Learning"],
+    related: []
   },
   {
     word: "Semantics",
     note: "hello",
     topics: ["LISP"],
-    related: [""]
+    related: ["Syntax"]
   },
   {
     word: "Syntax",
     note: "hello",
     topics: ["LISP"],
-    related: [""]
+    related: ["Semantics"]
   },
   {
     word: "Amplification/Gain",
     note: "hello",
     topics: ["Neural Networks"],
-    related: [""]
+    related: ["Signal", "Feedback"]
   },
   {
     word: "Input/Output",
     note: "hello",
     topics: ["Neural Networks"],
-    related: [""]
+    related: ["Signal", "Feedback", "Amplification/Gain"]
   },
   {
     word: "Feedback",
     note: "hello",
     topics: ["Neural Networks"],
-    related: [""]
+    related: ["Amplification/Gain"]
   },
   {
-    word: "(Machine) Learning",
+    word: "Machine Learning",
     note: "hello",
     topics: ["Neural Networks"],
-    related: [""]
+    related: []
   },
   {
     word: "Model",
     note: "hello",
     topics: ["Neural Networks"],
-    related: [""]
+    related: []
   },
   {
     word: "Linear Function",
     note: "hello",
     topics: ["Neural Networks"],
-    related: [""]
+    related: ["Function", "Nonlinear Function"]
   },
   {
     word: "Nonlinear Function",
     note: "hello",
     topics: ["Neural Networks"],
-    related: [""]
+    related: ["Function", "Linear Function", "Mapping Function", "Sigmoid/Squashing Function"]
   },
   {
     word: "Parallel Processing",
     note: "hello",
     topics: ["Neural Networks"],
-    related: [""]
+    related: []
   },
   {
     word: "Response Characteristics",
     note: "hello",
     topics: ["Neural Networks"],
-    related: [""]
+    related: ["Signal/Feedback", "Amplification/Gain", "Input/Output"]
   },
   {
     word: "Sigmoid/Squashing Function",
     note: "hello",
     topics: ["Neural Networks"],
-    related: [""]
+    related: ["Function", "Nonlinear Function"]
   },
   {
     word: "Switch",
     note: "hello",
     topics: ["Neural Networks"],
-    related: [""]
+    related: ["Threshold"]
   },
   {
     word: "Threshold",
     note: "hello",
     topics: ["Neural Networks"],
-    related: [""]
+    related: ["Switch"]
   },
   {
-    word: "Weight(ed Sum)",
+    word: "Weighted Sum",
     note: "hello",
     topics: ["Neural Networks"],
-    related: [""]
+    related: ["Parameters"]
   },
   {
     word: "Association/Relationship",
     note: "hello",
     topics: ["Databases"],
-    related: [""]
+    related: []
   },
   {
     word: "Attribute/Property",
     note: "hello",
     topics: ["Databases"],
-    related: [""]
+    related: []
   },
   {
     word: "Class",
     note: "hello",
     topics: ["Databases"],
-    related: [""]
+    related: []
   },
   {
-    word: "Data(set)",
+    word: "Data",
     note: "hello",
     topics: ["Databases"],
-    related: [""]
+    related: ["Dataset", "Labeled Data", "Unlabeled Data"]
+  },
+  {
+    word: "Dataset",
+    note: "hello",
+    topics: ["Databases"],
+    related: ["Data", "Labeled Data", "Unlabeled Data"]
   },
   {
     word: "Framework",
     note: "hello",
     topics: ["Databases"],
-    related: [""]
+    related: []
   },
   {
-    word: "(Generalized-)Hierarchy",
+    word: "Generalized-Hierarchy",
     note: "hello",
     topics: ["Databases"],
-    related: [""]
+    related: ["Hierarchy"]
+  },
+  {
+    word: "Hierarchy",
+    note: "hello",
+    topics: ["Databases"],
+    related: ["Generalized-Hierarchy"]
   },
   {
     word: "Graph",
     note: "hello",
     topics: ["Databases"],
-    related: [""]
+    related: []
   },
   {
     word: "Model",
     note: "hello",
     topics: ["Databases"],
-    related: [""]
+    related: []
   },
   {
     word: "Object",
     note: "hello",
     topics: ["Databases"],
-    related: [""]
+    related: ["Data Structure"]
   },
   {
     word: "Network",
     note: "hello",
     topics: ["Databases"],
-    related: [""]
+    related: []
   },
   {
     word: "Parent-Child Relationship",
     note: "hello",
     topics: ["Databases"],
-    related: [""]
+    related: ["Association/Relationship", "Hierarchy"]
   },
   {
     word: "Property",
     note: "hello",
     topics: ["Databases"],
-    related: [""]
+    related: []
   },
   {
-    word: "Raw/Curated Data",
+    word: "Raw Data",
     note: "hello",
     topics: ["Databases"],
-    related: [""]
+    related: []
+  },
+  {
+    word: "Curated Data",
+    note: "hello",
+    topics: ["Databases"],
+    related: []
   },
   {
     word: "Resource",
     note: "hello",
     topics: ["Databases"],
-    related: [""]
+    related: []
   },
   {
     word: "Schema",
     note: "hello",
     topics: ["Databases"],
-    related: [""]
+    related: ["Hierarchy"]
   },
   {
     word: "Semantics",
     note: "hello",
     topics: ["Databases"],
-    related: [""]
+    related: []
   },
   {
     word: "Structured Data",
     note: "hello",
     topics: ["Databases"],
-    related: ["Data", "Unstructured Data"]
+    related: ["Data", "Hierarchy"]
   },
   {
     word: "Unstructured Data",
@@ -332,82 +390,82 @@ buzzwords = [
     related: ["Data"]
   },
   {
-    word: "Algorithm/Methodology",
+    word: "Algorithm",
     note: "hello",
     topics: ["Machine Learning"],
-    related: [""]
+    related: ["Program", "Macro", "Task"]
+  },
+  {
+    word: "Methodology",
+    note: "hello",
+    topics: ["Machine Learning"],
+    related: ["Program", "Macro", "Task", "Programming Pattern/Paradigm"]
   },
   {
     word: "Data(set)",
     note: "hello",
     topics: ["Machine Learning"],
-    related: [""]
+    related: []
   },
   {
     word: "Explicitly Programmed",
     note: "hello",
     topics: ["Machine Learning"],
-    related: [""]
+    related: []
   },
   {
     word: "Feature",
     note: "hello",
     topics: ["Machine Learning"],
-    related: [""]
-  },
-  {
-    word: "Learning",
-    note: "hello",
-    topics: ["Machine Learning"],
-    related: [""]
+    related: []
   },
   {
     word: "Mapping Function",
     note: "hello",
     topics: ["Machine Learning"],
-    related: ["Function"]
+    related: ["Function", "Linear Function", "Nonlinear Function"]
   },
   {
     word: "Model",
     note: "hello",
     topics: ["Machine Learning"],
-    related: [""]
+    related: []
   },
   {
-    word: "(Non)linear",
+    word: "Task",
     note: "hello",
     topics: ["Machine Learning"],
-    related: [""]
+    related: ["Program", "Macro"]
   },
   {
-    word: "Program/Task",
+    word: "Programming Pattern",
     note: "hello",
     topics: ["Machine Learning"],
-    related: [""]
-  },
-  {
-    word: "(Programming) Pattern",
-    note: "hello",
-    topics: ["Machine Learning"],
-    related: [""]
+    related: []
   },
   {
     word: "Signal/Feedback",
     note: "hello",
     topics: ["Machine Learning"],
-    related: [""]
+    related: ["Input/Output", "Amplification/Gain", "Response Characteristics"]
   },
   {
-    word: "(Tunable) Parameters",
+    word: "Parameters",
     note: "hello",
     topics: ["Machine Learning"],
-    related: [""]
+    related: []
   },
   {
-    word: "(Un)labeled Data",
+    word: "Labeled Data",
     note: "hello",
     topics: ["Machine Learning"],
-    related: [""]
+    related: ["Unlabeled Data", "Data", "Dataset"]
+  },
+  {
+    word: "Unlabeled Data",
+    note: "hello",
+    topics: ["Machine Learning"],
+    related: ["Labeled Data", "Data", "Dataset"]
   }
 ]
 

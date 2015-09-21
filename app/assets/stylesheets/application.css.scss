@@ -155,6 +155,7 @@ $s10: 24px;
   padding: 0 $s4;
   &.header {
     position: fixed;
+    top: $s5;
     text-align: left;
     span, a {
       display: block;
@@ -247,7 +248,6 @@ body {
         }
         td {
           font-size: $s5;
-
         }
       }
       & > div {
@@ -297,15 +297,21 @@ body {
       }
     }
     & > ul > li {
-      padding: $s5;
-      p, div {
-        padding-left: $s10;
-        i {
-          margin-left: $s8;
-        }
-      }
+      margin: 0;
+      padding-left: $s8;
+      overflow: overlay;
       &:hover {
         @include bg4;
+      }
+      p:not(:first-of-type) {
+        margin-left: $s10;
+        &:not(:last-of-type) {
+          font-size: $s6;
+          line-height: $s9;
+          i {
+            margin-left: $s8;
+          }
+        }
       }
     }
   }

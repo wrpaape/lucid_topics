@@ -41,6 +41,7 @@ var Lisp = React.createClass({
           '\n;;;  down into embedded lists enclosed in parentheses:' +
           '\n' +
           '\n;;;  (defun foo (x) (+ x 1)) is a list where' +
+          '\n' +
           '\n;;;    defun is the operator that denotes the definition of,' +
           '\n;;;      a new function' +
           '\n;;;    foo is variable which will be assigned the function,' +
@@ -56,16 +57,26 @@ var Lisp = React.createClass({
           '\n  (foo 3)' +
           '\n  ;;  returns => 4' +
           '\n' +
-          '\n;;;  now we can define a new function, bar, that instead' +
-          '\n;;;  adds 2 to x:' +
+          '\n;;;  now it should come as no suprise that we can define a new' +
+          '\n;;;  function, bar, that instead adds 2 to x:' +
+          '\n' +
           '\n  (defun bar (x) (+ x 2))' +
           '\n  ;;  returns => BAR' +
           '\n  (bar 3)' +
           '\n  ;;  returns => 5' +
-          '\n(setf (symbol-function \'foo) #\'bar)' +
-          '\n;;;  returns => #<FUNCTION BAR (X) (DECLARE (SYSTEM::IN-DEFUN BAR)) (BLOCK BAR (+ X 2))>' +
-          '\n(foo 3)' +
-          '\n;;;  returns => 5'
+          '\n' +
+          '\n;;;***************************************************************' +
+          '\n;;;* here\'s where LISP departs from the traditional programming *' +
+          '\n;;;* paradigm:                                                   *' +
+          '\n;;;***************************************************************' +
+          '\n' +
+          '\n;;;' +
+          '\n;;;' +
+          '\n' +
+          '\n  (setf (symbol-function \'foo) #\'bar)' +
+          '\n ;;  returns => #<FUNCTION BAR (X) (DECLARE (SYSTEM::IN-DEFUN BAR)) (BLOCK BAR (+ X 2))>' +
+          '\n  (foo 3)' +
+          '\n  ;;  returns => 5'
         }
       }
     });

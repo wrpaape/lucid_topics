@@ -74,7 +74,7 @@ var Databases = React.createClass({
                 Static
               </h4>
               <p>
-                Contacts will need to be added, updated, or removed with manageable infrequence.
+                Contacts will need to be added, updated, or removed manageably infrequently.
               </p>
             </li>
           </ol>
