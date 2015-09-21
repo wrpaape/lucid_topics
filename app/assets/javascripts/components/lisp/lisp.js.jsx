@@ -22,7 +22,15 @@ var Lisp = React.createClass({
           keys: [-1, -1, -1],
           output: '',
           value: ';;; LISP' +
-          '\n(mult a (add b c))'
+          '\n(make-array \'(4 2 3) :initial-contents' +
+          '\n  \'(((a b c) (1 2 3))' +
+          '\n  ((d e f) (3 1 2))' +
+          '\n  ((g h i) (2 3 1))' +
+          '\n  ((j k l) (0 0 0))))'
+          // '\n(setq b (make-array \'(5 5) :initial-contents 0))' +
+          // '\n(setq c (make-array \'(5 5) :initial-contents 0))' +
+          // '\n' +
+          // '\n(mult a (add b c))'
         },
         'homoiconic': {
           title: 'A Homoiconic Language',
@@ -138,7 +146,7 @@ var Lisp = React.createClass({
     var contents = this.state.contents;
     var editors = Object.keys(contents).map(function(thisEditor) {
       return(
-        <div key={ 'editor-' + thisEditor }>
+        <div key={ 'editor-' + thisEditor } className={ 'editor ' + thisEditor }>
           <h3>
             { contents[thisEditor].title }
           </h3>
@@ -149,7 +157,9 @@ var Lisp = React.createClass({
             <abbr title='hold (cmd or ctr) + shift + return to evaluate'>
               output:&nbsp;&nbsp;
             </abbr>
-            { contents[thisEditor].output }
+            <div>
+              { contents[thisEditor].output }
+            </div>
           </code>
         </div>
       );

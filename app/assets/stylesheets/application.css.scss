@@ -280,21 +280,42 @@ body {
             @include bg4;
           }
         }
-        pre {
-          width: 400px;
-          height: 150px;
-          margin: $s5;
-          @include set-ace;
-          @include border2;
-          &#editor-homoiconic {
-            width: 550px;
-            height: 300px;
+        &.editor {
+          width: 550px;
+          &:not(.homoiconic) {
+            width: 400px;
+            margin-right: $s10;
+            vertical-align: top;
+            code > div {
+              width: 316px;
+            }
           }
-        }
-        code {
-          margin-left: $s5;
-          font-size: $s8;
-          cursor: help;
+          pre {
+            width: 400px;
+            height: 150px;
+            margin: $s5;
+            @include set-ace;
+            @include border2;
+            &#editor-homoiconic {
+              width: 550px;
+              height: 300px;
+            }
+          }
+          code {
+            display: inline-block;
+            margin-left: $s5;
+            font-size: $s8;
+            abbr {
+              vertical-align: top;
+              cursor: help;
+            }
+            div {
+              width: 468px;
+              display: inline-block;
+              white-space: nowrap;
+              overflow-x: auto;
+            }
+          }
         }
       }
     }
