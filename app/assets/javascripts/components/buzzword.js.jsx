@@ -4,9 +4,15 @@
 var Buzzword = React.createClass({
   getInitialState: function() {
     return({
+      show: false,
       word: this.props.word,
       note: this.props.note,
       related: this.props.related
+    });
+  },
+  toggleShow: function() {
+    this.setState({
+      show: !this.state.show
     });
   },
   resetBuzzword: function() {
@@ -30,13 +36,13 @@ var Buzzword = React.createClass({
   render: function() {
     return(
       <li onMouseLeave={ this.resetBuzzword }>
-        <p>
-          <i>{ this.state.word }</i>
+        <p className='nav'>
+          <span onClick={ this.toggleShow }>{ this.state.show ? '[-] ' : '[+] ' }</span><i>{ this.state.word }</i>
         </p>
-         { this.formatRelated() }
-        <p>
-          { marked(this.state.note) }
-        </p>
+        <div className={ this.state.show }>
+        { this.formatRelated() }
+        <span dangerouslySetInnerHTML={ {__html: marked(this.state.note) } } />
+        </div>
       </li>
     );
   }

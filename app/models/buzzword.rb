@@ -29,7 +29,7 @@ class Buzzword < ActiveRecord::Base
   private
 
   def strip_single_newlines
-    self.note = self.note[1..-2].split("\n*safe*").map.with_index { |sec, i| i % 2 == 0 ? sec.gsub(/(?<!\n)\n(?!\n)/, "") : sec }.join
+    self.note = self.note[1..-2].split("\n*safe*").map.with_index { |sec, i| i % 2 == 0 ? sec.gsub(/(?<!\n)\n(?!\n)/, " ") : sec }.join
   end
 
   def throw_dupes(other)

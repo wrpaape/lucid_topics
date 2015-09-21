@@ -29,7 +29,13 @@ var Lisp = React.createClass({
           mode: 'lisp',
           keys: [-1, -1, -1],
           output: '',
-          value: ';;;  first we can define a function, foo, that' +
+          value:
+          ';;;***************************************************************' +
+          '\n;;;* ALL PROGRAMS AND EVERYTHING WITHIN ARE DATA ONE IN THE SAME *' +
+          '\n;;;***************************************************************' +
+          '\n' +
+          '\n;;;  First we can define a function, foo, that:' +
+          '\n' +
           '\n;;;  1) receives a an argument, x,' +
           '\n;;;  1) adds the value 1 to that argument,' +
           '\n;;;  3) returns the result of that expression, x + 1' +
@@ -37,28 +43,28 @@ var Lisp = React.createClass({
           '\n  (defun foo (x) (+ x 1))' +
           '\n  ;;  returns => FOO' +
           '\n' +
-          '\n;;;  notice that the entire definition can be broken' +
+          '\n;;;  Notice that the entire definition can be broken' +
           '\n;;;  down into embedded lists enclosed in parentheses:' +
           '\n' +
-          '\n;;;  (defun foo (x) (+ x 1)) is a list where' +
+          '\n;;;  (defun foo (x) (+ x 1)) is a list where:' +
           '\n' +
-          '\n;;;    defun is the operator that denotes the definition of,' +
+          '\n;;;    - defun is the operator that denotes the definition of,' +
           '\n;;;      a new function' +
-          '\n;;;    foo is variable which will be assigned the function,' +
-          '\n;;;    (x) is a list of arguments that foo will receive, and' +
-          '\n;;;    (+ x 1) is a list comprising the function body where' +
+          '\n;;;    - foo is variable which will be assigned the function,' +
+          '\n;;;    - (x) is a list of arguments that foo will receive, and' +
+          '\n;;;    - (+ x 1) is a list comprising the function body where' +
           '\n;;;      the first element or \'atom,\' +, is the operator to be' +
           '\n;;;      performed on the arguments specified in the remaining' +
           '\n;;;      list atoms, x and 1' +
           '\n' +
-          '\n;;;  thus we can expect that if we pass the value 3 to foo,' +
+          '\n;;;  Thus we can expect that if we pass the value 3 to foo,' +
           '\n;;;  foo will return the result of the expression 3 + 1, or 4:' +
           '\n' +
           '\n  (foo 3)' +
           '\n  ;;  returns => 4' +
           '\n' +
-          '\n;;;  now it should come as no suprise that we can define a new' +
-          '\n;;;  function, bar, that instead adds 2 to x:' +
+          '\n;;;  In this fashion we can define a new function, bar, that' +
+          '\n;;;  instead adds 2 to x:' +
           '\n' +
           '\n  (defun bar (x) (+ x 2))' +
           '\n  ;;  returns => BAR' +
@@ -66,7 +72,7 @@ var Lisp = React.createClass({
           '\n  ;;  returns => 5' +
           '\n' +
           '\n;;;***************************************************************' +
-          '\n;;;* here\'s where LISP departs from the traditional programming *' +
+          '\n;;;* here\'s where LISP departs from the traditional programming  *' +
           '\n;;;* paradigm:                                                   *' +
           '\n;;;***************************************************************' +
           '\n' +

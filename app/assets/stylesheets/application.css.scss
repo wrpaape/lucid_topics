@@ -16,7 +16,8 @@ $s6: 12px;
 $s7: 14px;
 $s8: 16px;
 $s9: 18px;
-$s10: 24px;
+$s10: 20px;
+$s11: 24px;
 
 @mixin consolas {
   font-family: monaco, Consolas, 'Lucida Console', monospace;
@@ -144,8 +145,8 @@ $s10: 24px;
   display: none;
 }
 .alert {
-  font-size: $s10;
-  padding: $s10;
+  font-size: $s11;
+  padding: $s11;
   color: $c1;
   @include unfaded;
   @include pop-up;
@@ -184,7 +185,7 @@ body {
   }
   p, li {
     font-size: $s8;
-    line-height: $s10;
+    line-height: $s11;
     @include lucida;
   }
   ul > li {
@@ -208,7 +209,7 @@ body {
       color: $ch4;
     }
   }
-  .post, canvas, tbody, thead, pre {
+  .post, canvas, tbody, thead {
     @include border2;
   }
   section {
@@ -284,6 +285,7 @@ body {
           height: 150px;
           margin: $s5;
           @include set-ace;
+          @include border2;
           &#editor-homoiconic {
             width: 550px;
             height: 300px;
@@ -303,13 +305,23 @@ body {
       &:hover {
         @include bg4;
       }
-      p:not(:first-of-type) {
-        margin-left: $s10;
-        &:not(:last-of-type) {
+      p {
+        @include consolas;
+      }
+      & > div {
+        margin-left: $s11;
+        & > p {
           font-size: $s6;
           line-height: $s9;
           i {
-            margin-left: $s8;
+            color: $ch1;
+            margin: 0 $s8;
+          }
+        }
+        & > span {
+          p, pre, li {
+            font-size: $s7;
+            line-height: $s10;
           }
         }
       }

@@ -33,19 +33,26 @@ Topic.create([
 
 buzzwords = [
   {
-    word: "array",
+    word: "Array",
     note:
 """
 An array is data structure consisting of a collection of elements or atoms with each
 atom identified by a unique index or key. The simplest type of data structure is the linear or
 one-dimensional array, which can be modeled as a continuous container housing its atoms in
 a series of numbered boxes:
+*safe*
 
-  atoms:    [ \"I'm first\" , 42 , x , ... , \"I'm last\" ]
-  indices:  [      0        ,  1 , 2 , ... ,      n       ]
+```
+atoms:    [ \"I'm first\" , 42 , x , ... , \"I'm last\" ]
+indices:  [     0       ,  1 , 2 , ... ,     n      ]
+```
 
-pros:  
-cons:  
+pros:
+- can insert/delete an element or splice at anywhere in the list with constant speed regardless of its size
+
+cons:
+- not good for random access (can't \"look up\" an element but rather must traverse the list one by one)
+*safe*
 """,
     topics: ["LISP"],
     related: ["List", "Vector", "Nonatomic Data Structure"]
@@ -57,15 +64,16 @@ cons:  
 A list is an abstract data type that represents an ordered sequence of not necessarily unique values.
 Lists are most commonly implemented as \"linked lists\", consisting of a cluster of
 separated container nodes chained together by references.
-
-```
-  atoms:    [ \"I'm first\" , 42 , x , ... , \"I'm last\" ]
-  indices:  [      0        ,  1 , 2 , ... ,      n       ]
-```
-
 *safe*
+
+```
+atoms:    [ \"I'm first\" , 42 , x , ... , \"I'm last\" ]
+indices:  [     0       ,  1 , 2 , ... ,     n      ]
+```
+
 pros:
 - can insert/delete an element or splice at anywhere in the list with constant speed regardless of its size
+
 cons:
 - not good for random access (can't \"look up\" an element but rather must traverse the list one by one)
 *safe*
@@ -86,7 +94,7 @@ separated container nodes chained together by references.
 
 pros: can increase/decrease in size at run-time
 cons:
-"""[1..-2],
+""",
     topics: ["LISP"]
   },
   {
