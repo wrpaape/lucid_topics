@@ -6,7 +6,7 @@ class EvaluateController < ApplicationController
   end
 
   def pascal
-    # 100.times { puts Lisp.evaluate(%q((* 1 2 3))) }
+    render json: "(coming soon)" #TODO: add Pascal module
   end
 
   private

@@ -84,6 +84,17 @@ $s11: 24px;
     color: $c5;
   }
 }
+@mixin set-scrollbar {
+  ::-webkit-scrollbar {
+    width: $s7;
+  }
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 $s2 $c2;
+  }
+  ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-corner, ::-webkit-scrollbar-thumb:window-inactive {
+    @include bg2;
+  }
+}
 @mixin set-ace {
   &.ace-terminal-theme {
     color: $c2;
@@ -100,15 +111,7 @@ $s11: 24px;
       @include consolas;
       @include bg3;
     }
-    ::-webkit-scrollbar {
-        width: $s7;
-    }
-    ::-webkit-scrollbar-track {
-      box-shadow: inset 0 0 $s4 $c2;
-    }
-    ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-corner, ::-webkit-scrollbar-thumb:window-inactive {
-      @include bg2;
-    }
+    @include set-scrollbar;
   }
 }
 
@@ -305,6 +308,7 @@ body {
             display: inline-block;
             margin-left: $s5;
             font-size: $s8;
+            @include set-scrollbar;
             abbr {
               vertical-align: top;
               cursor: help;
@@ -340,9 +344,12 @@ body {
           }
         }
         & > span {
-          p, pre, li {
-            font-size: $s7;
-            line-height: $s10;
+          p, pre, li, h4 {
+            @include consolas;
+            &:not(h4) {
+              font-size: $s7;
+              line-height: $s10;
+            }
           }
         }
       }

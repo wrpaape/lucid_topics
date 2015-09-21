@@ -224,7 +224,7 @@ var Lisp = React.createClass({
             S</strong>tupid <strong>P</strong>arentheses).
             The list is a very versatile data structure, and while lists can be implemented in
             any language, Lisp makes it easy to use them. Many AI applications involve lists of
-            constantly changing size, making fixed-length data structures like vectors harder to use.
+            constantly changing size, making fixed-length data structures like arrays harder to use.
           </p>
           <h4>
             The First-Class Function

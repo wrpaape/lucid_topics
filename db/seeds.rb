@@ -43,15 +43,21 @@ a series of numbered boxes:
 *safe*
 
 ```
-atoms:    [ \"I'm first\" , 42 , x , ... , \"I'm last\" ]
-indices:  [     0       ,  1 , 2 , ... ,     n      ]
+elements:  [ \"I'm first\" , 42 , x , ... , \"I will always be last\" ]
+indices:   [     0       ,  1 , 2 , ... ,           N             ]
 ```
 
 pros:
-- can insert/delete an element or splice at anywhere in the list with constant speed regardless of its size
+- excels at random access \"look ups\"
+- sequencial iteration over its elements is noticeably faster than other data structures
+- light on memory
 
 cons:
-- not good for random access (can't \"look up\" an element but rather must traverse the list one by one)
+- (traditionally) dimension is fixed at runtime
+- consequencially, insert/delete/append operations not possible
+
+
+####*better at \"getting\" and \"setting\", but flexibility/adaptability is inhibited by fixed length*
 *safe*
 """,
     topics: ["LISP"],
@@ -63,45 +69,142 @@ cons:
 """
 A list is an abstract data type that represents an ordered sequence of not necessarily unique values.
 Lists are most commonly implemented as \"linked lists\", consisting of a cluster of
-separated container nodes chained together by references.
+separated container nodes chained together by references:
 *safe*
 
 ```
-atoms:    [ \"I'm first\" , 42 , x , ... , \"I'm last\" ]
-indices:  [     0       ,  1 , 2 , ... ,     n      ]
+nodes:  ==>[ 23 | ●=]==>[ \"hello world\" | ●=]==>[ my-function | ●=]==>
+            atom|ref          atom      |ref         atom     |ref
 ```
 
 pros:
 - can insert/delete an element or splice at anywhere in the list with constant speed regardless of its size
+- has no fixed length, program will not be limited by or crash due to \"index out of bounds\" error
+- moderate memory cost
 
 cons:
 - not good for random access (can't \"look up\" an element but rather must traverse the list one by one)
+- same inefficient tranversal must be made for appending an element at the list end
+
+
+####*better at adding and removing, worse at \"getting\" and \"setting\"*
 *safe*
 """,
     topics: ["LISP"],
-    related: ["Vector"]
+    related: ["Array", "Vector", "Nonatomic Data Structure", "S-expression"]
   },
   {
     word: "Vector",
     note:
 """
-A list is an abstract data type that represents an ordered sequence of not necessarily unique values.
-Lists are most commonly implemented as \"linked lists\", datastructures consisting of a cluster of
-separated container nodes chained together by references.
+A vector is a sequencial container data structure similar to the array with
+the exception that they can change in size. Just like array, vectors use contiguous
+storage locations (indices or keys) for their elements:
+*safe*
 
-  atoms:    [ \"I'm first\" , 42 , x , ... , \"I'm last\" ]
-  indices:  [      0        ,  1 , 2 , ... ,      n       ]
+```
+elements:  [ \"I'm first\" , foo , bar , ... , \"I'm last (for now)\" ]
+indices:   [     0       ,  1  ,  2  , ... ,          n           ]
+```
 
-pros: can increase/decrease in size at run-time
+*safe*
+However, vectors consume more memory than arrays as the dynamic allocation
+of their storage must be handled internally.
+*safe*
+
+pros:
+- excels at random access \"look ups\" and sequencial iteration (same as array)
+- robust handling of data as its size can change dynamically
+
 cons:
+- though append is supported, insert/delete operations still not possible
+- memory intensive
+
+
+####*shares the retrieval speed of the array and the variable length of the list, but must occupy more memory as compensation*
+*safe*
 """,
-    topics: ["LISP"]
+    topics: ["LISP"],
+    related: ["Array", "List", "Nonatomic Data Structure"]
   },
   {
-    word: "Atom",
-    note: "hello",
+    word: "Atom (Element)",
+    note:
+"""
+Atomicity is a property of an S-expression
+
+
+
+
+""",
     topics: ["LISP"],
-    related: ["Primitive Data Type"]
+    related: ["Primitive Data Type", "S-expression"]
+  },
+  {
+    word: "S-expression",
+    note:
+"""
+An S-expression (**S**ymbolic **expression**)is a notation for nested list (tree-structured) data
+invented for and popularized by LISP. Using standard LISP parentheses syntax, an S-expression
+is classically defined as:
+
+1. an atom, or
+2. an expression of the form `(x . y)`
+
+where `(x . y)` is a list containing a \"dotted pair\" with `.` denoting that the node
+housing the atom `x` references the node housing the atom `y`. Recalling the
+visual model of a list, fundamentally `(x . y)` can be expressed as a two node sequence:
+*safe*
+
+```
+nodes:  [ x | ●=]==>[ y ]
+        atom|ref    atom
+```
+
+*safe*
+in Common LISP. In Scheme, the second principle dialect of LISP, the S-expression
+of `(x . y)` would be expressed as `(x . (y . NIL))`, where a reference to NIL indicates
+the end of a list:
+*safe*
+
+```
+nodes:  [ x | ●=]==>[ y | ●=]==>NIL
+        atom|ref    atom|ref
+```
+
+*safe*
+####*Because LISP employs S-expressions as the sole representation of **source code as well as data**,
+LISP is **homoiconic***
+""",
+    topics: ["LISP"],
+    related: ["Atom (Element)", "List", "Syntax", "Common LISP", "Tree Data Structure", "Homoiconicity"]
+  },
+  {
+    word: "Common LISP",
+    note:
+"""
+WIP
+""",
+    topics: ["LISP"],
+    related: ["S-expression", "List", "Atom (Element)", "Common LISP"]
+  },
+  {
+    word: "Homoiconicity",
+    note:
+"""
+WIP
+""",
+    topics: ["LISP"],
+    related: ["S-expression", "List", "Common LISP"]
+  },
+  {
+    word: "Tree Data Structure",
+    note:
+"""
+WIP
+""",
+    topics: ["LISP"],
+    related: ["S-expression", "List", "Common LISP"]
   },
   {
     word: "Compile",
