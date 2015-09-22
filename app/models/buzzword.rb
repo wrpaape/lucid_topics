@@ -1,5 +1,5 @@
 class Buzzword < ActiveRecord::Base
-  before_create :strip_single_newlines
+  before_create :strip_single_newlines, :insert_newline_at_headers
   has_and_belongs_to_many :topics
   has_and_belongs_to_many :relateds, -> { order(:word) },
     class_name: Buzzword,
@@ -30,6 +30,10 @@ class Buzzword < ActiveRecord::Base
 
   def strip_single_newlines
     self.note = self.note[1..-2].split("\n*safe*").map.with_index { |sec, i| i % 2 == 0 ? sec.gsub(/(?<!\n)\n(?!\n)/, " ") : sec }.join
+  end
+
+  def insert_newline_at_headers
+    note.gsub!(/\n#+/) { |header| " #{header}" }
   end
 
   def throw_dupes(other)

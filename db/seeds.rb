@@ -57,11 +57,11 @@ cons:
 - consequencially, insert/delete/append operations not possible
 
 
-####*better at \"getting\" and \"setting\", but flexibility/adaptability is inhibited by fixed length*
+#### *better at \"getting\" and \"setting\", but flexibility/adaptability is inhibited by fixed length*
 *safe*
 """,
     topics: ["LISP"],
-    related: ["List", "Vector", "Nonatomic Data Structure"]
+    related: ["List", "Vector", "Nonatomic Data Structure", "Fixed-Length Data Structure"]
   },
   {
     word: "List",
@@ -87,7 +87,7 @@ cons:
 - same inefficient tranversal must be made for appending an element at the list end
 
 
-####*better at adding and removing, worse at \"getting\" and \"setting\"*
+#### *better at adding and removing, worse at \"getting\" and \"setting\"*
 *safe*
 """,
     topics: ["LISP"],
@@ -121,7 +121,7 @@ cons:
 - memory intensive
 
 
-####*shares the retrieval speed of the array and the variable length of the list, but must occupy more memory as compensation*
+#### *shares the retrieval speed of the array and the variable length of the list, but must occupy more memory as compensation*
 *safe*
 """,
     topics: ["LISP"],
@@ -131,20 +131,42 @@ cons:
     word: "Atom (Element)",
     note:
 """
-Atomicity is a property of an S-expression
+While the definition of the atom can vary depending on language and context,
+the original definition by John McCarthy applies most appropriately to LISP:
 
+> It was assumed that there existed *\"an infinite set of distinguishable atomic symbols\"*
+which can be represented as *\"strings of captial Latin letters and digits with single embedded blanks\"*.
+*safe*
 
+In other words, an atom is one of two fundamental units of data expression:
+- character string (i.e. \"Hello world, I am an atom\"), or
+- numeric literal (i.e. 470)
 
-
+*safe*
+That being said, the term *atom* is often loosely interpretted and commonly referred to as
+an *element*, a broader term including fundamental units such as functions and variables.
+In most practical contexts *atom* and *element* can be used interchangably.
 """,
     topics: ["LISP"],
-    related: ["Primitive Data Type", "S-expression"]
+    related: ["Primitive Data Type", "S-expression", "List", "Common LISP"]
+  },
+  {
+    word: "Primitive Data Type",
+    note:
+"""
+In computer science, a primitive data type can be classified as either a *basic type*, which is
+provided by a programming language as a basic building block, or a *built-in type*,
+for which the programming language provides built-in support. In LISP, an atom is the basic primitive
+data type, while nonatomic data structures such as a list are considered built-in types.
+""",
+    topics: ["LISP"],
+    related: ["Atom (Element)", "Nonatomic Data Structure", "List"]
   },
   {
     word: "S-expression",
     note:
 """
-An S-expression (**S**ymbolic **expression**)is a notation for nested list (tree-structured) data
+An S-expression (**S**ymbolic **expression**) is a notation for nested list (tree-structured) data
 invented for and popularized by LISP. Using standard LISP parentheses syntax, an S-expression
 is classically defined as:
 
@@ -172,12 +194,13 @@ nodes:  [ x | ●=]==>[ y | ●=]==>NIL
         atom|ref    atom|ref
 ```
 
+
+#### *Because LISP employs S-expressions as the sole representation of source code as well as data,
+LISP is homoiconic.*
 *safe*
-####*Because LISP employs S-expressions as the sole representation of **source code as well as data**,
-LISP is **homoiconic***
 """,
     topics: ["LISP"],
-    related: ["Atom (Element)", "List", "Syntax", "Common LISP", "Tree Data Structure", "Homoiconicity"]
+    related: ["Atom (Element)", "Primitive Data Type", "List", "Syntax", "Common LISP", "Tree Data Structure", "Homoiconicity"]
   },
   {
     word: "Common LISP",
@@ -208,373 +231,550 @@ WIP
   },
   {
     word: "Compile",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["LISP"],
     related: ["Debug"]
   },
   {
     word: "Fixed-Length Data Structure",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["LISP"],
-    related: ["Array", "Vector"]
+    related: ["Array"]
   },
   {
     word: "Nonatomic Data Structure",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["LISP"],
     related: ["List", "Array", "Vector"]
   },
   {
     word: "Debug",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["LISP"],
     related: ["Compile"]
   },
   {
     word: "Function",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["LISP", "Neural Networks"],
     related: ["Linear Function", "Nonlinear Function"]
   },
   {
     word: "High-Level",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["LISP"],
     related: ["Low-Level"]
   },
   {
     word: "Low-Level",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["LISP"],
     related: ["High-Level"]
   },
   {
     word: "Machine-Independent Programming Language",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["LISP"],
     related: []
   },
   {
     word: "Macro",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["LISP"],
     related: ["Program", "Task"]
   },
   {
-    word: "Primitive Data Type",
-    note: "hello",
-    topics: ["LISP", "Databases"],
-    related: ["Atom"]
-  },
-  {
     word: "Program",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["LISP"],
     related: ["Macro"]
   },
   {
     word: "Object",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["LISP"],
     related: ["Nonatomic Data Structure"]
   },
   {
     word: "Programming Pattern/Paradigm",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["LISP", "Machine Learning"],
     related: []
   },
   {
     word: "Semantics",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["LISP"],
     related: ["Syntax"]
   },
   {
     word: "Syntax",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["LISP"],
     related: ["Semantics"]
   },
   {
     word: "Amplification/Gain",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Neural Networks"],
     related: ["Signal", "Feedback"]
   },
   {
     word: "Input/Output",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Neural Networks"],
     related: ["Signal", "Feedback", "Amplification/Gain"]
   },
   {
     word: "Feedback",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Neural Networks"],
     related: ["Amplification/Gain"]
   },
   {
     word: "Machine Learning",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Neural Networks"],
     related: []
   },
   {
     word: "Model",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Neural Networks"],
     related: []
   },
   {
     word: "Linear Function",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Neural Networks"],
     related: ["Function", "Nonlinear Function"]
   },
   {
     word: "Nonlinear Function",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Neural Networks"],
     related: ["Function", "Linear Function", "Mapping Function", "Sigmoid/Squashing Function"]
   },
   {
     word: "Parallel Processing",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Neural Networks"],
     related: []
   },
   {
     word: "Response Characteristics",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Neural Networks"],
     related: ["Signal/Feedback", "Amplification/Gain", "Input/Output"]
   },
   {
     word: "Sigmoid/Squashing Function",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Neural Networks"],
     related: ["Function", "Nonlinear Function"]
   },
   {
     word: "Switch",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Neural Networks"],
     related: ["Threshold"]
   },
   {
     word: "Threshold",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Neural Networks"],
     related: ["Switch"]
   },
   {
     word: "Weighted Sum",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Neural Networks"],
     related: ["Parameters"]
   },
   {
     word: "Association/Relationship",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Databases"],
     related: []
   },
   {
     word: "Attribute/Property",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Databases"],
     related: []
   },
   {
     word: "Class",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Databases"],
     related: []
   },
   {
     word: "Data",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Databases"],
     related: ["Dataset", "Labeled Data", "Unlabeled Data"]
   },
   {
     word: "Dataset",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Databases"],
     related: ["Data", "Labeled Data", "Unlabeled Data"]
   },
   {
     word: "Framework",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Databases"],
     related: []
   },
   {
     word: "Generalized-Hierarchy",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Databases"],
     related: ["Hierarchy"]
   },
   {
     word: "Hierarchy",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Databases"],
     related: ["Generalized-Hierarchy"]
   },
   {
     word: "Graph",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Databases"],
     related: []
   },
   {
     word: "Model",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Databases"],
     related: []
   },
   {
     word: "Object",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Databases"],
     related: ["Data Structure"]
   },
   {
     word: "Network",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Databases"],
     related: []
   },
   {
     word: "Parent-Child Relationship",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Databases"],
     related: ["Association/Relationship", "Hierarchy"]
   },
   {
     word: "Property",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Databases"],
     related: []
   },
   {
     word: "Raw Data",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Databases"],
     related: []
   },
   {
     word: "Curated Data",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Databases"],
     related: []
   },
   {
     word: "Resource",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Databases"],
     related: []
   },
   {
     word: "Schema",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Databases"],
     related: ["Hierarchy"]
   },
   {
     word: "Semantics",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Databases"],
     related: []
   },
   {
     word: "Structured Data",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Databases"],
     related: ["Data", "Hierarchy"]
   },
   {
     word: "Unstructured Data",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Databases"],
     related: ["Data"]
   },
   {
     word: "Algorithm",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Machine Learning"],
     related: ["Program", "Macro", "Task"]
   },
   {
     word: "Methodology",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Machine Learning"],
     related: ["Program", "Macro", "Task", "Programming Pattern/Paradigm"]
   },
   {
     word: "Data(set)",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Machine Learning"],
     related: []
   },
   {
     word: "Explicitly Programmed",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Machine Learning"],
     related: []
   },
   {
     word: "Feature",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Machine Learning"],
     related: []
   },
   {
     word: "Mapping Function",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Machine Learning"],
     related: ["Function", "Linear Function", "Nonlinear Function"]
   },
   {
     word: "Model",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Machine Learning"],
     related: []
   },
   {
     word: "Task",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Machine Learning"],
     related: ["Program", "Macro"]
   },
   {
     word: "Programming Pattern",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Machine Learning"],
     related: []
   },
   {
     word: "Signal/Feedback",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Machine Learning"],
     related: ["Input/Output", "Amplification/Gain", "Response Characteristics"]
   },
   {
     word: "Parameters",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Machine Learning"],
     related: []
   },
   {
     word: "Labeled Data",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Machine Learning"],
     related: ["Unlabeled Data", "Data", "Dataset"]
   },
   {
     word: "Unlabeled Data",
-    note: "hello",
+    note:
+"""
+WIP
+""",
     topics: ["Machine Learning"],
     related: ["Labeled Data", "Data", "Dataset"]
   }

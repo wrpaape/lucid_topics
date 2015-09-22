@@ -22,15 +22,49 @@ var Lisp = React.createClass({
           keys: [-1, -1, -1],
           output: '',
           value: ';;; LISP' +
-          '\n(make-array \'(4 2 3) :initial-contents' +
-          '\n  \'(((a b c) (1 2 3))' +
-          '\n  ((d e f) (3 1 2))' +
-          '\n  ((g h i) (2 3 1))' +
-          '\n  ((j k l) (0 0 0))))'
-          // '\n(setq b (make-array \'(5 5) :initial-contents 0))' +
-          // '\n(setq c (make-array \'(5 5) :initial-contents 0))' +
-          // '\n' +
-          // '\n(mult a (add b c))'
+          '\n;;; first define functions add and mult:' +
+          '\n' +
+          '\n(defun add (m1 m2)' +
+          '\n  (let ((sum (make-array (array-dimensions m1))))' +
+          '\n    (dotimes (i (array-total-size m1))' +
+          '\n      (setf (row-major-aref sum i) ' +
+          '\n            (+ (row-major-aref m1 i)' +
+          '\n               (row-major-aref m2 i))))' +
+          '\n  sum))' +
+          '\n' +
+          '\n(defun mult' +
+          '\n  (a-matrix' +
+          '\n   b-matrix' +
+          '\n   &key' +
+          '\n   (product' +
+          '\n     (make-array' +
+          '\n       (list (nth 0 (array-dimensions a-matrix))' +
+          '\n             (nth 1 (array-dimensions b-matrix))))))' +
+          '\n  (let ((m (nth 0 (array-dimensions a-matrix)))' +
+          '\n        (n (nth 1 (array-dimensions b-matrix)))' +
+          '\n        (common (nth 0 (array-dimensions b-matrix))))' +
+          '\n    (dotimes (i m product)' +
+          '\n      (dotimes (j n)' +
+          '\n        (setf (aref product i j) 0.0)' +
+          '\n        (dotimes (k common)' +
+          '\n          (incf (aref product i j)' +
+          '\n                (* (aref a-matrix i k) (aref b-matrix k j))))))))' +
+          '\n' +
+          '\n;;; next define matrices a, b, and c:' +
+          '\n' +
+          '\n(defvar a' +
+          '\n  (make-array \'(2 3)' +
+          '\n    :initial-contents \'((1 0 1) (1 2 3))))' +
+          '\n(defvar b' +
+          '\n  (make-array \'(2 3)' +
+          '\n    :initial-contents \'((-2 2 3) (-1 0 4))))' +
+          '\n(defvar c' +
+          '\n  (make-array \'(3 2)' +
+          '\n    :initial-contents \'((2 2) (0 -1) (0 3))))' +
+          '\n' +
+          '\n;;; now our result to a × ( b + c ) can be computed:' +
+          '\n' +
+          '\n(mult a (add b c))'
         },
         'homoiconic': {
           title: 'A Homoiconic Language',
@@ -42,7 +76,7 @@ var Lisp = React.createClass({
           '\n;;;* ALL PROGRAMS AND EVERYTHING WITHIN ARE DATA ONE IN THE SAME *' +
           '\n;;;***************************************************************' +
           '\n' +
-          '\n;;;  First we can define a function, foo, that:' +
+          '\n;;;  First we can define a function, \'foo\', that:' +
           '\n' +
           '\n;;;  1) receives a an argument, x,' +
           '\n;;;  1) adds the value 1 to that argument,' +
@@ -71,7 +105,7 @@ var Lisp = React.createClass({
           '\n  (foo 3)' +
           '\n  ;;  returns => 4' +
           '\n' +
-          '\n;;;  In this fashion we can define a new function, bar, that' +
+          '\n;;;  In this fashion we can define a new function, \'bar\', that' +
           '\n;;;  instead adds 2 to x:' +
           '\n' +
           '\n  (defun bar (x) (+ x 2))' +
@@ -97,7 +131,7 @@ var Lisp = React.createClass({
   },
   componentDidMount: function () {
     var contents = this.state.contents;
-    Object.keys(contents).forEach(function(thisEditor) {
+    Object.keys(contents).forEach(function(thisEditor, i) {
       var editor = ace.edit('editor-' + thisEditor);
       editor.$blockScrolling = Infinity;
       editor.setTheme('ace/theme/terminal');
@@ -107,6 +141,10 @@ var Lisp = React.createClass({
         enableBasicAutocompletion: true,
         enableLiveAutocompletion: false
       });
+      if (i < 2) {
+        editor.resize(true);
+        editor.scrollToLine(editor.getValue().match(/\n/g).length);
+      }
     });
   },
   submitCode: function (contents, thisEditor, key) {
