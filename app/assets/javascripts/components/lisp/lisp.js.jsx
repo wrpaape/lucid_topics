@@ -10,10 +10,23 @@ var Lisp = React.createClass({
           mode: 'pascal',
           keys: [-1, -1, -1],
           output: '',
-          value: '(* Pascal *)' +
-          '\nvar temp, result: matrix;' +
-          '\nadd(b.c, temp);' +
-          '\nmult(a, temp, result);' +
+          scrollTo: 16,
+          value:
+          '{' +
+          '\n  ******************************************' +
+          '\n  *      HANDLING MATRICES IN PASCAL       *' +
+          '\n  ******************************************' +
+          '\n}' +
+          '\n' +
+          '\n{ ' +
+          '\n  (definitions, declarations, and' +
+          '\n  setting presumably clogged with' +
+          '\n  much low-level detail)' +
+          '\n}' +
+          '\n' +
+          '\nvar a, b, c, temp, result: matrix;' +
+          '\ntemp := add(b, c);' +
+          '\nresult := mult(a, result);' +
           '\nreturn(result);'
         },
         'lisp': {
@@ -21,13 +34,17 @@ var Lisp = React.createClass({
           mode: 'lisp',
           keys: [-1, -1, -1],
           output: '',
-          value: ';;; LISP' +
-          '\n;;; first define functions add and mult:' +
+          scrollTo: 44,
+          value:
+          ';;; *****************************************' +
+          '\n;;; *       HANDLING MATRICES IN LISP       *' +
+          '\n;;; *****************************************' +
+          '\n;;; First define functions add and mult:' +
           '\n' +
           '\n(defun add (m1 m2)' +
           '\n  (let ((sum (make-array (array-dimensions m1))))' +
           '\n    (dotimes (i (array-total-size m1))' +
-          '\n      (setf (row-major-aref sum i) ' +
+          '\n      (setf (row-major-aref sum i)' +
           '\n            (+ (row-major-aref m1 i)' +
           '\n               (row-major-aref m2 i))))' +
           '\n  sum))' +
@@ -50,76 +67,121 @@ var Lisp = React.createClass({
           '\n          (incf (aref product i j)' +
           '\n                (* (aref a-matrix i k) (aref b-matrix k j))))))))' +
           '\n' +
-          '\n;;; next define matrices a, b, and c:' +
+          '\n;;; Next set the values of matrices a, b,' +
+          '\n;;; and c:' +
           '\n' +
-          '\n(defvar a' +
+          '\n(setf a' +
           '\n  (make-array \'(2 3)' +
           '\n    :initial-contents \'((1 0 1) (1 2 3))))' +
-          '\n(defvar b' +
+          '\n(setf b' +
           '\n  (make-array \'(2 3)' +
           '\n    :initial-contents \'((-2 2 3) (-1 0 4))))' +
-          '\n(defvar c' +
+          '\n(setf c' +
           '\n  (make-array \'(3 2)' +
           '\n    :initial-contents \'((2 2) (0 -1) (0 3))))' +
           '\n' +
-          '\n;;; now our result to a × ( b + c ) can be computed:' +
+          '\n;;; with the definitions and setting taken' +
+          '\n;;; care of, a × ( b + c ) can be computed' +
+          '\n;;; with a single S-expression:' +
           '\n' +
-          '\n(mult a (add b c))'
+          '\n  (mult a (add b c))' +
+          '\n  ;;  returns => #2A((0.0 4.0 3.0) (-4.0 4.0 17.0))' +
+          '\n' +
+          '\n;;; where #2A indicates that the result' +
+          '\n;;; is a 2D array (a matrix). Incidentally' +
+          '\n;;; if a, b, and c where simple numbers:' +
+          '\n' +
+          '\n  (setf a 25)' +
+          '\n  (setf b 42)' +
+          '\n  (setf c -4)' +
+          '\n' +
+          '\n;;; the computation of a × ( b + c ) would' +
+          '\n;;; look the same after swapping the matrix' +
+          '\n;;; functions for the basic multiplication' +
+          '\n;;; and addition functions * and +:' +
+          '\n' +
+          '\n  (* a (+ b c))' +
+          '\n  ;;  returns => 950' +
+          '\n' +
+          '\n;;; As such...' +
+          '\n' +
+          '\n;;; *****************************************' +
+          '\n;;; *      DATA STRUCTURES ARE HANDLED      *' +
+          '\n;;; *  IDENTICALLY TO PRIMITIVE DATA TYPES  *' +
+          '\n;;; *          IN LISP EXPRESSIONS          *' +
+          '\n;;; *****************************************'
         },
         'homoiconic': {
           title: 'A Homoiconic Language',
           mode: 'lisp',
           keys: [-1, -1, -1],
           output: '',
+          scrollTo: 1,
           value:
-          ';;;***************************************************************' +
-          '\n;;;* ALL PROGRAMS AND EVERYTHING WITHIN ARE DATA ONE IN THE SAME *' +
-          '\n;;;***************************************************************' +
+          ';;; **************************************************************' +
+          '\n;;; *             ALL PROGRAMS AND EVERYTHING WITHIN             *' +
+          '\n;;; *                  ARE DATA ONE IN THE SAME                  *' +
+          '\n;;; **************************************************************' +
           '\n' +
-          '\n;;;  First we can define a function, \'foo\', that:' +
+          '\n;;; With LISP we can define a function, square, that:' +
           '\n' +
-          '\n;;;  1) receives a an argument, x,' +
-          '\n;;;  1) adds the value 1 to that argument,' +
-          '\n;;;  3) returns the result of that expression, x + 1' +
+          '\n;;; 1) receives a an argument, x,' +
+          '\n;;; 1) multiplies that argument by itself, and' +
+          '\n;;; 3) returns the result of that expression x²' +
           '\n' +
-          '\n  (defun foo (x) (+ x 1))' +
-          '\n  ;;  returns => FOO' +
+          '\n  (defun square (x) (* x x))' +
+          '\n  ;;  returns => SQUARE' +
           '\n' +
-          '\n;;;  Notice that the entire definition can be broken' +
-          '\n;;;  down into embedded lists enclosed in parentheses:' +
+          '\n;;; Notice that the entire definition can be broken' +
+          '\n;;; down into embedded lists enclosed in parentheses:' +
           '\n' +
-          '\n;;;  (defun foo (x) (+ x 1)) is a list where:' +
+          '\n;;; (defun square (x) (* x x)) is a list where:' +
           '\n' +
-          '\n;;;    - defun is the operator that denotes the definition of,' +
-          '\n;;;      a new function' +
-          '\n;;;    - foo is variable which will be assigned the function,' +
-          '\n;;;    - (x) is a list of arguments that foo will receive, and' +
-          '\n;;;    - (+ x 1) is a list comprising the function body where' +
-          '\n;;;      the first element or \'atom,\' +, is the operator to be' +
-          '\n;;;      performed on the arguments specified in the remaining' +
-          '\n;;;      list atoms, x and 1' +
+          '\n;;;   - defun is the operator that denotes the definition of,' +
+          '\n;;;     a new function' +
+          '\n;;;   - square is symbol to which the function will be assigned,' +
+          '\n;;;   - (x) is a list of arguments that square will receive, and' +
+          '\n;;;   - (* x x) is a list comprising the function body where' +
+          '\n;;;     the first element or "atom", *, is the operator to be' +
+          '\n;;;     performed on the arguments specified as the remaining' +
+          '\n;;;     atoms, x and x' +
           '\n' +
-          '\n;;;  Thus we can expect that if we pass the value 3 to foo,' +
-          '\n;;;  foo will return the result of the expression 3 + 1, or 4:' +
+          '\n;;; Thus we can expect that if we pass the value 3 to square, it' +
+          '\n;;; will return the result of the expression 3 * 3, or 3²:' +
           '\n' +
-          '\n  (foo 3)' +
-          '\n  ;;  returns => 4' +
+          '\n  (square 3)' +
+          '\n  ;;  returns => 9' +
           '\n' +
-          '\n;;;  In this fashion we can define a new function, \'bar\', that' +
-          '\n;;;  instead adds 2 to x:' +
+          '\n;;; **************************************************************' +
+          '\n;;; * HERE\'S WHERE LISP DEPARTS FROM THE TRADITIONAL PROGRAMMING *' +
+          '\n;;; *                         PARADIGM                           *' +
+          '\n;;; **************************************************************' +
           '\n' +
-          '\n  (defun bar (x) (+ x 2))' +
+          '\n;;; Suppose we were writing a program that needed to calculate the' +
+          '\n;;; average area of a large set of shapes composed of 0 or more' +
+          '\n;;; circles, squares, and equilateral triangles of all sizes' +
+          '\n;;; variety of dimensions. Now suppose the dimensions were not' +
+          '\n;;; input at the start of the program, but rather were constructed' +
+          '\n;;; at runtime. Perhaps more problematically, the shape of the' +
+          '\n;;; polygons were determined during runtime as well beforehand.' +
+          '\n' +
+          '\n;;; That being said, what we ARE certain of by the time it\'s' +
+          '\n;;; needed to calculate their average area' +
+          '\n;;;   1) Though sized differently, our polygons have uniform edge' +
+          '\n;;;      length (equilateral).' +
+          '\n;;;   2) Additionally, they cannot have more than 8 edges' +
+          '\n;;;   3) The formulas of all possible shape areas are provided' +
+          '\n;;;      at the program start, as a list of functions' +
+          '\n;;; (defun area-square (s) (square s))' +
+          '\n;;; (defun area-circle (r) (* pi (square r)))' +
+          '\n;;; (defun area-triangle (s) (* (/ (expt 3 1/3) 4) (square s)))' +
+          '\n;;; (setf (symbol-function \'area) (first functions))' +
+          '\n  (triangle square )' +
           '\n  ;;  returns => BAR' +
           '\n  (bar 3)' +
           '\n  ;;  returns => 5' +
           '\n' +
-          '\n;;;***************************************************************' +
-          '\n;;;* here\'s where LISP departs from the traditional programming  *' +
-          '\n;;;* paradigm:                                                   *' +
-          '\n;;;***************************************************************' +
-          '\n' +
-          '\n;;;' +
-          '\n;;;' +
+          '\n;;; Perhaps foo handled ' +
           '\n' +
           '\n  (setf (symbol-function \'foo) #\'bar)' +
           '\n ;;  returns => #<FUNCTION BAR (X) (DECLARE (SYSTEM::IN-DEFUN BAR)) (BLOCK BAR (+ X 2))>' +
@@ -143,7 +205,7 @@ var Lisp = React.createClass({
       });
       if (i < 2) {
         editor.resize(true);
-        editor.scrollToLine(editor.getValue().match(/\n/g).length);
+        editor.scrollToLine(contents[thisEditor].scrollTo);
       }
     });
   },
@@ -193,7 +255,7 @@ var Lisp = React.createClass({
           </pre>
           <code>
             <abbr title='hold (cmd or ctr) + shift + return to evaluate'>
-              output:&nbsp;&nbsp;
+              returns =>&nbsp;
             </abbr>
             <div>
               { contents[thisEditor].output }

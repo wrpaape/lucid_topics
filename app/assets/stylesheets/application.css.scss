@@ -96,6 +96,7 @@ $s11: 24px;
   }
 }
 @mixin set-ace {
+  font-family: monospace;
   &.ace-terminal-theme {
     color: $c2;
     .ace_marker-layer {
@@ -108,7 +109,6 @@ $s11: 24px;
     }
     .ace_gutter-layer {
       color: $c2;
-      @include consolas;
       @include bg3;
     }
     @include set-scrollbar;
@@ -290,7 +290,7 @@ body {
             margin-right: $s10;
             vertical-align: top;
             code > div {
-              width: 316px;
+              width: 299px;
             }
           }
           pre {
@@ -308,15 +308,15 @@ body {
             display: inline-block;
             margin-left: $s5;
             font-size: $s8;
+            white-space: nowrap;
             @include set-scrollbar;
             abbr {
               vertical-align: top;
               cursor: help;
             }
             div {
-              width: 468px;
+              width: 451px;
               display: inline-block;
-              white-space: nowrap;
               overflow-x: auto;
             }
           }
