@@ -152,41 +152,87 @@ var Lisp = React.createClass({
           '\n  (square 3)' +
           '\n  ;;  returns => 9' +
           '\n' +
+          '\n;;; Simple enough. With our new function square we can calculate' +
+          '\n;;; the square of any value we pass to it.  Nothing particularly' +
+          '\n;;; out of the ordinary.' +
+          '\n' +
+          '\n;;; However, suppose we needed to write a program that needed to' +
+          '\n;;; calculate the average surfce area of a large set of 2d plates.' +
+          '\n;;; For the purposes of our simple program, a plate can be' +
+          '\n;;; adequately represented by two properties:' +
+          '\n' +
+          '\n;;;   1) shape (i.e. square, circle, etc..)' +
+          '\n;;;   2) dimension (some positive number)' +
+          '\n' +
+          '\n;;; Our program must not only account for a wide range of valid' +
+          '\n;;; dimensions, but needs to handle a variety of shapes as well.' +
+          '\n;;; the structure of our program might look something like this:' +
+          '\n' +
+          '\n;;; 1) read input set of plates' +
+          '\n;;; 2) calculate the area of each plate' +
+          '\n;;; 3) calculate the average of these areas' +
+          '\n;;; 4) return output average' +
+          '\n' +
           '\n;;; **************************************************************' +
           '\n;;; * HERE\'S WHERE LISP DEPARTS FROM THE TRADITIONAL PROGRAMMING *' +
           '\n;;; *                         PARADIGM                           *' +
           '\n;;; **************************************************************' +
           '\n' +
-          '\n;;; Suppose we were writing a program that needed to calculate the' +
-          '\n;;; average area of a large set of shapes composed of 0 or more' +
-          '\n;;; circles, squares, and equilateral triangles of all sizes' +
-          '\n;;; variety of dimensions. Now suppose the dimensions were not' +
-          '\n;;; input at the start of the program, but rather were constructed' +
-          '\n;;; at runtime. Perhaps more problematically, the shape of the' +
-          '\n;;; polygons were determined during runtime as well beforehand.' +
+          '\n;;; If we were abiding to the imperative programming patterns of' +
+          '\n;;; traditional programming languages, the structure of our' +
+          '\n;;; "calculate area" step would involve writing a named function' +
+          '\n;;; for calculating the area of every expected shape in advance' +
+          '\n;;; (i.e. area-square, area-circle, ...), followed by a gigantic' +
+          '\n;;; conditional statement:' +
           '\n' +
-          '\n;;; That being said, what we ARE certain of by the time it\'s' +
-          '\n;;; needed to calculate their average area' +
-          '\n;;;   1) Though sized differently, our polygons have uniform edge' +
-          '\n;;;      length (equilateral).' +
-          '\n;;;   2) Additionally, they cannot have more than 8 edges' +
-          '\n;;;   3) The formulas of all possible shape areas are provided' +
-          '\n;;;      at the program start, as a list of functions' +
-          '\n;;; (defun area-square (s) (square s))' +
-          '\n;;; (defun area-circle (r) (* pi (square r)))' +
-          '\n;;; (defun area-triangle (s) (* (/ (expt 3 1/3) 4) (square s)))' +
-          '\n;;; (setf (symbol-function \'area) (first functions))' +
-          '\n  (triangle square )' +
-          '\n  ;;  returns => BAR' +
-          '\n  (bar 3)' +
-          '\n  ;;  returns => 5' +
+          '\n;;;   is this plate a square? => call area-square using plate dim' +
+          '\n;;;   is this plate a circle?  => call area-circle using plate dim' +
+          '\n;;;   .' +
+          '\n;;;   .' +
+          '\n;;;   .' +
+          '\n;;;   is this plate a (last expected shape)? => ...' +
           '\n' +
-          '\n;;; Perhaps foo handled ' +
+          '\n;;; Such repetition is tedious and brittle in response to change of' +
+          '\n;;; input:  What if sometime in the future our program needed' +
+          '\n;;; to handle a new shape? What if the area of this new shape' +
+          '\n;;; depended on more than one dimension (i.e. rectangle)?' +
+          '\n;;; Updating our program would require 3 fixes:' +
           '\n' +
-          '\n  (setf (symbol-function \'foo) #\'bar)' +
-          '\n ;;  returns => #<FUNCTION BAR (X) (DECLARE (SYSTEM::IN-DEFUN BAR)) (BLOCK BAR (+ X 2))>' +
-          '\n  (foo 3)' +
-          '\n  ;;  returns => 5'
+          '\n;;; 1) write new function for shape' +
+          '\n;;; 2) bolt another condition to giant statement to handle the shape' +
+          '\n;;; 3) tweak all parts of program that depended on plates having just one dimension' +
+          '\n;;; 4) debug and recompile the entire program' +
+          '\n' +
+          '\n;;; Simple enough if we\'re just dealing with 3 shapes, however,' +
+          '\n;;; the additional time and effort required for fix #3 exponentiates' +
+          '\n;;; with the size of the program and soon grows out of hand. Fix' +
+          '\n;;; #4 additionally becomes bothersome in larger programs, and' +
+          '\n;;; seems especially wasteful if our plate calculator were just a' +
+          '\n;;; tiny function of a much larger program.' +
+          '\n' +
+          '\n;;; As you can see, the design process of programming in a traditional' +
+          '\n;;; language relies heavily on the knowledge of the exact nature of' +
+          '\n;;; its input ahead of time and becomes unmaintainable when dealing' +
+          '\n;;; with dynamic, patternless, or unknown data.' +
+          '\n' +
+          '\n;;; A program written in LISP, however, can conquer these datasets' +
+          '\n;;; practically and with elegantly fewer lines of code. LISP\'s' +
+          '\n;;; homoiconicity makes it simple to implement the "data-driven"' +
+          '\n;;; programming paradigm, meaning that:' +
+          '\n' +
+          '\n;;; **************************************************************' +
+          '\n;;; * A LISP program can better                                  *' +
+          '\n;;; *                                                            *' +
+          '\n;;; *                    RESPOND TO THE DATA                     *' +
+          '\n;;; *                                                            *' +
+          '\n;;; * at run time rather than needing to                         *' +
+          '\n;;; *                                                            *' +
+          '\n;;; *                    ANTICIPATE THE DATA                     *' +
+          '\n;;; *                                                            *' +
+          '\n;;; * beforehand in its design.                                  *' +
+          '\n;;; **************************************************************' +
+          '\n' +
+          '\n'
         }
       }
     });
@@ -415,7 +461,7 @@ var Lisp = React.createClass({
             program is also a data structure in a primitive type of the language
             itself. LISP was the first language to incorporate this trait,
             as LISP programs and all objects and data within are represented
-            as embedded lists:
+            as <strong>S-expressions</strong> or embedded lists:
           </p>
           <div>
             { editors.slice(-1) }
