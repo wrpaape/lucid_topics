@@ -18,6 +18,9 @@ $s8: 16px;
 $s9: 18px;
 $s10: 20px;
 $s11: 24px;
+$s12: 26px;
+$s13: 30px;
+$s14: 46px;
 
 @mixin consolas {
   font-family: monaco, Consolas, 'Lucida Console', monospace;
@@ -114,6 +117,34 @@ $s11: 24px;
     @include set-scrollbar;
   }
 }
+@mixin sigma {
+  .sigma {
+    position: relative;
+    font-size: $s14;
+    display: inline-block;
+    vertical-align: middle;
+    &::before {
+      font-size: $s6;
+      display: block;
+      position: absolute;
+      left: 0;
+      top: -26px;
+      content: 'N';
+      width: $s13;
+      text-align: center;
+    }
+    &::after {
+      font-size: $s6;
+      display: block;
+      position: absolute;
+      left: 0;
+      bottom: -26px;
+      content: 'i = 1';
+      width: $s13;
+      text-align: center;
+    } 
+  }
+}
 
 @-webkit-keyframes fade-out {
   @include fade-out-keys;
@@ -190,6 +221,14 @@ body {
     font-size: $s8;
     line-height: $s11;
     @include lucida;
+    &.equation {
+      font-size: $s10;
+      height: $s14;
+      line-height: $s14;
+      font-family: serif;
+      text-align: center;
+      @include sigma
+    }
   }
   ul > li {
     margin-bottom: $s5;

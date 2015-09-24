@@ -10,7 +10,7 @@ var Lisp = React.createClass({
           mode: 'pascal',
           keys: [-1, -1, -1],
           output: '',
-          scrollTo: 1,
+          lineStart: 1,
           value:
           '{' +
           '\n  ***********************************************' +
@@ -34,7 +34,7 @@ var Lisp = React.createClass({
           mode: 'lisp',
           keys: [-1, -1, -1],
           output: '',
-          scrollTo: 40,
+          lineStart: 39,
           value:
           ';;; *********************************************' +
           '\n;;; *         HANDLING MATRICES IN LISP         *' +
@@ -112,7 +112,7 @@ var Lisp = React.createClass({
           mode: 'lisp',
           keys: [-1, -1, -1],
           output: '',
-          scrollTo: 1,
+          lineStart: 0,
           value:
           ';;; With LISP we can define a function, square, that:' +
           '\n' +
@@ -124,7 +124,8 @@ var Lisp = React.createClass({
           '\n  ;;  returns => SQUARE' +
           '\n' +
           '\n;;; Notice that the entire definition can be broken' +
-          '\n;;; down into embedded lists enclosed in parentheses:' +
+          '\n;;; down into embedded lists enclosed in parentheses' +
+          '\n;;; called S-expressions:' +
           '\n' +
           '\n;;; (defun square (x) (* x x)) is a list where:' +
           '\n' +
@@ -149,7 +150,7 @@ var Lisp = React.createClass({
         mode: 'lisp',
         keys: [-1, -1, -1],
         output: '',
-        scrollTo: 21,
+        lineStart: 20,
         value:
           ';;; **************** RANDOM PLATE GENERATOR FUNCTIONS ****************' +
           '\n' +
@@ -242,10 +243,10 @@ var Lisp = React.createClass({
           '\n;;; seems especially wasteful if our plate calculator were just a' +
           '\n;;; tiny function of a much larger program.' +
           '\n' +
-          '\n;;; As you can see, the design process of programming in a traditional' +
-          '\n;;; language relies heavily on the knowledge of the exact nature of' +
-          '\n;;; its input ahead of time and becomes unmaintainable when dealing' +
-          '\n;;; with data whose nature is dynamic, patternless, or unknown.' +
+          '\n;;; As you can see, the design process of programming in a' +
+          '\n;;; traditionallanguage relies heavily on the knowledge of the exact' +
+          '\n;;; nature of its input ahead of time and becomes unmaintainable when' +
+          '\n;;; dealing with data whose nature is dynamic, patternless, or unknown.' +
           '\n' +
           '\n;;; A program written in LISP, however, can conquer these datasets' +
           '\n;;; practically and with elegantly fewer lines of code. LISP\'s' +
@@ -287,13 +288,13 @@ var Lisp = React.createClass({
           '\n(avg (mapcar #\'area-plate (samp-plates 10)))' +
           '\n' +
           '\n;;; Aside from samp-plates used to generator some test data' +
-          '\n;;; (defined at the top of the editor), just two functions' +
-          '\n;;; avg and area-plate can handle the calculation of 6' +
+          '\n;;; (defined at the top of the editor), just two functions,' +
+          '\n;;; avg and area-plate, can handle the calculation of 6' +
           '\n;;; different shapes of plates having anywhere from 1 to' +
           '\n;;; 3 characteristic dimensions. This flexibility is made' +
           '\n;;; possible by the incorporation of LISP\'s lambda' +
           '\n;;; (anonymous function) macro, which allows the function' +
-          '\n;;; area-plate to' +
+          '\n;;; area-plate to...' +
           '\n' +
           '\n;;; *****************************************************************' +
           '\n;;; *                     CHANGE DURING RUNTIME                     *' +
@@ -326,7 +327,7 @@ var Lisp = React.createClass({
         enableLiveAutocompletion: false
       });
       editor.resize(true);
-      editor.scrollToLine(contents[thisEditor].scrollTo);
+      editor.scrollToLine(contents[thisEditor].lineStart);
     });
   },
   submitCode: function (contents, thisEditor, key) {
@@ -403,7 +404,7 @@ var Lisp = React.createClass({
             of languages developed for the purpose of expressing mathematical
             notation with minimal semantics and syntax. Developed in 1958,
             LISP is the second-oldest high-level programming language in
-            widespread use today (FORTRAN takes first with a birthday in '57).
+            widespread use today (FORTRAN takes first with a '57 birhday).
           </p>
           <h4>
             A Brief History

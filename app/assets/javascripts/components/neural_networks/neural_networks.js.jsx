@@ -157,13 +157,15 @@ var NeuralNetworks = React.createClass({
               but for now a little math:
             </p>
             <Img src={ imgPath + 'artificial_neuron.jpg' } />
-            <p>
-              a = x1w1 + x2w2 + x3w3... + xnwn + (-1)wn+1
+            <p className='equation'>
+              a = x<sub>1</sub>w<sub>1</sub> + x<sub>2</sub>w<sub>2</sub> + x<sub>3</sub>w<sub>3</sub>... + x<sub>n</sub>w<sub>n</sub> + (-1)w<sub>n+1</sub>
             </p>
             <p>
               or if you're familiar with summation notation:
             </p>
-            <Img src={ imgPath + 'a_sum.gif' } />
+            <p className='equation'>
+              a = <span className='sigma'>&Sigma;</span>&nbsp;x<sub>i</sub>w<sub>i</sub> + (-1)w<sub>n+1</sub>
+            </p>
             <p>
               The value, a, represents the activation value of our neuron's input and its calculation is
               the first step in computing its output. Just like a GPA the activation value is a simple
@@ -171,8 +173,8 @@ var NeuralNetworks = React.createClass({
               that each neuron has some "intrinsic threshold value" to compare to, this is it. One way of
               viewing how our neuron uses this value (called bias) to judge its weighted input is through the equation:
             </p>
-            <p>
-              x1w1 + x2w2 + x3w3... + xnwn >= t
+            <p className='equation'>
+              x<sub>1</sub>w<sub>1</sub> + x<sub>2</sub>w<sub>2</sub> + x<sub>3</sub>w<sub>3</sub>... + x<sub>n</sub>w<sub>n</sub> >= t
             </p>
             <p>
               With the weighted sum of its inputs calculated on the left hand side, our neuron's output
