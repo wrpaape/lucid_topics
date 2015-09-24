@@ -118,11 +118,6 @@ var Lisp = React.createClass({
           output: '',
           scrollTo: 1,
           value:
-          ';;; **************************************************************' +
-          '\n;;; *             ALL PROGRAMS AND EVERYTHING WITHIN             *' +
-          '\n;;; *                  ARE DATA ONE IN THE SAME                  *' +
-          '\n;;; **************************************************************' +
-          '\n' +
           '\n;;; With LISP we can define a function, square, that:' +
           '\n' +
           '\n;;; 1) receives a an argument, x,' +
@@ -144,7 +139,14 @@ var Lisp = React.createClass({
           '\n;;;   - (* x x) is a list comprising the function body where' +
           '\n;;;     the first element or "atom", *, is the operator to be' +
           '\n;;;     performed on the arguments specified as the remaining' +
-          '\n;;;     atoms, x and x'
+          '\n;;;     atoms, x and x' +
+          '\n' +
+          '\n;;; This is possible because...' +
+          '\n' +
+          '\n;;; **************************************************************' +
+          '\n;;; *             ALL PROGRAMS AND EVERYTHING WITHIN             *' +
+          '\n;;; *                  ARE DATA ONE IN THE SAME                  *' +
+          '\n;;; **************************************************************'
         },
         'prototypable': {
         title: 'A Prototypable Language',
@@ -153,7 +155,7 @@ var Lisp = React.createClass({
         output: '',
         scrollTo: 21,
         value:
-          ';;; ************** RANDOM PLATE GENERATOR FUNCTION****************' +
+          ';;; ************** RANDOM PLATE GENERATOR FUNCTIONS **************' +
           '\n' +
           '\n(defun rand-elt (choices)' +
           '\n  (elt choices (random (length choices))))' +
