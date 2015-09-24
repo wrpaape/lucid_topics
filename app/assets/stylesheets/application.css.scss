@@ -225,10 +225,12 @@ body {
       font-size: $s10;
       height: $s14;
       line-height: $s14;
-      font-family: serif;
       text-align: center;
       @include sigma
     }
+  }
+  .math {
+    font-family: serif;
   }
   ul > li {
     margin-bottom: $s5;

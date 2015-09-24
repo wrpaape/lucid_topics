@@ -158,30 +158,48 @@ var NeuralNetworks = React.createClass({
             </p>
             <Img src={ imgPath + 'artificial_neuron.jpg' } />
             <p className='equation'>
-              a = x<sub>1</sub>w<sub>1</sub> + x<sub>2</sub>w<sub>2</sub> + x<sub>3</sub>w<sub>3</sub>... + x<sub>n</sub>w<sub>n</sub> + (-1)w<sub>n+1</sub>
+              <span className='math'>a = x<sub>1</sub>w<sub>1</sub> + x<sub>2</sub>w<sub>2</sub> + x<sub>3</sub>w<sub>3</sub>... + x<sub>n</sub>w<sub>n</sub> + (-1)w<sub>n+1</sub></span>
             </p>
             <p>
               or if you're familiar with summation notation:
             </p>
             <p className='equation'>
-              a = <span className='sigma'>&Sigma;</span>&nbsp;x<sub>i</sub>w<sub>i</sub> + (-1)w<sub>n+1</sub>
+              <span className='math'>a = <span className='sigma'>&Sigma;</span>&nbsp;x<sub>i</sub>w<sub>i</sub> + (-1)w<sub>n+1</sub></span>
             </p>
             <p>
               The value, a, represents the activation value of our neuron's input and its calculation is
               the first step in computing its output. Just like a GPA the activation value is a simple
               weighted sum. But where does that last element in the series come from? If you recall from earlier
               that each neuron has some "intrinsic threshold value" to compare to, this is it. One way of
-              viewing how our neuron uses this value (called bias) to judge its weighted input is through the equation:
+              viewing how our neuron uses this value to judge its weighted input is through the equation:
             </p>
             <p className='equation'>
-              x<sub>1</sub>w<sub>1</sub> + x<sub>2</sub>w<sub>2</sub> + x<sub>3</sub>w<sub>3</sub>... + x<sub>n</sub>w<sub>n</sub> >= t
+              <span className='math'>x<sub>1</sub>w<sub>1</sub> + x<sub>2</sub>w<sub>2</sub> + x<sub>3</sub>w<sub>3</sub>... + x<sub>n</sub>w<sub>n</sub> >= t</span>
             </p>
             <p>
               With the weighted sum of its inputs calculated on the left hand side, our neuron's output
-              depends on whether or not this value meets or exceeds the threshold. For reasons lurking
-              uncomfortably deep in Math World, this comparison is better expressed for the purpose of
-              constructing our model by treating the threshold as an additional weight as so:
+              depends on whether or not this value meets or exceeds the threshold. For reasons that will
+              soon be made clear, this comparison is better expressed for the purpose of
+              constructing our model by treating the threshold as an additional weight like so:
             </p>
+            <p className='equation'>
+              <span className='math'>x<sub>1</sub>w<sub>1</sub> + x<sub>2</sub>w<sub>2</sub> + x<sub>3</sub>w<sub>3</sub>... + x<sub>n</sub>w<sub>n</sub> + (-1)t >= 0</span>
+            </p>
+            <p>
+              The last term of the left side of our activation equation, <span className='math'>(-1)t</span> , is usually referred to as
+              the <strong>bias</strong> of a neuron, and it's purpose is to offset our activation function to allow for output values
+              outside the range of <span className='math'>0</span> to <span className='math'>1</span>.<br />So what is an activation function?
+            </p>
+            <p>
+              As it turns out, the original explanation of our neuron's role in the network needs to be
+              tweaked for our demonstration. The "combinatorial switch" model limits the output of our
+              neurons to just 2 values: "fire" or "don't fire" depending whether activation was achieved or not.
+              While a binary output could be implemented to reproduce our caveman's learning process
+              (ouch => wrong, not ouch => right), in many applications of machine learning there exists
+              a gray area where the "rightness" of an output must be evaluated by a decimal <strong>error</strong>
+              (think ).
+            </p>
+            <Img src={ imgPath + 'nn_controller.png' } />
             <p>
             </p>
           </section>

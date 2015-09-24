@@ -1,7 +1,7 @@
 'use strict';
 
 var Neuron = function(numInputs, indexLayer, indexNeuron) {
-  var neuronColors = [['#1DFD84', '#C1FA1C'], 'aqua', 'fuchsia'];
+  var neuronColors = [['#C1FA1C', '#1DFD84'], 'aqua', 'fuchsia'];
   if (indexLayer) {
     this.color = neuronColors[indexLayer];
     this.getInitalWeights = function() {
