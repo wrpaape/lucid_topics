@@ -17,14 +17,4 @@
 
 'use strict';
 window.classifier = new ColorClassifier();
-marked.setOptions({
-  renderer: new marked.Renderer(),
-  gfm: false,
-  tables: true,
-  breaks: true,
-  pedantic: true,
-  sanitize: true,
-  smartLists: false,
-  smartypants: false
-});
 
