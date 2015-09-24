@@ -2,6 +2,8 @@
 'use strict';
 
 var Buzzword = React.createClass({
+  componentWillMount: function () {
+  },
   getInitialState: function() {
     return({
       show: false,
@@ -41,7 +43,7 @@ var Buzzword = React.createClass({
         </p>
         <div className={ this.state.show }>
         { this.formatRelated() }
-        <span dangerouslySetInnerHTML={ {__html: marked(this.state.note) } } />
+        <span dangerouslySetInnerHTML={ {__html: marked(this.state.note).replace(/▓/g, '<br />') } } />
         </div>
       </li>
     );

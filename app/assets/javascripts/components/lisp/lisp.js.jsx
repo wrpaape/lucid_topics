@@ -10,12 +10,12 @@ var Lisp = React.createClass({
           mode: 'pascal',
           keys: [-1, -1, -1],
           output: '',
-          scrollTo: 16,
+          scrollTo: 1,
           value:
           '{' +
-          '\n  ******************************************' +
-          '\n  *      HANDLING MATRICES IN PASCAL       *' +
-          '\n  ******************************************' +
+          '\n  ***********************************************' +
+          '\n  *         HANDLING MATRICES IN PASCAL         *' +
+          '\n  ***********************************************' +
           '\n}' +
           '\n' +
           '\n{ ' +
@@ -34,11 +34,11 @@ var Lisp = React.createClass({
           mode: 'lisp',
           keys: [-1, -1, -1],
           output: '',
-          scrollTo: 44,
+          scrollTo: 40,
           value:
-          ';;; *****************************************' +
-          '\n;;; *       HANDLING MATRICES IN LISP       *' +
-          '\n;;; *****************************************' +
+          ';;; *********************************************' +
+          '\n;;; *         HANDLING MATRICES IN LISP         *' +
+          '\n;;; *********************************************' +
           '\n;;; First define functions add and mult:' +
           '\n' +
           '\n(defun add (m1 m2)' +
@@ -49,14 +49,10 @@ var Lisp = React.createClass({
           '\n               (row-major-aref m2 i))))' +
           '\n  sum))' +
           '\n' +
-          '\n(defun mult' +
-          '\n  (a-matrix' +
-          '\n   b-matrix' +
-          '\n   &key' +
-          '\n   (product' +
-          '\n     (make-array' +
-          '\n       (list (nth 0 (array-dimensions a-matrix))' +
-          '\n             (nth 1 (array-dimensions b-matrix))))))' +
+          '\n(defun mult (a-matrix b-matrix &key' +
+          '\n  (product (make-array' +
+          '\n    (list (nth 0 (array-dimensions a-matrix))' +
+          '\n          (nth 1 (array-dimensions b-matrix))))))' +
           '\n  (let ((m (nth 0 (array-dimensions a-matrix)))' +
           '\n        (n (nth 1 (array-dimensions b-matrix)))' +
           '\n        (common (nth 0 (array-dimensions b-matrix))))' +
@@ -65,7 +61,7 @@ var Lisp = React.createClass({
           '\n        (setf (aref product i j) 0.0)' +
           '\n        (dotimes (k common)' +
           '\n          (incf (aref product i j)' +
-          '\n                (* (aref a-matrix i k) (aref b-matrix k j))))))))' +
+          '\n            (* (aref a-matrix i k) (aref b-matrix k j))))))))' +
           '\n' +
           '\n;;; Next set the values of matrices a, b,' +
           '\n;;; and c:' +
@@ -80,9 +76,9 @@ var Lisp = React.createClass({
           '\n  (make-array \'(3 2)' +
           '\n    :initial-contents \'((2 2) (0 -1) (0 3))))' +
           '\n' +
-          '\n;;; with the definitions and setting taken' +
+          '\n;;; With the definitions and setting taken' +
           '\n;;; care of, a × ( b + c ) can be computed' +
-          '\n;;; with a pair of S-expressions:' +
+          '\n;;; with a single pair of S-expressions:' +
           '\n' +
           '\n  (mult a (add b c))' +
           '\n  ;;  returns => #2A((0.0 4.0 3.0) (-4.0 4.0 17.0))' +
@@ -105,11 +101,11 @@ var Lisp = React.createClass({
           '\n' +
           '\n;;; As such...' +
           '\n' +
-          '\n;;; *****************************************' +
-          '\n;;; *      DATA STRUCTURES ARE HANDLED      *' +
-          '\n;;; *  IDENTICALLY TO PRIMITIVE DATA TYPES  *' +
-          '\n;;; *          IN LISP EXPRESSIONS          *' +
-          '\n;;; *****************************************'
+          '\n;;; *********************************************' +
+          '\n;;; *        DATA STRUCTURES ARE HANDLED        *' +
+          '\n;;; *    IDENTICALLY TO PRIMITIVE DATA TYPES    *' +
+          '\n;;; *            IN LISP EXPRESSIONS            *' +
+          '\n;;; *********************************************'
         },
         'homoiconic': {
           title: 'A Homoiconic Language',
@@ -118,7 +114,7 @@ var Lisp = React.createClass({
           output: '',
           scrollTo: 1,
           value:
-          '\n;;; With LISP we can define a function, square, that:' +
+          ';;; With LISP we can define a function, square, that:' +
           '\n' +
           '\n;;; 1) receives a an argument, x,' +
           '\n;;; 1) multiplies that argument by itself, and' +
@@ -143,10 +139,10 @@ var Lisp = React.createClass({
           '\n' +
           '\n;;; This is possible because...' +
           '\n' +
-          '\n;;; **************************************************************' +
-          '\n;;; *             ALL PROGRAMS AND EVERYTHING WITHIN             *' +
-          '\n;;; *                  ARE DATA ONE IN THE SAME                  *' +
-          '\n;;; **************************************************************'
+          '\n;;; ******************************************************************' +
+          '\n;;; *               ALL PROGRAMS AND EVERYTHING WITHIN               *' +
+          '\n;;; *                    ARE DATA ONE IN THE SAME                    *' +
+          '\n;;; ******************************************************************'
         },
         'prototypable': {
         title: 'A Prototypable Language',
@@ -155,7 +151,7 @@ var Lisp = React.createClass({
         output: '',
         scrollTo: 21,
         value:
-          ';;; ************** RANDOM PLATE GENERATOR FUNCTIONS **************' +
+          ';;; **************** RANDOM PLATE GENERATOR FUNCTIONS ****************' +
           '\n' +
           '\n(defun rand-elt (choices)' +
           '\n  (elt choices (random (length choices))))' +
@@ -165,7 +161,7 @@ var Lisp = React.createClass({
           '\n' +
           '\n(defun rand-plate ()' +
           '\n  (let* ((rand-shape (rand-elt (mapcar #\'car shapes-areas)))' +
-          '\n    (rand-dims  (loop :repeat' +
+          '\n    (rand-dims (loop :repeat' +
           '\n      (if (eq rand-shape \'trapezoid) 3' +
           '\n        (if (find rand-shape \'(square circle)) 1 2))' +
           '\n      :collect (rand-btwn dim-min dim-max))))' +
@@ -174,7 +170,7 @@ var Lisp = React.createClass({
           '\n(defun samp-plates (num-plates)' +
           '\n(loop :repeat num-plates :collect (rand-plate)))' +
           '\n' +
-          '\n;;; ************** RANDOM PLATE GENERATOR FUNCTIONS **************' +
+          '\n;;; **************** RANDOM PLATE GENERATOR FUNCTIONS ****************' +
           '\n' +
           '\n;;; Recall our new function, square, from the example above:' +
           '\n' +
@@ -208,10 +204,10 @@ var Lisp = React.createClass({
           '\n;;; 3) calculate the average of these areas' +
           '\n;;; 4) return output average' +
           '\n' +
-          '\n;;; **************************************************************' +
-          '\n;;; * HERE\'S WHERE LISP DEPARTS FROM THE TRADITIONAL PROGRAMMING *' +
-          '\n;;; *                         PARADIGM                           *' +
-          '\n;;; **************************************************************' +
+          '\n;;; ******************************************************************' +
+          '\n;;; *   HERE\'S WHERE LISP DEPARTS FROM THE TRADITIONAL PROGRAMMING   *' +
+          '\n;;; *                           PARADIGM                             *' +
+          '\n;;; ******************************************************************' +
           '\n' +
           '\n;;; If we were abiding to the imperative programming patterns of' +
           '\n;;; traditional programming languages, the structure of our' +
@@ -256,17 +252,17 @@ var Lisp = React.createClass({
           '\n;;; homoiconicity makes it simple to implement the "data-driven"' +
           '\n;;; programming paradigm, meaning that:' +
           '\n' +
-          '\n;;; *************************************************************' +
-          '\n;;; * A LISP program can better                                 *' +
-          '\n;;; *                                                           *' +
-          '\n;;; *                    RESPOND TO THE DATA                    *' +
-          '\n;;; *                                                           *' +
-          '\n;;; * at run time rather than needing to                        *' +
-          '\n;;; *                                                           *' +
-          '\n;;; *                    ANTICIPATE THE DATA                    *' +
-          '\n;;; *                                                           *' +
-          '\n;;; * beforehand in its design.                                 *' +
-          '\n;;; *************************************************************' +
+          '\n;;; *****************************************************************' +
+          '\n;;; *   A LISP program can better                                   *' +
+          '\n;;; *                                                               *' +
+          '\n;;; *                      RESPOND TO THE DATA                      *' +
+          '\n;;; *                                                               *' +
+          '\n;;; *   at run time rather than needing to                          *' +
+          '\n;;; *                                                               *' +
+          '\n;;; *                      ANTICIPATE THE DATA                      *' +
+          '\n;;; *                                                               *' +
+          '\n;;; *   beforehand in its design.                                   *' +
+          '\n;;; *****************************************************************' +
           '\n' +
           '\n;;; With this philosophy in mind, here\'s our plate calculator in'  +
           '\n;;; LISP might look:' +
@@ -299,9 +295,9 @@ var Lisp = React.createClass({
           '\n;;; (anonymous function) macro, which allows the function' +
           '\n;;; area-plate to' +
           '\n' +
-          '\n;;; **************************************************************' +
-          '\n;;; *                    CHANGE DURING RUNTIME                   *' +
-          '\n;;; **************************************************************' +
+          '\n;;; *****************************************************************' +
+          '\n;;; *                     CHANGE DURING RUNTIME                     *' +
+          '\n;;; *****************************************************************' +
           '\n' +
           '\n;;; according to the area formula of its argument plate\'s shape.' +
           '\n' +
@@ -581,7 +577,8 @@ var Lisp = React.createClass({
           <p>
             The ability to delay decisions-or more accurately, to make
             temporary, nonbinding decisions-is usually a good thing,
-            because it means that irrelevant details can be ignored.
+            because it means that irrelevant details can be ignored, and,
+            in sum, results in a more adaptive and robust program.
           </p>
         </section>
         <section>

@@ -165,7 +165,7 @@ $s11: 24px;
       display: block;
     }
   }
-  span, a, select, i {
+  span, a, select, &:not(p) > i {
     @include btn;
   }
 }
@@ -284,24 +284,22 @@ body {
           }
         }
         &.editor {
-          width: 550px;
+          width: 600px;
           &.lisp, &.pascal {
-            width: 400px;
+            width: 450px;
             margin-right: $s10;
             vertical-align: top;
             code > div {
-              width: 299px;
+              width: 349px;
             }
           }
           pre {
-            width: 400px;
-            height: 150px;
+            height: 300px;
             margin: $s5;
             @include set-ace;
             @include border2;
             &#editor-homoiconic, &#editor-prototypable {
-              width: 550px;
-              height: 300px;
+              height: 400px;
             }
           }
           code {
@@ -315,7 +313,7 @@ body {
               cursor: help;
             }
             div {
-              width: 451px;
+              width: 501px;
               display: inline-block;
               overflow-x: auto;
             }
@@ -334,7 +332,7 @@ body {
         @include consolas;
       }
       & > div {
-        margin-left: $s11;
+        margin: 0 $s11;
         & > p {
           font-size: $s6;
           line-height: $s9;

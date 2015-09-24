@@ -1,4 +1,4 @@
-/* globals ColorClassifier */
+/* globals ColorClassifier, marked */
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
@@ -17,4 +17,14 @@
 
 'use strict';
 window.classifier = new ColorClassifier();
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  gfm: false,
+  tables: true,
+  breaks: true,
+  pedantic: true,
+  sanitize: true,
+  smartLists: false,
+  smartypants: false
+});
 

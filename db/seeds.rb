@@ -67,14 +67,14 @@ cons:
     word: "List",
     note:
 """
-A list is an abstract data type that represents an ordered sequence of not necessarily unique values.
-Lists are most commonly implemented as \"linked lists\", consisting of a cluster of
+A list is an abstract data type that represents an ordered sequence of not necessarily unique atoms
+(and elements). Lists are most commonly implemented as \"linked lists\", consisting of a cluster of
 separated container nodes chained together by references:
 *safe*
 
 ```
 nodes:  ==>[ 23 | ●=]==>[ \"hello world\" | ●=]==>[ my-function | ●=]==>
-            atom|ref          atom      |ref         atom     |ref
+            atom|ref          atom      |ref        element   |ref
 ```
 
 pros:
@@ -195,8 +195,7 @@ nodes:  [ x | ●=]==>[ y | ●=]==>NIL
 ```
 
 
-#### *Because LISP employs S-expressions as the sole representation of source code as well as data,
-LISP is homoiconic.*
+#### *Because LISP employs S-expressions as the sole representation of source code as well as data, LISP is homoiconic.*
 *safe*
 """,
     topics: ["LISP"],
