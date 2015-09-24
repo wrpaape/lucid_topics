@@ -285,7 +285,7 @@ body {
         }
         &.editor {
           width: 550px;
-          &:not(.homoiconic) {
+          &.lisp, &.pascal {
             width: 400px;
             margin-right: $s10;
             vertical-align: top;
@@ -299,7 +299,7 @@ body {
             margin: $s5;
             @include set-ace;
             @include border2;
-            &#editor-homoiconic {
+            &#editor-homoiconic, &#editor-prototypable {
               width: 550px;
               height: 300px;
             }

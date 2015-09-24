@@ -116,30 +116,9 @@ var Lisp = React.createClass({
           mode: 'lisp',
           keys: [-1, -1, -1],
           output: '',
-          scrollTo: 21,
+          scrollTo: 1,
           value:
-          ';;; ********************** RANDOM PLATE GENERATOR FUNCTIONS **********************' +
-          '\n' +
-          '\n(defun rand-elt (choices)' +
-          '\n  (elt choices (random (length choices))))' +
-          '\n' +
-          '\n(defun rand-btwn (min max)' +
-          '\n  (+ min (random (coerce (- max min) \'float))))' +
-          '\n' +
-          '\n(defun rand-plate ()' +
-          '\n  (let* ((rand-shape (rand-elt (mapcar #\'car shapes-areas)))' +
-          '\n    (rand-dims  (loop :repeat' +
-          '\n      (if (eq rand-shape \'trapezoid) 3' +
-          '\n        (if (find rand-shape \'(square circle)) 1 2))' +
-          '\n      :collect (rand-btwn dim-min dim-max))))' +
-          '\n  (cons rand-shape rand-dims)))' +
-          '\n' +
-          '\n(defun samp-plates (num-plates)' +
-          '\n(loop :repeat num-plates :collect (rand-plate)))' +
-          '\n' +
-          '\n;;; ********************** RANDOM PLATE GENERATOR FUNCTIONS **********************' +
-          '\n' +
-          '\n;;; **************************************************************' +
+          ';;; **************************************************************' +
           '\n;;; *             ALL PROGRAMS AND EVERYTHING WITHIN             *' +
           '\n;;; *                  ARE DATA ONE IN THE SAME                  *' +
           '\n;;; **************************************************************' +
@@ -165,17 +144,50 @@ var Lisp = React.createClass({
           '\n;;;   - (* x x) is a list comprising the function body where' +
           '\n;;;     the first element or "atom", *, is the operator to be' +
           '\n;;;     performed on the arguments specified as the remaining' +
-          '\n;;;     atoms, x and x' +
+          '\n;;;     atoms, x and x'
+        },
+        'prototypable': {
+        title: 'A Prototypable Language',
+        mode: 'lisp',
+        keys: [-1, -1, -1],
+        output: '',
+        scrollTo: 21,
+        value:
+          ';;; ************** RANDOM PLATE GENERATOR FUNCTION****************' +
           '\n' +
-          '\n;;; Thus we can expect that if we pass the value 3 to square, it' +
+          '\n(defun rand-elt (choices)' +
+          '\n  (elt choices (random (length choices))))' +
+          '\n' +
+          '\n(defun rand-btwn (min max)' +
+          '\n  (+ min (random (coerce (- max min) \'float))))' +
+          '\n' +
+          '\n(defun rand-plate ()' +
+          '\n  (let* ((rand-shape (rand-elt (mapcar #\'car shapes-areas)))' +
+          '\n    (rand-dims  (loop :repeat' +
+          '\n      (if (eq rand-shape \'trapezoid) 3' +
+          '\n        (if (find rand-shape \'(square circle)) 1 2))' +
+          '\n      :collect (rand-btwn dim-min dim-max))))' +
+          '\n  (cons rand-shape rand-dims)))' +
+          '\n' +
+          '\n(defun samp-plates (num-plates)' +
+          '\n(loop :repeat num-plates :collect (rand-plate)))' +
+          '\n' +
+          '\n;;; ************** RANDOM PLATE GENERATOR FUNCTIONS **************' +
+          '\n' +
+          '\n;;; Recall our new function, square, from the example above:' +
+          '\n' +
+          '\n  (defun square (x) (* x x))' +
+          '\n  ;;  returns => SQUARE' +
+          '\n' +
+          '\n;;; We can expect that if we pass the value 3 to square, it' +
           '\n;;; will return the result of the expression 3 * 3, or 3²:' +
           '\n' +
           '\n  (square 3)' +
           '\n  ;;  returns => 9' +
           '\n' +
-          '\n;;; Simple enough. With our new function square we can calculate' +
-          '\n;;; the square of any value we pass to it.  Nothing particularly' +
-          '\n;;; out of the ordinary.' +
+          '\n;;; Simple enough. With this we can calculate the square of any' +
+          '\n;;; value we pass to it.  Nothing your dime-a-dozen traditional' +
+          '\n;;; programming language can\'t handle.' +
           '\n' +
           '\n;;; However, suppose we needed to write a program that needed to' +
           '\n;;; calculate the average surfce area of a large set of 2d plates.' +
@@ -242,17 +254,17 @@ var Lisp = React.createClass({
           '\n;;; homoiconicity makes it simple to implement the "data-driven"' +
           '\n;;; programming paradigm, meaning that:' +
           '\n' +
-          '\n;;; **************************************************************' +
-          '\n;;; * A LISP program can better                                  *' +
-          '\n;;; *                                                            *' +
-          '\n;;; *                    RESPOND TO THE DATA                     *' +
-          '\n;;; *                                                            *' +
-          '\n;;; * at run time rather than needing to                         *' +
-          '\n;;; *                                                            *' +
-          '\n;;; *                    ANTICIPATE THE DATA                     *' +
-          '\n;;; *                                                            *' +
-          '\n;;; * beforehand in its design.                                  *' +
-          '\n;;; **************************************************************' +
+          '\n;;; *************************************************************' +
+          '\n;;; * A LISP program can better                                 *' +
+          '\n;;; *                                                           *' +
+          '\n;;; *                    RESPOND TO THE DATA                    *' +
+          '\n;;; *                                                           *' +
+          '\n;;; * at run time rather than needing to                        *' +
+          '\n;;; *                                                           *' +
+          '\n;;; *                    ANTICIPATE THE DATA                    *' +
+          '\n;;; *                                                           *' +
+          '\n;;; * beforehand in its design.                                 *' +
+          '\n;;; *************************************************************' +
           '\n' +
           '\n;;; With this philosophy in mind, here\'s our plate calculator in'  +
           '\n;;; LISP might look:' +
@@ -298,8 +310,7 @@ var Lisp = React.createClass({
           '\n;;; associating a plate\'s shape with its proper area formula.' +
           '\n;;; As such, only the parameter shapes-areas need be recompiled,' +
           '\n;;; decoupling the traditional wastefulness of needing to' +
-          '\n;;; recompile the entire program for every tweak.' +
-          '\n'
+          '\n;;; recompile the entire program for every tweak.'
         }
       }
     });
@@ -529,7 +540,7 @@ var Lisp = React.createClass({
             as <strong>S-expressions</strong> or embedded lists:
           </p>
           <div>
-            { editors.slice(-1) }
+            { editors[2] }
           </div>
           <h4>
             Extensibility
@@ -556,8 +567,11 @@ var Lisp = React.createClass({
             to window systems) that surround LISP systems are usually
             very good. And the dynamic, interactive nature of LISP
             makes it <strong>easy to experiment and change
-            a program while it is being developed</strong>.
+            a program while it is being developed:</strong>.
           </p>
+          <div>
+            { editors[3] }
+          </div>
           <h3>
             <strong>In sum, these factors allow a programmer to delay
             making decisions.</strong>
