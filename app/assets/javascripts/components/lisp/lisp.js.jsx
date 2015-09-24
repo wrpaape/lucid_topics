@@ -82,7 +82,7 @@ var Lisp = React.createClass({
           '\n' +
           '\n;;; with the definitions and setting taken' +
           '\n;;; care of, a × ( b + c ) can be computed' +
-          '\n;;; with a single S-expression:' +
+          '\n;;; with a pair of S-expressions:' +
           '\n' +
           '\n  (mult a (add b c))' +
           '\n  ;;  returns => #2A((0.0 4.0 3.0) (-4.0 4.0 17.0))' +
@@ -116,9 +116,30 @@ var Lisp = React.createClass({
           mode: 'lisp',
           keys: [-1, -1, -1],
           output: '',
-          scrollTo: 1,
+          scrollTo: 21,
           value:
-          ';;; **************************************************************' +
+          ';;; ********************** RANDOM PLATE GENERATOR FUNCTIONS **********************' +
+          '\n' +
+          '\n(defun rand-elt (choices)' +
+          '\n  (elt choices (random (length choices))))' +
+          '\n' +
+          '\n(defun rand-btwn (min max)' +
+          '\n  (+ min (random (coerce (- max min) \'float))))' +
+          '\n' +
+          '\n(defun rand-plate ()' +
+          '\n  (let* ((rand-shape (rand-elt (mapcar #\'car shapes-areas)))' +
+          '\n    (rand-dims  (loop :repeat' +
+          '\n      (if (eq rand-shape \'trapezoid) 3' +
+          '\n        (if (find rand-shape \'(square circle)) 1 2))' +
+          '\n      :collect (rand-btwn dim-min dim-max))))' +
+          '\n  (cons rand-shape rand-dims)))' +
+          '\n' +
+          '\n(defun samp-plates (num-plates)' +
+          '\n(loop :repeat num-plates :collect (rand-plate)))' +
+          '\n' +
+          '\n;;; ********************** RANDOM PLATE GENERATOR FUNCTIONS **********************' +
+          '\n' +
+          '\n;;; **************************************************************' +
           '\n;;; *             ALL PROGRAMS AND EVERYTHING WITHIN             *' +
           '\n;;; *                  ARE DATA ONE IN THE SAME                  *' +
           '\n;;; **************************************************************' +
@@ -162,7 +183,7 @@ var Lisp = React.createClass({
           '\n;;; adequately represented by two properties:' +
           '\n' +
           '\n;;;   1) shape (i.e. square, circle, etc..)' +
-          '\n;;;   2) dimension (some positive number)' +
+          '\n;;;   2) dimension (some positive number, i.e. radius = 2.2)' +
           '\n' +
           '\n;;; Our program must not only account for a wide range of valid' +
           '\n;;; dimensions, but needs to handle a variety of shapes as well.' +
@@ -200,10 +221,11 @@ var Lisp = React.createClass({
           '\n' +
           '\n;;; 1) write new function for shape' +
           '\n;;; 2) bolt another condition to giant statement to handle the shape' +
-          '\n;;; 3) tweak all parts of program that depended on plates having just one dimension' +
+          '\n;;; 3) tweak all parts of program that depended on plates having just' +
+          '\n;;;    one dimension' +
           '\n;;; 4) debug and recompile the entire program' +
           '\n' +
-          '\n;;; Simple enough if we\'re just dealing with 3 shapes, however,' +
+          '\n;;; Simple enough if we\'re dealing with just 3 shapes, however,' +
           '\n;;; the additional time and effort required for fix #3 exponentiates' +
           '\n;;; with the size of the program and soon grows out of hand. Fix' +
           '\n;;; #4 additionally becomes bothersome in larger programs, and' +
@@ -213,7 +235,7 @@ var Lisp = React.createClass({
           '\n;;; As you can see, the design process of programming in a traditional' +
           '\n;;; language relies heavily on the knowledge of the exact nature of' +
           '\n;;; its input ahead of time and becomes unmaintainable when dealing' +
-          '\n;;; with dynamic, patternless, or unknown data.' +
+          '\n;;; with data whose nature is dynamic, patternless, or unknown.' +
           '\n' +
           '\n;;; A program written in LISP, however, can conquer these datasets' +
           '\n;;; practically and with elegantly fewer lines of code. LISP\'s' +
@@ -232,6 +254,51 @@ var Lisp = React.createClass({
           '\n;;; * beforehand in its design.                                  *' +
           '\n;;; **************************************************************' +
           '\n' +
+          '\n;;; With this philosophy in mind, here\'s our plate calculator in'  +
+          '\n;;; LISP might look:' +
+          '\n' +
+          '\n(defparameter shapes-areas' +
+          '\n  (list (cons \'square #\'(lambda (s) (square s)))' +
+          '\n    (cons \'circle #\'(lambda (r) (* pi (square r))))' +
+          '\n    (cons \'triangle #\'(lambda (b h) (* 1/2 b h)))' +
+          '\n    (cons \'rectangle #\'(lambda (w l) (* w l)))' +
+          '\n    (cons \'ellipse #\'(lambda (a b) (* pi a b)))' +
+          '\n    (cons \'trapezoid #\'(lambda (b1 b2 h) (* 1/2 (+ b1 b2) h)))))' +
+          '\n(defparameter dim-min 0)' +
+          '\n(defparameter dim-max 100)' +
+          '\n' +
+          '\n(defun avg (list)' +
+          '\n  (/ (apply #\'+ list) (length list)))' +
+          '\n' +
+          '\n(defun area-plate (plate)' +
+          '\n  (apply (cdr (assoc (car plate) shapes-areas))' +
+          '\n    (cdr plate)))' +
+          '\n' +
+          '\n(avg (mapcar #\'area-plate (samp-plates 10)))' +
+          '\n' +
+          '\n;;; Aside from samp-plates used to generator some test data' +
+          '\n;;; (defined at the top of the editor), just two functions' +
+          '\n;;; avg and area-plate can handle the calculation of 6' +
+          '\n;;; different shapes of plates having anywhere from 1 to' +
+          '\n;;; 3 characteristic dimensions. This flexibility is made' +
+          '\n;;; possible by the incorporation of LISP\'s lambda' +
+          '\n;;; (anonymous function) macro, which allows the function' +
+          '\n;;; area-plate to' +
+          '\n' +
+          '\n;;; **************************************************************' +
+          '\n;;; *                    CHANGE DURING RUNTIME                   *' +
+          '\n;;; **************************************************************' +
+          '\n' +
+          '\n;;; according to the area formula of its argument plate\'s shape.' +
+          '\n' +
+          '\n;;; In addition to the advantages of brevity and diminished' +
+          '\n;;; repetition, the only change to our program required to handle' +
+          '\n;;; an additional shape would involve adding a new entry to the' +
+          '\n;;; parameter shapes-areas, which serves as a look-up table' +
+          '\n;;; associating a plate\'s shape with its proper area formula.' +
+          '\n;;; As such, only the parameter shapes-areas need be recompiled,' +
+          '\n;;; decoupling the traditional wastefulness of needing to' +
+          '\n;;; recompile the entire program for every tweak.' +
           '\n'
         }
       }
@@ -249,10 +316,8 @@ var Lisp = React.createClass({
         enableBasicAutocompletion: true,
         enableLiveAutocompletion: false
       });
-      if (i < 2) {
-        editor.resize(true);
-        editor.scrollToLine(contents[thisEditor].scrollTo);
-      }
+      editor.resize(true);
+      editor.scrollToLine(contents[thisEditor].scrollTo);
     });
   },
   submitCode: function (contents, thisEditor, key) {
@@ -272,7 +337,7 @@ var Lisp = React.createClass({
       var evalUrl = this.props.urls.evaluate[contents[thisEditor].mode];
       ajax.get(
         evalUrl,
-        { input: ace.edit('editor-' + thisEditor).getValue() },
+        { input: ace.edit('editor-' + thisEditor).getValue().replace(/\n;;;.*/g, '') },
         function(output) {
           contents[thisEditor].output = output;
           contents[thisEditor].keys = [-1, -1, -1];
