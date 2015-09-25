@@ -1,8 +1,9 @@
 module Lisp
   extend ActiveSupport::Concern
 
-  SBCL = %q(sbcl/sbcl-1.0.54-x86-64-linux/run-sbcl.sh --noinform --noprint --no-userinit --disable-debugger --disable-ldb --lose-on-corruption)
-
+  SBCL = %q( --noinform --noprint --no-userinit --disable-debugger --disable-ldb --lose-on-corruption)
+  SBCL.prepend(ENV["RAILS_ENV"] == "production" ? %q(sbcl/sbcl-1.0.54-x86-64-linux/run-sbcl.sh) : %q(sbcl))
+  
   def self.evaluate(expr)
     execute(%Q((format *standard-output* "~S" #{expr})))
   end

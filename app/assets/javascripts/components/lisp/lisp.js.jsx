@@ -11,6 +11,7 @@ var Lisp = React.createClass({
           keys: [-1, -1, -1],
           output: '',
           lineStart: 1,
+          loading: false,
           value:
           '{' +
           '\n  ***********************************************' +
@@ -35,6 +36,7 @@ var Lisp = React.createClass({
           keys: [-1, -1, -1],
           output: '',
           lineStart: 39,
+          loading: false,
           value:
           ';;; *********************************************' +
           '\n;;; *         HANDLING MATRICES IN LISP         *' +
@@ -151,6 +153,7 @@ var Lisp = React.createClass({
         keys: [-1, -1, -1],
         output: '',
         lineStart: 20,
+        loading: false,
         value:
           ';;; **************** RANDOM PLATE GENERATOR FUNCTIONS ****************' +
           '\n' +
@@ -344,18 +347,19 @@ var Lisp = React.createClass({
       return !(!~last3.indexOf(keys[0]) || !~last3.indexOf(keys[1]) || !~last3.indexOf(keys[2]));
     });
     if (submitted) {
-      var evalUrl = this.props.urls.evaluate[contents[thisEditor].mode];
-      ajax.get(
-        evalUrl,
-        { input: ace.edit('editor-' + thisEditor).getValue().replace(/\n;;;.*/g, '') },
-        function(output) {
-          contents[thisEditor].output = output;
-          contents[thisEditor].keys = [-1, -1, -1];
-          this.setState({
-            contents: contents
-          });
-        }.bind(this),
-        true
+      contents[thisEditor].loading = true;
+      this.setState({ contents: contents },
+        ajax.get(
+          this.props.urls.evaluate[contents[thisEditor].mode],
+          { input: ace.edit('editor-' + thisEditor).getValue().replace(/\n;;;.*/g, '') },
+          function(output) {
+            contents[thisEditor].output = output;
+            contents[thisEditor].keys = [-1, -1, -1];
+            contents[thisEditor].loading = false;
+            this.setState({ contents: contents }, document.body.removeAttribute('class'));
+          }.bind(this),
+          true
+        )
       );
     } else {
       this.setState({
@@ -366,19 +370,25 @@ var Lisp = React.createClass({
   render: function() {
     var contents = this.state.contents;
     var editors = Object.keys(contents).map(function(thisEditor) {
+      var editorClass = 'ace_editor ace_dark ace-terminal-theme';
+      var outputClass = '';
+      if (contents[thisEditor].loading) {
+        editorClass += ' loading';
+        outputClass += ' loading';
+      }
       return(
         <div key={ 'editor-' + thisEditor } className={ 'editor ' + thisEditor }>
           <h3>
             { contents[thisEditor].title }
           </h3>
-          <pre id={ 'editor-' + thisEditor } onKeyDown={ this.submitCode.bind(this, contents, thisEditor) }>
+          <pre id={ 'editor-' + thisEditor } className={ editorClass } onKeyDown={ this.submitCode.bind(this, contents, thisEditor) }>
             { contents[thisEditor].value }
           </pre>
           <code>
             <abbr title='hold (cmd or ctr) + shift + return to evaluate'>
               returns =>&nbsp;
             </abbr>
-            <div>
+            <div className={ outputClass }>
               { contents[thisEditor].output }
             </div>
           </code>

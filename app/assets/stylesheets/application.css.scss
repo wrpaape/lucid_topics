@@ -186,6 +186,10 @@ $s14: 46px;
   @include pop-up;
   @include fade-out;
 }
+.loading {
+  opacity: 0.5;
+  cursor: progress;
+}
 .nav{
   padding: 0 $s4;
   &.header {
@@ -395,7 +399,6 @@ body {
     }
   }
   select {
-    // lolcomment
     margin-top: $s4;
     font-size: $s9;
     -webkit-appearance: menulist-button;
