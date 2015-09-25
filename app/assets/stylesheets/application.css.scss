@@ -406,14 +406,26 @@ body {
   canvas {
     width: 20%;
     margin: $s5 $s8 0;
+    background-size: 100%;
     &#neural-networks, &#neural-network-model {
       width: 50%;
     }
     &#approximator {
       width: 90%;
       border: none;
-      background-size: 100%;
       background-image: image-url('neural_networks/approximator_bg.png');
+    }
+    &#plane-vectors-input, &#plane-vectors-output {
+      background-image: image-url('neural_networks/plane_vectors_bg.png');
+    }
+    &#plane-values-input {
+      background-image: image-url('neural_networks/plane_values_input_bg.png');
+    }
+    &#plane-values-output {
+      background-image: image-url('neural_networks/plane_values_output_bg.png');
+    }
+    &#neural-network-model {
+      background-image: image-url('neural_networks/neural_network_model_bg.png');
     }
   }
 }

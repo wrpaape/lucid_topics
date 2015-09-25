@@ -20,13 +20,13 @@ var PlaneVectors = React.createClass({
     var rArrow = xo - 4 * rBall;
     var xBall = xo + (rArrow + 2 * rBall) * Math.cos(theta);
     var yBall = yo + (rArrow + 2 * rBall) * Math.sin(theta);
-    var drawDottedLine = this.props.drawDottedLine;
+    // var drawDottedLine = this.props.drawDottedLine;
     var drawArrow = this.props.drawArrow;
     var drawBall = this.props.drawBall;
     var drawInput = function() {
       ctxInput.clearRect(0, 0, width, height);
       plane.draw(ctxInput);
-      drawDottedLine(ctxInput, xo, yo, 2 * xo, yo);
+      // drawDottedLine(ctxInput, xo, yo, 2 * xo, yo);
       drawArrow(ctxInput, xo, yo, rArrow, rArrow / 6, dAlpha, '#C1FA1C');
       drawArrow(ctxInput, xo, yo, rArrow, rArrow / 3, theta, '#1DFD84');
       drawBall(ctxInput, xBall, yBall, rBall, 'blue');
@@ -34,7 +34,7 @@ var PlaneVectors = React.createClass({
     var drawOutput = function() {
       ctxOutput.clearRect(0, 0, width, height);
       plane.draw(ctxOutput);
-      drawDottedLine(ctxOutput, xo, yo, 2 * xo, yo);
+      // drawDottedLine(ctxOutput, xo, yo, 2 * xo, yo);
       drawArrow(ctxOutput, xo, yo, rArrow, rArrow / 6, phiActual, 'fuchsia');
       drawArrow(ctxOutput, xo, yo, rArrow, rArrow / 3, phiDesired, 'lime');
       drawBall(ctxOutput, xBall, yBall, rBall, 'blue');

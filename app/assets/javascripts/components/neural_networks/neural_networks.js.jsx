@@ -39,20 +39,25 @@ var NeuralNetworks = React.createClass({
     //   ctx.restore();
     // };
     // for (var i = 1; i < xAll.length; i++) {
-    //   this.lineFromTo(xAll[i - 1], yActual[i - 1], xAll[i], yActual[i], 'fuchsia');
+    //   lineFromTo(xAll[i - 1], yActual[i - 1], xAll[i], yActual[i], 'fuchsia');
     //   if (i % 10 === 0 || i === xAll.length - 1) {
-    //     this.lineFromTo(xAll[i - 10], yDesired[i - 10], xAll[i - 5], yDesired[i - 5], 'lime');
+    //     lineFromTo(xAll[i - 10], yDesired[i - 10], xAll[i - 5], yDesired[i - 5], 'lime');
     //   }
-    // }   
+    // }
+    // ctx.font = '36px monospace';
+    // ctx.fillStyle = '#FF00FF';
+    // ctx.fillText('actual', 1854, 22 + pad);
+    // ctx.fillStyle = '#00FF00';
+    // ctx.fillText('desired', 1830, 22 + pad + 44);
+
+    var widthLegend = 175;   
+    var heightLegend = 100;
     var draw = function(i) {
       ctx.save();
       ctx.clearRect(0, 0, width, height);
-      ctx.fillRect(xAll[i], 0, width, height, 'black');
-      ctx.font = '36px monospace';
-      ctx.fillStyle = '#FF00FF';
-      ctx.fillText('actual', 1854, 22 + pad);
-      ctx.fillStyle = '#00FF00';
-      ctx.fillText('desired', 1830, 22 + pad + 44);
+      ctx.fillRect(xAll[i], 0, Math.max(0, width - widthLegend - xAll[i]), height, 'black');
+      ctx.fillRect(xAll[i], heightLegend, width - xAll[i], height - heightLegend, 'black');
+
       this.drawBall(ctx, xAll[i], yActual[i], rBall, '#FF00FF');
       this.drawCircle(ctx, xAll[i], yDesired[i], rBall, '#00FF00');
       ctx.restore();
@@ -311,7 +316,7 @@ var NeuralNetworks = React.createClass({
               Consider the implementation of a neural network as the steering control of a robot programmed
               to collect moving targets in a 2D plane:
             </p>
-            <Img src={ imgPath + 'robot_env.png' } />
+            <Img src={ imgPath + 'neural_network_demo.png' } />
             <p>
               With the sensory input of relative postion and velocity of the nearest target, the desired output of
               our robot's neural network needs to be a steering force or thrust with the proper magnitude and
@@ -325,7 +330,7 @@ var NeuralNetworks = React.createClass({
               approximator.</strong>
             </h3>
             <p>
-              meaning that, provided there exists some dependence of a desired output on a given input, be it known or unknown,
+              meaning that, provided there exists some dependence of the desired output on the given input, be it known or unknown,
               with enough "training" repetition a neural network will converge toward a solution connecting these
               two states.
             </p>
