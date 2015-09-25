@@ -4,12 +4,104 @@
 var NeuralNetworks = React.createClass({
   getInitialState: function() {
     return({
-      demo: null
+      demo: null,
+      ctx: null,
+      xAll: [],
+      yDesired: [],
+      yActual: [],
+      step: 0
     });
+  },
+  componentDidMount: function() {
+    var canvas = document.getElementById('approximator');
+    var ctx = canvas.getContext('2d');
+    var width = canvas.width;
+    var height = canvas.height;
+    var pad = height / 90;
+    var rBall = pad - 2;
+    var x0 = 0.4;
+    var xf = 8.75;
+    var yMin = -2.758;
+    var yMax = 4.371;
+    var xScale = (width - 2 * pad) / (xf - x0);
+    var yScale = (height - 2 * pad) / (yMax - yMin);
+    var dx = (xf - x0) / 2000;
+    var xAll = [], yDesired = [], yActual = [];
+    for (var x = 0.4; x < 8.75; x += dx) {
+      xAll.push((x - x0) * xScale + pad);
+      yDesired.push((this.outputDesired(x) - yMin) * yScale + pad);
+      yActual.push((this.outputActual(x) - yMin) * yScale + pad);
+    }
+
+    var draw = function() {
+      for (var i = 1; i < xAll.length; i++) {
+        this.lineFromTo(ctx, xAll[i - 1], yActual[i - 1], xAll[i], yActual[i], 'fuchsia');
+        if (i % 10 === 0 || i === xAll.length - 1) {
+          this.lineFromTo(ctx, xAll[i - 10], yDesired[i - 10], xAll[i - 5], yDesired[i - 5], 'lime');
+        }
+      }  
+    }.bind(this);
+    console.log(xAll[1825], xAll[1800]);
+
+    window.requestAnimationFrame(draw);
+    this.setState({
+      ctx: ctx,
+      xAll: xAll,
+      yDesired: yDesired,
+      yActual: yActual,
+      step: 10
+    });
+  },
+  componentDidUpdate: function() {
+    var ctx = this.state.ctx;
+    var xAll = this.state.xAll;
+    var yDesired = this.state.yDesired;
+    var yActual = this.state.yActual;
+    var step = this.state.step;
+
+    // var draw = function() {
+    //   for (var i = 1; i < step; i++) {
+    //     this.lineFromTo(ctx, xAll[i - 1], yActual[i - 1], xAll[i], yActual[i], 'fuchsia');
+    //     if (i % 10 === 0 || i === xAll.length - 1) {
+    //       this.lineFromTo(ctx, xAll[i - 10], yDesired[i - 10], xAll[i], yDesired[i], 'lime', true);
+    //     }
+    //   }  
+    // }
+
+    // window.requestAnimationFrame(draw);
+    // this.setState()
+  },
+  outputDesired: function(x) {
+    return (Math.pow((x - 8), 4) * Math.pow((x - 2), 3) * Math.pow((x - 5), 2) * (x - 0.5)) / 12000 + 1;
+  },
+  outputActual: function(x) {
+    return this.outputDesired(x) - 4 * Math.pow(Math.E, -x) * Math.cos(6 * Math.PI * x + 0.5);
+  },
+  lineFromTo(ctx, x1, y1, x2, y2, color) {
+    ctx.save();
+    ctx.strokeStyle =  color;
+    ctx.lineWidth = 4;
+    // if (dashed) {
+    //   ctx.setLineDash([30]);
+    // }
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+    ctx.restore();
+  },
+  drawBall: function(ctx, x, y, r, color) {
+    ctx.save();
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, 2 * Math.PI);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
   },
   seeDemo: function() {
     this.setState({
-      demo: <NeuralNetworksDemo goBack={ this.quitDemo } goHome={ this.goBack } />
+      demo: <NeuralNetworksDemo goBack={ this.quitDemo } goHome={ this.goBack } drawBall={ this.drawBall } />
     });
   },
   quitDemo: function(callback) {
@@ -196,12 +288,57 @@ var NeuralNetworks = React.createClass({
               neurons to just 2 values: "fire" or "don't fire" depending whether activation was achieved or not.
               While a binary output could be implemented to reproduce our caveman's learning process
               (ouch => wrong, not ouch => right), in many applications of machine learning there exists
-              a gray area where the "rightness" of an output must be evaluated by a decimal <strong>error</strong>
-              (think ).
+              a gray area where the "rightness" of an output must be evaluated with an analog <strong>error
+              </strong> Consider the basic control flow of a neural network undergoing <strong>supervised learning</strong>.
             </p>
             <Img src={ imgPath + 'nn_controller.png' } />
             <p>
+              In the case of our caveman learning not to roast his hand, the role of supervisor said to be <strong>training
+              </strong> the neural network would be played by his sensory system.  For every case where an input of
+              "desire to touch fire" results in the output state of "hand in fire", the network will:
+              <ol>
+                <li>
+                  receive a jolt of pain or <strong>error signal</strong> from the sensory receptors
+                </li>
+                <li>
+                  process this pain through some sort of <strong>learning algorithm</strong> (typically
+                  modeled by backpropogation), and
+                </li>
+                <li>
+                  adjust the individual weights of each neuron in accordance to the error signal so that
+                  next time Ogg has the urge to "grab pretty flame" he will be a little less inclined to
+                  follow through.
+                </li>
+              </ol>
             </p>
+            <p>
+              Simple enough, at least from an abstract point of view. But how could this model be applied to
+              cases where a neural network's performance can't adaquately be qualified with a simple
+              "right" or "wrong?"
+            </p>
+            <p>
+              Consider the implementation of a neural network as the steering control of a robot programmed
+              to collect moving targets in a 2D plane:
+            </p>
+            <Img src={ imgPath + 'robot_env.png' } />
+            <p>
+              With the sensory input of relative postion and velocity of the nearest target, the desired output of
+              our robot's neural network needs to be a steering force or thrust with the proper magnitude and
+              direction that will result in the target's interception. In other words, this neural network is
+              used to approximate a continuous <strong>mapping function</strong> that bridges the unknown gap
+              between "there's the target" to "got it!" This is the power of the feedforward-backpropogation
+              network: According to the <strong>Universal Approximation Theorem</strong>...
+            </p>
+            <h3>
+              <strong>The standard multilayer feed-forward network with a single hidden layer is a universal
+              approximator.</strong>
+            </h3>
+            <p>
+              meaning that, provided there exists some dependence of a desired output on a given input, be it known or unknown,
+              with enough "training" repetition a neural network will converge toward a solution connecting these
+              two states.
+            </p>
+            <canvas id='approximator' width='2000' height='720' />
           </section>
         { this.props.buzzwordBank }
         </div>

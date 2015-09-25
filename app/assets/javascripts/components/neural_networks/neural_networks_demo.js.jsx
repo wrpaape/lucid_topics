@@ -237,7 +237,7 @@ var NeuralNetworksDemo = React.createClass({
           ctx.clearRect(0, 0, width, height);
         }
       },
-      this.setPlanes.bind(this, 2)
+      this.setPlanes.bind(this, 3)
     );
   },
   setPlanes: function(numPlanes) {
@@ -315,8 +315,8 @@ var NeuralNetworksDemo = React.createClass({
       idSelected: idSelected,
       updateIndex: this.updateIndex,
       drawDottedLine: this.drawDottedLine,
-      drawArrow: this.drawArrow,
-      drawBall: this.drawBall,
+      drawArrow: this.props.drawArrow,
+      drawBall: this.props.drawBall,
       pause: this.pause,
       resume: this.resume
     };
@@ -421,15 +421,6 @@ var NeuralNetworksDemo = React.createClass({
     ctx.moveTo(xo + rArc, yo);
     ctx.arc(xo, yo, rArc, 0, phi, false);
     ctx.stroke();
-    ctx.restore();
-  },
-  drawBall: function(ctx, x, y, r, color) {
-    ctx.save();
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    ctx.arc(x, y, r, 0, 2 * Math.PI);
-    ctx.closePath();
-    ctx.fill();
     ctx.restore();
   },
   render: function() {

@@ -27,8 +27,8 @@ var PlaneVectors = React.createClass({
       ctxInput.clearRect(0, 0, width, height);
       plane.draw(ctxInput);
       drawDottedLine(ctxInput, xo, yo, 2 * xo, yo);
-      drawArrow(ctxInput, xo, yo, rArrow, rArrow / 6, dAlpha, '#1DFD84');
-      drawArrow(ctxInput, xo, yo, rArrow, rArrow / 3, theta, '#C1FA1C');
+      drawArrow(ctxInput, xo, yo, rArrow, rArrow / 6, dAlpha, '#C1FA1C');
+      drawArrow(ctxInput, xo, yo, rArrow, rArrow / 3, theta, '#1DFD84');
       drawBall(ctxInput, xBall, yBall, rBall, 'blue');
     };
     var drawOutput = function() {
