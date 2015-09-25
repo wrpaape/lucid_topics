@@ -315,7 +315,7 @@ var NeuralNetworksDemo = React.createClass({
       idSelected: idSelected,
       updateIndex: this.updateIndex,
       drawDottedLine: this.drawDottedLine,
-      drawArrow: this.props.drawArrow,
+      drawArrow: this.drawArrow,
       drawBall: this.props.drawBall,
       pause: this.pause,
       resume: this.resume

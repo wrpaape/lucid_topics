@@ -411,8 +411,9 @@ body {
     }
     &#approximator {
       width: 90%;
-      // background-size: 100%;
-      // background-image: image-url('neural_networks/approximator_bg.png');
+      border: none;
+      background-size: 100%;
+      background-image: image-url('neural_networks/approximator_bg.png');
     }
   }
 }

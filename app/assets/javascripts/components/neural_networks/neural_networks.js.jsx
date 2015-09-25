@@ -4,12 +4,7 @@
 var NeuralNetworks = React.createClass({
   getInitialState: function() {
     return({
-      demo: null,
-      ctx: null,
-      xAll: [],
-      yDesired: [],
-      yActual: [],
-      step: 0
+      demo: null
     });
   },
   componentDidMount: function() {
@@ -17,12 +12,12 @@ var NeuralNetworks = React.createClass({
     var ctx = canvas.getContext('2d');
     var width = canvas.width;
     var height = canvas.height;
-    var pad = height / 90;
+    var pad = height / 20;
     var rBall = pad - 2;
     var x0 = 0.4;
     var xf = 8.75;
-    var yMin = -2.758;
-    var yMax = 4.371;
+    var yMin = -3.26;
+    var yMax = 4.723;
     var xScale = (width - 2 * pad) / (xf - x0);
     var yScale = (height - 2 * pad) / (yMax - yMin);
     var dx = (xf - x0) / 2000;
@@ -32,63 +27,49 @@ var NeuralNetworks = React.createClass({
       yDesired.push((this.outputDesired(x) - yMin) * yScale + pad);
       yActual.push((this.outputActual(x) - yMin) * yScale + pad);
     }
-
-    var draw = function() {
-      for (var i = 1; i < xAll.length; i++) {
-        this.lineFromTo(ctx, xAll[i - 1], yActual[i - 1], xAll[i], yActual[i], 'fuchsia');
-        if (i % 10 === 0 || i === xAll.length - 1) {
-          this.lineFromTo(ctx, xAll[i - 10], yDesired[i - 10], xAll[i - 5], yDesired[i - 5], 'lime');
-        }
-      }  
+    // // draw bg
+    // var lineFromTo = function(x1, y1, x2, y2, color) {
+    //   ctx.save();
+    //   ctx.strokeStyle =  color;
+    //   ctx.lineWidth = 4;
+    //   ctx.beginPath();
+    //   ctx.moveTo(x1, y1);
+    //   ctx.lineTo(x2, y2);
+    //   ctx.stroke();
+    //   ctx.restore();
+    // };
+    // for (var i = 1; i < xAll.length; i++) {
+    //   this.lineFromTo(xAll[i - 1], yActual[i - 1], xAll[i], yActual[i], 'fuchsia');
+    //   if (i % 10 === 0 || i === xAll.length - 1) {
+    //     this.lineFromTo(xAll[i - 10], yDesired[i - 10], xAll[i - 5], yDesired[i - 5], 'lime');
+    //   }
+    // }   
+    var draw = function(i) {
+      ctx.save();
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillRect(xAll[i], 0, width, height, 'black');
+      ctx.font = '36px monospace';
+      ctx.fillStyle = '#FF00FF';
+      ctx.fillText('actual', 1854, 22 + pad);
+      ctx.fillStyle = '#00FF00';
+      ctx.fillText('desired', 1830, 22 + pad + 44);
+      this.drawBall(ctx, xAll[i], yActual[i], rBall, '#FF00FF');
+      this.drawCircle(ctx, xAll[i], yDesired[i], rBall, '#00FF00');
+      ctx.restore();
     }.bind(this);
-    console.log(xAll[1825], xAll[1800]);
 
-    window.requestAnimationFrame(draw);
-    this.setState({
-      ctx: ctx,
-      xAll: xAll,
-      yDesired: yDesired,
-      yActual: yActual,
-      step: 10
-    });
-  },
-  componentDidUpdate: function() {
-    var ctx = this.state.ctx;
-    var xAll = this.state.xAll;
-    var yDesired = this.state.yDesired;
-    var yActual = this.state.yActual;
-    var step = this.state.step;
-
-    // var draw = function() {
-    //   for (var i = 1; i < step; i++) {
-    //     this.lineFromTo(ctx, xAll[i - 1], yActual[i - 1], xAll[i], yActual[i], 'fuchsia');
-    //     if (i % 10 === 0 || i === xAll.length - 1) {
-    //       this.lineFromTo(ctx, xAll[i - 10], yDesired[i - 10], xAll[i], yDesired[i], 'lime', true);
-    //     }
-    //   }  
-    // }
-
-    // window.requestAnimationFrame(draw);
-    // this.setState()
+    var animate = function(i) {
+      window.requestAnimationFrame(draw.bind(null, i));
+      i += (i + 1 < xAll.length) ? 1 : -i;
+      setTimeout(animate.bind(null, i), 0);
+    };
+    animate(0);
   },
   outputDesired: function(x) {
     return (Math.pow((x - 8), 4) * Math.pow((x - 2), 3) * Math.pow((x - 5), 2) * (x - 0.5)) / 12000 + 1;
   },
   outputActual: function(x) {
-    return this.outputDesired(x) - 4 * Math.pow(Math.E, -x) * Math.cos(6 * Math.PI * x + 0.5);
-  },
-  lineFromTo(ctx, x1, y1, x2, y2, color) {
-    ctx.save();
-    ctx.strokeStyle =  color;
-    ctx.lineWidth = 4;
-    // if (dashed) {
-    //   ctx.setLineDash([30]);
-    // }
-    ctx.beginPath();
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x2, y2);
-    ctx.stroke();
-    ctx.restore();
+    return this.outputDesired(x) - 4 * Math.pow(Math.E, -x / 1.5) * Math.cos(6 * Math.PI * x + 0.5);
   },
   drawBall: function(ctx, x, y, r, color) {
     ctx.save();
@@ -97,6 +78,16 @@ var NeuralNetworks = React.createClass({
     ctx.arc(x, y, r, 0, 2 * Math.PI);
     ctx.closePath();
     ctx.fill();
+    ctx.restore();
+  },
+  drawCircle: function(ctx, x, y, r, color) {
+    ctx.save();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 4;
+    ctx.setLineDash([5]);
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, 2 * Math.PI);
+    ctx.stroke();
     ctx.restore();
   },
   seeDemo: function() {
@@ -338,7 +329,7 @@ var NeuralNetworks = React.createClass({
               with enough "training" repetition a neural network will converge toward a solution connecting these
               two states.
             </p>
-            <canvas id='approximator' width='2000' height='720' />
+            <canvas id='approximator' width='2000' height='400' />
           </section>
         { this.props.buzzwordBank }
         </div>
