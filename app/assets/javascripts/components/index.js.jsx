@@ -42,7 +42,7 @@ var Index = React.createClass({
           topic: topic,
           downloadPdf: <a href={ topic.urls.download.pdf }>pdf⇩</a>,
           title: <h1>{ topic.title }</h1>,
-          buzzwordBank: <section><h3>Buzzword Bank</h3><ul>{ buzzwordList }</ul></section>,
+          buzzwordBank: <section className='buzzword-bank'><h3>Buzzword Bank</h3><ul>{ buzzwordList }</ul></section>,
           urls: topic.urls,
           paths: topic.paths,
           setAlert: this.setAlert,

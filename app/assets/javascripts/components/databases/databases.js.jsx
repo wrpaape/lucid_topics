@@ -455,7 +455,82 @@ var Databases = React.createClass({
           <p>
             The triplestore database, an RDF database that has become very popular across a wide range
             of applications as of late, has the ability to ingest diverse data, allowing flexibility to
-            schema changes as data does not have to be reloaded. Triplestores combine full text search
+            schema changes as data does not have to be reloaded. Particularly noteworthy is the triplestore's
+            elegant handling of unstructured data, which is data that either:
+          </p>
+          <ul>
+            <li>
+              does not adhere to a predefined data model or schema, or, generally put,
+            </li>
+            <li>
+              is not organized in some pre-defined manner.
+            </li>
+          </ul>
+          <p>
+            Consider the following <strong>UML</strong> diagram modeling a typical relational database
+            schema structured to track the interations between a population of farmers with their clientele:
+          </p>
+          <Img className='full-scale' src={ imgPath + 'farmers_rdbms_schema.png' } />
+          <p>
+            With this configuration a classical RDBMS such as Active Record + SQL can, with proper querying,
+            retreive valuable underlying information embedded in complex relationships with lightning speed and efficiency:
+          </p>
+          <blockquote>
+            <strong>best selling crop:</strong>
+            <pre> 
+              <code>
+                {
+                  'query: Crop.select("crops.*,\n' + 
+                  '                    COUNT(contracts.id)\n' +
+                  '                    AS contracts_count")\n' +
+                  '           .joins(:contracts)\n' +
+                  '           .group(:id)\n' +
+                  '           .order("contracts_count DESC")\n' +
+                  '           .take\n' +
+                  '\n' +
+                  'returns => { \n' +
+                  '             id: 44,\n' +
+                  '             name: "strawberries",\n' + 
+                  '             yield: 50500.0,\n' +
+                  '             created_at: Sat, 15 Aug 2015 00:19:19 CDT -05:00,\n' +
+                  '             updated_at: Sat, 15 Aug 2015 00:19:19 CDT -05:00,\n' +
+                  '             contracts_count: 775\n' + 
+                  '           }\n' +
+                  '           (12.2 ms)'
+                }
+              </code>
+            </pre>
+            <strong>most profitable farmer:</strong>
+            <pre>
+              <code>
+                {
+                  'query: Farmer.joins(:contracts, :farm)\n' +
+                  '             .select("farmers.*,\n' +
+                  '                      SUM(price * weight) -\n' +
+                  '                      maintenance -\n' +
+                  '                      (SELECT SUM(upkeep)\n' +
+                  '                       FROM fields\n' +
+                  '                       WHERE farm_id = farms.id)\n' +
+                  '                      AS profit")\n' +
+                  '             .group("farmers.id,\n' +
+                  '                     farms.id")\n' +
+                  '             .order("profit DESC")\n' +
+                  '             .take\n' +
+                  '\n' +
+                  'returns => { \n' +
+                  '             id: 900,\n' +
+                  '             name: "Garth",\n' + 
+                  '             created_at: Sat, 15 Aug 2015 00:19:13 CDT -05:00,\n' +
+                  '             updated_at: Sat, 15 Aug 2015 00:19:13 CDT -05:00,\n' +
+                  '             profit: 79934.025618004\n' + 
+                  '           }\n' +
+                  '           (58.6 ms)'
+                }
+              </code>
+            </pre>
+          </blockquote>
+          <p>
+            Triplestores combine full text search
             with graph analytics and logical reasoning to produce deep, rich results.
             **metadata, content enrichment,***
           </p>

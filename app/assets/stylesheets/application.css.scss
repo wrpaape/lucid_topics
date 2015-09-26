@@ -214,8 +214,12 @@ body {
   img {
     max-width: 80%;
     max-height: 400px;
+    &.full-scale {
+      max-width: 100%;
+      max-height: 100%;
+    }
   }
-  h2, h4, p, td, li {
+  h2, h4, p, td, li, blockquote {
     text-align: left;
   }
   h3 {
@@ -262,6 +266,14 @@ body {
   }
   section {
     padding: 0 100px 0;
+    & > blockquote {
+      font-size: $s8;
+      > pre {
+        font-size: $s7;
+        margin-bottom: 2em;
+        padding-left: 2em;
+      }
+    }
     & > div {
       display: table;
       width: 100%;
@@ -368,7 +380,7 @@ body {
         }
       }
     }
-    & > ul > li {
+    &.buzzword-bank > ul > li {
       margin: 0;
       padding-left: $s8;
       overflow: overlay;
