@@ -47,8 +47,10 @@ var Databases = React.createClass({
           </h3>
           <p>
             There's a reason why your exes' digits go into a little black book and Facebook incorporates
-            the sophisticated DBMS "MySQL." In most cases pen and paper or 16GB of storage
-            will suffice for managing personal phone numbers as this data is:
+            the sophisticated DBMS "MySQL", a popular open source implementation of <strong>SQL</strong> (
+            <strong>S</strong>tructured <strong>Q</strong>uery <strong>L</strong>anguage), the programming
+            language used for querying and updating relational databases. In most cases pen and paper or 16GB
+            of storage will suffice for managing personal phone numbers as this data is:
           </p>
           <ol>
             <li>
@@ -441,13 +443,92 @@ var Databases = React.createClass({
             The RDF Data Model
           </h3>
           <p>
-            RDF or Resource Description Framework is a simple language for expressing data models,
+            RDF is a simple language for expressing data models,
             which refer to objects ("resources") and their associations or relationships. RDF Schema
             is a vocabulary for describing properties and classes of RDF-based resources, with semantics
             for generalized-hierarchies of such properies and classes. The RDF data model consists of
             resources, properties and values. Properties are the relationships that bind together
             resources and values.  A value, however, is either a resource or a primitive data type.
             The basic unit to represent information in RDF is the statement.
+          </p>
+          <table>
+            <caption>
+              The Seven Bridges of Königsberg is a classic historical problem
+              best known academically for its solution by Leonhard Euler providing the early framework
+              for <strong>graph theory</strong>, an area of study in mathematics and computer
+              science which factored heavily in the development of the RDF data model. The problem was
+              to devise a walk through the city of Königsberg, Prussia (shown left) that would cross each
+              bridge once and only once, under the conditions that:
+              <ol>
+                <li>
+                  islands can only be reached by the bridges, and that
+                </li>
+                <li>
+                  every bridge once accessed must be crossed to its other end.
+                </li>
+              </ol>
+              Euler's solution proving this walk impossible involved stripping the cluttered, awkward
+              layout of the city map down to a simplified <strong>graph</strong> of nodes and vertices
+              representing islands of land and the bridges connecting them, respectively.
+            </caption>
+            <tbody>
+              <tr>
+                <td><Img className='full-scale' src={ imgPath + 'bridges_graph.gif' } /></td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            Though its mathematical roots date back to Euler's Königsberg Bridge problem published in 1736,
+            the Resource Descriptive Framework or RDF's implementation as a database management system
+            stems from the development of the first non relational databases in the late 1960's.
+            Later referred to commonly as "NoSQL" or "Not only SQL", the motivation for the 
+            diverting from the beaten RDBMS path include:
+          </p>
+          <ul>
+            <li>
+              simplicity of design
+            </li>
+            <li>
+              horizontal scalability
+              <p>
+                An advantage of RDF DBMSs like NoSQL is the ability to manage a single database
+                with a network of machines. Splitting a database across multiple machines traditionally
+                meant exporting and loading copied data, which leads to costly maintenance
+                at large enough scale to keep data consistent and up to date. Because NoSQL can
+                function in a distributed setting, users can scale their database by running it seamlessly
+                across additional inexpensive machines that share one database instance rather than having
+                to scale vertically with increasingly costly upgrades to their existing machines.
+              </p>
+            </li>
+            <li>
+              finer control over availability
+              <p>
+                The philosophy of the RDF DBMS favors availability, partition tolerance, and speed
+                at the compromise of data consistency. While recent "NewSQL" databases promise "eventual
+                consistency" with database updates propogated to all nodes in a matter of milliseconds,
+                responding to a chnage in the chain of associations in NoSQL is not as simple as flipping the value
+                of a single relational foreign key. Accordingly, most modern NoSQL datbases are considered <strong>
+                BASE</strong> (<strong>B</strong>asically <strong>A</strong>vailable, <strong>S</strong>oft state,
+                and <strong>E</strong>ventually consistent) in contrast to the traditional <strong>ACID</strong> (
+                <strong>A</strong>tomic, <strong>C</strong>onsistent, <strong>I</strong>solated, and <strong>
+                D</strong>urabile) principles of reliable database transactions.
+              </p>
+            </li>
+          </ul>
+          <h4>
+            The Statement (Triple)
+          </h4>
+          <p>
+            A statement is a 'triple' of the type:
+          </p>
+          <p>
+            <samp>subject</samp> - <samp>predicate</samp> - <samp>object</samp>
+          </p>
+          <p>
+            where <samp>subject</samp> is a resource, <samp>predicate</samp> is a property, and <samp>object</samp> is a value. All data
+            is represented in triples in a triplestore database, which form the glue bringing structure
+            and order in the form of <strong>graphs</strong> to all but the most capricious globs of raw
+            data (much like the RDBMS's method of keys and tables). Take for example the triple:
           </p>
           <h4>
             Triplestore
@@ -468,7 +549,8 @@ var Databases = React.createClass({
           </ul>
           <p>
             Consider the following <strong>UML</strong> diagram modeling a typical relational database
-            schema structured to track the interations between a population of farmers with their clientele:
+            schema structured to track the interations between a population of a few thousand
+            farmers and their clientele:
           </p>
           <Img className='full-scale' src={ imgPath + 'farmers_rdbms_schema.png' } />
           <p>
@@ -573,61 +655,22 @@ var Databases = React.createClass({
             rules and inferences to bring meaning to all of your data.</strong>
           </h3>
           <h4>
-            The Statement (Triple)
-          </h4>
-          <p>
-            A statement is a 'triple' of the type:
-          </p>
-          <p>
-            <samp>subject</samp> - <samp>predicate</samp> - <samp>object</samp>
-          </p>
-          <p>
-            where <samp>subject</samp> is a resource, <samp>predicate</samp> is a property, and <samp>object</samp> is a value. All data
-            is represented in triples in a triplestore database, which form the glue bringing structure
-            and order in the form of <strong>graphs</strong> to all but the most capricious globs of raw
-            data (much like the RDBMS's method of keys and tables). Take for example the triple:
-          </p>
-          <p>
-            <samp>subject</samp> - <samp>predicate</samp> - <samp>object</samp>
-            <samp>subject</samp> - <samp>predicate</samp> - <samp>object</samp>
-            <samp>subject</samp> - <samp>predicate</samp> - <samp>object</samp>
-            <samp>subject</samp> - <samp>predicate</samp> - <samp>object</samp>
-          </p>
-          <h4>
             AI Applications
           </h4>
           <p>
-            RDF or Resource Description Framework is a simple language for expressing data models,
-            which refer to objects ("resources") and their relationships. RDF Schema is a vocabulary
-            for describing properties and classes of RDF-based resources, with semantics for
-            generalized-hierarchies of such properies and classes. The RDF data model consists of
-            resources, properties and values. Properties are the relationships that bind together
-            resources and values.  A value, however, is either a resource or a primitive data type.
-            The basic unit to represent information in RDF is the statement.
+            WIP
           </p>
           <h4>
             Watson's Triplestore
           </h4>
           <p>
-            RDF or Resource Description Framework is a simple language for expressing data models,
-            which refer to objects ("resources") and their relationships. RDF Schema is a vocabulary
-            for describing properties and classes of RDF-based resources, with semantics for
-            generalized-hierarchies of such properies and classes. The RDF data model consists of
-            resources, properties and values. Properties are the relationships that bind together
-            resources and values.  A value, however, is either a resource or a primitive data type.
-            The basic unit to represent information in RDF is the statement.
+            WIP
           </p>
           <h4>
             Quadstore or Named Graph
           </h4>
           <p>
-            RDF or Resource Description Framework is a simple language for expressing data models,
-            which refer to objects ("resources") and their relationships. RDF Schema is a vocabulary
-            for describing properties and classes of RDF-based resources, with semantics for
-            generalized-hierarchies of such properies and classes. The RDF data model consists of
-            resources, properties and values. Properties are the relationships that bind together
-            resources and values.  A value, however, is either a resource or a primitive data type.
-            The basic unit to represent information in RDF is the statement.
+            WIP
           </p>
         </section>
         { this.props.buzzwordBank }

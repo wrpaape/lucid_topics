@@ -172,7 +172,7 @@ var Lisp = React.createClass({
           '\n    (cons rand-shape rand-dims)))' +
           '\n' +
           '\n(defun samp-plates (num-plates)' +
-          '\n(loop :repeat num-plates :collect (rand-plate)))' +
+          '\n    (loop :repeat num-plates :collect (rand-plate)))' +
           '\n' +
           '\n;;; **************** RANDOM PLATE GENERATOR FUNCTIONS ****************' +
           '\n' +
