@@ -62,6 +62,7 @@ var NeuralNetworks = React.createClass({
     var xRepsCounter = width / 2 - 150;
     var xError = width / 2 + 150;
     var yStats = 2 * height / 5 + 20;
+    var errorScale = (yStats - 10) / maxError;
     var yA, yD, error;
     var draw = function(i) {
       x = xAll[i];
@@ -73,7 +74,7 @@ var NeuralNetworks = React.createClass({
       ctx.fillRect(x, 0, Math.max(0, width - widthLegend - x), height, 'black');
       ctx.fillRect(x, heightLegend, width - x, height - heightLegend, 'black');
       this.drawRepsCounter(ctx, xRepsCounter, yStats, i, '#' + cyclesSpec.colourAt(i));
-      this.drawError(ctx, xError, yStats, 1.25 * error, '#' + errorSpec.colourAt(Math.abs(error)));
+      this.drawErrorBar(ctx, xError, yStats, errorScale * error, '#' + errorSpec.colourAt(Math.abs(error)));
       this.drawBall(ctx, x, yA, rBall, '#FF00FF');
       this.drawCircle(ctx, x, yD, rBall, '#00FF00');
       ctx.restore();
@@ -99,7 +100,7 @@ var NeuralNetworks = React.createClass({
     ctx.fillText('cycles: ' + numCycles, x, y);
     ctx.restore();
   },
-  drawError: function(ctx, x, y, error, color) {
+  drawErrorBar: function(ctx, x, y, error, color) {
     ctx.save();
     ctx.font = '36px monospace';
     ctx.fillStyle = color;
@@ -228,7 +229,7 @@ var NeuralNetworks = React.createClass({
               scope of problem-solving capabilities, with some better suited than others at
               solving any particular problem. We will be venturing just deep enough into Math
               World to cover the very basics of "the quintessential" neural network model:
-              Feedforward-Backpropogation.
+              <strong>Feedforward-Backpropogation</strong>.
             </p>
             <Img src={ imgPath + 'f_b_network.jpg' } />
             <p>
@@ -286,7 +287,7 @@ var NeuralNetworks = React.createClass({
               <span className='math'>a = <span className='sigma'>&Sigma;</span>&nbsp;x<sub>i</sub>w<sub>i</sub> + (-1)w<sub>n+1</sub></span>
             </p>
             <p>
-              The value, a, represents the activation value of our neuron's input and its calculation is
+              The value, a, represents the <strong>activation value</strong> of our neuron's input and its calculation is
               the first step in computing its output. Just like a GPA the activation value is a simple
               weighted sum. But where does that last element in the series come from? If you recall from earlier
               that each neuron has some "intrinsic threshold value" to compare to, this is it. One way of
@@ -305,9 +306,21 @@ var NeuralNetworks = React.createClass({
               <span className='math'>x<sub>1</sub>w<sub>1</sub> + x<sub>2</sub>w<sub>2</sub> + x<sub>3</sub>w<sub>3</sub>... + x<sub>n</sub>w<sub>n</sub> + (-1)t >= 0</span>
             </p>
             <p>
-              The last term of the left side of our activation equation, <span className='math'>(-1)t</span> , is usually referred to as
-              the <strong>bias</strong> of a neuron, and it's purpose is to offset our activation function to allow for output values
-              outside the range of <span className='math'>0</span> to <span className='math'>1</span>.<br />So what is an activation function?
+              The last term of the left side of our equation, <span className='math'>(-1)t</span> , is usually referred to as
+              the <strong>bias</strong> of a neuron, and it's purpose is to offset the activation function to allow for better handling of
+              inputs outside the binary range of <span className='math'>0</span> to <span className='math'>1</span>.
+              <br />So what is an activation function?
+            </p>
+            <p>
+              Commonly denoted by the uppercase phi, <span className='math'>Φ</span>, the <strong>activation function</strong> is
+              the neuron's means of processing its weighted and biased input or activation value, <span className='math'>a
+              </span>, into usable output to be passed on as input for its neighbors downstream. At its simplest, the activation
+              function serves as a switch, typically expressed as a step function:
+            </p>
+            <Img src={ imgPath + 'step_function.png' } />
+            <p>
+              Activation values greater than or equal to <span className='math'>0</span> correspond to an output of 1 and
+              negative values to an output of 0.
             </p>
             <p>
               As it turns out, the original explanation of our neuron's role in the network needs to be
@@ -329,7 +342,7 @@ var NeuralNetworks = React.createClass({
                 </li>
                 <li>
                   process this pain through some sort of <strong>learning algorithm</strong> (typically
-                  modeled by backpropogation), and
+                  implemented as backpropogation), and
                 </li>
                 <li>
                   adjust the individual weights of each neuron in accordance to the error signal so that
