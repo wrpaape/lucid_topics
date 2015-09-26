@@ -158,18 +158,18 @@ var Lisp = React.createClass({
           ';;; **************** RANDOM PLATE GENERATOR FUNCTIONS ****************' +
           '\n' +
           '\n(defun rand-elt (choices)' +
-          '\n  (elt choices (random (length choices))))' +
+          '\n    (elt choices (random (length choices))))' +
           '\n' +
           '\n(defun rand-btwn (min max)' +
-          '\n  (+ min (random (coerce (- max min) \'float))))' +
+          '\n    (+ min (random (coerce (- max min) \'float))))' +
           '\n' +
           '\n(defun rand-plate ()' +
-          '\n  (let* ((rand-shape (rand-elt (mapcar #\'car shapes-areas)))' +
-          '\n    (rand-dims (loop :repeat' +
-          '\n      (if (eq rand-shape \'trapezoid) 3' +
-          '\n        (if (find rand-shape \'(square circle)) 1 2))' +
-          '\n      :collect (rand-btwn dim-min dim-max))))' +
-          '\n  (cons rand-shape rand-dims)))' +
+          '\n    (let* ((rand-shape (rand-elt (mapcar #\'car shapes-areas)))' +
+          '\n        (rand-dims (loop :repeat' +
+          '\n            (if (eq rand-shape \'trapezoid) 3' +
+          '\n                (if (find rand-shape \'(square circle)) 1 2))' +
+          '\n            :collect (rand-btwn dim-min dim-max))))' +
+          '\n    (cons rand-shape rand-dims)))' +
           '\n' +
           '\n(defun samp-plates (num-plates)' +
           '\n(loop :repeat num-plates :collect (rand-plate)))' +
@@ -272,21 +272,21 @@ var Lisp = React.createClass({
           '\n;;; LISP might look:' +
           '\n' +
           '\n(defparameter shapes-areas' +
-          '\n  (list (cons \'square #\'(lambda (s) (square s)))' +
-          '\n    (cons \'circle #\'(lambda (r) (* pi (square r))))' +
-          '\n    (cons \'triangle #\'(lambda (b h) (* 1/2 b h)))' +
-          '\n    (cons \'rectangle #\'(lambda (w l) (* w l)))' +
-          '\n    (cons \'ellipse #\'(lambda (a b) (* pi a b)))' +
-          '\n    (cons \'trapezoid #\'(lambda (b1 b2 h) (* 1/2 (+ b1 b2) h)))))' +
+          '\n    (list (cons \'square #\'(lambda (s) (square s)))' +
+          '\n        (cons \'circle #\'(lambda (r) (* pi (square r))))' +
+          '\n        (cons \'triangle #\'(lambda (b h) (* 1/2 b h)))' +
+          '\n        (cons \'rectangle #\'(lambda (w l) (* w l)))' +
+          '\n        (cons \'ellipse #\'(lambda (a b) (* pi a b)))' +
+          '\n        (cons \'trapezoid #\'(lambda (b1 b2 h) (* 1/2 (+ b1 b2) h)))))' +
           '\n(defparameter dim-min 0)' +
           '\n(defparameter dim-max 100)' +
           '\n' +
           '\n(defun avg (list)' +
-          '\n  (/ (apply #\'+ list) (length list)))' +
+          '\n    (/ (apply #\'+ list) (length list)))' +
           '\n' +
           '\n(defun area-plate (plate)' +
-          '\n  (apply (cdr (assoc (car plate) shapes-areas))' +
-          '\n    (cdr plate)))' +
+          '\n    (apply (cdr (assoc (car plate) shapes-areas))' +
+          '\n        (cdr plate)))' +
           '\n' +
           '\n(avg (mapcar #\'area-plate (samp-plates 10)))' +
           '\n' +
@@ -324,7 +324,7 @@ var Lisp = React.createClass({
       editor.$blockScrolling = Infinity;
       editor.setTheme('ace/theme/terminal');
       editor.getSession().setMode('ace/mode/' + contents[thisEditor].mode);
-      editor.getSession().setTabSize(2);
+      editor.getSession().setTabSize(4);
       editor.setOptions({
         enableBasicAutocompletion: true,
         enableLiveAutocompletion: false

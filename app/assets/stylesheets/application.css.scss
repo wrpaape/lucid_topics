@@ -329,21 +329,23 @@ body {
           }
         }
         &.editor {
-          width: 600px;
+          width: 1000px;
           &.lisp, &.pascal {
-            width: 450px;
+            width: 600px;
             margin-right: $s10;
             vertical-align: top;
             code > div {
-              width: 349px;
+              width: 476px;
             }
           }
           pre {
-            height: 300px;
+            font-size: $s7;
+            height: 250px;
             margin: $s5;
             @include set-ace;
             @include border2;
             &#editor-homoiconic, &#editor-prototypable {
+              font-size: $s8;
               height: 400px;
             }
           }
@@ -358,7 +360,7 @@ body {
               cursor: help;
             }
             div {
-              width: 501px;
+              width: 876px;
               display: inline-block;
               overflow-x: auto;
             }
