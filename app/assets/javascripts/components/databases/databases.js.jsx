@@ -530,6 +530,40 @@ var Databases = React.createClass({
             </pre>
           </blockquote>
           <p>
+            This is possible because ahead of time because one-by-one each data entry
+            was inserted into one of the 6 database tables (farmers, contracts, clients,
+            farms, fields, and clients) with its relationships <strong>established ahead of
+            time</strong> by the allocation of keys. For example, if farmer "Garth" was contracted
+            to grow "strawberries", the entry representing that contract would hold keys pointing
+            to "Garth" and "strawberries":
+          </p>
+          <blockquote>
+            <pre>
+              <code>
+                {
+                  'one of Garth\'s contracts => { \n' +
+                  '                               id: (contract\'s id),\n' +
+                  '                               ...\n' + 
+                  '                               farmer_id: 900\n' +
+                  '                               crop_id: 44\n' +
+                  '                               ...\n' + 
+                  '                             }'
+                }
+              </code>
+            </pre>
+          </blockquote>
+          <p>
+            The key phrase "established ahead of time" means that a vanilla RDBMS's "knowledge"
+            of the data it handles is limited to the exact specification of its entries' schema.
+            Active Record + SQL knows that Garth sold strawberries because an entry on the
+            "contracts" table points <strong>directly</strong> at Garth's and strawberries's
+            ids. This means that... 
+          </p>
+          <h3>
+            <strong>A traditional relational DBMS is not capable of inferencing, reasoning, or
+            interpolation of any kind when handling a query.</strong>
+          </h3>
+          <p>
             Triplestores combine full text search
             with graph analytics and logical reasoning to produce deep, rich results.
             **metadata, content enrichment,***
