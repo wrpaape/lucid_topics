@@ -13,6 +13,7 @@
 //= require ace-builds/src-min-noconflict/mode-pascal
 //= require ajax
 //= require marked
+// = require rainbowvis
 //= require_tree .
 
 'use strict';

@@ -125,6 +125,8 @@ GEM
       activesupport (= 4.2.3)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
+    rainbowvis_rails (0.0.1)
+      railties (>= 3.1.0, < 5.0)
     rake (10.4.2)
     rdoc (4.2.0)
     react-rails (1.2.0)
@@ -188,6 +190,7 @@ DEPENDENCIES
   puma
   rails (= 4.2.3)
   rails_12factor
+  rainbowvis_rails
   react-rails
   react-rails-img
   sass-rails (~> 5.0)

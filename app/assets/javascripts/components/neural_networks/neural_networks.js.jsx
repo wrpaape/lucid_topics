@@ -20,6 +20,7 @@ var NeuralNetworks = React.createClass({
     var yMax = 4.723;
     var xScale = (width - 2 * pad) / (xf - x0);
     var yScale = (height - 2 * pad) / (yMax - yMin);
+    var maxError = 2.592 * yScale;
     var dx = (xf - x0) / 2000;
     var xAll = [], yDesired = [], yActual = [];
     for (var x = 0.4; x < 8.75; x += dx) {
@@ -52,14 +53,29 @@ var NeuralNetworks = React.createClass({
 
     var widthLegend = 175;   
     var heightLegend = 100;
+    var cyclesSpec = new Rainbow();
+    cyclesSpec.setNumberRange(0, xAll.length);
+    cyclesSpec.setSpectrum('#FF00FF', '#00FF00');
+    var errorSpec = new Rainbow();
+    errorSpec.setNumberRange(0, maxError);
+    errorSpec.setSpectrum('green', 'yellow', 'red');
+    var xRepsCounter = width / 2 - 150;
+    var xError = width / 2 + 150;
+    var yStats = 2 * height / 5 + 20;
+    var yA, yD, error;
     var draw = function(i) {
+      x = xAll[i];
+      yA = yActual[i];
+      yD = yDesired[i];
+      error = yD - yA;
       ctx.save();
       ctx.clearRect(0, 0, width, height);
-      ctx.fillRect(xAll[i], 0, Math.max(0, width - widthLegend - xAll[i]), height, 'black');
-      ctx.fillRect(xAll[i], heightLegend, width - xAll[i], height - heightLegend, 'black');
-
-      this.drawBall(ctx, xAll[i], yActual[i], rBall, '#FF00FF');
-      this.drawCircle(ctx, xAll[i], yDesired[i], rBall, '#00FF00');
+      ctx.fillRect(x, 0, Math.max(0, width - widthLegend - x), height, 'black');
+      ctx.fillRect(x, heightLegend, width - x, height - heightLegend, 'black');
+      this.drawRepsCounter(ctx, xRepsCounter, yStats, i, '#' + cyclesSpec.colourAt(i));
+      this.drawError(ctx, xError, yStats, 1.25 * error, '#' + errorSpec.colourAt(Math.abs(error)));
+      this.drawBall(ctx, x, yA, rBall, '#FF00FF');
+      this.drawCircle(ctx, x, yD, rBall, '#00FF00');
       ctx.restore();
     }.bind(this);
 
@@ -75,6 +91,21 @@ var NeuralNetworks = React.createClass({
   },
   outputActual: function(x) {
     return this.outputDesired(x) - 4 * Math.pow(Math.E, -x / 1.5) * Math.cos(6 * Math.PI * x + 0.5);
+  },
+  drawRepsCounter: function(ctx, x, y, numCycles, color) {
+    ctx.save();
+    ctx.font = '36px monospace';
+    ctx.fillStyle = color;
+    ctx.fillText('cycles: ' + numCycles, x, y);
+    ctx.restore();
+  },
+  drawError: function(ctx, x, y, error, color) {
+    ctx.save();
+    ctx.font = '36px monospace';
+    ctx.fillStyle = color;
+    ctx.fillText('error: ', x, y);
+    ctx.fillRect(x + 158, y - 10, 100, error, color);
+    ctx.restore();
   },
   drawBall: function(ctx, x, y, r, color) {
     ctx.save();
@@ -221,7 +252,7 @@ var NeuralNetworks = React.createClass({
               teachers implement when grading their assignments: a failed test is usually
               more costly to a student's overall GPA than a forgotten homework worksheet.
               But while a heavier weight implies greater importance to a graded assignment,
-              a "heavier" weight simply implies greater amplification. To diverge even further
+              a "heavier" weight simply implies <strong>greater amplification</strong>. To diverge even further
               from this analogy, weights assigned to inputs in a feedforward-backpropogation
               network can be negative and of magnitude greater than one as opposed to the familiar
               10%-20%-70% grading system. The steps this neuron will take to process its
@@ -323,16 +354,16 @@ var NeuralNetworks = React.createClass({
               direction that will result in the target's interception. In other words, this neural network is
               used to approximate a continuous <strong>mapping function</strong> that bridges the unknown gap
               between "there's the target" to "got it!" This is the power of the feedforward-backpropogation
-              network: According to the <strong>Universal Approximation Theorem</strong>...
+              network. According to the <strong>Universal Approximation Theorem</strong>:
             </p>
             <h3>
               <strong>The standard multilayer feed-forward network with a single hidden layer is a universal
               approximator.</strong>
             </h3>
             <p>
-              meaning that, provided there exists some dependence of the desired output on the given input, be it known or unknown,
-              with enough "training" repetition a neural network will converge toward a solution connecting these
-              two states.
+              This means that provided there exists some dependence of the desired output on the given input, be it known or unknown,
+              with enough "training" cycles a neural network will converge toward a solution connecting these
+              two states:
             </p>
             <canvas id='approximator' width='2000' height='400' />
           </section>
