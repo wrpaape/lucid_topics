@@ -12,6 +12,6 @@ class EvaluateController < ApplicationController
   private
 
   def format_lisp
-    "(progn #{params[:input]}\n)"
+    "(progn \n(setf *random-state* (make-random-state t))\n#{params[:input]}\n)"
   end
 end
