@@ -165,8 +165,6 @@ var NeuralNetworks = React.createClass({
               approximate functions that can depend on a large number of inputs and
               are generally unknown.
             </p>
-            <Img src={ imgPath + 'neuron.png' } />
-            <Img src={ imgPath + 'basic_diagram.png' } />
             <p>
               Artificial neural networks are generally presented
               as systems of interconnected "neurons" which exchange messages between each
@@ -188,6 +186,7 @@ var NeuralNetworks = React.createClass({
               this threshold, the switch is thrown and the neuron fires, relaying a
               new synapse to one or more downstream neurons.
             </p>
+            <Img src={ imgPath + 'irl_neuron.png' } />
             <p>
               What makes a neuron smarter than a simple switch, or rather, what makes
               a <strong>network</strong> of billions of neurons firing together smarter
