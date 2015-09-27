@@ -228,10 +228,10 @@ var NeuralNetworks = React.createClass({
               Accordingly, hundreds of models were born from Math World possessing a particular
               scope of problem-solving capabilities, with some better suited than others at
               solving any particular problem. We will be venturing just deep enough into Math
-              World to cover the very basics of "the quintessential" neural network model:
-              <strong>Feedforward-Backpropogation</strong>.
+              World to cover the very basics of "the quintessential" neural network model: <strong>
+              Feedforward-Backpropogation</strong>.
             </p>
-            <Img src={ imgPath + 'f_b_network.jpg' } />
+            <Img className='full-scale' src={ imgPath + 'ff_bp_3_layers.png' } />
             <p>
               Feedforward-Backpropogation is not indicative of the layered configuration
               of this neural network, but rather "feedforward" describes the method
@@ -245,7 +245,7 @@ var NeuralNetworks = React.createClass({
               from two upstream neurons and fires off its output synapse to a single neuron
               downstream. Biological details aside, our neuron should look something like this:
             </p>
-            <Img src={ imgPath + 'perceptron.png' } />
+            <Img src={ imgPath + 'perceptron_simple.png' } />
             <p>
               It turns out the properties of each synapse of this simple neuron can be
               modeled by the assignment of a simple decimal number. This number is referred
@@ -276,7 +276,7 @@ var NeuralNetworks = React.createClass({
               how their combined effort results in the magic phenomenon we call learning soon enough,
               but for now a little math:
             </p>
-            <Img src={ imgPath + 'artificial_neuron.jpg' } />
+            <Img src={ imgPath + 'perceptron_general.jpg' } />
             <p className='equation'>
               <span className='math'>a = x<sub>1</sub>w<sub>1</sub> + x<sub>2</sub>w<sub>2</sub> + x<sub>3</sub>w<sub>3</sub>... + x<sub>n</sub>w<sub>n</sub> + (-1)w<sub>n+1</sub></span>
             </p>
@@ -379,6 +379,8 @@ var NeuralNetworks = React.createClass({
               two states:
             </p>
             <canvas id='approximator' width='2000' height='400' />
+            <p>
+            </p>
           </section>
         { this.props.buzzwordBank }
         </div>
