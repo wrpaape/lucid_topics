@@ -587,9 +587,9 @@ var Lisp = React.createClass({
           </h3>
           <p>
             The ability to delay decisions-or more accurately, to make
-            temporary, nonbinding decisions-is usually a good thing,
+            temporary, nonbinding decisions-is usually a good thing
             because it means that irrelevant details can be ignored, and,
-            in sum, results in a more adaptive and robust program.
+            in sum, results in an elegantly succinct and robust program.
           </p>
         </section>
         <section>

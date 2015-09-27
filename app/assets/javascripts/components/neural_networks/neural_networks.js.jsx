@@ -375,7 +375,7 @@ var NeuralNetworks = React.createClass({
             </h3>
             <p>
               This means that provided there exists some dependence of the desired output on the given input, be it known or unknown,
-              with enough "training" cycles a neural network will converge toward a solution connecting these
+              with enough feedforward-backpropagation training cycles a neural network will converge toward a solution connecting these
               two states:
             </p>
             <canvas id='approximator' width='2000' height='400' />
