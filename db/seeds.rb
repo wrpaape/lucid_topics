@@ -142,6 +142,7 @@ In other words, an atom is one of two fundamental units of data expression:
 - character string (i.e. \"Hello world, I am an atom\"), or
 - numeric literal (i.e. 470)
 
+
 *safe*
 That being said, the term *atom* is often loosely interpretted and commonly referred to as
 an *element*, a broader term including fundamental units such as functions and variables.
