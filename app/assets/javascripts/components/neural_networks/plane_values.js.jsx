@@ -79,6 +79,7 @@ var PlaneValues = React.createClass({
       ctxOutput.fillText('Tₒ: ' + formatScalar(aMagDesired, 'kN'), xo2, height - 2 * heightText - 4);
       ctxOutput.fillText('φₒ: ' + formatAngle(phiDesired), xo2, height - heightText);
     };
+    // lolcomment
     var draw = function() {
       drawInput();
       drawOutput();
