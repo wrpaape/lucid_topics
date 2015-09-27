@@ -276,15 +276,15 @@ var NeuralNetworks = React.createClass({
               how their combined effort results in the magic phenomenon we call learning soon enough,
               but for now a little math:
             </p>
-            <Img src={ imgPath + 'perceptron_general.jpg' } />
+            <Img src={ imgPath + 'perceptron_general.png' } />
             <p className='equation'>
-              <span className='math'>a = x<sub>1</sub>w<sub>1</sub> + x<sub>2</sub>w<sub>2</sub> + x<sub>3</sub>w<sub>3</sub>... + x<sub>n</sub>w<sub>n</sub> + (-1)w<sub>n+1</sub></span>
+              <span className='math'>a = x<sub>1</sub>w<sub>1</sub> + x<sub>2</sub>w<sub>2</sub> + x<sub>3</sub>w<sub>3</sub>... + x<sub>n</sub>w<sub>n</sub> + (-1)w<sub>N+1</sub></span>
             </p>
             <p>
               or if you're familiar with summation notation:
             </p>
             <p className='equation'>
-              <span className='math'>a = <span className='sigma'>&Sigma;</span>&nbsp;x<sub>i</sub>w<sub>i</sub> + (-1)w<sub>n+1</sub></span>
+              <span className='math'>a = <span className='sigma'>&Sigma;</span>&nbsp;x<sub>i</sub>w<sub>i</sub> + (-1)w<sub>N+1</sub></span>
             </p>
             <p>
               The value, a, represents the <strong>activation value</strong> of our neuron's input and its calculation is
