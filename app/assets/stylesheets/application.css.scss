@@ -212,6 +212,7 @@ body {
   @include consolas;
   @include bg1;
   img {
+    vertical-align: top;
     max-width: 80%;
     max-height: 400px;
     &.full-scale {

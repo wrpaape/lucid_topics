@@ -277,7 +277,7 @@ var NeuralNetworks = React.createClass({
             </p>
             <Img src={ imgPath + 'perceptron_general.png' } />
             <p className='equation'>
-              <span className='math'>a = x<sub>1</sub>w<sub>1</sub> + x<sub>2</sub>w<sub>2</sub> + x<sub>3</sub>w<sub>3</sub>... + x<sub>n</sub>w<sub>n</sub> + (-1)w<sub>N+1</sub></span>
+              <span className='math'>a = x<sub>1</sub>w<sub>1</sub> + x<sub>2</sub>w<sub>2</sub> + x<sub>3</sub>w<sub>3</sub>... + x<sub>N</sub>w<sub>N</sub> + (-1)w<sub>N+1</sub></span>
             </p>
             <p>
               or if you're familiar with summation notation:
@@ -293,7 +293,7 @@ var NeuralNetworks = React.createClass({
               viewing how our neuron uses this value to judge its weighted input is through the equation:
             </p>
             <p className='equation'>
-              <span className='math'>x<sub>1</sub>w<sub>1</sub> + x<sub>2</sub>w<sub>2</sub> + x<sub>3</sub>w<sub>3</sub>... + x<sub>n</sub>w<sub>n</sub> >= t</span>
+              <span className='math'>x<sub>1</sub>w<sub>1</sub> + x<sub>2</sub>w<sub>2</sub> + x<sub>3</sub>w<sub>3</sub>... + x<sub>N</sub>w<sub>N</sub> >= t</span>
             </p>
             <p>
               With the weighted sum of its inputs calculated on the left hand side, our neuron's output
@@ -302,7 +302,7 @@ var NeuralNetworks = React.createClass({
               constructing our model by treating the threshold as an additional weight like so:
             </p>
             <p className='equation'>
-              <span className='math'>x<sub>1</sub>w<sub>1</sub> + x<sub>2</sub>w<sub>2</sub> + x<sub>3</sub>w<sub>3</sub>... + x<sub>n</sub>w<sub>n</sub> + (-1)t >= 0</span>
+              <span className='math'>x<sub>1</sub>w<sub>1</sub> + x<sub>2</sub>w<sub>2</sub> + x<sub>3</sub>w<sub>3</sub>... + x<sub>N</sub>w<sub>N</sub> + (-1)t >= 0</span>
             </p>
             <p>
               The last term of the left side of our equation, <span className='math'>(-1)t</span> , is usually referred to as
@@ -317,18 +317,30 @@ var NeuralNetworks = React.createClass({
               function serves as a switch, typically expressed as a step function:
             </p>
             <Img src={ imgPath + 'step_function.png' } />
+            <Img src={ imgPath + 'step_function_eq.png' } />
             <p>
               Activation values greater than or equal to <span className='math'>0</span> correspond to an output of 1 and
-              negative values to an output of 0.
-            </p>
-            <p>
-              As it turns out, the original explanation of our neuron's role in the network needs to be
-              tweaked for our demonstration. The "combinatorial switch" model limits the output of our
+              negative values to an output of 0. With this a neuron can accomplish the classic "combinatorial
+              switch" in a network, however, this activation limits the output of our
               neurons to just 2 values: "fire" or "don't fire" depending whether activation was achieved or not.
               While a binary output could be implemented to reproduce our caveman's learning process
               (ouch => wrong, not ouch => right), in many applications of machine learning there exists
               a gray area where the "rightness" of an output must be evaluated with an analog <strong>error
-              </strong> Consider the basic control flow of a neural network undergoing <strong>supervised learning</strong>.
+              </strong> feedback. Enter the <strong>sigmoid</strong> or "<strong>squashing</strong>" <strong>function</strong>:
+            </p>
+              <Img src={ imgPath + 'sigmoid.png' } />
+              <Img src={ imgPath + 'sigmoid_eq.png' } />
+            <p>
+              For larger positive and negative activation values the sigmoid output resembles that of the step
+              function, approaching <span className='math'>1</span> and <span className='math'>0</span> asymptotically.
+              However, the flattened behavior near 0 provides a neuron with an approximately linear output where values
+              are "righter." Accordingly, a sigmoid activation function allows a neural network to respond
+              with "wrong" or "right" for activation values that are far from desired but also respond with
+              "warmer" or "colder" for values with small error. With this squashing action, problems both of the
+              linear and non-linear type can be solved or learned.
+            </p>
+            <p>
+              Consider the basic control flow of a neural network undergoing <strong>supervised learning</strong>.
             </p>
             <Img src={ imgPath + 'nn_controller.png' } />
             <p>
