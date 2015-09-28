@@ -377,7 +377,7 @@ var NeuralNetworks = React.createClass({
               our robot's neural network needs to be a steering force or thrust with the proper magnitude and
               direction that will result in the target's interception. In other words, this neural network is
               used to approximate a continuous <strong>mapping function</strong> that bridges the unknown gap
-              between "there's the target" to "got it!" This is the power of the feedforward-backpropogation
+              between "there's the target" to "got it!". This is the power of the feedforward-backpropogation
               network. According to the <strong>Universal Approximation Theorem</strong>:
             </p>
             <h3>

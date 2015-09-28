@@ -18,13 +18,49 @@ var Lisp = React.createClass({
           '\n  *         HANDLING MATRICES IN PASCAL         *' +
           '\n  ***********************************************' +
           '\n}' +
+          '\n// First define functions add and mult:' +
           '\n' +
-          '\n{ ' +
-          '\n  (definitions, declarations, and' +
-          '\n  setting presumably clogged with' +
-          '\n  much low-level detail)' +
-          '\n}' +
+          '\n// adds two matrices x and y, then returns the result' +
+          '\nFunction add(x : matrix; y : matrix) : matrix;' +
+          '\nvar a, b, result : matrix;' +
+          '\nbegin' +
+          '\n    a := x;' +
+          '\n    b := y;' +
           '\n' +
+          '\n    new(result);' +
+          '\n    result^.m := a^.m;' +
+          '\n    result^.n := a^.n;' +
+          '\n' +
+          '\n    for m := 1 to a^.m do for n := 1 to a^.n do' +
+          '\n        result^.mat[m, n] := a^.mat[m, n] + b^.mat[m, n];' +
+          '\n    add := result;' +
+          '\nend;' +
+          '\n' +
+          '\n' +
+          '\n// multiplies two matrices x and y, then returns the result' +
+          '\nFunction mult(x : matrix; y : matrix) : matrix;' +
+          '\nvar a, b, result : matrix;' +
+          '\nbegin' +
+          '\n    a := x;' +
+          '\n    b := y;' +
+          '\n' +
+          '\n    new(result);' +
+          '\n    result^.m := a^.m;' +
+          '\n    result^.n := b^.n;' +
+          '\n' +
+          '\n    for m:= 1 to a^.m do' +
+          '\n        for n := 1 to b^.n do' +
+          '\n        begin' +
+          '\n        result^.mat[m,n] := 0;' +
+          '\n        for i := 1 to a^.n do' +
+          '\n        result^.mat[m,n] := a^.mat[m,i] * b^.mat[i,n] + result^.mat[m,n];' +
+          '\n        end;' +
+          '\n    mult := result;' +
+          '\nend;' +
+          '\n' +
+          '\n// Next intialize variables a, b,' +
+          '\n// and c and storage variables temp' +
+          '\n// and result as matrix type' +
           '\nvar a, b, c, temp, result: matrix;' +
           '\ntemp := add(b, c);' +
           '\nresult := mult(a, result);' +
@@ -43,27 +79,29 @@ var Lisp = React.createClass({
           '\n;;; *********************************************' +
           '\n;;; First define functions add and mult:' +
           '\n' +
-          '\n(defun add (m1 m2)' +
-          '\n  (let ((sum (make-array (array-dimensions m1))))' +
-          '\n    (dotimes (i (array-total-size m1))' +
+          '\n;;; adds two matrices x and y, then returns the result' +
+          '\n(defun add (x y)' +
+          '\n  (let ((sum (make-array (array-dimensions x))))' +
+          '\n    (dotimes (i (array-total-size x))' +
           '\n      (setf (row-major-aref sum i)' +
-          '\n            (+ (row-major-aref m1 i)' +
-          '\n               (row-major-aref m2 i))))' +
+          '\n            (+ (row-major-aref x i)' +
+          '\n               (row-major-aref y i))))' +
           '\n  sum))' +
           '\n' +
-          '\n(defun mult (a-matrix b-matrix &key' +
+          '\n;;; multiplies two matrices x and y, then returns the result' +
+          '\n(defun mult (x y &key' +
           '\n  (product (make-array' +
-          '\n    (list (nth 0 (array-dimensions a-matrix))' +
-          '\n          (nth 1 (array-dimensions b-matrix))))))' +
-          '\n  (let ((m (nth 0 (array-dimensions a-matrix)))' +
-          '\n        (n (nth 1 (array-dimensions b-matrix)))' +
-          '\n        (common (nth 0 (array-dimensions b-matrix))))' +
+          '\n    (list (nth 0 (array-dimensions x))' +
+          '\n          (nth 1 (array-dimensions y))))))' +
+          '\n  (let ((m (nth 0 (array-dimensions x)))' +
+          '\n        (n (nth 1 (array-dimensions y)))' +
+          '\n        (common (nth 0 (array-dimensions y))))' +
           '\n    (dotimes (i m product)' +
           '\n      (dotimes (j n)' +
           '\n        (setf (aref product i j) 0.0)' +
           '\n        (dotimes (k common)' +
           '\n          (incf (aref product i j)' +
-          '\n            (* (aref a-matrix i k) (aref b-matrix k j))))))))' +
+          '\n            (* (aref x i k) (aref y k j))))))))' +
           '\n' +
           '\n;;; Next set the values of matrices a, b,' +
           '\n;;; and c:' +

@@ -36,7 +36,7 @@ var Databases = React.createClass({
             The general definition of a database is "a collection of information organized to provide
             efficient retrieval." Technically a floppy disk, an Excel spreadsheet, and even a rolodex qualifies
             as a database, but what developers most likely refer to when answering the question "What database
-            does your product use?" is a <strong>database management system</strong>. or DBMS A DBMS
+            does your product use?" is a <strong>database management system</strong> or DBMS. A DBMS
             is the interactive software layer through which programmers, their programs, and, indirectly,
             consumers find, change, and otherwise make use of the data stored in the actual database.
           </p>
@@ -81,7 +81,7 @@ var Databases = React.createClass({
             </li>
           </ol>
           <p>
-            Note the keyword "manageable." While there's probably a several-orders-of-magnitude
+            Note the keyword "manageably". While there's probably a several-orders-of-magnitude
             shortage of manufactured notebooks outstanding required to house the Facebook database,
             even if it could be stored on paper maintaining the simple status updates of its userbase
             yet alone the dynamic rewiring of countless network relationships as friends are added
@@ -447,9 +447,10 @@ var Databases = React.createClass({
             which refer to objects ("resources") and their associations or relationships. RDF Schema
             is a vocabulary for describing properties and classes of RDF-based resources, with semantics
             for generalized-hierarchies of such properies and classes. The RDF data model consists of
-            resources, properties and values. Properties are the relationships that bind together
+            resources, properties and values. Resources can be anything, including documents, people, physical
+            objects, and abstract concepts. Properties are the relationships that bind together
             resources and values.  A value, however, is either a resource or a primitive data type.
-            The basic unit to represent information in RDF is the statement.
+            The basic unit to represent information in RDF is <strong>the statement</strong>.
           </p>
           <table>
             <caption>
@@ -487,6 +488,11 @@ var Databases = React.createClass({
           <ul>
             <li>
               simplicity of design
+              <p>
+                Instead of a network of several tables having columns configured according to the different
+                data they contain, <strong>an RDF database houses the entirety of its data in a
+                single table</strong> most commonly configured with 3 columns.
+              </p>
             </li>
             <li>
               horizontal scalability
@@ -515,21 +521,6 @@ var Databases = React.createClass({
               </p>
             </li>
           </ul>
-          <h4>
-            The Statement (Triple)
-          </h4>
-          <p>
-            A statement is a 'triple' of the type:
-          </p>
-          <p>
-            <samp>subject</samp> - <samp>predicate</samp> - <samp>object</samp>
-          </p>
-          <p>
-            where <samp>subject</samp> is a resource, <samp>predicate</samp> is a property, and <samp>object</samp> is a value. All data
-            is represented in triples in a triplestore database, which form the glue bringing structure
-            and order in the form of <strong>graphs</strong> to all but the most capricious globs of raw
-            data (much like the RDBMS's method of keys and tables). Take for example the triple:
-          </p>
           <h4>
             Triplestore
           </h4>
@@ -646,10 +637,148 @@ var Databases = React.createClass({
             interpolation of any kind when handling a query.</strong>
           </h3>
           <p>
-            Triplestores combine full text search
-            with graph analytics and logical reasoning to produce deep, rich results.
-            **metadata, content enrichment,***
+            So how do triplestores do what RDBMS's can't?
           </p>
+          <h4>
+            The Statement (Triple)
+          </h4>
+          <p>
+            A statement is a 'triple' of the type:
+          </p>
+          <p>
+            <samp>subject</samp> - <samp>predicate</samp> - <samp>object</samp>
+          </p>
+          <p>
+            where <samp>subject</samp> is a resource, <samp>predicate</samp> is a property, and <samp>object</samp> is a value
+            or additional resource. All data is represented in triples in a triplestore database, which form the glue bringing structure
+            and order in the form of <strong>graphs</strong> to all but the most capricious globs of raw
+            data (much like the RDBMS's method of keys and tables). The subject and object represent
+            the two resources being related, and the predicate represents the nature of their relationship.
+            The relationship is phrased in a directional way (<strong>from</strong> subject <strong>to</strong> object)
+            and is called a property. Take for example the table below housing triples that capture
+            a slice of our farmers-clients dataset:
+          </p>
+          <div>
+            <h3>
+              farmers and clients statements
+            </h3>
+            <table className='triples'>
+              <thead>
+                <tr>
+                  <th>subject</th>
+                  <th>predicate</th>
+                  <th>object</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Farmer</td>
+                  <td>is a type of</td>
+                  <td>Person</td>
+                </tr>
+                <tr>
+                  <td>Client</td>
+                  <td>is a type of</td>
+                  <td>Person</td>
+                </tr>
+                <tr>
+                  <td>Farm</td>
+                  <td>is a type of</td>
+                  <td>Building</td>
+                </tr>
+                <tr>
+                  <td>Crop</td>
+                  <td>is a type of</td>
+                  <td>Food</td>
+                </tr>
+                <tr>
+                  <td>Pumpkin</td>
+                  <td>is a</td>
+                  <td>Crop</td>
+                </tr>                
+                <tr>
+                  <td>Ol MacDonald</td>
+                  <td>is a</td>
+                  <td>Farmer</td>
+                </tr>
+                <tr>
+                  <td>EIO Ranch</td>
+                  <td>is a</td>
+                  <td>Farm</td>
+                </tr>
+                <tr>
+                  <td>Pumpkin Patch</td>
+                  <td>is a type of</td>
+                  <td>Field</td>
+                </tr>
+                <tr>
+                  <td>Pumpkin</td>
+                  <td>is grown in</td>
+                  <td>Pumpkin Patch</td>
+                </tr>
+                <tr>
+                  <td>Ol MacDonald</td>
+                  <td>has a</td>
+                  <td>EIO Ranch</td>
+                </tr>
+                <tr>
+                  <td>EIO Ranch</td>
+                  <td>has a</td>
+                  <td>Pumpkin Patch</td>
+                </tr>
+                <tr>
+                  <td>Pumpkin Cartel</td>
+                  <td>is a type of</td>
+                  <td>Criminal Organization</td>
+                </tr>
+                <tr>
+                  <td>Pumpkin Cartel</td>
+                  <td>has dirt on</td>
+                  <td>Ol MacDonald</td>
+                </tr>
+                <tr>
+                  <td>The Great Pumpkin</td>
+                  <td>is head of</td>
+                  <td>Pumpkin Cartel</td>
+                </tr>
+                <tr>
+                  <td>The Great Pumpkin</td>
+                  <td>is a</td>
+                  <td>Client</td>
+                </tr>  
+                <tr>
+                  <td>Extortion</td>
+                  <td>is a type of</td>
+                  <td>Contract</td>
+                </tr>
+                <tr>
+                  <td>Halloween Offering</td>
+                  <td>is a</td>
+                  <td>Extortion</td>
+                </tr>
+                <tr>
+                  <td>Halloween Offering</td>
+                  <td>requires Crop</td>
+                  <td>Pumpkin</td>
+                </tr>
+                <tr>
+                  <td>Halloween Offering</td>
+                  <td>requires weight (lbs)</td>
+                  <td>1000000</td>
+                </tr>
+                <tr>
+                  <td>The Great Pumpkin</td>
+                  <td>demands payment</td>
+                  <td>Halloween Offering</td>
+                </tr>
+                <tr>
+                  <td>Halloween Offering</td>
+                  <td>binds victim</td>
+                  <td>Ol MacDonald</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <h3>
             <strong>Triplestores are the "smart brain" on top of legacy systems leveraging knowledge,
             rules and inferences to bring meaning to all of your data.</strong>
@@ -670,7 +799,8 @@ var Databases = React.createClass({
             Quadstore or Named Graph
           </h4>
           <p>
-            WIP
+            N-quads statements are a sequence of RDF terms representing the subject, predicate, object and
+            graph label of an RDF Triple and the graph it is part of in a dataset. 
           </p>
         </section>
         { this.props.buzzwordBank }
