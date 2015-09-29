@@ -306,7 +306,7 @@ var Lisp = React.createClass({
           '\n;;; *   beforehand in its design.                                   *' +
           '\n;;; *****************************************************************' +
           '\n' +
-          '\n;;; With this philosophy in mind, here\'s our plate calculator in'  +
+          '\n;;; With this philosophy in mind, here\'s how our plate calculator in' +
           '\n;;; LISP might look:' +
           '\n' +
           '\n(defparameter shapes-areas' +

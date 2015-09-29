@@ -416,7 +416,7 @@ var Databases = React.createClass({
           </p>
           <p>
             In the case of our forum, the "one-to-many" association between a user and their posts can
-            be handled without having to stuff the contents of every post belonging to each user in
+            be handled without having to cram the contents of every post belonging to each user into
             its corresponding entry in the "users" table. Rather a separate "posts" table is created
             where ownership of each post entry is expressed by the value of its foreign key "user_id."
             The case is similar with the "comments" table, however, since our forum allows for users
@@ -539,7 +539,7 @@ var Databases = React.createClass({
             </li>
           </ul>
           <p>
-            Consider the following <strong>UML</strong> diagram modeling a typical relational database
+            Consider the following diagram modeling a typical relational database
             schema structured to track the interations between a population of a few thousand
             farmers and their clientele:
           </p>
@@ -671,7 +671,7 @@ var Databases = React.createClass({
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                {/* <tr>
                   <td>Farmer</td>
                   <td>is a type of</td>
                   <td>Person</td>
@@ -690,21 +690,16 @@ var Databases = React.createClass({
                   <td>Crop</td>
                   <td>is a type of</td>
                   <td>Food</td>
-                </tr>
+                </tr> 
                 <tr>
                   <td>Pumpkin</td>
                   <td>is a</td>
                   <td>Crop</td>
-                </tr>                
-                <tr>
-                  <td>Ol MacDonald</td>
-                  <td>is a</td>
-                  <td>Farmer</td>
                 </tr>
                 <tr>
-                  <td>EIO Ranch</td>
-                  <td>is a</td>
-                  <td>Farm</td>
+                  <td>Pumpkin</td>
+                  <td>has yield (lbs/acre)</td>
+                  <td>26600</td>
                 </tr>
                 <tr>
                   <td>Pumpkin Patch</td>
@@ -715,7 +710,17 @@ var Databases = React.createClass({
                   <td>Pumpkin</td>
                   <td>is grown in</td>
                   <td>Pumpkin Patch</td>
+                </tr> */}                
+                <tr>
+                  <td>Ol MacDonald</td>
+                  <td>is a</td>
+                  <td>Farmer</td>
                 </tr>
+                {/* <tr>
+                  <td>EIO Ranch</td>
+                  <td>is a</td>
+                  <td>Farm</td>
+                </tr> */}
                 <tr>
                   <td>Ol MacDonald</td>
                   <td>has a</td>
@@ -724,14 +729,19 @@ var Databases = React.createClass({
                 <tr>
                   <td>EIO Ranch</td>
                   <td>has a</td>
-                  <td>Pumpkin Patch</td>
+                  <td>Little 'ol Punkin Patch</td>
                 </tr>
                 <tr>
+                  <td>Lil' Ol' Punkin Patch</td>
+                  <td>is size (acres)</td>
+                  <td>0.2</td>
+                </tr>
+                 {/* <tr>
                   <td>Pumpkin Cartel</td>
-                  <td>is a type of</td>
+                  <td>is a </td>
                   <td>Criminal Organization</td>
                 </tr>
-                <tr>
+               <tr>
                   <td>Pumpkin Cartel</td>
                   <td>has dirt on</td>
                   <td>Ol MacDonald</td>
@@ -755,10 +765,15 @@ var Databases = React.createClass({
                   <td>Halloween Offering</td>
                   <td>is a</td>
                   <td>Extortion</td>
+                </tr> */}
+                <tr>
+                  <td>The Great Pumpkin</td>
+                  <td>offers payment through ($/lbs)</td>
+                  <td>Halloween Offering</td>
                 </tr>
                 <tr>
                   <td>Halloween Offering</td>
-                  <td>requires Crop</td>
+                  <td>requires crop</td>
                   <td>Pumpkin</td>
                 </tr>
                 <tr>
@@ -767,18 +782,19 @@ var Databases = React.createClass({
                   <td>1000000</td>
                 </tr>
                 <tr>
-                  <td>The Great Pumpkin</td>
-                  <td>demands payment</td>
+                  <td>Ol MacDonald</td>
+                  <td>receives payment through ($/lbs)</td>
                   <td>Halloween Offering</td>
                 </tr>
                 <tr>
                   <td>Halloween Offering</td>
-                  <td>binds victim</td>
-                  <td>Ol MacDonald</td>
+                  <td>has payment of</td>
+                  <td>0.00</td>
                 </tr>
               </tbody>
             </table>
           </div>
+          <Img className='full-scale' src={ imgPath + 'farmers_rdf_graph.png' } />
           <h3>
             <strong>Triplestores are the "smart brain" on top of legacy systems leveraging knowledge,
             rules and inferences to bring meaning to all of your data.</strong>
