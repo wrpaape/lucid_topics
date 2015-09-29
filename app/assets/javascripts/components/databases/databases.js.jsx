@@ -670,57 +670,12 @@ var Databases = React.createClass({
                   <th>object</th>
                 </tr>
               </thead>
-              <tbody>
-                {/* <tr>
-                  <td>Farmer</td>
-                  <td>is a type of</td>
-                  <td>Person</td>
-                </tr>
-                <tr>
-                  <td>Client</td>
-                  <td>is a type of</td>
-                  <td>Person</td>
-                </tr>
-                <tr>
-                  <td>Farm</td>
-                  <td>is a type of</td>
-                  <td>Building</td>
-                </tr>
-                <tr>
-                  <td>Crop</td>
-                  <td>is a type of</td>
-                  <td>Food</td>
-                </tr> 
-                <tr>
-                  <td>Pumpkin</td>
-                  <td>is a</td>
-                  <td>Crop</td>
-                </tr>
-                <tr>
-                  <td>Pumpkin</td>
-                  <td>has yield (lbs/acre)</td>
-                  <td>26600</td>
-                </tr>
-                <tr>
-                  <td>Pumpkin Patch</td>
-                  <td>is a type of</td>
-                  <td>Field</td>
-                </tr>
-                <tr>
-                  <td>Pumpkin</td>
-                  <td>is grown in</td>
-                  <td>Pumpkin Patch</td>
-                </tr> */}                
+              <tbody>             
                 <tr>
                   <td>Ol MacDonald</td>
                   <td>is a</td>
                   <td>Farmer</td>
                 </tr>
-                {/* <tr>
-                  <td>EIO Ranch</td>
-                  <td>is a</td>
-                  <td>Farm</td>
-                </tr> */}
                 <tr>
                   <td>Ol MacDonald</td>
                   <td>has a</td>
@@ -729,66 +684,36 @@ var Databases = React.createClass({
                 <tr>
                   <td>EIO Ranch</td>
                   <td>has a</td>
-                  <td>Little 'ol Punkin Patch</td>
+                  <td>Little 'Ol Punkin Patch</td>
                 </tr>
                 <tr>
                   <td>Lil' Ol' Punkin Patch</td>
                   <td>is size (acres)</td>
                   <td>0.2</td>
                 </tr>
-                 {/* <tr>
-                  <td>Pumpkin Cartel</td>
-                  <td>is a </td>
-                  <td>Criminal Organization</td>
-                </tr>
-               <tr>
-                  <td>Pumpkin Cartel</td>
-                  <td>has dirt on</td>
-                  <td>Ol MacDonald</td>
-                </tr>
                 <tr>
                   <td>The Great Pumpkin</td>
-                  <td>is head of</td>
-                  <td>Pumpkin Cartel</td>
-                </tr>
-                <tr>
-                  <td>The Great Pumpkin</td>
-                  <td>is a</td>
-                  <td>Client</td>
-                </tr>  
-                <tr>
-                  <td>Extortion</td>
-                  <td>is a type of</td>
-                  <td>Contract</td>
-                </tr>
-                <tr>
-                  <td>Halloween Offering</td>
-                  <td>is a</td>
-                  <td>Extortion</td>
-                </tr> */}
-                <tr>
-                  <td>The Great Pumpkin</td>
-                  <td>offers payment through ($/lbs)</td>
+                  <td>offers payment ($/lbs) through</td>
                   <td>Halloween Offering</td>
                 </tr>
                 <tr>
                   <td>Halloween Offering</td>
-                  <td>requires crop</td>
+                  <td>has terms (crop)</td>
                   <td>Pumpkin</td>
                 </tr>
                 <tr>
                   <td>Halloween Offering</td>
-                  <td>requires weight (lbs)</td>
+                  <td>has terms (weight lbs)</td>
                   <td>1000000</td>
                 </tr>
                 <tr>
                   <td>Ol MacDonald</td>
-                  <td>receives payment through ($/lbs)</td>
+                  <td>receives payment ($/lbs) through</td>
                   <td>Halloween Offering</td>
                 </tr>
                 <tr>
                   <td>Halloween Offering</td>
-                  <td>has payment of</td>
+                  <td>has payment ($/lbs) of</td>
                   <td>0.00</td>
                 </tr>
               </tbody>
