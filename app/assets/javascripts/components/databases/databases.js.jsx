@@ -25,7 +25,7 @@ var Databases = React.createClass({
             big messy flowchart. The universal symbol for database, the cylinder, has roots in
             technology that predates the database concept:
           </p>
-          <Img src={ imgPath + 'drum.jpg' } />
+          <Img src={ imgPath + 'drum.png' } />
           <p>
             Invented in the early 30's, drum memory was widely used as computer storage around
             the time early database models were being hashed out on the drawing board. You'd be
@@ -181,7 +181,7 @@ var Databases = React.createClass({
                 jimchrist:&nbsp;&nbsp;Prove me wrong, peasants.
                 <br />
                 <br />
-                EDIT: You're all getting bans once our db schema can handle them.
+                EDIT:&nbsp;&nbsp;You're all getting bans once our db schema can handle them.
                 <div>
                   IHeartATX:&nbsp;&nbsp;first
                 </div>
@@ -474,7 +474,7 @@ var Databases = React.createClass({
             </caption>
             <tbody>
               <tr>
-                <td><Img className='full-scale' src={ imgPath + 'bridges_graph.gif' } /></td>
+                <td><Img className='full-scale' src={ imgPath + 'bridges_graph.png' } /></td>
               </tr>
             </tbody>
           </table>

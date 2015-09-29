@@ -28,6 +28,9 @@ $s14: 46px;
 @mixin lucida {
   font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif;
 }
+@mixin arial {
+  font-family: arial, helvetica, sans-serif;
+}
 @mixin unfaded {
   opacity: 1;
   background-color: rgba(255, 255, 255, 1);
@@ -263,19 +266,6 @@ body {
       color: $ch4;
     }
   }
-  // table.triples {
-  //   td, th {
-  //     &:first-child {
-  //       color: $ch2;
-  //     }
-  //     &:nth-child(2) {
-  //       color: $ch3;
-  //     }
-  //     &:nth-child(3) {
-  //       color: $ch4;
-  //     }
-  //   }
-  // }
   .post, canvas, tbody, thead {
     @include border2;
   }
@@ -346,6 +336,7 @@ body {
           vertical-align: top;
           width: 48%;
           @include bg4;
+          @include arial;
           &:first-child {
             margin: $s8 $s5 $s8 0;
           }
@@ -355,10 +346,9 @@ body {
           div {
             padding: $s5;
             margin: $s5;
-            span {
+            div, span {
               font-size: $s7;
               line-height: $s9;
-              @include lucida;
             }
           }
           & > div, & > div > div > div {
