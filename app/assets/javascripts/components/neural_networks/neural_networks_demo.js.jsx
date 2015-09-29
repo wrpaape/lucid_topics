@@ -3,11 +3,16 @@
 
 var NeuralNetworksDemo = React.createClass({
   getInitialState: function() {
+    var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+    var numPlanes = isSafari ? 1 : 3;
+    var numDots = isSafari ? 3 : 10;
     return({
       idSelected: 0,
       showHud: true,
       walkthrough: null,
-      planeVectors: null
+      planeVectors: null,
+      numPlanes: numPlanes,
+      numDots: numDots
     });
   },
   componentDidMount: function() {
@@ -237,7 +242,7 @@ var NeuralNetworksDemo = React.createClass({
           ctx.clearRect(0, 0, width, height);
         }
       },
-      this.setPlanes.bind(this, 3)
+      this.setPlanes.bind(this, this.state.numPlanes)
     );
   },
   setPlanes: function(numPlanes) {
@@ -256,7 +261,7 @@ var NeuralNetworksDemo = React.createClass({
       }
     };
 
-    this.setState({ planes: planes }, this.setDots.bind(this, 10));
+    this.setState({ planes: planes }, this.setDots.bind(this, this.state.numDots));
   },
   setDots: function(numDots) {
     var allPlanes = this.state.planes.all;

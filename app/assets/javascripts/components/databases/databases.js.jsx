@@ -417,7 +417,7 @@ var Databases = React.createClass({
           </div>
           <p>
             Note the fields having "id" or "type" in them.  These are called <strong>keys</strong> and
-            make possible the robust efficiency and raw speed with which RDBMSs handle structured data.
+            make possible the efficiency and raw speed with which RDBMSs handle structured data.
             A key in most cases is unique and immutable and can be classified as either "primary" or "foreign."
             The convention is that field or column names indicating the primary key are labeled "id"
             and that foreign keys occupy the column (or columns in the case of polymorphic associations)
@@ -594,8 +594,8 @@ var Databases = React.createClass({
                   '                      SUM(price * weight) -\n' +
                   '                      maintenance -\n' +
                   '                      (SELECT SUM(upkeep)\n' +
-                  '                       FROM fields\n' +
-                  '                       WHERE farm_id = farms.id)\n' +
+                  '                        FROM fields\n' +
+                  '                        WHERE farm_id = farms.id)\n' +
                   '                      AS profit")\n' +
                   '             .group("farmers.id,\n' +
                   '                     farms.id")\n' +

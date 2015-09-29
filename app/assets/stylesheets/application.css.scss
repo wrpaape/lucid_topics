@@ -186,6 +186,7 @@ $s14: 46px;
   font-size: $s11;
   padding: $s11;
   color: $c1;
+  -webkit-filter: contrast(200%);
   @include unfaded;
   @include pop-up;
   @include fade-out;
