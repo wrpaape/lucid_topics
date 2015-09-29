@@ -3,10 +3,11 @@ $c2: white;
 $c3: lighten($c1, 5%);
 $c4: lighten($c1, 10%);
 $c5: lighten($c1, 25%);
-$ch1: aqua;
+$ch1: lime;
 $ch2: red;
 $ch3: yellow;
 $ch4: green;
+$ch5: blue;
 $s1: 1px;
 $s2: 2px;
 $s3: 3px;
@@ -255,6 +256,10 @@ body {
   strong {
     color: $ch1;
   }
+  code {
+    color: $ch1;
+    text-shadow: $s1 $s1 $s1 $ch5;
+  }
   samp, .triples td, .triples th {
     &:nth-of-type(3n + 1) {
       color: $ch2;
@@ -283,15 +288,28 @@ body {
         padding-left: 2em;
       }
     }
-    & > table {
+    & > table.image-caption {
+      &.split {
+        display: inline-block;
+        width: auto;
+        margin: 1em 2em;
+        img {
+          max-width: none;
+        }
+      }
       caption {
-        padding: 0 1em;
+        @include bg3;
+        padding: 1em;
+        margin-bottom: 2em;
         font-size: $s6;
         text-align: left;
         caption-side: bottom;
         li {
           font-size: $s7;
         }
+      }
+      td {
+        text-align: center;
       }
     }
     & > div {
@@ -365,7 +383,7 @@ body {
             margin-right: $s10;
             vertical-align: top;
             code > div {
-              width: 476px;
+              width: 474px;
             }
           }
           pre {
@@ -390,7 +408,7 @@ body {
               cursor: help;
             }
             div {
-              width: 876px;
+              width: 874px;
               display: inline-block;
               overflow-x: auto;
             }

@@ -18,23 +18,35 @@ var Databases = React.createClass({
           <h3>
             What is a Database?
           </h3>
-          <Img src={ imgPath + 'cylinder.png' } />
-          <p>
-            If you've endured a PowerPoint presentation in a business setting in the 20 or 21st
-            century chances are this guy popped up somewhere in the corner of the slide with the
-            big messy flowchart. The universal symbol for database, the cylinder, has roots in
-            technology that predates the database concept:
-          </p>
-          <Img src={ imgPath + 'drum.png' } />
-          <p>
-            Invented in the early 30's, drum memory was widely used as computer storage around
+          <table className='image-caption split'>
+            <caption>
+              If you've endured a PowerPoint presentation in a business setting in the 20 or 21st
+              century chances are this guy popped up somewhere in the corner of the slide with the
+              big messy flowchart. The universal symbol for database, the cylinder, has roots in
+              technology that predates the database concept (see right).
+            </caption>
+            <tbody>
+              <tr>
+                <td><Img src={ imgPath + 'cylinder.png' } /></td>
+              </tr>
+            </tbody>
+          </table>
+          <table className='image-caption split'>
+            <caption>
+              Invented in the early 30's, drum memory was widely used as computer storage around
             the time early database models were being hashed out on the drawing board. You'd be
             blind not see the resemblance, however, a database as a system serves a
             purpose <strong>more thorough than a simple means of storage</strong>.
-          </p>
+            </caption>
+            <tbody>
+              <tr>
+                <td><Img src={ imgPath + 'drum.png' } /></td>
+              </tr>
+            </tbody>
+          </table>
           <p>
-            The general definition of a database is "a collection of information organized to provide
-            efficient retrieval." Technically a floppy disk, an Excel spreadsheet, and even a rolodex qualifies
+            The general definition of a database is "<i>a collection of information organized to provide
+            efficient retrieval</i>." Technically a floppy disk, an Excel spreadsheet, and even a rolodex qualifies
             as a database, but what developers most likely refer to when answering the question "What database
             does your product use?" is a <strong>database management system</strong> or DBMS. A DBMS
             is the interactive software layer through which programmers, their programs, and, indirectly,
@@ -452,7 +464,7 @@ var Databases = React.createClass({
             resources and values.  A value, however, is either a resource or a primitive data type.
             The basic unit to represent information in RDF is <strong>the statement</strong>.
           </p>
-          <table>
+          <table className='image-caption'>
             <caption>
               The Seven Bridges of Königsberg is a classic historical problem
               best known academically for its solution by Leonhard Euler providing the early framework
