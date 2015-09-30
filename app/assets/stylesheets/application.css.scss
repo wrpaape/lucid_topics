@@ -32,6 +32,9 @@ $s14: 46px;
 @mixin arial {
   font-family: arial, helvetica, sans-serif;
 }
+@mixin play {
+  font-family: 'Play', sans-serif;
+}
 @mixin unfaded {
   opacity: 1;
   background-color: rgba(255, 255, 255, 1);
@@ -149,6 +152,16 @@ $s14: 46px;
     } 
   }
 }
+@mixin stroke {
+  -webkit-text-fill-color: $c1;
+  -webkit-text-stroke-width: 0.25px;
+  -webkit-text-stroke-color: $c2;
+}
+@mixin no-stroke {
+  -webkit-text-fill-color: $ch1;
+  -webkit-text-stroke-width: 0;
+  text-decoration: none;
+}
 
 @-webkit-keyframes fade-out {
   @include fade-out-keys;
@@ -226,6 +239,22 @@ body {
       width: 100%;
     }
   }
+  h1, h2, section > h3, section > h4 {
+    @include play;
+    font-size: $s14;
+    &:not(h1) {
+      font-size: $s12;
+      &:not(h4) {
+        font-size: $s13;
+        }
+      &:not(h2) {
+        @include stroke;
+        & > strong {
+          @include no-stroke;
+        }
+      }
+    }
+  }
   h2, h4, p, td, li, blockquote {
     text-align: left;
   }
@@ -241,11 +270,14 @@ body {
       height: $s14;
       line-height: $s14;
       text-align: center;
-      @include sigma
+      @include sigma;
     }
   }
   .math {
     font-family: serif;
+  }
+  .db-table {
+    font-family: monospace;
   }
   ul > li {
     margin-bottom: $s5;
@@ -256,6 +288,10 @@ body {
   }
   strong {
     color: $ch1;
+    text-decoration: underline;
+  }
+  blockquote > strong {
+    text-decoration: none;
   }
   code {
     color: $ch1;
@@ -272,15 +308,7 @@ body {
       color: $ch4;
     }
   }
-      //   &:nth-of-type(3n + 1):not(.pred):not(.obj) {
-    //   color: $ch2;
-    // }
-    // &:nth-of-type(3n + 2):not(.sub):not(.obj) {
-    //   color: $ch3;
-    // }
-    // &:nth-of-type(3n + 3):not(.sub):not(.pred) {
-    //   color: $ch4;
-    // }
+
   .post, canvas, tbody, thead {
     @include border2;
   }
@@ -308,7 +336,7 @@ body {
         }
       }
       caption {
-        @include bg3;
+        @include bg4;
         padding: 1em;
         margin-bottom: 2em;
         font-size: $s6;
@@ -441,7 +469,7 @@ body {
         & > p {
           font-size: $s6;
           line-height: $s9;
-          i {
+          em {
             color: $ch1;
             margin: 0 $s8;
           }

@@ -112,7 +112,7 @@ var Databases = React.createClass({
             of rows and columns. Each row represents a single entry in the database, where an entry's
             attributes are set according to the values listed in each column or field.
           </p>
-          <div>
+          <div className='db-table'>
             <h3>
               users
             </h3>
@@ -164,10 +164,10 @@ var Databases = React.createClass({
             </table>
           </div>
           <p>
-            Take for example the archetypal "users" table above configured to keep track of
-            data concerning, for instance, the userbase of a particular forum. Each "user" entry
-            records the attributes listed in the table header:  our first user goes by the username
-            of "jimchrist," has admin privileges, etc... This table configuration, or <strong>
+            Take for example the archetypal <code>users</code> table above configured to keep track of
+            data concerning, for instance, the userbase of a particular forum. Each user entry
+            records the attributes listed in the table header:  our first user goes by the <code>username</code>
+            of <code>jimchrist</code>, has <code>admin</code> privileges, etc... This table configuration, or <strong>
             schema</strong>, so far looks like nothing your cookie-cutter spreadsheet software
             couldn't handle. So what if the owner of this website wanted to allow their users
             to make posts like a proper forum?  Not only that, but lets say they wanted to allow
@@ -232,7 +232,7 @@ var Databases = React.createClass({
           <p>
             Let's see how an RDBMS would handle this dataset:
           </p>
-          <div>
+          <div className='db-table'>
             <h3>
               users
             </h3>
@@ -288,7 +288,7 @@ var Databases = React.createClass({
               </tbody>
             </table>
           </div>
-          <div>
+          <div className='db-table'>
             <h3>
               posts
             </h3>
@@ -323,7 +323,7 @@ var Databases = React.createClass({
               </tbody>
             </table>
           </div>
-          <div>
+          <div className='db-table'>
             <h3>
               comments
             </h3>
@@ -416,31 +416,31 @@ var Databases = React.createClass({
             </table>
           </div>
           <p>
-            Note the fields having "id" or "type" in them.  These are called <strong>keys</strong> and
+            Note the fields having <code>id</code> or <code>type</code> in them.  These are called <strong>keys</strong> and
             make possible the efficiency and raw speed with which RDBMSs handle structured data.
             A key in most cases is unique and immutable and can be classified as either "primary" or "foreign."
-            The convention is that field or column names indicating the primary key are labeled "id"
-            and that foreign keys occupy the column (or columns in the case of polymorphic associations)
-            labeled with the singular of the parent entry's table name followed by "id" and sometimes
-            "type." Using this simple system of recording <strong>associations</strong> by <strong>
+            The convention is that field or column names indicating the primary key are labeled <code>id</code> and
+            that foreign keys occupy the column (or columns in the case of polymorphic associations)
+            labeled with the singular of the parent entry's table name followed by <code>_id</code> and sometimes <code>_type</code>. 
+            Using this simple system of recording <strong>associations</strong> by <strong>
             inserting the parent entry's primary key into its child(ren) entry(ies) as a foreign key</strong>, a
             sophisticated network of otherwise independent tables of data can be established.
           </p>
           <p>
             In the case of our forum, the "one-to-many" association between a user and their posts can
             be handled without having to cram the contents of every post belonging to each user into
-            its corresponding entry in the "users" table. Rather a separate "posts" table is created
-            where ownership of each post entry is expressed by the value of its foreign key "user_id."
-            The case is similar with the "comments" table, however, since our forum allows for users
+            its corresponding entry in the <code>users</code> table. Rather a separate <code>posts</code> table is created
+            where ownership of each post entry is expressed by the value of its foreign key <code>user_id</code>.
+            The case is similar with the <code>comments</code> table, however, since our forum allows for users
             to comment on posts AND other comments as well, ownership must be expressed through two
-            foreign keys: "commentable_id" and "commentable_type" where commentable_type indicates
-            which table (posts or comments) the RDBMS should look up for the parent having an id with
-            the value of its commentable_id. Accordingly the polymorphic (meaning that this table can
-            belong to two or more separate tables on a single association) association establishing one
-            post-to-many comments AND one comment-to-many comments can be handled with ease.
+            foreign keys: <code>commentable_id</code> and <code>commentable_type</code> where <code>commentable_type</code> indicates
+            which table (<code>posts</code> or <code>comments</code>) the RDBMS should look up for the parent having an <code>id</code> with
+            the value of its <code>commentable_id</code>. Accordingly the polymorphic (meaning that this table can
+            belong to two or more separate tables on a single association) association establishing
+            one post-to-many comments AND one comment-to-many comments can be handled with ease.
           </p>
           <p>
-            While our users-posts-comments database exhibits just two cases of the one-to-many association,
+            While our <code>users</code>-<code>posts</code>-<code>comments</code> database exhibits just two cases of the one-to-many association,
             a vast library of all types of "one-to-one," "one-to-many," and "many-to-many" associations
             are at your disposal with a standard RDBMS which can be tailored to your specific data-handling
             needs. In fact, whole careers are devoted to determining the "best" selection of RDBMS
@@ -482,7 +482,7 @@ var Databases = React.createClass({
               </ol>
               Euler's solution proving this walk impossible involved stripping the cluttered, awkward
               layout of the city map down to a simplified <strong>graph</strong> of nodes and vertices
-              representing islands of land and the bridges connecting them, respectively.
+              (shown right) representing islands of land and the bridges connecting them, respectively.
             </caption>
             <tbody>
               <tr>
@@ -501,7 +501,7 @@ var Databases = React.createClass({
             <li>
               simplicity of design
               <p>
-                Instead of a network of several tables having columns configured according to the different
+                Instead of a network of several tables having columns configured specifically to the different
                 data they contain, <strong>an RDF database houses the entirety of its data in a
                 single table</strong> most commonly configured with 3 columns.
               </p>
@@ -665,12 +665,12 @@ var Databases = React.createClass({
             or additional resource. All data is represented in triples in a triplestore database, which form the glue bringing structure
             and order in the form of <strong>graphs</strong> to all but the most capricious globs of raw
             data (much like the RDBMS's method of keys and tables). The <samp className='sub'>subject</samp> and <samp className='obj'>object
-            </samp>represent the two resources being related, and the <samp className='pred'>predicate</samp> represents the nature of their relationship.
+            </samp> represent the two resources being related, and the <samp className='pred'>predicate</samp> represents the nature of their relationship.
             The relationship is phrased in a directional way (
             <samp className='sub'>subject</samp> <samp className='pred'>&#8594;</samp> <samp className='obj'>object</samp>) and is called a property.
             Take for example the table below housing triples that capture a slice of our farmers-clients dataset:
           </p>
-          <div>
+          <div className='db-table'>
             <h3>
               farmers and clients statements
             </h3>
@@ -732,7 +732,7 @@ var Databases = React.createClass({
             </table>
           </div>
           <p>
-            Reads nicely, huh? Let's see how our triples table would look mapped
+            Reads nicely, huh? Let's see how our triples would look mapped
             onto an RDF graph, the visual representation of triplestore data:
           </p>
           <Img className='full-scale' src={ imgPath + 'farmers_rdf_graph.png' } />
@@ -742,13 +742,13 @@ var Databases = React.createClass({
             and the solid arrows represent <samp className='pred'>predicates</samp> describing
             resources that were entered into the database at some point. The remaining dashed
             arrows represent <strong>inferences</strong> made by our triplestore. It's this
-            ability to draw connections between nodes <strong>that were never explicitly
-            entered</strong> that sets RDF datbases apart from traditional RDBMS's.
+            ability to draw connections between resources <strong>that were never explicitly
+            entered into the database</strong> that sets the RDF model apart from traditional RDBMS's.
           </p>
           <p>
-            For instance, notice how <code>Lil' Ol' Punkin Patch"</code> was not entered into the
-            database as a <code>Field</code> where <code>Crops</code> could be grown, yet alone
-            a <code>Field</code> growing <code>Pumpkins</code>, but because the triples:
+            For instance, notice how <code>Lil' Ol' Punkin Patch</code> was not entered as
+            a <code>Field</code> where <code>Crops</code> could be grown, yet alone
+            a <code>Field</code> growing <code>Pumpkin</code>s, but because the triples:
           </p>
           <p>
             <samp>Farmer</samp> - <samp>has one or more</samp> - <samp>Farm</samp>
@@ -777,7 +777,7 @@ var Databases = React.createClass({
           <p>
             were already stored along with other <strong>suspicious relationships</strong> (i.
             e. <code>Ol' MacDonald</code>'s connection to <code>The Great Pumpkin</code>),
-            our triplestore can <strong>infer</strong> that with reasonable probability:
+            our triplestore can <strong>infer</strong> that with reasonable probability that:
           </p>
           <ol>
             <li>

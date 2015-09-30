@@ -84,7 +84,7 @@ var MachineLearning = React.createClass({
                 Reinforcement Learning
               </h4>
               <p>
-                Inspired by behaviorist psychology (Pavlov's dog), the principles of reinforcement learning
+                Inspired by behaviorist psychology (think Pavlov's dog), the principles of reinforcement learning
                 achieve a program that acts in an environment so as to <strong>maximize some notion of
                 culmlative reward</strong>.
               </p>
