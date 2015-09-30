@@ -466,11 +466,13 @@ body {
       }
       & > div {
         margin: 0 $s11;
+        i, h4 > em {
+          color: $ch1;
+        }
         & > p {
           font-size: $s6;
           line-height: $s9;
-          em {
-            color: $ch1;
+          i {
             margin: 0 $s8;
           }
         }

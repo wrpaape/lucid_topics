@@ -44,7 +44,7 @@ a series of numbered boxes:
 
 ```
 elements:  [ \"I'm first\" , 42 , x , ... , \"I will always be last\" ]
-indices:   [     0       ,  1 , 2 , ... ,           N             ]
+indices:   [      0      ,  1 , 2 , ... ,            N            ]
 ```
 
 pros:
