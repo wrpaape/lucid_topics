@@ -455,8 +455,8 @@ var Databases = React.createClass({
             The RDF Data Model
           </h3>
           <p>
-            RDF is a simple language for expressing data models,
-            which refer to objects ("resources") and their associations or relationships. RDF Schema
+            RDF (Resource Description Framework) is a simple language for expressing data models,
+            which refer to objects (<strong>resources</strong>) and their associations or relationships. RDF Schema
             is a vocabulary for describing properties and classes of RDF-based resources, with semantics
             for generalized-hierarchies of such properies and classes. The RDF data model consists of
             resources, properties and values. Resources can be anything, including documents, people, physical
@@ -664,11 +664,11 @@ var Databases = React.createClass({
             where <samp>subject</samp> is a resource, <samp>predicate</samp> is a property, and <samp>object</samp> is a value
             or additional resource. All data is represented in triples in a triplestore database, which form the glue bringing structure
             and order in the form of <strong>graphs</strong> to all but the most capricious globs of raw
-            data (much like the RDBMS's method of keys and tables). The subject and object represent
-            the two resources being related, and the predicate represents the nature of their relationship.
-            The relationship is phrased in a directional way (<strong>from</strong> subject <strong>to</strong> object)
-            and is called a property. Take for example the table below housing triples that capture
-            a slice of our farmers-clients dataset:
+            data (much like the RDBMS's method of keys and tables). The <samp className='sub'>subject</samp> and <samp className='obj'>object
+            </samp>represent the two resources being related, and the <samp className='pred'>predicate</samp> represents the nature of their relationship.
+            The relationship is phrased in a directional way (
+            <samp className='sub'>subject</samp> <samp className='pred'>&#8594;</samp> <samp className='obj'>object</samp>) and is called a property.
+            Take for example the table below housing triples that capture a slice of our farmers-clients dataset:
           </p>
           <div>
             <h3>
@@ -684,12 +684,12 @@ var Databases = React.createClass({
               </thead>
               <tbody>             
                 <tr>
-                  <td>Ol MacDonald</td>
+                  <td>Ol' MacDonald</td>
                   <td>is a</td>
                   <td>Farmer</td>
                 </tr>
                 <tr>
-                  <td>Ol MacDonald</td>
+                  <td>Ol' MacDonald</td>
                   <td>has a</td>
                   <td>EIO Ranch</td>
                 </tr>
@@ -719,7 +719,7 @@ var Databases = React.createClass({
                   <td>1000000</td>
                 </tr>
                 <tr>
-                  <td>Ol MacDonald</td>
+                  <td>Ol' MacDonald</td>
                   <td>receives payment ($/lbs) through</td>
                   <td>Halloween Offering</td>
                 </tr>
@@ -731,7 +731,92 @@ var Databases = React.createClass({
               </tbody>
             </table>
           </div>
+          <p>
+            Reads nicely, huh? Let's see how our triples table would look mapped
+            onto an RDF graph, the visual representation of triplestore data:
+          </p>
           <Img className='full-scale' src={ imgPath + 'farmers_rdf_graph.png' } />
+          <p>
+            The nodes in orange represent <samp className='sub'>subjects
+            </samp> or <samp className='obj'>objects</samp> (resources) entered in the table above,
+            and the solid arrows represent <samp className='pred'>predicates</samp> describing
+            resources that were entered into the database at some point. The remaining dashed
+            arrows represent <strong>inferences</strong> made by our triplestore. It's this
+            ability to draw connections between nodes <strong>that were never explicitly
+            entered</strong> that sets RDF datbases apart from traditional RDBMS's.
+          </p>
+          <p>
+            For instance, notice how <code>Lil' Ol' Punkin Patch"</code> was not entered into the
+            database as a <code>Field</code> where <code>Crops</code> could be grown, yet alone
+            a <code>Field</code> growing <code>Pumpkins</code>, but because the triples:
+          </p>
+          <p>
+            <samp>Farmer</samp> - <samp>has one or more</samp> - <samp>Farm</samp>
+          </p>
+          <p>
+            <samp>Ol' MacDonald</samp> - <samp>is a</samp> - <samp>Farmer</samp>
+          </p>
+          <p>
+            <samp>Ol' MacDonald</samp> - <samp>has a</samp> - <samp>EIO ranch</samp>
+          </p>
+          <p>
+            <samp>Farm</samp> - <samp>has one or more</samp> - <samp>Field</samp>
+          </p>
+          <p>
+            <samp>EIO Ranch</samp> - <samp>has a</samp> - <samp>Lil' Ol' Punkin Patch</samp>
+          </p>
+          <p>
+            <samp>Crop</samp> - <samp>is grown in</samp> - <samp>Field</samp>
+          </p>
+          <p>
+            <samp>Pumpkin</samp> - <samp>is a</samp> - <samp>Crop</samp>
+          </p>
+          <p>
+            <samp>"Punkin"</samp> - <samp>is slang for</samp> - <samp>Pumpkin</samp>
+          </p>
+          <p>
+            were already stored along with other <strong>suspicious relationships</strong> (i.
+            e. <code>Ol' MacDonald</code>'s connection to <code>The Great Pumpkin</code>),
+            our triplestore can <strong>infer</strong> that with reasonable probability:
+          </p>
+          <ol>
+            <li>
+              <code>EIO Ranch</code> is a <code>Farm</code> because
+              <ul>
+                <li>
+                  <code>Farmer</code>s have <code>Farm</code>s
+                </li>
+              </ul>
+            </li>
+            <li>
+              <code>Lil' Ol' Punkin Patch</code> is a <code>Field</code> because
+              <ul>
+                <li>
+                  <code>Farm</code>s have <code>Field</code>s
+                </li>
+              </ul>
+            </li>
+            <li>
+              <code>Pumpkin</code>s are grown in <code>Lil' Ol' Punkin Patch</code> because
+              <ul>
+                <li>
+                  <code>Crop</code>s are grown in <code>Field</code>s
+                </li>
+                <li>
+                  <code>Pumpkin</code>s are a <code>Crop</code>
+                </li>
+                <li>
+                  the resource <code>Lil' Ol' Punkin Patch</code> includes the
+                  slang term for <code>Pumpkin</code>s
+                </li>
+                <li>
+                  <code>The Great Pumpkin</code> is expecting <code>1000000</code> lbs
+                  of <code>Pumpkin</code>s from <code>Ol' MacDonald</code>, who apparently
+                  is already on thin ice with <code>The Pumpkin Cartel</code>.
+                </li>
+              </ul>
+            </li>
+          </ol>
           <h3>
             <strong>Triplestores are the "smart brain" on top of legacy systems leveraging knowledge,
             rules and inferences to bring meaning to all of your data.</strong>

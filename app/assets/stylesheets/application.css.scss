@@ -262,16 +262,25 @@ body {
     text-shadow: $s1 $s1 $s1 $ch5;
   }
   samp, .triples td, .triples th {
-    &:nth-of-type(3n + 1) {
+    &.sub, &:nth-of-type(3n + 1):not(.pred):not(.obj) {
       color: $ch2;
     }
-    &:nth-of-type(3n + 2) {
+    &.pred, &:nth-of-type(3n + 2):not(.sub):not(.obj) {
       color: $ch3;
     }
-    &:nth-of-type(3n + 3) {
+    &.obj, &:nth-of-type(3n + 3):not(.sub):not(.pred) {
       color: $ch4;
     }
   }
+      //   &:nth-of-type(3n + 1):not(.pred):not(.obj) {
+    //   color: $ch2;
+    // }
+    // &:nth-of-type(3n + 2):not(.sub):not(.obj) {
+    //   color: $ch3;
+    // }
+    // &:nth-of-type(3n + 3):not(.sub):not(.pred) {
+    //   color: $ch4;
+    // }
   .post, canvas, tbody, thead {
     @include border2;
   }
