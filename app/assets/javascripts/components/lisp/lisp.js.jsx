@@ -466,7 +466,11 @@ var Lisp = React.createClass({
           </p>
           <p>
             Independent from the design purposes of pragmaticality or reducing
-            the novice entry barrier were a
+            the novice entry barrier, LISP's development strove to push the
+            limits of language design. Posing questions about program notation,
+            language semantics, and the simplest possible language syntax, LISP
+            did not emerge as an improvement on previous programming languages but rather is said
+            to have evolved "straight from mathematics".
           </p>
         </section>
         <section>
@@ -479,8 +483,8 @@ var Lisp = React.createClass({
           <p>
             The syntax of Lisp programs is simple. This makes the language easy to learn,
             and very little time is wasted correcting typos. In addition, it is easy to
-            write programs that <strong>manipulate other programs</strong> or <strong>
-            define whole new languages</strong>.
+            write programs that manipulate other programs (called <strong>metaprogramming</strong>)
+            or <strong>define whole new languages</strong>.
           </p>
           <h4>
             The List
@@ -563,7 +567,7 @@ var Lisp = React.createClass({
             spent providing type declarations and allocating storage adds
             up in longer programs, and these minutiae are <strong>avoided entirely</strong> in
             LISP. For instance, take the trivial problem of computing <var>a</var> × ( <var>
-            b</var> + <var>c</var> ) when <var>a</var>, <var>b</var>, and <var>
+            b</var> + <var>c</var> ) where <var>a</var>, <var>b</var>, and <var>
             c</var> are matrices. Compare below how this is addressed in Pascal, a more
             traditional language, versus LISP.
           </p>

@@ -171,8 +171,10 @@ An S-expression (**S**ymbolic **expression**) is a notation for nested list (tre
 invented for and popularized by LISP. Using standard LISP parentheses syntax, an S-expression
 is classically defined as:
 
+*safe*
 1. an atom, or
 2. an expression of the form `(x . y)`
+*safe*
 
 where `(x . y)` is a list containing a \"dotted pair\" with `.` denoting that the node
 housing the atom `x` references the node housing the atom `y`. Recalling the
@@ -786,6 +788,28 @@ WIP
 """,
     topics: ["Machine Learning"],
     related: ["Labeled Data", "Data", "Dataset"]
+  },
+  {
+    word: "Semantic Web (Web 3.0, Linked Data Web, Web of Data)",
+    note:
+"""
+The Semantic Web represents the next major evolution in connecting information.
+It enables data to be linked from a source to any other source and to be
+**understood by computers so that they can perform increasingly sophisticated tasks
+on our behalf.**
+
+The word semantic itself implies **meaning** or **understanding**. As such, the fundamental
+difference between Semantic Web technologies and other technologies related to data (such as
+relational databases or the World Wide Web itself) is that the Semantic Web is concerned with
+the **meaning** and not the structure of data.
+
+This fundamental difference engenders a completely different outlook on how storing, querying,
+and displaying information might be approached.  Some applications, such as those that refer
+to a large amount of data from many different sources, benefit enormously from this feature.
+Others, such as the storage of high volumes of highly structured transactional data, do not.
+""",
+    topics: ["Machine Learning", "Databases", "LISP"],
+    related: ["Common LISP"]
   }
 ]
 

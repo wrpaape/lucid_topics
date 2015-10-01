@@ -33,7 +33,7 @@ var Databases = React.createClass({
           </table>
           <table className='image-caption split'>
             <caption>
-              Invented in the early 30's, drum memory was widely used as computer storage around
+              Invented in the early 30s, drum memory was widely used as computer storage around
             the time early database models were being hashed out on the drawing board. You'd be
             blind not see the resemblance, however, a database as a system serves a
             purpose <strong>more thorough than a simple means of storage</strong>.
@@ -166,8 +166,8 @@ var Databases = React.createClass({
           <p>
             Take for example the archetypal <code>users</code> table above configured to keep track of
             data concerning, for instance, the userbase of a particular forum. Each user entry
-            records the attributes listed in the table header:  our first user goes by the <code>username</code>
-            of <code>jimchrist</code>, has <code>admin</code> privileges, etc... This table configuration, or <strong>
+            records the attributes listed in the table header:  our first user goes by the <code>username
+            </code> of <code>jimchrist</code>, has <code>admin</code> privileges, etc... This table configuration, or <strong>
             schema</strong>, so far looks like nothing your cookie-cutter spreadsheet software
             couldn't handle. So what if the owner of this website wanted to allow their users
             to make posts like a proper forum?  Not only that, but lets say they wanted to allow
@@ -180,7 +180,7 @@ var Databases = React.createClass({
             The Relational Database Management System (RDBMS)
           </h3>
           <p>
-            The grandaddy of DBMS's, the relational DBMS originated in the 70's and has thrived
+            The grandaddy of DBMS's, the relational DBMS originated in the 70s and has thrived
             to this day as one of the most common and powerful database implementations. Returning
             to our example, let's populate this forum with some commonplace forum dialogue:
           </p>
@@ -417,7 +417,7 @@ var Databases = React.createClass({
           </div>
           <p>
             Note the fields having <code>id</code> or <code>type</code> in them.  These are called <strong>keys</strong> and
-            make possible the efficiency and raw speed with which RDBMSs handle structured data.
+            make possible the efficiency and raw speed with which RDBMS's handle structured data.
             A key in most cases is unique and immutable and can be classified as either "primary" or "foreign."
             The convention is that field or column names indicating the primary key are labeled <code>id</code> and
             that foreign keys occupy the column (or columns in the case of polymorphic associations)
@@ -493,7 +493,7 @@ var Databases = React.createClass({
           <p>
             Though its mathematical roots date back to Euler's Königsberg Bridge problem published in 1736,
             the Resource Descriptive Framework or RDF's implementation as a database management system
-            stems from the development of the first non relational databases in the late 1960's.
+            stems from the development of the first non relational databases in the late 1960s.
             Later referred to commonly as "NoSQL" or "Not only SQL", the motivation for the 
             diverting from the beaten RDBMS path include:
           </p>
@@ -618,9 +618,9 @@ var Databases = React.createClass({
             This is possible because ahead of time because one-by-one each data entry
             was inserted into one of the 6 database tables (farmers, contracts, clients,
             farms, fields, and clients) with its relationships <strong>established ahead of
-            time</strong> by the allocation of keys. For example, if farmer "Garth" was contracted
-            to grow "strawberries", the entry representing that contract would hold keys pointing
-            to "Garth" and "strawberries":
+            time</strong> by the allocation of keys. For example, if farmer <code>Garth</code> was contracted
+            to grow <code>strawberries</code>, the entry representing that contract would hold keys pointing
+            to <code>Garth</code> and <code>strawberries</code>:
           </p>
           <blockquote>
             <pre>
@@ -640,12 +640,12 @@ var Databases = React.createClass({
           <p>
             The key phrase "established ahead of time" means that a vanilla RDBMS's "knowledge"
             of the data it handles is limited to the exact specification of its entries' schema.
-            Active Record + SQL knows that Garth sold strawberries because an entry on the
-            "contracts" table points <strong>directly</strong> at Garth's and strawberries's
+            Active Record + SQL knows that <code>Garth</code> sold <code>strawberries</code> because an entry on the
+            "contracts" table points <strong>directly</strong> at <code>Garth</code>'s and <code>strawberries</code>'s
             ids. This means that... 
           </p>
           <h3>
-            <strong>A traditional relational DBMS is not capable of inferencing, reasoning, or
+            <strong>A traditional relational DBMS is <u>not</u> capable of inferencing, reasoning, or
             interpolation of any kind when handling a query.</strong>
           </h3>
           <p>
@@ -674,7 +674,7 @@ var Databases = React.createClass({
             <h3>
               farmers and clients statements
             </h3>
-            <table className='triples'>
+            <table className='rdf'>
               <thead>
                 <tr>
                   <th>subject</th>
@@ -760,9 +760,6 @@ var Databases = React.createClass({
             <samp>Ol' MacDonald</samp> - <samp>has a</samp> - <samp>EIO ranch</samp>
           </p>
           <p>
-            <samp>Farm</samp> - <samp>has one or more</samp> - <samp>Field</samp>
-          </p>
-          <p>
             <samp>EIO Ranch</samp> - <samp>has a</samp> - <samp>Lil' Ol' Punkin Patch</samp>
           </p>
           <p>
@@ -837,9 +834,397 @@ var Databases = React.createClass({
             Quadstore or Named Graph
           </h4>
           <p>
-            N-quads statements are a sequence of RDF terms representing the subject, predicate, object and
-            graph label of an RDF Triple and the graph it is part of in a dataset. 
+            Quadstore or named graphs are a simple extension of the RDF data model through which graphs can be created
+            but the model lacks an effective means of distinguishing between them.
+            Quad statements are a sequence of RDF terms representing the <samp>subject</samp>
+            , <samp>predicate</samp>, <samp>object</samp> and <samp className='glab'>graph label</samp> of an RDF
+            triple and the graph it is part of in a dataset. This is necessary because on combining
+            the data 2 or more separate triplestores, through the keyless method of RDF storage and retrieval
+            it becomes impossible for the database to distinguish between duplicate entries. Take,
+            for instance, the combination of 2 triplestores mapping the extended families of
+            the newlyweds <code>Jane</code> and <code>Tom</code>:
           </p>
+          <div className='db-table inline'>
+            <h3>
+              Jane's Family
+            </h3>
+            <table className='rdf'>
+              <thead>
+                <tr>
+                  <th>subject</th>
+                  <th>predicate</th>
+                  <th>object</th>
+                </tr>
+              </thead>
+              <tbody>             
+                <tr>
+                  <td>Jane</td>
+                  <td>is a child of</td>
+                  <td>Jake</td>
+                </tr>
+                <tr>
+                  <td>Jane</td>
+                  <td>is a child of</td>
+                  <td>Jennifer</td>
+                </tr>
+                <tr>
+                  <td>Jane</td>
+                  <td>is a sibling of</td>
+                  <td>Jim</td>
+                </tr>
+                <tr>
+                  <td>Jane</td>
+                  <td>is a sibling of</td>
+                  <td>Jordan</td>
+                </tr>
+                <tr>
+                  <td>Jane</td>
+                  <td>is a sibling of</td>
+                  <td>John</td>
+                </tr>
+                <tr>
+                  <td>Jane</td>
+                  <td>is the spouse of</td>
+                  <td>Tom</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className='db-table inline'>
+            <h3>
+              Tom's Family
+            </h3>
+            <table className='rdf'>
+              <thead>
+                <tr>
+                  <th>subject</th>
+                  <th>predicate</th>
+                  <th>object</th>
+                </tr>
+              </thead>
+              <tbody>             
+                <tr>
+                  <td>Tom</td>
+                  <td>is a child of</td>
+                  <td>Tim</td>
+                </tr>
+                <tr>
+                  <td>Tom</td>
+                  <td>is a child of</td>
+                  <td>Tammy</td>
+                </tr>
+                <tr>
+                  <td>Tom</td>
+                  <td>is a sibling of</td>
+                  <td>Theodore</td>
+                </tr>
+                <tr>
+                  <td>Tom</td>
+                  <td>is the spouse of</td>
+                  <td>Jane</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            If these tables were combined in a triplestore that recognized <samp className='pred'>is
+            the spouse of</samp> as an <strong>inverse property</strong> of itself (i. e. the triples
+          </p>
+          <p>
+            <samp>Jane</samp> - <samp>is the spouse of</samp> - <samp>Tom</samp>
+          </p>
+          <p>
+            and
+          </p>
+          <p>
+            <samp>Tom</samp> - <samp>is the spouse of</samp> - <samp>Jane</samp>
+          </p>
+          <p>
+            are effectively equivalent), then only one of the triples at the bottom of the tables
+            above would be necessary to adaquately define <code>Tom</code> and <code>Jane</code>'s
+            relationship. Redundancy of this sort actually comes with no penalty to retreival speed
+            in a triplestore as a query of <code>Who is Jane's Spouse?</code> would start to
+            scan entries and halt immediately upon finding either triple instance and return: <code>Tom</code>
+            . <code>Tom</code> is <code>Tom</code> is <code>Tom</code>, so no harm no foul.
+          </p>
+          <p>
+            But what if lurking deep in the ancestral roots of <code>Tom</code> and <code>Jane</code>'s family
+            trees lived separate distant relatives, who, precise lineage aside, appear to have had a
+            disturbing amount in common:
+          </p>
+          <div className='db-table inline'>
+            <h3>
+              Jane's Family
+            </h3>
+            <table className='rdf'>
+              <thead>
+                <tr>
+                  <th>subject</th>
+                  <th>predicate</th>
+                  <th>object</th>
+                </tr>
+              </thead>
+              <tbody>             
+                <tr>
+                  <td>Russell</td>
+                  <td>has birthday</td>
+                  <td>July 2, 1830</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>is spouse of</td>
+                  <td>Agnes</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>lives in</td>
+                  <td>Wintonbury, Connecticut</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>has occupation</td>
+                  <td>Candlestick Maker</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>has bloodtype</td>
+                  <td>O-</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>has egg preference</td>
+                  <td>Sunny Side Up</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className='db-table inline'>
+            <h3>
+              Tom's Family
+            </h3>
+            <table className='rdf'>
+              <thead>
+                <tr>
+                  <th>subject</th>
+                  <th>predicate</th>
+                  <th>object</th>
+                </tr>
+              </thead>
+              <tbody>             
+                <tr>
+                  <td>Russell</td>
+                  <td>has birthday</td>
+                  <td>July 2, 1830</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>is spouse of</td>
+                  <td>Agnes</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>lives in</td>
+                  <td>Wintonbury, Connecticut</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>has occupation</td>
+                  <td>Candlestick Maker</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>has bloodtype</td>
+                  <td>O-</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>has egg preference</td>
+                  <td>Over Easy</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Which would be stored in our shared triplestore database like this:
+          </p>
+          <div className='db-table'>
+            <h3>
+              Jane and Tom's Families
+            </h3>
+            <table className='rdf'>
+              <thead>
+                <tr>
+                  <th>subject</th>
+                  <th>predicate</th>
+                  <th>object</th>
+                </tr>
+              </thead>
+              <tbody>             
+                <tr>
+                  <td>Russell</td>
+                  <td>has birthday</td>
+                  <td>July 2, 1830</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>is spouse of</td>
+                  <td>Agnes</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>lives in</td>
+                  <td>Wintonbury, Connecticut</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>has occupation</td>
+                  <td>Candlestick Maker</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>has bloodtype</td>
+                  <td>O-</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>has egg preference</td>
+                  <td>Sunny Side Up</td>
+                </tr>          
+                <tr>
+                  <td>Russell</td>
+                  <td>has birthday</td>
+                  <td>July 2, 1830</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>is spouse of</td>
+                  <td>Agnes</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>lives in</td>
+                  <td>Wintonbury, Connecticut</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>has occupation</td>
+                  <td>Candlestick Maker</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>has bloodtype</td>
+                  <td>O-</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>has egg preference</td>
+                  <td>Over Easy</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Now had Tom had set the recovery question to his old email to "Russell the Civil War Era Candlestick Maker liked
+            his eggs prepared ________," a query to the new pooled database of his and Jane's family data would
+            return two <code>Russell</code>s pointing to separate egg preference objects. Further distinction would
+            have to be made in the query asserting that the desired <code>Russell</code> belongs specifically to <code>Tom</code>'s
+            lineage. While <strong>backward-chaining</strong> a couple generations to distinguish between the two <code>
+            Russell</code>s is a trivial task for any RDF database, and the additional cost of the extra assertion
+            is negligible, inefficiency of this sort becomes problematic when querying larger datasets with sufficient frequency.
+          </p>
+          <p>
+            By extending the core RDF model from a triple to a quad, named graphs provide a useful
+            extra degree of freedom when managing an RDF dataset:
+          </p>
+          <div className='db-table'>
+            <h3>
+              Jane and Tom's Families
+            </h3>
+            <table className='rdf'>
+              <thead>
+                <tr>
+                  <th>subject</th>
+                  <th>predicate</th>
+                  <th>object</th>
+                  <th>graph label</th>
+                </tr>
+              </thead>
+              <tbody>             
+                <tr>
+                  <td>Russell</td>
+                  <td>has birthday</td>
+                  <td>July 2, 1830</td>
+                  <td>from Jane's Family</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>is spouse of</td>
+                  <td>Agnes</td>
+                  <td>from Jane's Family</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>lives in</td>
+                  <td>Wintonbury, Connecticut</td>
+                  <td>from Jane's Family</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>has occupation</td>
+                  <td>Candlestick Maker</td>
+                  <td>from Jane's Family</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>has bloodtype</td>
+                  <td>O-</td>
+                  <td>from Jane's Family</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>has egg preference</td>
+                  <td>Sunny Side Up</td>
+                  <td>from Jane's Family</td>
+                </tr>          
+                <tr>
+                  <td>Russell</td>
+                  <td>has birthday</td>
+                  <td>July 2, 1830</td>
+                  <td>from Tom's Family</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>is spouse of</td>
+                  <td>Agnes</td>
+                  <td>from Tom's Family</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>lives in</td>
+                  <td>Wintonbury, Connecticut</td>
+                  <td>from Tom's Family</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>has occupation</td>
+                  <td>Candlestick Maker</td>
+                  <td>from Tom's Family</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>has bloodtype</td>
+                  <td>O-</td>
+                  <td>from Tom's Family</td>
+                </tr>
+                <tr>
+                  <td>Russell</td>
+                  <td>has egg preference</td>
+                  <td>Over Easy</td>
+                  <td>from Tom's Family</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </section>
         { this.props.buzzwordBank }
       </div>

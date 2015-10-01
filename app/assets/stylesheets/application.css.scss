@@ -278,6 +278,10 @@ body {
   }
   .db-table {
     font-family: monospace;
+    &.inline {
+      width: 50%;
+      display: inline-block;
+    }
   }
   ul > li {
     margin-bottom: $s5;
@@ -297,7 +301,10 @@ body {
     color: $ch1;
     text-shadow: $s1 $s1 $s1 $ch5;
   }
-  samp, .triples td, .triples th {
+  samp, .rdf td, .rdf th {
+    &.glab, &:nth-of-type(4):not(.sub):not(.pred):not(.obj) {
+      color: $ch5;
+    }
     &.sub, &:nth-of-type(3n + 1):not(.pred):not(.obj) {
       color: $ch2;
     }
@@ -315,6 +322,7 @@ body {
   table {
     margin: 1em auto;
     width: 80%;
+    text-shadow: $s1 $s1 $s1 $c1;
   }
   section {
     padding: 0 100px 0;
