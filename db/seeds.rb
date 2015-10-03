@@ -286,16 +286,24 @@ WIP
     word: "High-Level",
     note:
 """
-WIP
+High-Level is a term used to classify a description of a system that is more abstracted,
+describes overall goals and systemic features, and is typically more concerned
+with the system as a whole, or larger components of it. LISP, for example, is
+considered a high-level programming language because it allows a programmer to
+not concern themselves with the \"1s and 0s\" or more concrete details of interacting
+with a computer such as memory allocation.
 """,
-    topics: ["LISP"],
+    topics: ["LISP", "Neural Networks"],
     related: ["Low-Level"]
   },
   {
     word: "Low-Level",
     note:
 """
-WIP
+Low-Level is a term used to classify a description of a system that delves into
+the function of individual components and how they operate, favoring detail rather
+than overview. A low-level description of the sensation of touch for instance would
+cover the anatomy of an individual neuron.
 """,
     topics: ["LISP"],
     related: ["High-Level"]
@@ -349,10 +357,76 @@ WIP
     word: "Semantics",
     note:
 """
-WIP
+Generally speaking, semantics is the study of meaning, or more formally, <em>the
+relation between signs and the things to which they infer</em>. A semantic query of a
+triplestore database will enable the retrieval of both explicitly and implicitly derived information
+based on syntactic, semantic and structural information contained in the data. A purely statistical
+learning model such as an artificial neural network does <strong>not</strong> adhere to
+a semantic methodology as it will approximate or mimic a target behavior but will not
+understand the meaning of that behavior per se.
 """,
-    topics: ["LISP"],
+    topics: ["LISP", "Machine Learning", "Databases"],
     related: ["Syntax"]
+  },
+  {
+    word: "Statistical Model",
+    note:
+"""
+A statistical model is a mathematical model which is modified or trained by the input of data points,
+such as an artificial neural network.
+Statistical models are often but not always probabilistic. Take, for instance, Claude Shannon's proposed
+probabilistic models of communication:
+
+If you have a vocabulary of `100000` words and a second-order Markov model in which the probability of a
+word depends on the previous two words, then you need a quadrillion (`10e15`) probability values to specify
+the model. The only feasible way to learn these `10e15` values is to gather statistics from data and introduce
+some smoothing method for the many cases where there is no data. Therefore, most (but not all) probabilistic
+models are trained. Also, many (but not all) trained models are probabilistic.
+
+As another example, consider the Newtonian model of gravitational attraction, which says that the force between
+two objects of mass <span class='math'>m<sub>1</sub></span> and <span class='math'>m<sub>2</sub></span>
+a distance <span class='math'>r</span> apart is given by:
+<p class='equation math'>
+  F = G m<sub>1</sub> m<sub>2</sub> / r<sup>2</sup>
+</p>
+where <span class='math'>G</span> is the universal gravitational constant.
+""",
+    topics: ["Machine Learning", "Neural Networks"],
+    related: ["Syntax", "Mathematical Model", "Probabilistic model", "Trained Model"]
+  },
+  {
+    word: "Mathematical Model",
+    note:
+"""
+A mathematical model specifies a relation among variables, either in functional form that maps inputs
+to outputs (e.g. <span class='math'>y = m x + b</span>) or in relation form (e.g. the following
+<span class='math'>(x, y)</span> pairs are part of the relation).
+""",
+    topics: ["Machine Learning", "Neural Networks"],
+    related: ["Syntax", "Statistical Model", "Probabilistic model", "Trained Model"]
+  },
+  {
+    word: "Probabilistic Model",
+    note:
+"""
+A probabilistic model specifies a probability distribution over possible values of random variables, e.g.,
+<span class='math'>P(x, y)</span>, rather than a strict deterministic relationship, e.g., <span class='math'>y = f(x)</span>.
+
+""",
+    topics: ["Machine Learning", "Neural Networks"],
+    related: ["Syntax", "Mathematical Model", "Statistical model", "Trained Model"]
+  },
+  {
+    word: "Trained Model",
+    note:
+"""
+A trained model uses some training/learning algorithm to take as input a collection of possible models and a
+collection of data points (e.g. <span class='math'>(x, y)</span> pairs) and select the best model. Often
+this is in the form of choosing the values of parameters (such as <span class='math'>m</span> and <span class='math'>b</span>
+  above) through a process of statistical inference.
+""",
+    topics: ["Machine Learning", "Neural Networks"],
+    related: ["Syntax", "Mathematical Model", "Probabilistic model", "Statistical Model"]
   },
   {
     word: "Syntax",
