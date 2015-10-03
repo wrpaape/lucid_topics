@@ -202,13 +202,17 @@ nodes:  [ x | ●=]==>[ y | ●=]==>NIL
 *safe*
 """,
     topics: ["LISP"],
-    related: ["Atom (Element)", "Primitive Data Type", "List", "Syntax", "Common LISP", "Tree Data Structure", "Homoiconicity"]
+    related: ["Atom (Element)", "Primitive Data Type", "List", "Syntax", "Common LISP", "Tree Data Structure"]
   },
   {
     word: "Common LISP",
     note:
 """
-WIP
+Known for its extreme flexibility, excellent support for a healthy selection of programming paradigms, and fast
+prototyping capabilities, Common LISP has vied with Scheme as the more popular of the two principal LISP dialects
+since its standardized release in 1986. Common LISP has a large standard library of predefined functions and other
+tools \"out-of-the-box\" that aid in getting new programs up and running quickly rather than having to start
+completely from scratch.
 """,
     topics: ["LISP"],
     related: ["S-expression", "List", "Atom (Element)", "Common LISP"]
@@ -217,16 +221,9 @@ WIP
     word: "Data Driven Programming",
     note:
 """
-WIP
-""",
-    topics: ["LISP"],
-    related: ["S-expression", "Common LISP"]
-  },
-  {
-    word: "Homoiconicity",
-    note:
-"""
-WIP
+Rather than the traditional means of defining a series of steps to be taken when processessing input data from program start to end,
+data-driven programming is a programming paradigm characterized by **reacting** to the data provided (usually through pattern matching)
+followed by the processing steps defined for handling that particular chunk of data.
 """,
     topics: ["LISP"],
     related: ["S-expression", "List", "Common LISP"]
