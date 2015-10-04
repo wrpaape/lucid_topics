@@ -99,17 +99,51 @@ var MachineLearning = React.createClass({
           <h3>
             Machine Learning vs. Statistical Learning, a Tale of Two Implementations
           </h3>
-          <Img src={ imgPath + 'ml_venn.png' } />
+          <div className='quote'>
+            <i>...perhaps that’s child’s play compared to the true original sin of ML nomenclature:
+            tossing around the highly deceptive term “neural network” for a stack of linear functions
+            paired with a wonky, overhyped training algorithm; the combination of which, many years
+            later, still causes confusion.</i>
+            <div>
+              <div>
+                – Brennan O'Connor, author
+                of <a href='http://brenocon.com/blog/2008/12/statistics-vs-machine-learning-fight/' target='_blank'>
+                  <i>
+                    Statistics vs. Machine Learning, fight!
+                  </i>
+                </a>, on staticians "marketing" of their field through cool lingo
+              </div>
+            </div>
+          </div>
+          <table className='wcap'>
+            <caption>
+              Taken from
+              a <a href='http://blogs.sas.com/content/subconsciousmusings/2014/08/22/looking-backwards-looking-forwards-sas-data-mining-and-machine-learning/' target='_blank'>
+                data mining primer course in 1998
+              </a>, the venn diagram above depicts the then-perceived overlap between
+              the analytical sciences of statistics and machine learning:  none. While there remains a
+              cultural split between the two
+              fields <a href='http://norvig.com/chomsky.html' target='_blank'>
+                to this day
+              </a>, the consensus today is that they share much in common and benefit heavily from each others' works,
+              with machine learning validating statistics through engineering success.
+            </caption>
+            <tbody>
+              <tr>
+                <td><Img src={ imgPath + 'ml_venn.png' } /></td>
+              </tr>
+            </tbody>
+          </table>
           <p>
             WIP
           </p>
           <div>
             <table className='wcap'>
               <caption>
-                <a href='http://www-stat.stanford.edu/~tibs/stat315a/glossary.pdf' target='_blank'>
-                  an amusing comparison of analogous buzzwords from machine learning and statistics
-                  by statistician and machine learning expert Robert Tibshiriani
-                </a>
+                an amusing <a href='http://www-stat.stanford.edu/~tibs/stat315a/glossary.pdf' target='_blank'>
+                  comparison
+                </a> of analogous buzzwords from machine learning and statistics by statistician and machine
+                learning expert Robert Tibshiriani
               </caption>
               <thead>
                 <tr>
@@ -156,13 +190,15 @@ var MachineLearning = React.createClass({
         </section>
         <section>
           <h3>
-            Data Modeling vs. Algorithmic Modeling, The Other Black Box 
+            Data Modeling and Algorithmic Modeling, The Other Black Box 
           </h3>
           <div className='quote'>
             <i>My job as a spacecraft engineer was not to land on Mars, but to land on the model
             of Mars provided by the geologists.</i>
             <div>
-              – James Martin, leader of NASA's Viking missions to Mars
+              <div>
+                – James Martin, leader of NASA's Viking missions to Mars
+              </div>
             </div>
           </div>
         </section>

@@ -167,6 +167,9 @@ $s14: 46px;
   margin: 1em 0 2em;
   font-size: $s6;
 }
+@mixin text-shadow($color) {
+  text-shadow: $s1 $s1 $s1 $color;
+}
 
 @-webkit-keyframes fade-out {
   @include fade-out-keys;
@@ -221,13 +224,35 @@ $s14: 46px;
     text-align: left;
     span, a {
       display: block;
+      text-decoration: none;
     }
   }
   span, a, select, &:not(p) > i {
     @include btn;
   }
 }
-
+.math {
+  font-family: serif;
+}
+.db-table {
+  font-family: monospace;
+  &.inline {
+    width: 50%;
+    display: inline-block;
+  }
+}
+.quote {
+  @include quote;
+  & > div {
+    display: block;
+    padding-left: 50%;
+    padding-top: 1em;
+    div {
+      text-align: left;
+    }
+  }
+}
+  
 body {
   font-size: $s9;
   color: $c2;
@@ -235,9 +260,11 @@ body {
   @include consolas;
   @include bg1;
   img {
+    display: table;
+    margin: auto;
     vertical-align: top;
     max-width: 80%;
-    max-height: 400px;
+    max-height: 300px;
     &.full-scale {
       max-width: none;
       max-height: none;
@@ -260,7 +287,7 @@ body {
       }
     }
   }
-  h2, h4, p, td, li, caption {
+  h2, h4, p, td, li, caption, blockquote {
     text-align: left;
   }
   h3 {
@@ -278,41 +305,22 @@ body {
       @include sigma;
     }
   }
-  .math {
-    font-family: serif;
-  }
-  .db-table {
-    font-family: monospace;
-    &.inline {
-      width: 50%;
-      display: inline-block;
-    }
-  }
-  .quote {
-    @include quote;
-    div {
-      width: 100%;
-      padding-top: 1em;
-      text-align: right
-    }
-  }
   ul > li {
     margin-bottom: $s5;
   }
   a {
     color: $c2;
-    text-decoration: none;
   }
   strong {
     color: $ch1;
-    text-decoration: underline;
+    @include text-shadow($ch2)
   }
   blockquote > strong {
     text-decoration: none;
   }
   code {
     color: $ch1;
-    text-shadow: $s1 $s1 $s1 $ch5;
+    @include text-shadow($ch5);
   }
   samp, .rdf td, .rdf th {
     &.glab, &:nth-of-type(4):not(.sub):not(.pred):not(.obj) {
@@ -335,7 +343,7 @@ body {
   table {
     margin: 1em auto;
     width: 80%;
-    text-shadow: $s1 $s1 $s1 $c1;
+    @include text-shadow($c1);
   }
   section {
     padding: 0 100px 0;
