@@ -302,7 +302,7 @@ with a computer such as memory allocation.
 """
 Low-Level is a term used to classify a description of a system that delves into
 the function of individual components and how they operate, favoring detail rather
-than overview. A low-level description of the sensation of touch for instance would
+than overview. A low-level description of the sensation of touch, for instance, would
 cover the anatomy of an individual neuron.
 """,
     topics: ["LISP"],
@@ -389,7 +389,10 @@ a distance <span class='math'>r</span> apart is given by:
 <p class='equation math'>
   F = G m<sub>1</sub> m<sub>2</sub> / r<sup>2</sup>
 </p>
-where <span class='math'>G</span> is the universal gravitational constant.
+where <span class='math'>G</span> is the universal gravitational constant. This is a trained model because the
+gravitational constant <span class='math'>G</span> is determined by statistical inference over the results of a
+series of experiments that contain stochastic experimental error. It is also a deterministic (non-probabilistic)
+model because it states an exact functional relationship.
 """,
     topics: ["Machine Learning", "Neural Networks"],
     related: ["Syntax", "Mathematical Model", "Probabilistic model", "Trained Model"]

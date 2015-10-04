@@ -91,6 +91,62 @@ var MachineLearning = React.createClass({
             </li>
           </ol>
           <h3>
+            Machine Learning vs. Statistics, a Tale of Two Implementations
+          </h3>
+          <p>
+
+          </p>
+          <div>
+            <table className='wcap'>
+              <caption>
+                <a href='http://www-stat.stanford.edu/~tibs/stat315a/glossary.pdf' target='_blank'>
+                  an amusing comparison of analogous buzzwords from machine learning and statistics
+                  by statistician and machine learning expert Robert Tibshiriani
+                </a>
+              </caption>
+              <thead>
+                <tr>
+                  <th>Machine Learning</th>
+                  <th>Statistics</th>
+                </tr>
+              </thead>
+              <tbody>             
+                <tr>
+                  <td>network, graphs</td>
+                  <td>model</td>
+                </tr>
+                <tr>
+                  <td>weights</td>
+                  <td>parameters</td>
+                </tr>
+                <tr>
+                  <td>learning</td>
+                  <td>fitting</td>
+                </tr>
+                <tr>
+                  <td>generalization</td>
+                  <td>test set performance</td>
+                </tr>
+                <tr>
+                  <td>supervised learning</td>
+                  <td>regression/classification</td>
+                </tr>
+                <tr>
+                  <td>unsupervised learning</td>
+                  <td>density estimation, clustering</td>
+                </tr>          
+                <tr>
+                  <td>large grant = $1,000,000</td>
+                  <td>large grant = $50,000</td>
+                </tr>
+                <tr>
+                  <td>nice place to have a meeting: Snowbird, Utah, French Alps</td>
+                  <td>nice place to have a meeting: Las Vegas in August</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>
             Applications
           </h3>
           <p>

@@ -18,7 +18,7 @@ var Databases = React.createClass({
           <h3>
             What is a Database?
           </h3>
-          <table className='image-caption split'>
+          <table className='wcap split'>
             <caption>
               If you've endured a PowerPoint presentation in a business setting in the 20 or 21st
               century chances are this guy popped up somewhere in the corner of the slide with the
@@ -31,7 +31,7 @@ var Databases = React.createClass({
               </tr>
             </tbody>
           </table>
-          <table className='image-caption split'>
+          <table className='wcap split'>
             <caption>
               Invented in the early 30s, drum memory was widely used as computer storage around
             the time early database models were being hashed out on the drawing board. You'd be
@@ -169,7 +169,7 @@ var Databases = React.createClass({
             records the attributes listed in the table header:  our first user goes by the <code>username
             </code> of <code>jimchrist</code>, has <code>admin</code> privileges, etc... This table configuration, or <strong>
             schema</strong>, so far looks like nothing your cookie-cutter spreadsheet software
-            couldn't handle. So what if the owner of this website wanted to allow their users
+            couldn't handle. But what if the owner of this website wanted to allow their users
             to make posts like a proper forum?  Not only that, but lets say they wanted to allow
             users to comment on posts and other comments as well–AND keep track of this interaction
             without having a nervous breakdown. This is where a proper DBMS excels over Excel.
@@ -464,7 +464,7 @@ var Databases = React.createClass({
             resources and values.  A value, however, is either a resource or a primitive data type.
             The basic unit to represent information in RDF is <strong>the statement</strong>.
           </p>
-          <table className='image-caption'>
+          <table className='wcap'>
             <caption>
               The Seven Bridges of Königsberg is a classic historical problem
               best known academically for its solution by Leonhard Euler providing the early framework

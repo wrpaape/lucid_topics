@@ -334,7 +334,7 @@ body {
         padding-left: 2em;
       }
     }
-    & > table.image-caption {
+    table.wcap {
       &.split {
         display: inline-block;
         width: auto;
@@ -344,9 +344,9 @@ body {
         }
       }
       caption {
-        @include bg4;
+        @include bg5;
         padding: 1em;
-        margin-bottom: 2em;
+        margin: 1em 0 2em;
         font-size: $s6;
         text-align: left;
         caption-side: bottom;
