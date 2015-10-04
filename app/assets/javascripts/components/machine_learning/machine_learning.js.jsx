@@ -3,6 +3,8 @@
 
 var MachineLearning = React.createClass({
   render: function() {
+    var imgPath = this.props.paths.img;
+
     return(
       <div>
         <div className='nav header'>
@@ -46,6 +48,7 @@ var MachineLearning = React.createClass({
               <h4>
                 Supervised Learning
               </h4>
+              <Img src={ imgPath + 'sl_flowchart.png' } />
               <p>
                 The program is presented with example inputs <strong>and</strong> their desired
                 outputs, given by a "teacher", and the goal is to <strong>learn a general rule
@@ -56,6 +59,7 @@ var MachineLearning = React.createClass({
               <h4>
                 Unsupervised Learning
               </h4>
+              <Img src={ imgPath + 'ul_flowchart.png' } />
               <p>
                 Unsupervised learning can be a goal in itself, for instance, when a program is
                 given the task of <strong>discovering hidden patterns in data</strong>. It can
@@ -90,11 +94,14 @@ var MachineLearning = React.createClass({
               </p>
             </li>
           </ol>
+        </section>
+        <section>
           <h3>
-            Machine Learning vs. Statistics, a Tale of Two Implementations
+            Machine Learning vs. Statistical Learning, a Tale of Two Implementations
           </h3>
+          <Img src={ imgPath + 'ml_venn.png' } />
           <p>
-
+            WIP
           </p>
           <div>
             <table className='wcap'>
@@ -146,12 +153,18 @@ var MachineLearning = React.createClass({
               </tbody>
             </table>
           </div>
+        </section>
+        <section>
           <h3>
-            Applications
+            Data Modeling vs. Algorithmic Modeling, The Other Black Box 
           </h3>
-          <p>
-            google dream machine
-          </p>
+          <div className='quote'>
+            <i>My job as a spacecraft engineer was not to land on Mars, but to land on the model
+            of Mars provided by the geologists.</i>
+            <div>
+              – James Martin, leader of NASA's Viking missions to Mars
+            </div>
+          </div>
         </section>
         { this.props.buzzwordBank }
       </div>

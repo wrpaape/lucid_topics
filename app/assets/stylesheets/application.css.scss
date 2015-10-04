@@ -162,6 +162,11 @@ $s14: 46px;
   -webkit-text-stroke-width: 0;
   text-decoration: none;
 }
+@mixin quote {
+  padding: 1em;
+  margin: 1em 0 2em;
+  font-size: $s6;
+}
 
 @-webkit-keyframes fade-out {
   @include fade-out-keys;
@@ -255,7 +260,7 @@ body {
       }
     }
   }
-  h2, h4, p, td, li, blockquote {
+  h2, h4, p, td, li, caption {
     text-align: left;
   }
   h3 {
@@ -281,6 +286,14 @@ body {
     &.inline {
       width: 50%;
       display: inline-block;
+    }
+  }
+  .quote {
+    @include quote;
+    div {
+      width: 100%;
+      padding-top: 1em;
+      text-align: right
     }
   }
   ul > li {
@@ -345,10 +358,7 @@ body {
       }
       caption {
         @include bg5;
-        padding: 1em;
-        margin: 1em 0 2em;
-        font-size: $s6;
-        text-align: left;
+        @include quote;
         caption-side: bottom;
         li {
           font-size: $s7;
