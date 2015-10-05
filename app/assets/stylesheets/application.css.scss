@@ -240,6 +240,7 @@ $s14: 46px;
 }
 .math {
   font-family: serif;
+  white-space: nowrap;
 }
 .db-table {
   font-family: monospace;
@@ -248,6 +249,7 @@ $s14: 46px;
   width: 50%;
   display: inline-block;
   text-align: center;
+  vertical-align: top;
 }
 .quote {
   @include quote;
@@ -490,7 +492,7 @@ body {
     &.buzzword-bank > ul > li {
       margin: 0;
       padding-left: $s8;
-      overflow: overlay;
+      overflow: hidden;
       &:hover {
         @include bg4;
       }
@@ -517,7 +519,7 @@ body {
               line-height: $s10;
             }
             &.inline {
-              padding: $s8 0;
+              padding-bottom: $s8;
               img {
                 margin-top: 1em;
               }

@@ -317,14 +317,32 @@ of the entities that really or fundamentally exist for a particular domain of di
 It is thus a practical application of philosophical ontology, with a taxonomy. Ontologies
 are created to aid in reducing complexity and organizing information so that problem solving
 techniques can be applied more practically on large and loosely structured datasets.
+*safe*
 
-The two most established ontology visualization techniques:
+Most ontologies describe **individuals** (instances), **classes** (concepts), **attributes**, and **relations**:
+<dl>
+  <dt>**individuals**</dt>
+    <dd>instances or objects (the basic or \"ground level\" objects)</dd>
+    <dd>`Reid Paape`, `Frost Bank Tower`</dd>
+  <dt>**classes**</dt>
+    <dd>sets, collections, concepts, classes in programming, types of objects, or kinds of things</dd>
+    <dd>`Person`, `Office Building`</dd>
+  <dt>**attributes**</dt>
+    <dd>aspects, properties, features, characteristics, or parameters that objects (and classes) can have</dd>
+    <dd>`clumsy`, `515 ft`</dd>
+  <dt>**relations**</dt>
+    <dd>ways in which classes and individuals can be related to one another</dd>
+    <dd>`is a`, `is located in`</dd>
+</dl>
+
+*safe*
+Ontologies are usually visualized in one of two ways:
 
 <div class='inline'>
-  graph (better for creating mappings)
+  **graph**<br /><sup>(better for creating mappings)</sup>
   <img src='graph.png'>
 </div><div class='inline'>
-  indented tree (better for evaluating mappings)
+  **indented tree**<br /><sup>(better for evaluating mappings)</sup>
   <img src='indented_tree.png'>
 </div>
 """,
@@ -338,6 +356,25 @@ The two most established ontology visualization techniques:
 Ontology languages are formal languages used to construct ontologies. They allow the encoding
 of knowledge about specific domains and often include reasoning rules that support the
 processing of that knowledge.
+*safe*
+
+\"defining an individual\" by declaring instance \"Reid Paape\" a member of a class \"Person\" in three ontology languages:
+<dt>The Web Ontology Language (OWL)</dt>
+```
+<owlx:Individual owlx:name=\"Reid Paape\"> 
+  <owlx:type owlx:name=\"Person\" />
+</owlx:Individual>``` 
+<dt>Resource Description Framework (RDF) using FOAF (friend of a friend) ontology</dt>
+```
+<foaf:Person>
+  <foaf:name>Reid Paape</foaf:name>
+</foaf:Person>
+```
+<dt>CycL</dt>
+```
+(\#$isa \#$ReidPaape \#$Person) \\;
+```
+*safe*
 """,
     topics: ["LISP", "Databases"],
     related: ["Semantics", "Common LISP", "Ontology"]
@@ -395,7 +432,7 @@ Generally speaking, semantics is the study of meaning, or more formally, <em>the
 relation between signs and the things to which they infer</em>. A semantic query of a
 triplestore database will enable the retrieval of both explicitly and implicitly derived information
 based on syntactic, semantic and structural information contained in the data. A purely statistical
-learning model such as an artificial neural network does <strong>not</strong> adhere to
+learning model such as an artificial neural network does **not** adhere to
 a semantic methodology as it will approximate or mimic a target behavior but will not
 understand the meaning of that behavior per se.
 """,
