@@ -309,6 +309,40 @@ cover the anatomy of an individual neuron.
     related: ["High-Level"]
   },
   {
+    word: "Ontology",
+    note:
+"""
+In computer science and information science, an ontology is a formal naming and definition of the types, properties, and interrelationships
+of the entities that really or fundamentally exist for a particular domain of discourse.
+It is thus a practical application of philosophical ontology, with a taxonomy. Ontologies
+are created to aid in reducing complexity and organizing information so that problem solving
+techniques can be applied more practically on large and loosely structured datasets.
+
+The two most established ontology visualization techniques:
+
+<div class='inline'>
+  graph (better for creating mappings)
+  <img src='graph.png'>
+</div><div class='inline'>
+  indented tree (better for evaluating mappings)
+  <img src='indented_tree.png'>
+</div>
+""",
+    topics: ["LISP", "Databases"],
+    related: ["Semantics", "Common LISP", "Ontology Language"]
+  },
+  {
+    word: "Ontology Language",
+    note:
+"""
+Ontology languages are formal languages used to construct ontologies. They allow the encoding
+of knowledge about specific domains and often include reasoning rules that support the
+processing of that knowledge.
+""",
+    topics: ["LISP"],
+    related: ["Semantics", "Common LISP", "Ontology"]
+  },
+  {
     word: "Machine-Independent Programming Language",
     note:
 """
@@ -342,7 +376,7 @@ WIP
 WIP
 """,
     topics: ["LISP"],
-    related: ["Nonatomic Data Structure"]
+    related: ["Nonatomic Data Structure", "Data Structure"]
   },
   {
     word: "Programming Pattern/Paradigm",
@@ -482,7 +516,7 @@ WIP
 """
 WIP
 """,
-    topics: ["Neural Networks"],
+    topics: ["Neural Networks", "Databases", "Machine Learning"],
     related: []
   },
   {
@@ -639,24 +673,6 @@ WIP
     related: []
   },
   {
-    word: "Model",
-    note:
-"""
-WIP
-""",
-    topics: ["Databases"],
-    related: []
-  },
-  {
-    word: "Object",
-    note:
-"""
-WIP
-""",
-    topics: ["Databases"],
-    related: ["Data Structure"]
-  },
-  {
     word: "Network",
     note:
 """
@@ -718,15 +734,6 @@ WIP
 """,
     topics: ["Databases"],
     related: ["Hierarchy"]
-  },
-  {
-    word: "Semantics",
-    note:
-"""
-WIP
-""",
-    topics: ["Databases"],
-    related: []
   },
   {
     word: "Structured Data",
@@ -799,15 +806,6 @@ WIP
 """,
     topics: ["Machine Learning"],
     related: ["Function", "Linear Function", "Nonlinear Function"]
-  },
-  {
-    word: "Model",
-    note:
-"""
-WIP
-""",
-    topics: ["Machine Learning"],
-    related: []
   },
   {
     word: "Task",
@@ -883,7 +881,7 @@ to a large amount of data from many different sources, benefit enormously from t
 Others, such as the storage of high volumes of highly structured transactional data, do not.
 """,
     topics: ["Machine Learning", "Databases", "LISP"],
-    related: ["Common LISP"]
+    related: ["Common LISP", "Ontology", "Ontology Language", "Semantics"]
   }
 ]
 

@@ -236,23 +236,24 @@ $s14: 46px;
 }
 .db-table {
   font-family: monospace;
-  &.inline {
-    width: 50%;
-    display: inline-block;
-  }
+}
+.inline {
+  width: 50%;
+  display: inline-block;
+  text-align: center;
 }
 .quote {
   @include quote;
   & > div {
     display: block;
     padding-left: 50%;
-    padding-top: 1em;
+    padding-top: 2em;
     div {
       text-align: left;
     }
   }
 }
-  
+
 body {
   font-size: $s9;
   color: $c2;
@@ -503,11 +504,17 @@ body {
           }
         }
         & > span {
-          p, pre, li, h4 {
+          p, pre, li, h4, div {
             @include consolas;
             &:not(h4) {
               font-size: $s7;
               line-height: $s10;
+            }
+            &.inline {
+              padding: $s8 0;
+              img {
+                margin-top: 1em;
+              }
             }
           }
         }

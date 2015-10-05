@@ -190,7 +190,7 @@ var MachineLearning = React.createClass({
         </section>
         <section>
           <h3>
-            Data Modeling and Algorithmic Modeling, The Other Black Box 
+            Data Modeling and Algorithmic Modeling, the Other Black Box 
           </h3>
           <div className='quote'>
             <i>My job as a spacecraft engineer was not to land on Mars, but to land on the model

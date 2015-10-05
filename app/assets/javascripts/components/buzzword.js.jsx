@@ -28,6 +28,11 @@ var Buzzword = React.createClass({
       related: newBuzzword.related
     });
   },
+  formatMd: function(md) {
+    return md.replace(/▓/g, '<br />').replace(/(<img[^>]*src=')([^>]*)('[^>]*>)/g, function(match, imgOpen, path, imgClose) {
+      return imgOpen + Img.assetPath('buzzwords/' + path) + imgClose;
+    });
+  },
   formatRelated: function() {
     var related = this.state.related.map(function(word, i) {
       return <i key={ this.state.word + '-' + word } onClick={ this.selectBuzzword.bind(this, word) }>{ word }</i>;
@@ -43,7 +48,7 @@ var Buzzword = React.createClass({
         </p>
         <div className={ this.state.show }>
         { this.formatRelated() }
-        <span dangerouslySetInnerHTML={ {__html: marked(this.state.note).replace(/▓/g, '<br />') } } />
+        <span dangerouslySetInnerHTML={ {__html: this.formatMd(marked(this.state.note)) } } />
         </div>
       </li>
     );

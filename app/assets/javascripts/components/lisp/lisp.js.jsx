@@ -635,9 +635,17 @@ var Lisp = React.createClass({
           </p>
         </section>
         <section>
-          <h4>
+          <h3>
+            CycL
+          </h3>
+          <p>
+            WIP
+          </p>
+        </section>
+        <section>
+          <h3>
             Prolog
-          </h4>
+          </h3>
           <p>
             It must be mentioned that in Europe and Japan,
             Prolog has been as popular as LISP for AI work. Prolog shares most
