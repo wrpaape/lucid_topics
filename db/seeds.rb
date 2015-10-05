@@ -359,17 +359,20 @@ processing of that knowledge.
 *safe*
 
 \"defining an individual\" by declaring instance \"Reid Paape\" a member of a class \"Person\" in three ontology languages:
+
 <dt>The Web Ontology Language (OWL)</dt>
 ```
 <owlx:Individual owlx:name=\"Reid Paape\"> 
   <owlx:type owlx:name=\"Person\" />
 </owlx:Individual>``` 
+
 <dt>Resource Description Framework (RDF) using FOAF (friend of a friend) ontology</dt>
 ```
 <foaf:Person>
   <foaf:name>Reid Paape</foaf:name>
 </foaf:Person>
 ```
+
 <dt>CycL</dt>
 ```
 (\#$isa \#$ReidPaape \#$Person) \\;
@@ -380,22 +383,60 @@ processing of that knowledge.
     related: ["Semantics", "Common LISP", "Ontology"]
   },
   {
-    word: "Machine-Independent Programming Language",
-    note:
-"""
-WIP
-""",
-    topics: ["LISP"],
-    related: []
-  },
-  {
     word: "Macro",
     note:
 """
+A Lisp macro is a method built into the language **used to transform LISP code**. This is possible because
+code expressed as a macro is **evaluated before compile time**, with the resulting LISP expression
+substituted inline by run time. Consider the definition of the nullary (receives no arguments) function
+`func-add-1-1`:
+*safe*
+```
+(defun func-add-1-1 () (+ 1 1))
+```
+if called at run time, `func-add-1-1` should return the value `2`:
+```
+(func-add-1-1)
+;; compiled => (func-add-1-1)
+;; returns => 2
+```
+A similar effect can be achieved with the macro `mac-add-1-1`:
+```
+(demacro mac-add-1-1 () (+ 1 1))
+(mac-add-1-1)
+;; compiled => 2
+;; returns => 2
+```
+however, the unique power of the LISP macro comes from its ability to return lisp expressions
+before compile time:
+```
+(demacro mac-express-add-1-1 () '(+ 1 1))
+(mac-express-add-1-1)
+;; compiled => (+ 1 1)
+;; returns => 2
+```
+#### *Exploitation of this subtle difference in evaulation allows for an ease of metaprogramming not attainable in traditional languages.*
+*safe*
+
+Because **the macro language is LISP itself**, the full power of the language is available.
+Contrast this with traditional macros such as one written in C, where a separate language (which doesn't
+know how C works) is used.
+
+Also a macro can return **anything it wants**, including fragments of programs, so it can be used to
+build up pieces of programs at compile time. In other words, **a macro can generate code**. It thus
+can be used to **extend the language**.
+""",
+    topics: ["LISP"],
+    related: ["Program", "Task", "Function", "Common LISP", "Metaprogramming", "High-Level"]
+  },
+  {
+    word: "Metaprogramming",
+    note:
+"""
 WIP
 """,
     topics: ["LISP"],
-    related: ["Program", "Task"]
+    related: ["Macro", "Common LISP", "High-Level", "Program"]
   },
   {
     word: "Program",
@@ -404,7 +445,7 @@ WIP
 WIP
 """,
     topics: ["LISP"],
-    related: ["Macro"]
+    related: ["Macro", "Function"]
   },
   {
     word: "Object",

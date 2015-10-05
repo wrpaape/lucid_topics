@@ -137,7 +137,7 @@ var Databases = React.createClass({
                   <td>"2015-09-15 12:30:42"</td>
                 </tr>
                 <tr>
-                  <td>"PackersFan96"</td>
+                  <td>"immune"</td>
                   <td>"greenbay@example.com"</td>
                   <td>"$2a$10$B3BC0qh7HyTZvsN6jEHOh.5ZhZ2rhQFiSGJfk4Q56n4hyaCiUkohO"</td>
                   <td>false</td>
@@ -145,7 +145,7 @@ var Databases = React.createClass({
                   <td>"2015-09-14 00:55:47"</td>
                 </tr>
                 <tr>
-                  <td>"IHeartATX"</td>
+                  <td>"dukranger"</td>
                   <td>"asdf@example.com"</td>
                   <td>"$2a$10$5YwBHb2WzFJVD3SX8W4sauxHTDOtSYFDvQDvZpgHAFtb2a27lhWgS"</td>
                   <td>false</td>
@@ -195,25 +195,25 @@ var Databases = React.createClass({
                 <br />
                 EDIT:&nbsp;&nbsp;You're all getting bans once our db schema can handle them.
                 <div>
-                  IHeartATX:&nbsp;&nbsp;first
+                  dukranger:&nbsp;&nbsp;first
                 </div>
                 <div>
                   implosions:&nbsp;&nbsp;ur mum's always right
                   <div>
                     jimchrist:&nbsp;&nbsp;That she is. After all, she did grace the world with yours truly.
                     <div>
-                      PackersFan96:&nbsp;&nbsp;he meant that in a sexual way sperglord
+                      immune:&nbsp;&nbsp;he meant that in a sexual way sperglord
                     </div>
                   </div>
                 </div>
                 <div>
                   jimchrist:&nbsp;&nbsp;Let's stay on topic people. Am I ever wrong?
                   <div>
-                    PackersFan96:&nbsp;&nbsp;not as wrong as your mother LMAO
+                    immune:&nbsp;&nbsp;not as wrong as your mother LMAO
                   </div>
                 </div>
                 <div>
-                  IHeartATX:&nbsp;&nbsp;pls stop fighting ;_;
+                  dukranger:&nbsp;&nbsp;pls stop fighting ;_;
                 </div>
               </div>
             </div>
@@ -224,7 +224,7 @@ var Databases = React.createClass({
               <div>
                 implosions:&nbsp;&nbsp;any pics yet?
                 <div>
-                  PackersFan96:&nbsp;&nbsp;working on it
+                  immune:&nbsp;&nbsp;working on it
                 </div>
               </div>
             </div>
@@ -260,7 +260,7 @@ var Databases = React.createClass({
                 </tr>
                 <tr>
                   <td>2</td>
-                  <td>"PackersFan96"</td>
+                  <td>"immune"</td>
                   <td>"greenbay@example.com"</td>
                   <td>"$2a$10$B3BC0qh7HyTZvsN6jEHOh.5ZhZ2rhQFiSGJfk4Q56n4hyaCiUkohO"</td>
                   <td>false</td>
@@ -269,7 +269,7 @@ var Databases = React.createClass({
                 </tr>
                 <tr>
                   <td>3</td>
-                  <td>"IHeartATX"</td>
+                  <td>"dukranger"</td>
                   <td>"asdf@example.com"</td>
                   <td>"$2a$10$5YwBHb2WzFJVD3SX8W4sauxHTDOtSYFDvQDvZpgHAFtb2a27lhWgS"</td>
                   <td>false</td>
@@ -533,9 +533,9 @@ var Databases = React.createClass({
               </p>
             </li>
           </ul>
-          <h4>
+          <h3>
             Triplestore
-          </h4>
+          </h3>
           <p>
             The triplestore database, an RDF database that has become very popular across a wide range
             of applications as of late, has the ability to ingest diverse data, allowing flexibility to

@@ -43,7 +43,7 @@ var MachineLearning = React.createClass({
             general categories, depending on the nature of the learning "signal" or "feedback"
             available to a learning system:
           </p>
-          <ol>
+          <ol className='main'>
             <li>
               <h4>
                 Supervised Learning

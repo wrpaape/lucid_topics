@@ -259,8 +259,12 @@ $s14: 46px;
     padding-top: 2em;
     div {
       text-align: left;
+      font-size: $s5;
     }
   }
+}
+.main > li {
+  font-size: $s10;
 }
 
 body {
@@ -281,7 +285,7 @@ body {
       width: 100%;
     }
   }
-  h1, h2, section > h3, section > h4 {
+  h1, h2, section > h3, section > h4, .main > li > h4 {
     @include play;
     font-size: $s14;
     &:not(h1) {
@@ -369,6 +373,7 @@ body {
         display: inline-block;
         width: auto;
         margin: 1em 2em;
+        vertical-align: top;
         img {
           max-width: none;
         }
