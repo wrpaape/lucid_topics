@@ -81,40 +81,40 @@ var Lisp = React.createClass({
           '\n' +
           '\n;;; adds two matrices x and y, then returns the result' +
           '\n(defun add (x y)' +
-          '\n  (let ((sum (make-array (array-dimensions x))))' +
-          '\n    (dotimes (i (array-total-size x))' +
-          '\n      (setf (row-major-aref sum i)' +
-          '\n            (+ (row-major-aref x i)' +
-          '\n               (row-major-aref y i))))' +
-          '\n  sum))' +
+          '\n    (let ((sum (make-array (array-dimensions x))))' +
+          '\n        (dotimes (i (array-total-size x))' +
+          '\n            (setf (row-major-aref sum i)' +
+          '\n                (+ (row-major-aref x i)' +
+          '\n                   (row-major-aref y i))))' +
+          '\n    sum))' +
           '\n' +
           '\n;;; multiplies two matrices x and y, then returns the result' +
           '\n(defun mult (x y &key' +
-          '\n  (product (make-array' +
-          '\n    (list (nth 0 (array-dimensions x))' +
-          '\n          (nth 1 (array-dimensions y))))))' +
-          '\n  (let ((m (nth 0 (array-dimensions x)))' +
+          '\n    (product (make-array' +
+          '\n        (list (nth 0 (array-dimensions x))' +
+          '\n            (nth 1 (array-dimensions y))))))' +
+          '\n    (let ((m (nth 0 (array-dimensions x)))' +
           '\n        (n (nth 1 (array-dimensions y)))' +
           '\n        (common (nth 0 (array-dimensions y))))' +
-          '\n    (dotimes (i m product)' +
-          '\n      (dotimes (j n)' +
-          '\n        (setf (aref product i j) 0.0)' +
-          '\n        (dotimes (k common)' +
-          '\n          (incf (aref product i j)' +
-          '\n            (* (aref x i k) (aref y k j))))))))' +
+          '\n        (dotimes (i m product)' +
+          '\n            (dotimes (j n)' +
+          '\n                (setf (aref product i j) 0.0)' +
+          '\n                (dotimes (k common)' +
+          '\n                    (incf (aref product i j)' +
+          '\n                        (* (aref x i k) (aref y k j))))))))' +
           '\n' +
           '\n;;; Next set the values of matrices a, b,' +
           '\n;;; and c:' +
           '\n' +
           '\n(setf a' +
-          '\n  (make-array \'(2 3)' +
-          '\n    :initial-contents \'((1 0 1) (1 2 3))))' +
+          '\n    (make-array \'(2 3)' +
+          '\n        :initial-contents \'((1 0 1) (1 2 3))))' +
           '\n(setf b' +
-          '\n  (make-array \'(2 3)' +
-          '\n    :initial-contents \'((-2 2 3) (-1 0 4))))' +
+          '\n    (make-array \'(2 3)' +
+          '\n        :initial-contents \'((-2 2 3) (-1 0 4))))' +
           '\n(setf c' +
-          '\n  (make-array \'(3 2)' +
-          '\n    :initial-contents \'((2 2) (0 -1) (0 3))))' +
+          '\n    (make-array \'(3 2)' +
+          '\n        :initial-contents \'((2 2) (0 -1) (0 3))))' +
           '\n' +
           '\n;;; With the definitions and setting taken' +
           '\n;;; care of, a × ( b + c ) can be computed' +

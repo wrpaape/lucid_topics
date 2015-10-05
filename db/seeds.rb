@@ -139,8 +139,8 @@ which can be represented as *\"strings of captial Latin letters and digits with 
 *safe*
 
 In other words, an atom is one of two fundamental units of data expression:
-- character string (i.e. \"Hello world, I am an atom\"), or
-- numeric literal (i.e. 470)
+- character string (i.e. `\"Hello world, I am an atom\"`), or
+- numeric literal (i.e. `470`)
 
 
 *safe*
@@ -339,7 +339,7 @@ Ontology languages are formal languages used to construct ontologies. They allow
 of knowledge about specific domains and often include reasoning rules that support the
 processing of that knowledge.
 """,
-    topics: ["LISP"],
+    topics: ["LISP", "Databases"],
     related: ["Semantics", "Common LISP", "Ontology"]
   },
   {

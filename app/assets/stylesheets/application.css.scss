@@ -109,6 +109,9 @@ $s14: 46px;
   font-family: monospace;
   &.ace-terminal-theme {
     color: $c2;
+    .ace_comment {
+      @include text-code;
+    }
     .ace_marker-layer {
       .ace_active-line {
         @include bg4;
@@ -169,6 +172,10 @@ $s14: 46px;
 }
 @mixin text-shadow($color) {
   text-shadow: $s1 $s1 $s1 $color;
+}
+@mixin text-code {
+  color: $ch1;
+  @include text-shadow($ch5);
 }
 
 @-webkit-keyframes fade-out {
@@ -320,8 +327,7 @@ body {
     text-decoration: none;
   }
   code {
-    color: $ch1;
-    @include text-shadow($ch5);
+    @include text-code;
   }
   samp, .rdf td, .rdf th {
     &.glab, &:nth-of-type(4):not(.sub):not(.pred):not(.obj) {
