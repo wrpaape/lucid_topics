@@ -1,10 +1,10 @@
 class Hash
   def create_and_assign_topics_return_lamba
-    related = delete(:related)
+    related = delete(:related) || []
     query = { title: delete(:topics) } if has_key?(:topics)
     buzzword = Buzzword.create(self)
     buzzword.topics << Topic.where(query)
-    -> { catch(:dupe) { buzzword.relateds << Buzzword.where(word: related) } }
+    -> { catch(:dupe) { buzzword.relateds << Buzzword.where(word: related.map(&:titleize)) } }
   end
 end
 
@@ -626,7 +626,7 @@ series of experiments that contain stochastic experimental error. It is also a d
 model because it states an exact functional relationship.
 """,
     topics: ["Machine Learning", "Neural Networks"],
-    related: ["Syntax", "Mathematical Model", "Probabilistic model", "Trained Model"]
+    related: ["Syntax", "Mathematical Model", "Probabilistic Model", "Trained Model"]
   },
   {
     word: "Mathematical Model",
@@ -648,7 +648,7 @@ A probabilistic model specifies a probability distribution over possible values 
 
 """,
     topics: ["Machine Learning", "Neural Networks"],
-    related: ["Syntax", "Mathematical Model", "Statistical model", "Trained Model"]
+    related: ["Syntax", "Mathematical Model", "Statistical Model", "Trained Model"]
   },
   {
     word: "Trained Model",
@@ -660,7 +660,7 @@ this is in the form of choosing the values of parameters (such as <span class='m
   above) through a process of statistical inference.
 """,
     topics: ["Machine Learning", "Neural Networks"],
-    related: ["Syntax", "Mathematical Model", "Probabilistic model", "Statistical Model"]
+    related: ["Syntax", "Mathematical Model", "Probabilistic Model", "Statistical Model"]
   },
   {
     word: "Syntax",
