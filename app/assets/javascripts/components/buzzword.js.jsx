@@ -29,7 +29,7 @@ var Buzzword = React.createClass({
     });
   },
   formatMd: function(md) {
-    return md.replace(/▓/g, '<br />').replace(/(<img[^>]*src=')([^>]*)('[^>]*>)/g, function(match, imgOpen, path, imgClose) {
+    return md.replace(/(<img[^>]*src=')([^>]*)('[^>]*>)/g, function(match, imgOpen, path, imgClose) {
       return imgOpen + Img.assetPath('buzzwords/' + path) + imgClose;
     });
   },

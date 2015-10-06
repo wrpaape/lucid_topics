@@ -1,10 +1,10 @@
 class Hash
   def create_and_assign_topics_return_lamba
-    related = delete(:related) || []
+    related = delete(:related).try(:map, &:titleize)
     query = { title: delete(:topics) } if has_key?(:topics)
     buzzword = Buzzword.create(self)
     buzzword.topics << Topic.where(query)
-    -> { catch(:dupe) { buzzword.relateds << Buzzword.where(word: related.map(&:titleize)) } }
+    -> { catch(:dupe) { buzzword.relateds << Buzzword.where(word: related) } }
   end
 end
 
@@ -91,7 +91,7 @@ cons:
 *safe*
 """,
     topics: ["LISP"],
-    related: ["Array", "Vector", "Nonatomic Data Structure", "S-expression"]
+    related: ["Array", "Vector", "Nonatomic Data Structure", "S-Expression"]
   },
   {
     word: "Vector",
@@ -149,7 +149,7 @@ an *element*, a broader term including fundamental units such as functions and v
 In most practical contexts *atom* and *element* can be used interchangably.
 """,
     topics: ["LISP"],
-    related: ["Primitive Data Type", "S-expression", "List", "Common LISP"]
+    related: ["Primitive Data Type", "S-Expression", "List", "Common LISP"]
   },
   {
     word: "Primitive Data Type",
@@ -164,7 +164,7 @@ data type, while nonatomic data structures such as a list are considered built-i
     related: ["Atom (Element)", "Nonatomic Data Structure", "List"]
   },
   {
-    word: "S-expression",
+    word: "S-Expression",
     note:
 """
 An S-expression (**S**ymbolic **expression**) is a notation for nested list (tree-structured) data
@@ -215,7 +215,7 @@ tools \"out-of-the-box\" that aid in getting new programs up and running quickly
 completely from scratch.
 """,
     topics: ["LISP"],
-    related: ["S-expression", "List", "Atom (Element)", "Common LISP"]
+    related: ["S-Expression", "List", "Atom (Element)", "Common LISP"]
   },
   {
     word: "Data Driven Programming",
@@ -226,7 +226,7 @@ data-driven programming is a programming paradigm characterized by **reacting** 
 followed by the processing steps defined for handling that particular chunk of data.
 """,
     topics: ["LISP"],
-    related: ["S-expression", "List", "Common LISP"]
+    related: ["S-Expression", "List", "Common LISP"]
   },
   {
     word: "Tree Data Structure",
@@ -312,9 +312,9 @@ every node may have zero to many children. Because a cyclic tree is invalid, eac
 - storing data in a way that makes it easily searchable (i.e. file directory)
 - routing algorithms
 
-
-## Buzzword Bank
+<br />
 <dl>
+  <h2>Buzzword Bank</h2>
   <dt>root</dt>
   <dd>the top node in a tree</dd>
   <dt>parent</dt>
@@ -345,7 +345,7 @@ every node may have zero to many children. Because a cyclic tree is invalid, eac
 *safe*
 """,
     topics: ["LISP", "Databases"],
-    related: ["S-expression", "List", "Common LISP", "Backward-Chaining", "Parent-Child Relationship"]
+    related: ["S-Expression", "List", "Common LISP", "Backward-Chaining", "Parent-Child Relationship"]
   },
   {
     word: "Backward-Chaining",
@@ -438,8 +438,9 @@ are created to aid in reducing complexity and organizing information so that pro
 techniques can be applied more practically on large and loosely structured datasets.
 *safe*
 
-Most ontologies describe **individuals** (instances), **classes** (concepts), **attributes**, and **relations**:
+
 <dl>
+  <p>Most ontologies describe **individuals** (instances), **classes** (concepts), **attributes**, and **relations**:</p>
   <dt>individuals</dt>
     <dd>instances or objects (the basic or \"ground level\" objects)</dd>
     <dd>`Reid Paape`, `Frost Bank Tower`</dd>
@@ -572,17 +573,47 @@ WIP
 """
 WIP
 """,
-    topics: ["LISP"],
+    topics: ["LISP", "Machine Learning"],
     related: ["Nonatomic Data Structure", "Data Structure"]
   },
   {
     word: "Programming Pattern/Paradigm",
     note:
 """
-WIP
+A programming pattern or programming paradigm is a style of computer programming,
+serving as a way of building the structure and elements of computer programs.
+Programming paradigms can be viewed as models of the behavior of the programs that adhere to them.
+Some programming languages are designed to follow only one paradigm, while others
+such as Common LISP support multiple paradigms.
+
+With different paradigms, programs can be seen and built in different ways; for
+example, in object-oriented programming, a program is a collection of objects interacting
+in explicitly defined ways, while in declarative programming the computer is told
+only what the problem is, not how to actually solve it.
+*safe*
+
+
+<dl>
+  <p>some popular paradigms:</p>
+  <dt>imperative</dt>
+  <dd>An imperative program uses statements that change a program's state. In much the sameway that the imperative mood in natural languages expresses commands, an imperative program consists of commands for the computer to perform. Imperative programming focuses on describing *how* a program operates, implementing algorithms in terms of explicit steps.</dd>
+  <dt>declarative</dt>
+  <dd>A declarative program expresses the logic of a computation without describing its control flow. The declarative paradigm attempts to minimize or eliminate side effects by describing *what* the program should accomplish in terms of the problem domain, rather than describing *how* to go about accomplishing it.</dd>
+  <dt>functional</dt>
+  <dd>A functional program treats computation as the evaluation of mathematical functions and avoids changing state and mutable (stateful) data.</dd>
+  <dt>object-oriented</dt>
+  <dd></dd>
+  <dt>procedural</dt>
+  <dd></dd>
+  <dt>logic</dt>
+  <dd></dd>
+  <dt>symbolic</dt>
+  <dd></dd>
+</dl>
+*safe*
 """,
     topics: ["LISP", "Machine Learning"],
-    related: []
+    related: ["Semantics", "Common LISP", "Syntax", "Object", "Function", "Program"]
   },
   {
     word: "Semantics",
@@ -1012,15 +1043,6 @@ WIP
 """,
     topics: ["Machine Learning"],
     related: ["Program", "Macro"]
-  },
-  {
-    word: "Programming Pattern",
-    note:
-"""
-WIP
-""",
-    topics: ["Machine Learning"],
-    related: []
   },
   {
     word: "Signal/Feedback",

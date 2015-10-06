@@ -1,5 +1,7 @@
 class Buzzword < ActiveRecord::Base
-  before_create :strip_single_newlines, :force_line_breaks_at_headers
+  before_create :ensure_titleize!,
+    :strip_single_newlines!,
+    :force_line_breaks_at_headers!
   has_and_belongs_to_many :topics
   has_and_belongs_to_many :relateds, -> { order(:word) },
     class_name: Buzzword,
@@ -28,12 +30,16 @@ class Buzzword < ActiveRecord::Base
 
   private
 
-  def strip_single_newlines
-    self.note = self.note[1..-2].split("\n*safe*").map.with_index { |sec, i| i % 2 == 0 ? sec.gsub(/(?<!\n)\n(?!\n)/, " ") : sec }.join
+  def ensure_titleize!
+    self.word = self.word.titleize
   end
 
-  def force_line_breaks_at_headers
-    note.gsub!(/(?<=[^\n]\n\n)(\n*)(?=\n#)/, "▓ ")
+  def strip_single_newlines!
+    self.note = self.note.strip.split("\n*safe*").map.with_index { |sec, i| i % 2 == 0 ? sec.gsub(/(?<!\n)\n(?!\n)/, " ") : sec }.join
+  end
+
+  def force_line_breaks_at_headers!
+    note.gsub!(/(?<=[^\n]\n\n)(\n*)(?=\n#)/, "<br /> ")
   end
 
   def throw_dupes(other)
