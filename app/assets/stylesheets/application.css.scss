@@ -238,9 +238,20 @@ $s14: 46px;
     @include btn;
   }
 }
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}
 .math {
   font-family: serif;
   white-space: nowrap;
+}
+.full-scale {
+  max-width: none;
+  max-height: none;
+  width: 100%;
 }
 .db-table {
   font-family: monospace;
@@ -266,6 +277,53 @@ $s14: 46px;
 .main > li {
   font-size: $s10;
 }
+.wcap {
+  &.split {
+    display: inline-block;
+    width: auto;
+    margin: 1em 2em;
+    vertical-align: top;
+    img {
+      max-width: none;
+    }
+  }
+  caption {
+    @include bg5;
+    @include quote;
+    @include consolas;
+    caption-side: bottom;
+    li {
+      font-size: $s7;
+    }
+  }
+  td {
+    text-align: center;
+  }
+}
+.multi {
+  table-layout: fixed;
+  & > tbody {
+    vertical-align: top;
+    table {
+      @extend .wcap;
+      margin: auto;
+      tbody {
+        vertical-align: bottom;
+        td {
+          height: 150px;
+          img {
+            max-height: 100%;
+            max-width:  100%;
+          }
+        }
+      }
+      caption {
+        font-size: $s5;
+        line-height: 1.5em;
+      }
+    }
+  }
+}
 
 body {
   font-size: $s9;
@@ -279,11 +337,6 @@ body {
     vertical-align: top;
     max-width: 80%;
     max-height: 300px;
-    &.full-scale {
-      max-width: none;
-      max-height: none;
-      width: 100%;
-    }
   }
   h1, h2, section > h3, section > h4, .main > li > h4 {
     @include play;
@@ -325,7 +378,7 @@ body {
   a {
     color: $c2;
   }
-  strong {
+  strong, dt {
     color: $ch1;
     @include text-shadow($ch2)
   }
@@ -366,28 +419,6 @@ body {
         font-size: $s7;
         margin-bottom: 2em;
         padding-left: 2em;
-      }
-    }
-    table.wcap {
-      &.split {
-        display: inline-block;
-        width: auto;
-        margin: 1em 2em;
-        vertical-align: top;
-        img {
-          max-width: none;
-        }
-      }
-      caption {
-        @include bg5;
-        @include quote;
-        caption-side: bottom;
-        li {
-          font-size: $s7;
-        }
-      }
-      td {
-        text-align: center;
       }
     }
     & > div {
@@ -517,7 +548,12 @@ body {
           }
         }
         & > span {
-          p, pre, li, h4, div {
+          h2 {
+            text-align: center;
+            @include play;
+            @include stroke;
+          }
+          p, pre, li, h4, div, dt, dd {
             @include consolas;
             &:not(h4) {
               font-size: $s7;

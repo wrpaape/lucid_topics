@@ -57,7 +57,7 @@ cons:
 - consequencially, insert/delete/append operations not possible
 
 
-#### *better at \"getting\" and \"setting\", but flexibility/adaptability is inhibited by fixed length*
+#### _**better at \"getting\" and \"setting\", but flexibility/adaptability is inhibited by fixed length**_
 *safe*
 """,
     topics: ["LISP"],
@@ -87,7 +87,7 @@ cons:
 - same inefficient tranversal must be made for appending an element at the list end
 
 
-#### *better at adding and removing, worse at \"getting\" and \"setting\"*
+#### _**better at adding and removing, worse at \"getting\" and \"setting\"**_
 *safe*
 """,
     topics: ["LISP"],
@@ -121,7 +121,7 @@ cons:
 - memory intensive
 
 
-#### *shares the retrieval speed of the array and the variable length of the list, but must occupy more memory as compensation*
+#### _**shares the retrieval speed of the array and the variable length of the list, but must occupy more memory as compensation**_
 *safe*
 """,
     topics: ["LISP"],
@@ -198,7 +198,7 @@ nodes:  [ x | ●=]==>[ y | ●=]==>NIL
 ```
 
 
-#### *Because LISP employs S-expressions as the sole representation of source code as well as data, LISP is homoiconic.*
+#### _**Because LISP employs S-expressions as the sole representation of source code as well as data, LISP is homoiconic.**_
 *safe*
 """,
     topics: ["LISP"],
@@ -232,10 +232,129 @@ followed by the processing steps defined for handling that particular chunk of d
     word: "Tree Data Structure",
     note:
 """
+A tree is a data structure made up of nodes and edges without having cycle:
+
+<img src='tree1.png'>
+
+A tree consists of a root node and potentially many levels of additional nodes that form a hierarchy, where
+every node may have zero to many children. Because a cyclic tree is invalid, each non-root node may only have one parent:
+*safe*
+
+<table class='multi'>
+  <tbody>
+    <tr>
+      <td>
+        <table>
+          <caption>
+            <span class='green'>valid</span>: each linear list is trivially a tree
+          </caption>
+          <tbody>
+            <tr>
+              <td><img src='tree2.png'></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+      <td>
+        <table>
+          <caption>
+            <span class='red'>invalid</span>: cycle A → A
+          </caption>
+          <tbody>
+            <tr>
+              <td><img src='tree_not1.png'></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+      <td>
+        <table>
+          <caption>
+            <span class='red'>invalid</span>: cycle B → C → E → D → B
+          </caption>
+          <tbody>
+            <tr>
+              <td><img src='tree_not2.png'></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+      <td>
+        <table>
+          <caption>
+            <span class='red'>invalid</span>: undirected cycle 1 → 2 → 4 → 3
+          </caption>
+          <tbody>
+            <tr>
+              <td><img src='tree_not3.png'></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+      <td>
+        <table>
+          <caption>
+            <span class='red'>invalid</span>: two non-connected parts, A → B and C → D → E
+          </caption>
+          <tbody>
+            <tr>
+              <td><img src='tree_not4.png'></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+#### some common uses:
+- representing hierarchical data
+- storing data in a way that makes it easily searchable (i.e. file directory)
+- routing algorithms
+
+
+## Buzzword Bank
+<dl>
+  <dt>root</dt>
+  <dd>the top node in a tree</dd>
+  <dt>parent</dt>
+  <dd>points to child; the converse notion of a child</dd>
+  <dt>siblings</dt>
+  <dd>nodes with the same parent</dd>
+  <dt>ancestor</dt>
+  <dd>a node reachable by **backward-chaining** from child to parent</dd>
+  <dt>leaf</dt>
+  <dd>a node with no children; also known as an **external node**</dd>
+  <dt>internal node</dt>
+  <dd>a node with at least one child</dd>
+  <dt>degree</dt>
+  <dd>number of sub trees of a node</dd>
+  <dt>edge</dt>
+  <dd>connection between one node to another</dd>
+  <dt>path</dt>
+  <dd>sequence of nodes and edges connecting a node with a descendant</dd>
+  <dt>level</dt>
+  <dd>the level of a node is defined by 1 + (the number of connections between the node and the root)</dd>
+  <dt>height of tree</dt>
+  <dd>number of edges on the longest downward path between that node and a leaf</dd>
+  <dt>depth</dt>
+  <dd>number of edges from the node to the tree's root node</dd>
+  <dt>forest</dt>
+  <dd>a set of n ≥ 0 disjoint trees</dd>
+</dl>
+*safe*
+""",
+    topics: ["LISP", "Databases"],
+    related: ["S-expression", "List", "Common LISP", "Backward-Chaining", "Parent-Child Relationship"]
+  },
+  {
+    word: "Backward-Chaining",
+    note:
+"""
 WIP
 """,
-    topics: ["LISP"],
-    related: ["S-expression", "List", "Common LISP"]
+    topics: ["Databases"],
+    related: ["Tree Data Structure"]
   },
   {
     word: "Compile",
@@ -321,16 +440,16 @@ techniques can be applied more practically on large and loosely structured datas
 
 Most ontologies describe **individuals** (instances), **classes** (concepts), **attributes**, and **relations**:
 <dl>
-  <dt>**individuals**</dt>
+  <dt>individuals</dt>
     <dd>instances or objects (the basic or \"ground level\" objects)</dd>
     <dd>`Reid Paape`, `Frost Bank Tower`</dd>
-  <dt>**classes**</dt>
+  <dt>classes</dt>
     <dd>sets, collections, concepts, classes in programming, types of objects, or kinds of things</dd>
     <dd>`Person`, `Office Building`</dd>
-  <dt>**attributes**</dt>
+  <dt>attributes</dt>
     <dd>aspects, properties, features, characteristics, or parameters that objects (and classes) can have</dd>
     <dd>`clumsy`, `515 ft`</dd>
-  <dt>**relations**</dt>
+  <dt>relations</dt>
     <dd>ways in which classes and individuals can be related to one another</dd>
     <dd>`is a`, `is located in`</dd>
 </dl>
@@ -392,30 +511,30 @@ substituted inline by run time. Consider the definition of the nullary (receives
 `func-add-1-1`:
 *safe*
 ```
-(defun func-add-1-1 () (+ 1 1))
+  (defun func-add-1-1 () (+ 1 1))
 ```
-if called at run time, `func-add-1-1` should return the value `2`:
+if copmiled then called at run time, `func-add-1-1` should return the value `2`:
 ```
-(func-add-1-1)
-;; compiled => (func-add-1-1)
-;; returns => 2
+  (func-add-1-1)
+  ;;  compiled => (func-add-1-1)
+  ;;  returns => 2
 ```
 A similar effect can be achieved with the macro `mac-add-1-1`:
 ```
-(demacro mac-add-1-1 () (+ 1 1))
-(mac-add-1-1)
-;; compiled => 2
-;; returns => 2
+  (demacro mac-add-1-1 () (+ 1 1))
+  (mac-add-1-1)
+  ;;  compiled => 2
+  ;;  returns => 2
 ```
 however, the unique power of the LISP macro comes from its ability to return lisp expressions
 before compile time:
 ```
-(demacro mac-express-add-1-1 () '(+ 1 1))
-(mac-express-add-1-1)
-;; compiled => (+ 1 1)
-;; returns => 2
+  (demacro mac-express-add-1-1 () '(+ 1 1))
+  (mac-express-add-1-1)
+  ;;  compiled => (+ 1 1)
+  ;;  returns => 2
 ```
-#### *Exploitation of this subtle difference in evaulation allows for an ease of metaprogramming not attainable in traditional languages.*
+#### _**Exploitation of this subtle difference in evaulation allows for an ease of metaprogramming not attainable in traditional languages.**_
 *safe*
 
 Because **the macro language is LISP itself**, the full power of the language is available.

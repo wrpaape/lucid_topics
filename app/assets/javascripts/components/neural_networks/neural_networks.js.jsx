@@ -293,7 +293,7 @@ var NeuralNetworks = React.createClass({
               viewing how our neuron uses this value to judge its weighted input is through the equation:
             </p>
             <p className='equation'>
-              <span className='math'>x<sub>1</sub>w<sub>1</sub> + x<sub>2</sub>w<sub>2</sub> + x<sub>3</sub>w<sub>3</sub>... + x<sub>N</sub>w<sub>N</sub> >= t</span>
+              <span className='math'>x<sub>1</sub>w<sub>1</sub> + x<sub>2</sub>w<sub>2</sub> + x<sub>3</sub>w<sub>3</sub>... + x<sub>N</sub>w<sub>N</sub> ≥ t</span>
             </p>
             <p>
               With the weighted sum of its inputs calculated on the left hand side, our neuron's output
@@ -302,7 +302,7 @@ var NeuralNetworks = React.createClass({
               constructing our model by treating the threshold as an additional weight like so:
             </p>
             <p className='equation'>
-              <span className='math'>x<sub>1</sub>w<sub>1</sub> + x<sub>2</sub>w<sub>2</sub> + x<sub>3</sub>w<sub>3</sub>... + x<sub>N</sub>w<sub>N</sub> + (-1)t >= 0</span>
+              <span className='math'>x<sub>1</sub>w<sub>1</sub> + x<sub>2</sub>w<sub>2</sub> + x<sub>3</sub>w<sub>3</sub>... + x<sub>N</sub>w<sub>N</sub> + (-1)t ≥ 0</span>
             </p>
             <p>
               The last term of the left side of our equation, <span className='math'>(-1)t</span> , is usually referred to as

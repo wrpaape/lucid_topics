@@ -33,7 +33,7 @@ class Buzzword < ActiveRecord::Base
   end
 
   def force_line_breaks_at_headers
-    note.gsub!(/(?<=[^\n]\n\n)(\n*)(?=\n#)/) { |nl| nl.gsub(/./, "▓ ") }
+    note.gsub!(/(?<=[^\n]\n\n)(\n*)(?=\n#)/, "▓ ")
   end
 
   def throw_dupes(other)
