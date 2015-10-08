@@ -218,6 +218,24 @@ completely from scratch.
     related: ["S-Expression", "List", "Atom (Element)", "Common LISP"]
   },
   {
+    word: "SubL",
+    note:
+"""
+WIP
+""",
+    topics: ["LISP"],
+    related: ["Low-Level", "CycL", "Common LISP"]
+  },
+  {
+    word: "CycL",
+    note:
+"""
+WIP
+""",
+    topics: ["LISP"],
+    related: ["High-Level", "SubL", "Common LISP"]
+  },
+  {
     word: "Data Driven Programming",
     note:
 """
@@ -553,7 +571,9 @@ can be used to **extend the language**.
     word: "Metaprogramming",
     note:
 """
-WIP
+Metaprogramming is the writing of computer programs with the ability to treat programs as their
+data. It means that a program could be designed to read, generate, analyse or transform other programs,
+and even modify itself while running.
 """,
     topics: ["LISP"],
     related: ["Macro", "Common LISP", "High-Level", "Program"]
@@ -594,7 +614,7 @@ only what the problem is, not how to actually solve it.
 
 
 <dl>
-  <p>some popular paradigms:</p>
+  <p>some better-known paradigms:</p>
   <dt>imperative</dt>
   <dd>An imperative program uses statements that change a program's state. In much the sameway that the imperative mood in natural languages expresses commands, an imperative program consists of commands for the computer to perform. Imperative programming focuses on describing *how* a program operates, implementing algorithms in terms of explicit steps.</dd>
   <dt>declarative</dt>

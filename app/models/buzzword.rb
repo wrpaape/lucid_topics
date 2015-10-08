@@ -13,7 +13,7 @@ class Buzzword < ActiveRecord::Base
   def self.all_as_json
     Hash[
       pluck(:word).zip(
-        all.as_json(
+        includes(:relateds).all.as_json(
           only: [
             :word,
             :note

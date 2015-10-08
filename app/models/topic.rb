@@ -3,7 +3,7 @@ class Topic < ActiveRecord::Base
   has_and_belongs_to_many :buzzwords, -> { order(:word) }
 
   def self.all_as_json
-    all.as_json(except: :filename,
+    includes(buzzwords: :relateds).as_json(except: :filename,
       methods: [
         :urls,
         :paths
