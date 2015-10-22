@@ -154,9 +154,31 @@ var NeuralNetworksDemo = React.createClass({
             context.fillStyle = this.color;
             context.fill();
           };
+          this.checkStuck = function() {
+            var sHistory = this.s.history;
+            sHistory.unshift({
+              x: this.s.x,
+              y: this.s.y
+            });
+            sHistory.pop();
+
+            var stuck = sHistory.reduce(function(s1, s2) {
+              console.log(s1.x, s2.x);
+              return (s1.x === s2.x && s1.y === s2.y) ? s1 : false;
+            });
+
+            if (stuck) {
+              var v = this.v;
+              console.log(sHistory);
+              v.x = vNegRand(v.x, 1, 10);
+              v.y = vNegRand(v.y, 1, 10);
+              this.updateMagAngle(v);
+            }
+          };
           this.update = function() {
             this.updateVectors();
             this.updateMagAngle(this.v);
+            this.checkStuck();
           };
           this.updateDS = function() {
             var s = this.s;
@@ -178,7 +200,6 @@ var NeuralNetworksDemo = React.createClass({
             this.updateDS();
             this.updateDV();
             this.updateMagAngle(this.dS);
-            this.updateMagAngle(this.dV);
           };
           this.c = c;
           this.ar = ar;
@@ -189,6 +210,7 @@ var NeuralNetworksDemo = React.createClass({
           this.initializeVectors();
           this.updateMagAngle(this.v);
           this.targetsCollected = 0;
+          this.s.history =  Array.apply(null, new Array(4)).map(function() { return { x: null, y: null }; });
         },
         Dot: function(allPlanes) {
           var radius = randRange(pad * 3 / 10, pad / 2);
